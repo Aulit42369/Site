@@ -9,11 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  .planning-frame { width: 100 %; aspect-ratio: 16 / 9; border: none; display: block; }
+  .planning-frame { width: 100%; aspect-ratio: 16 / 9; border: none; display: block; }
 </style>
 </head>
 <body>
-
 <header class="site-header">
   <div class="container">
     <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
@@ -28,39 +27,35 @@
     </nav>
   </div>
 </header>
-
 <main>
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow">// Programme de la semaine</div>
-      <h1 style="font-size:clamp (2 rem,4.5 vw,3 rem);">Planning <em class="accent">stream</em></h1>
-      <p class="lead" style="margin-top:14 px;">
+      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Planning <em class="accent">stream</em></h1>
+      <p class="lead" style="margin-top:14px;">
         Mis à jour directement par le streamer — toujours la version la plus
         récente, sans rien à rafraîchir.
       </p>
     </div>
   </section>
-
   <section class="tight">
     <div class="container">
       <div class="broadcast-frame">
-        <iframe class="planning-frame" src="https://aulit42369.github.io/planning/" title="Planning de la semaine AULIT42369" loading="lazy"></iframe>
+        <iframe class="planning-frame" id="planningFrame" title="Planning de la semaine AULIT42369" loading="lazy"></iframe>
       </div>
     </div>
   </section>
-
   <section class="tight">
     <div class="container">
       <div class="card" style="text-align:center;">
         <p style="margin:0;">
           Le planning peut évoluer d'une semaine à l'autre — le plus fiable
-          reste toujours le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" style="color:var (--cyan);">Discord de la chaine </a>.
+          reste toujours le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" style="color:var(--cyan);">Discord de la chaine</a>.
         </p>
       </div>
     </div>
   </section>
 </main>
-
 <footer class="site-footer">
   <div class="container">
     <div class="brand">AULIT42369 · TWITCH.TV</div>
@@ -72,7 +67,6 @@
     </div>
   </div>
 </footer>
-
 <script>
   const navToggle = document.getElementById('navToggle');
   const nav = document.getElementById('nav');
@@ -81,6 +75,11 @@
     navToggle.setAttribute('aria-expanded', open);
   });
 </script>
-
+<script>
+  // Un paramètre différent à chaque visite force le navigateur à aller
+  // rechercher la dernière version, plutôt que de réutiliser une copie
+  // en mémoire de l'ancien planning.
+  document.getElementById('planningFrame').src = 'https://aulit42369.github.io/planning/?v=' + Date.now();
+</script>
 </body>
 </html>
