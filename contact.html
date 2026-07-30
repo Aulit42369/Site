@@ -31,6 +31,7 @@
   .form-note { font-size: 0.85rem; color: var(--muted); }
   .success-box { display: none; }
   .success-box.show { display: block; }
+  .hp-field { position: absolute; left: -9999px; top: -9999px; }
 </style>
 </head>
 <body>
@@ -62,7 +63,7 @@
 
   <section class="tight">
     <div class="container">
-      <form class="contact-form card" id="contactForm" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST">
+      <form class="contact-form card" id="contactForm" action="https://formspree.io/f/mqeroedk" method="POST">
         <div class="field">
           <label for="name">Nom</label>
           <input type="text" id="name" name="name" required>
@@ -74,6 +75,10 @@
         <div class="field">
           <label for="message">Message</label>
           <textarea id="message" name="message" required></textarea>
+        </div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="_gotcha">Ne pas remplir</label>
+          <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
         </div>
         <button type="submit" class="btn btn-primary">Envoyer</button>
         <p class="form-note">Réponse par e-mail, généralement sous quelques jours.</p>
@@ -89,7 +94,7 @@
 
 <footer class="site-footer">
   <div class="container">
-    <div class="brand">AULIT42369 · TWITCH.TV</div>
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:var(--dim);font-size:0.78rem;">Mentions légales</a></div>
     <div class="socials">
       <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
       <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>

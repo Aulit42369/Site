@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Mentions légales</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=4">
+<style>
+  .legal-content { max-width: 720px; }
+  .legal-content h2 { font-size: 1.25rem; margin-top: 42px; margin-bottom: 14px; }
+  .legal-content h2:first-child { margin-top: 0; }
+  .legal-content p, .legal-content li { color: #c3cadb; line-height: 1.7; }
+  .legal-content ul { padding-left: 22px; margin-top: 8px; }
+  .legal-content li { margin-bottom: 6px; }
+  .legal-content a { color: var(--cyan); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// Informations légales</div>
+      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Mentions <em class="accent">légales</em></h1>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container legal-content">
+
+      <h2>Éditeur du site</h2>
+      <p>Ce site est un projet personnel édité par AULIT42369, dans le cadre de son activité de créateur de contenu sur Twitch. Pour toute question, le formulaire de <a href="contact.html">contact</a> ou le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord de la chaîne</a> restent les moyens les plus directs.</p>
+
+      <h2>Hébergement</h2>
+      <p>Ce site est hébergé par GitHub, Inc. — 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Le planning intégré sur ce site est hébergé séparément, également via GitHub Pages.</p>
+
+      <h2>Données collectées</h2>
+      <p>Ce site collecte deux types de données, chacune décrite ci-dessous.</p>
+
+      <h2 style="font-size:1.05rem;margin-top:26px;">Statistiques de visite</h2>
+      <p>Ce site utilise GoatCounter, un outil de mesure d'audience conçu pour ne pas suivre les visiteurs individuellement. Concrètement :</p>
+      <ul>
+        <li>Aucun cookie n'est déposé sur votre appareil</li>
+        <li>Aucune adresse IP n'est conservée</li>
+        <li>Aucun identifiant permettant de vous reconnaître d'une visite à l'autre n'est créé</li>
+        <li>Les données conservées se limitent à des statistiques agrégées : pages visitées, site d'origine, type de navigateur, pays et taille d'écran approximatifs</li>
+      </ul>
+      <p>Ce traitement repose sur l'intérêt légitime du responsable du site à comprendre la fréquentation de celui-ci, et ne nécessite pas de bandeau de consentement dans la mesure où aucune donnée personnelle n'est traitée.</p>
+
+      <h2 style="font-size:1.05rem;margin-top:26px;">Formulaire de contact</h2>
+      <p>Si vous utilisez le formulaire de contact, votre nom, votre adresse e-mail et le contenu de votre message sont transmis à Formspree (service tiers qui achemine le message par e-mail) dans le seul but de vous répondre. Ces informations ne sont ni revendues, ni utilisées à des fins commerciales.</p>
+
+      <h2>Vos droits</h2>
+      <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression concernant les données vous concernant (notamment les messages envoyés via le formulaire de contact). Pour exercer ce droit, contactez-nous via le <a href="contact.html">formulaire</a> ou le Discord de la chaîne.</p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>L'identité visuelle, les textes et les visuels propres à ce site sont la propriété d'AULIT42369, sauf mention contraire. Les extraits de streams et clips intégrés restent soumis aux conditions d'utilisation de Twitch.</p>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:var(--dim);font-size:0.78rem;">Mentions légales</a></div>
+    <div class="socials">
+      <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/aulit42369/?hl=fr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@aulit42369_" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    document.body.classList.toggle('nav-open', open);
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+<script data-goatcounter="https://aulit42369.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
