@@ -2,66 +2,108 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Alerte Bits</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Clips</title>
+<meta name="description" content="Les derniers clips marquants de la chaîne AULIT42369.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-  :root{--accent:#00f5ff;--accent2:#9b5cff;--bg:#070a10;--white:#e8eaf6;--glow:0 0 12px #00f5ff,0 0 40px #00f5ff55;}
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{width:600px;height:200px;overflow:hidden;background:transparent;font-family:'Rajdhani',sans-serif;}
-  .alert{position:relative;width:600px;height:180px;background:linear-gradient(135deg,#0d1220,#070a10);border:1px solid #1a2540;overflow:hidden;clip-path:polygon(12px 0%,calc(100% - 12px) 0%,100% 12px,100% 100%,0% 100%,0% 12px);animation:slideIn .5s cubic-bezier(.18,.89,.32,1.28) forwards;opacity:0;}
-  @keyframes slideIn{0%{transform:translateY(-120px);opacity:0}100%{transform:translateY(0);opacity:1}}
-  .alert::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);box-shadow:var(--glow);z-index:2;}
-  .alert::after{content:'';position:absolute;bottom:0;right:0;width:20px;height:20px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent);opacity:.6;}
-  .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.04) 1px,transparent 1px);background-size:28px 28px;}
-  .orb{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--accent);right:-40px;top:-40px;filter:blur(60px);opacity:.15;animation:pulse 2s ease-in-out infinite;}
-  @keyframes pulse{0%,100%{opacity:.1}50%{opacity:.25}}
-  .bit{position:absolute;width:6px;height:6px;border-radius:50%;animation:bitFloat 1.5s ease-out forwards;}
-  .bit:nth-child(3){background:var(--accent);left:80px;top:80px;animation-delay:.2s;--dy:-60px;--dx:30px;}
-  .bit:nth-child(4){background:var(--accent2);left:100px;top:60px;animation-delay:.4s;--dy:-80px;--dx:-20px;}
-  .bit:nth-child(5){background:#ff2d78;left:60px;top:90px;animation-delay:.3s;--dy:-50px;--dx:50px;}
-  .bit:nth-child(6){background:var(--accent);left:120px;top:100px;animation-delay:.5s;--dy:-70px;--dx:-40px;}
-  .bit:nth-child(7){background:var(--accent2);left:90px;top:70px;animation-delay:.1s;--dy:-90px;--dx:10px;}
-  @keyframes bitFloat{0%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
-  .pulse-ring{position:absolute;width:70px;height:70px;border-radius:50%;border:1px solid var(--accent);left:28px;top:50%;transform:translateY(-50%);animation:ringEx 1.5s ease-out infinite;}
-  .pulse-ring:nth-child(9){animation-delay:.5s;border-color:var(--accent2);}
-  @keyframes ringEx{0%{transform:translateY(-50%) scale(.3);opacity:.8}100%{transform:translateY(-50%) scale(2.2);opacity:0}}
-  .inner{position:relative;z-index:3;display:flex;align-items:center;height:100%;padding:0 28px;gap:20px;}
-  .icon{width:70px;height:70px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2rem;background:#050810;border:1px solid var(--accent);box-shadow:var(--glow);clip-path:polygon(6px 0%,calc(100% - 6px) 0%,100% 6px,100% 100%,0% 100%,0% 6px);}
-  .text{flex:1;}
-  .label{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);text-shadow:var(--glow);margin-bottom:6px;}
-  .name{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;color:var(--white);letter-spacing:.05em;animation:nameIn .4s ease .3s both;}
-  @keyframes nameIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-  .sub-text{font-size:.75rem;color:#4a5568;margin-top:4px;letter-spacing:.1em;}
-  .bits-count{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:900;margin-top:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:amountPop .3s ease .5s both;display:inline-block;}
-  @keyframes amountPop{from{transform:scale(0)}to{transform:scale(1)}}
-  .message{font-size:.68rem;color:#8892a8;margin-top:4px;font-style:italic;}
-  .prog{width:100%;height:2px;background:#1a2540;margin-top:8px;border-radius:2px;overflow:hidden;}
-  .prog-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));box-shadow:var(--glow);animation:progAnim 4s linear forwards .5s;width:0;}
-  @keyframes progAnim{from{width:0}to{width:100%}}
+  .clips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+  .clip-title { padding: 14px 18px; font-weight: 700; font-size: 1rem; }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
 <body>
-<div class="alert">
-  <div class="grid"></div>
-  <div class="orb"></div>
-  <div class="bit"></div>
-  <div class="bit"></div>
-  <div class="bit"></div>
-  <div class="bit"></div>
-  <div class="bit"></div>
-  <div class="pulse-ring"></div>
-  <div class="pulse-ring"></div>
-  <div class="inner">
-    <div class="icon">💎</div>
-    <div class="text">
-      <div class="label">// Bits reçus !</div>
-      <div class="name">{username}</div>
-      <div class="sub-text">a envoyé</div>
-      <div class="bits-count">{amount} Bits</div>
-      <div class="message">{message}</div>
-      <div class="prog"><div class="prog-fill"></div></div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html" class="active">Clips</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// Meilleurs moments</div>
+      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Derniers <em class="accent">clips</em></h1>
+      <p class="lead" style="margin-top:14px;">Une sélection à la main, mise à jour après chaque stream.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="clips-grid" id="clipsGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        Aucun clip pour l'instant — reviens après le prochain stream.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV</div>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener">Discord</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">TikTok</a>
     </div>
   </div>
-</div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   ✏️  AJOUTE TES CLIPS ICI
+   ────────────────────────────────────────────────────────
+   Pour chaque clip : ouvre-le sur Twitch, copie la partie de
+   l'adresse après "clips.twitch.tv/" (le "slug") — par exemple
+   pour https://clips.twitch.tv/AwkwardSalamanderSwiftRage
+   le slug est "AwkwardSalamanderSwiftRage".
+
+   Le plus récent en premier dans la liste.
+════════════════════════════════════════════════════════ */
+const CLIPS = [
+  // { slug: 'ColleIciLeSlugDuClip', title: 'Titre du clip' },
+];
+
+const grid = document.getElementById('clipsGrid');
+const empty = document.getElementById('emptyState');
+
+if (CLIPS.length === 0) {
+  empty.style.display = 'block';
+} else {
+  CLIPS.forEach(clip => {
+    const card = document.createElement('div');
+    card.className = 'broadcast-frame clip-card';
+    card.innerHTML = `
+      <iframe src="https://clips.twitch.tv/embed?clip=${clip.slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
+      <div class="clip-title">${clip.title}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+</script>
+
 </body>
 </html>
