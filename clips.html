@@ -84,7 +84,7 @@
    Le plus récent en premier dans la liste.
 ════════════════════════════════════════════════════════ */
 const CLIPS = [
-  // { slug: 'ImpartialProudQuailBlargNaut-yuC_Ko9dKA5FpRpZ', title: 'Hago se jette dans le vide sans aucune hésitation et gaspille l'argent du groupe' },
+  // { slug: 'ColleIciLeSlugDuClip', title: 'Titre du clip' },
 ];
 
 const grid = document.getElementById('clipsGrid');
@@ -97,8 +97,8 @@ if (CLIPS.length === 0) {
     const card = document.createElement('div');
     card.className = 'broadcast-frame clip-card';
     card.innerHTML = `
-      <iframe src="https://clips.twitch.tv/embed?clip=${clip.slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
-      <div class="clip-title">${clip.title}</div>
+      <iframe src="https://clips.twitch.tv/embed?clip=${clip.ImpartialProudQuailBlargNaut-yuC_Ko9dKA5FpRpZ?filter=clips&range=7d}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
+      <div class="clip-title">${clip.Hago se jette dans le vide sans aucune hésitation et gaspille l'argent du groupe}</div>
     `;
     grid.appendChild(card);
   });
