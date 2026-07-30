@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AULIT42369 — Planning</title>
+<title>Page introuvable — AULIT42369</title>
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="description" content="Le programme de la semaine sur la chaîne AULIT42369.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  .planning-frame { width: 100%; aspect-ratio: 16 / 9; border: none; display: block; }
+  .error-wrap { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; }
+  .error-code { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: clamp(4rem, 14vw, 8rem); color: var(--cyan); text-shadow: 0 0 20px #00f5ff, 0 0 60px rgba(0,245,255,.45); line-height: 1; }
 </style>
 </head>
 <body>
+
 <header class="site-header">
   <div class="container">
     <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
@@ -23,41 +24,23 @@
     </button>
     <nav class="nav" id="nav">
       <a href="index.html">Accueil</a>
-      <a href="planning.html" class="active">Planning</a>
+      <a href="planning.html">Planning</a>
       <a href="clips.html">Clips</a>
       <a href="apropos.html">À propos</a>
     </nav>
   </div>
 </header>
-<main>
-  <section class="grid-bg">
-    <div class="container">
-      <div class="eyebrow">// Programme de la semaine</div>
-      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Planning <em class="accent">stream</em></h1>
-      <p class="lead" style="margin-top:14px;">
-        Mis à jour directement par le streamer — toujours la version la plus
-        récente, sans rien à rafraîchir.
-      </p>
-    </div>
-  </section>
-  <section class="tight">
-    <div class="container">
-      <div class="broadcast-frame">
-        <iframe class="planning-frame" id="planningFrame" title="Planning de la semaine AULIT42369" loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
-  <section class="tight">
-    <div class="container">
-      <div class="card" style="text-align:center;">
-        <p style="margin:0;">
-          Le planning peut évoluer d'une semaine à l'autre — le plus fiable
-          reste toujours le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" style="color:var(--cyan);">Discord de la chaine</a>.
-        </p>
-      </div>
-    </div>
-  </section>
+
+<main class="grid-bg">
+  <div class="error-wrap">
+    <div class="eyebrow">// Erreur 404</div>
+    <div class="error-code">404</div>
+    <h2 style="margin-top:18px;">Cette page n'existe <em class="accent">pas</em></h2>
+    <p class="lead" style="margin:14px auto 30px;">Le lien est peut-être périmé, ou l'adresse mal tapée.</p>
+    <a href="index.html" class="btn btn-primary">Retour à l'accueil</a>
+  </div>
 </main>
+
 <footer class="site-footer">
   <div class="container">
     <div class="brand">AULIT42369 · TWITCH.TV</div>
@@ -69,6 +52,7 @@
     </div>
   </div>
 </footer>
+
 <script>
   const navToggle = document.getElementById('navToggle');
   const nav = document.getElementById('nav');
@@ -77,11 +61,6 @@
     navToggle.setAttribute('aria-expanded', open);
   });
 </script>
-<script>
-  // Un paramètre différent à chaque visite force le navigateur à aller
-  // rechercher la dernière version, plutôt que de réutiliser une copie
-  // en mémoire de l'ancien planning.
-  document.getElementById('planningFrame').src = 'https://aulit42369.github.io/planning/?v=' + Date.now();
-</script>
+
 </body>
 </html>
