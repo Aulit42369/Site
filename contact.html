@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Contact</title>
+<meta name="description" content="Contacter AULIT42369.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Aperçu Discord / réseaux sociaux -->
+<meta property="og:title" content="AULIT42369 — Contact">
+<meta property="og:description" content="Une question, une proposition ? Écris ici.">
+<meta property="og:url" content="https://aulit42369.github.io/Site/contact.html">
+<meta property="og:image" content="https://aulit42369.github.io/Site/og-image.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#00f5ff">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=4">
+<style>
+  .contact-form { display: flex; flex-direction: column; gap: 18px; max-width: 560px; }
+  .field label { display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px; }
+  .field input, .field textarea {
+    width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 4px;
+    padding: 13px 16px; color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 1rem;
+  }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--cyan); }
+  .field textarea { resize: vertical; min-height: 140px; }
+  .form-note { font-size: 0.85rem; color: var(--muted); }
+  .success-box { display: none; }
+  .success-box.show { display: block; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// Une question, une proposition</div>
+      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Me <em class="accent">contacter</em></h1>
+      <p class="lead" style="margin-top:14px;">Pour tout le reste, le Discord reste plus rapide — mais si tu préfères écrire ici, c'est possible aussi.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <form class="contact-form card" id="contactForm" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST">
+        <div class="field">
+          <label for="name">Nom</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <p class="form-note">Réponse par e-mail, généralement sous quelques jours.</p>
+      </form>
+
+      <div class="card v success-box" id="successBox" style="margin-top:18px;">
+        <h3 style="color:var(--violet);">Message envoyé</h3>
+        <p style="margin-top:8px;">Merci — réponse dès que possible.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV</div>
+    <div class="socials">
+      <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/aulit42369/?hl=fr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@aulit42369_" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    document.body.classList.toggle('nav-open', open);
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+<script>
+  // Envoi sans quitter la page : Formspree répond en JSON si on le lui
+  // demande, on affiche alors le message de confirmation à la place du
+  // formulaire plutôt que de rediriger vers une page à part.
+  const form = document.getElementById('contactForm');
+  const successBox = document.getElementById('successBox');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi...';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' },
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        successBox.classList.add('show');
+      } else {
+        throw new Error('Échec de l\'envoi');
+      }
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer';
+      alert("L'envoi a échoué — réessaie, ou passe par le Discord en attendant.");
+    }
+  });
+</script>
+
+<script data-goatcounter="https://aulit42369.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
