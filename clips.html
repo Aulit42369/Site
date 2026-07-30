@@ -17,7 +17,7 @@
 <meta name="description" content="Les derniers clips marquants de la chaîne AULIT42369.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=4">
 <style>
   .clips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
   .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
@@ -78,6 +78,7 @@
   const nav = document.getElementById('nav');
   navToggle.addEventListener('click', () => {
     const open = nav.classList.toggle('open');
+    document.body.classList.toggle('nav-open', open);
     navToggle.setAttribute('aria-expanded', open);
   });
 </script>

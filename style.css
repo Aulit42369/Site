@@ -170,6 +170,12 @@ section.tight { padding: 56px 0; }
 .site-footer .socials a:hover { color: var(--cyan); }
 
 /* respecte les préférences de mouvement réduit */
+/* Les iframes (lecteur Twitch, planning intégré) ignorent parfois
+   l'empilement normal des éléments et s'affichent par-dessus tout,
+   quel que soit le z-index — on les masque le temps que le menu
+   mobile est ouvert plutôt que de compter sur l'empilement. */
+body.nav-open iframe { visibility: hidden; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
