@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Accueil</title>
+<meta name="description" content="AULIT42369 — chaîne Twitch multigaming, jeux coop entre potes. Planning, clips et liens de la communauté.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html" class="active">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO : le direct comme cœur de la page -->
+  <section class="grid-bg" style="padding-top:64px;">
+    <div class="container hero-grid" style="padding-top:0;">
+      <div>
+        <div class="eyebrow">// Multigaming · Jeu coop · Entre potes</div>
+        <h1>AULIT<em class="accent">42369</em></h1>
+        <p class="lead" style="margin-top:18px;">
+          Une chaîne où on teste, on rage, on rigole et on troll les copains —
+          au feeling, sans planning de jeu figé.
+        </p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;">
+          <a href="https://www.twitch.tv/aulit42369" class="btn btn-primary" target="_blank" rel="noopener">Suivre sur Twitch</a>
+          <a href="planning.html" class="btn btn-secondary">Voir le planning</a>
+        </div>
+      </div>
+
+      <div class="broadcast-frame">
+        <!-- Le lecteur Twitch officiel gère lui-même l'affichage en direct/hors
+             ligne — rien à maintenir à la main ici. -->
+        <iframe
+          src="https://player.twitch.tv/?channel=aulit42369&parent=aulit42369.github.io&muted=true"
+          height="330" width="100%" allowfullscreen
+          style="display:block;aspect-ratio:16/9;height:auto;border:none;">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCÈS RAPIDES -->
+  <section class="tight">
+    <div class="container">
+      <div class="link-grid">
+        <a href="planning.html" class="link-card">
+          <div class="ic">P</div>
+          <div><div class="label">Planning</div><div class="sub">Les jours et horaires de la semaine</div></div>
+        </a>
+        <a href="clips.html" class="link-card">
+          <div class="ic">C</div>
+          <div><div class="label">Clips</div><div class="sub">Les derniers moments marquants</div></div>
+        </a>
+        <a href="apropos.html" class="link-card">
+          <div class="ic">A</div>
+          <div><div class="label">À propos</div><div class="sub">La chaîne, les règles, la communauté</div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REJOINDRE -->
+  <section class="tight">
+    <div class="container">
+      <div class="card" style="text-align:center;padding:44px 30px;">
+        <h2>Rejoindre la <em class="accent">communauté</em></h2>
+        <p style="max-width:520px;margin:14px auto 26px;">
+          Le Discord, c'est là que ça se passe entre deux streams — annonces,
+          organisation des sessions coop, et une bonne dose de bêtises.
+        </p>
+        <a href="#" class="btn btn-primary">Rejoindre le Discord</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV</div>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener">Discord</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+</body>
+</html>

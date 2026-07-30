@@ -1,0 +1,178 @@
+/* ================================================================
+   AULIT42369 — feuille de style partagée
+   Reprend les tokens de la charte graphique (couleurs, typo, effets).
+   Modifier ici pour changer l'apparence de TOUTES les pages à la fois.
+   ================================================================ */
+
+:root {
+  --bg: #070a10;
+  --surface: #0d1220;
+  --surface2: #080c18;
+  --line: #1a2540;
+  --cyan: #00f5ff;
+  --violet: #9b5cff;
+  --magenta: #ff2d78;
+  --white: #e8eaf6;
+  --muted: #8892a8;
+  --dim: #4a5568;
+  --glow-c: 0 0 8px #00f5ff, 0 0 24px rgba(0, 245, 255, 0.35);
+  --glow-v: 0 0 8px #9b5cff, 0 0 24px rgba(155, 92, 255, 0.35);
+  --max: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* fond quadrillé discret, réutilisable sur n'importe quel bloc */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+
+.container { max-width: var(--max); margin: 0 auto; padding: 0 28px; width: 100%; }
+
+/* ---------- en-tête / nav, partagé sur toutes les pages ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(7, 10, 16, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .container { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+.logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.15rem; letter-spacing: 0.04em; display: flex; align-items: center; gap: 10px; }
+.logo .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); box-shadow: var(--glow-c); }
+.nav { display: flex; align-items: center; gap: 6px; }
+.nav a {
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem;
+  letter-spacing: 0.03em; text-transform: uppercase;
+  padding: 9px 16px; border-radius: 3px; color: var(--muted);
+  border: 1px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.nav a:hover { color: var(--white); }
+.nav a.active { color: var(--cyan); border-color: var(--cyan); text-shadow: var(--glow-c); }
+.nav-toggle { display: none; }
+
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 34px; }
+}
+
+@media (max-width: 780px) {
+  .nav { position: fixed; inset: 74px 0 0 0; background: var(--bg); flex-direction: column; padding: 24px; gap: 10px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .18s ease, transform .18s ease; }
+  .nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .nav a { width: 100%; text-align: center; padding: 14px; font-size: 1.1rem; }
+  .nav-toggle {
+    display: flex; flex-direction: column; gap: 5px; justify-content: center;
+    width: 34px; height: 34px; background: none; border: none; cursor: pointer;
+  }
+  .nav-toggle span { display: block; height: 2px; background: var(--white); border-radius: 2px; }
+}
+
+/* ---------- typo générique ---------- */
+.eyebrow { font-size: 0.82rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--cyan); text-shadow: var(--glow-c); margin-bottom: 14px; }
+h1, h2, h3 { font-family: 'Orbitron', sans-serif; font-weight: 900; line-height: 1.12; margin: 0; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; letter-spacing: 0.02em; }
+h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+em.accent { color: var(--cyan); font-style: normal; text-shadow: var(--glow-c); }
+p { color: #c3cadb; }
+p.lead { font-size: 1.15rem; color: var(--muted); max-width: 640px; }
+
+/* ---------- sections ---------- */
+section { padding: 84px 0; }
+section.tight { padding: 56px 0; }
+
+/* ---------- cartes / blocs signature ---------- */
+.card {
+  background: linear-gradient(180deg, var(--surface), var(--surface2));
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 26px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent, var(--cyan)), transparent);
+  box-shadow: 0 0 8px var(--accent, var(--cyan));
+}
+.card.v { --accent: var(--violet); }
+.card.m { --accent: var(--magenta); }
+
+/* cadre "diffusion" à coins coupés, pour l'embed Twitch en particulier */
+.broadcast-frame {
+  position: relative;
+  border: 1px solid var(--line);
+  clip-path: polygon(18px 0%, calc(100% - 18px) 0%, 100% 18px, 100% 100%, 0% 100%, 0% 18px);
+  background: var(--surface2);
+  overflow: hidden;
+}
+.broadcast-frame::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 2;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 3px;
+  background: var(--surface2); border: 1px solid var(--line);
+}
+.status-pill .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ---------- boutons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem;
+  padding: 13px 26px; border-radius: 4px; cursor: pointer; border: 1px solid transparent;
+}
+.btn-primary { background: var(--cyan); color: var(--bg); }
+.btn-secondary { background: transparent; color: var(--cyan); border-color: var(--cyan); }
+
+/* ---------- grille de liens / réseaux ---------- */
+.link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.link-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 22px; border-radius: 4px;
+  background: var(--surface); border: 1px solid var(--line);
+  transition: border-color .15s ease, transform .15s ease;
+}
+.link-card:hover { border-color: var(--accent, var(--cyan)); transform: translateY(-2px); }
+.link-card .ic { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--surface2); border: 1px solid var(--accent, var(--cyan)); color: var(--accent, var(--cyan)); flex-shrink: 0; font-family: 'Orbitron', sans-serif; font-weight: 900; }
+.link-card .label { font-weight: 700; }
+.link-card .sub { font-size: 0.85rem; color: var(--muted); }
+
+/* ---------- pied de page, partagé ---------- */
+.site-footer { border-top: 1px solid var(--line); padding: 40px 0; margin-top: auto; }
+.site-footer .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.site-footer .brand { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.25em; color: var(--dim); }
+.site-footer .socials { display: flex; gap: 14px; }
+.site-footer .socials a { font-size: 0.85rem; color: var(--muted); font-weight: 700; }
+.site-footer .socials a:hover { color: var(--cyan); }
+
+/* respecte les préférences de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }

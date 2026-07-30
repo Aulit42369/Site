@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Clips</title>
+<meta name="description" content="Les derniers clips marquants de la chaîne AULIT42369.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .clips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+  .clip-title { padding: 14px 18px; font-weight: 700; font-size: 1rem; }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html" class="active">Clips</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// Meilleurs moments</div>
+      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Derniers <em class="accent">clips</em></h1>
+      <p class="lead" style="margin-top:14px;">Une sélection à la main, mise à jour après chaque stream.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="clips-grid" id="clipsGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        Aucun clip pour l'instant — reviens après le prochain stream.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV</div>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener">Discord</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   ✏️  AJOUTE TES CLIPS ICI
+   ────────────────────────────────────────────────────────
+   Pour chaque clip : ouvre-le sur Twitch, copie la partie de
+   l'adresse après "clips.twitch.tv/" (le "slug") — par exemple
+   pour https://clips.twitch.tv/AwkwardSalamanderSwiftRage
+   le slug est "AwkwardSalamanderSwiftRage".
+
+   Le plus récent en premier dans la liste.
+════════════════════════════════════════════════════════ */
+const CLIPS = [
+  // { slug: 'ColleIciLeSlugDuClip', title: 'Titre du clip' },
+];
+
+const grid = document.getElementById('clipsGrid');
+const empty = document.getElementById('emptyState');
+
+if (CLIPS.length === 0) {
+  empty.style.display = 'block';
+} else {
+  CLIPS.forEach(clip => {
+    const card = document.createElement('div');
+    card.className = 'broadcast-frame clip-card';
+    card.innerHTML = `
+      <iframe src="https://clips.twitch.tv/embed?clip=${clip.slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
+      <div class="clip-title">${clip.title}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+</script>
+
+</body>
+</html>

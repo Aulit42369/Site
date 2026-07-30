@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — À propos</title>
+<meta name="description" content="Présentation de la chaîne AULIT42369 — multigaming, jeu coop, communauté.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; } }
+  .rule-list { list-style: none; padding: 0; margin: 16px 0 0; }
+  .rule-list li { padding: 10px 0 10px 26px; position: relative; border-bottom: 1px solid var(--line); color: #c3cadb; }
+  .rule-list li::before { content: '//'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
+  .rule-list li:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="apropos.html" class="active">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// La chaîne</div>
+      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">À <em class="accent">propos</em></h1>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="about-grid">
+        <div class="card">
+          <h3 style="color:var(--cyan);margin-bottom:14px;">La chaîne</h3>
+          <p>
+            <!-- ✏️ Texte de départ à personnaliser -->
+            Bienvenue dans mon univers : ici on fait du multigaming, du jeu
+            coop, on rage, on rigole et on troll les copains. Installe-toi
+            et viens dire des bêtises avec nous.
+          </p>
+          <p style="margin-top:14px;">
+            Pas de planning de jeu figé — le choix se fait à l'ambiance du
+            soir, entre amis.
+          </p>
+        </div>
+
+        <div class="card v">
+          <h3 style="color:var(--violet);margin-bottom:14px;">Sur Twitch</h3>
+          <p>Quelques commandes utiles dans le tchat :</p>
+          <ul class="rule-list">
+            <li><code>!commandes</code> — la liste complète</li>
+            <li><code>!gameinfos</code> — infos sur le jeu en cours</li>
+            <li><code>!discord</code> — le lien du serveur</li>
+            <li><code>!wishliststeam</code> — la wishlist Steam</li>
+            <li><code>!regles</code> — le règlement du chat</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="card" style="text-align:center;padding:44px 30px;">
+        <h2>Une question, une envie de <em class="accent">jouer ensemble</em> ?</h2>
+        <p style="max-width:520px;margin:14px auto 26px;">Le Discord reste le plus rapide pour échanger en dehors des streams.</p>
+        <a href="#" class="btn btn-primary">Rejoindre le Discord</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV</div>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener">Discord</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+</body>
+</html>

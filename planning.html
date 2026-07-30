@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Planning</title>
+<meta name="description" content="Le programme de la semaine sur la chaîne AULIT42369.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .planning-frame { width: 100%; aspect-ratio: 16 / 9; border: none; display: block; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html" class="active">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// Programme de la semaine</div>
+      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Planning <em class="accent">stream</em></h1>
+      <p class="lead" style="margin-top:14px;">
+        Mis à jour directement par le streamer — toujours la version la plus
+        récente, sans rien à rafraîchir.
+      </p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="broadcast-frame">
+        <iframe class="planning-frame" src="https://aulit42369.github.io/planning/" title="Planning de la semaine AULIT42369" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="card" style="text-align:center;">
+        <p style="margin:0;">
+          Le planning peut évoluer d'une semaine à l'autre — le plus fiable
+          reste toujours le <a href="https://www.twitch.tv/aulit42369" target="_blank" rel="noopener" style="color:var(--cyan);">calendrier natif sur la chaîne Twitch</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV</div>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener">Discord</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  navToggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+</script>
+
+</body>
+</html>
