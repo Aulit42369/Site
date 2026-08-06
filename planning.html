@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="style.css?v=4">
 <style>
   .planning-frame { width: 100%; aspect-ratio: 16 / 9; border: none; display: block; }
+  .planning-wide { max-width: 1600px; }
 </style>
 </head>
 <body>
@@ -39,25 +40,15 @@
   </div>
 </header>
 <main>
-  <section class="grid-bg">
-    <div class="container">
-      <div class="eyebrow">// Programme de la semaine</div>
-      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Planning <em class="accent">stream</em></h1>
-      <p class="lead" style="margin-top:14px;">
-        Mis à jour directement par le streamer — toujours la version la plus
-        récente, sans rien à rafraîchir.
-      </p>
-    </div>
-  </section>
-  <section class="tight">
-    <div class="container">
+  <section class="tight" style="padding-top:56px;">
+    <div class="container planning-wide">
       <div class="broadcast-frame">
         <iframe class="planning-frame" id="planningFrame" title="Planning de la semaine AULIT42369" loading="lazy"></iframe>
       </div>
     </div>
   </section>
   <section class="tight">
-    <div class="container">
+    <div class="container planning-wide">
       <div class="card" style="text-align:center;">
         <p style="margin:0;">
           Le planning peut évoluer d'une semaine à l'autre — le plus fiable
