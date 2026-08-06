@@ -74,7 +74,7 @@ img { max-width: 100%; display: block; }
   .hero-grid { grid-template-columns: 1fr; gap: 34px; }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 920px) {
   .nav { display: none; position: fixed; top: 74px; left: 0; right: 0; bottom: 0; z-index: 999; background: #070a10; flex-direction: column; padding: 24px; gap: 10px; }
   .nav.open { display: flex; }
   .nav a { width: 100%; text-align: center; padding: 14px; font-size: 1.1rem; }
@@ -83,6 +83,10 @@ img { max-width: 100%; display: block; }
     width: 34px; height: 34px; background: none; border: none; cursor: pointer;
   }
   .nav-toggle span { display: block; height: 2px; background: var(--white); border-radius: 2px; }
+}
+
+@media (max-width: 420px) {
+  .container { padding: 0 18px; }
 }
 
 /* ---------- typo générique ---------- */
