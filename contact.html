@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AULIT42369 — Contact</title>
-<meta name="description" content="Contacter AULIT42369.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -15,10 +14,12 @@
 <meta property="og:image" content="https://aulit42369.github.io/Site/og-image.png">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#00f5ff">
+<meta name="description" content="Contacter AULIT42369.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <style>
   .contact-form { display: flex; flex-direction: column; gap: 18px; max-width: 560px; }
   .field label { display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px; }
@@ -56,7 +57,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow">// Une question, une proposition</div>
-      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Me <em class="accent">contacter</em></h1>
+      <h1 class="h1-page">Me <em class="accent">contacter</em></h1>
       <p class="lead" style="margin-top:14px;">Pour tout le reste, le Discord reste plus rapide — mais si tu préfères écrire ici, c'est possible aussi.</p>
     </div>
   </section>
@@ -104,15 +105,7 @@
   </div>
 </footer>
 
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const nav = document.getElementById('nav');
-  navToggle.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    document.body.classList.toggle('nav-open', open);
-    navToggle.setAttribute('aria-expanded', open);
-  });
-</script>
+<script src="main.js"></script>
 
 <script>
   // Envoi sans quitter la page : Formspree répond en JSON si on le lui

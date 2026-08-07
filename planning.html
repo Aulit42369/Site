@@ -16,8 +16,9 @@
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Le programme de la semaine sur la chaîne AULIT42369.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <style>
   .planning-frame { width: 100%; aspect-ratio: 16 / 9; border: none; display: block; }
   .planning-wide { max-width: 1600px; }
@@ -42,6 +43,7 @@
 <main>
   <section class="tight" style="padding-top:56px;">
     <div class="container planning-wide">
+      <h1 class="sr-only">Planning de la semaine — AULIT42369</h1>
       <div class="broadcast-frame">
         <iframe class="planning-frame" id="planningFrame" title="Planning de la semaine AULIT42369" loading="lazy"></iframe>
       </div>
@@ -69,15 +71,7 @@
     </div>
   </div>
 </footer>
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const nav = document.getElementById('nav');
-  navToggle.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    document.body.classList.toggle('nav-open', open);
-    navToggle.setAttribute('aria-expanded', open);
-  });
-</script>
+<script src="main.js"></script>
 <script>
   // Un paramètre différent à chaque visite force le navigateur à aller
   // rechercher la dernière version, plutôt que de réutiliser une copie

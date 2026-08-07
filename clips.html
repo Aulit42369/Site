@@ -16,8 +16,9 @@
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Les derniers clips marquants de la chaîne AULIT42369.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <style>
   .clips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
   .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
@@ -47,7 +48,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow">// Meilleurs moments</div>
-      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Derniers <em class="accent">clips</em></h1>
+      <h1 class="h1-page">Derniers <em class="accent">clips</em></h1>
       <p class="lead" style="margin-top:14px;">Une sélection à la main, mise à jour après chaque stream.</p>
     </div>
   </section>
@@ -57,6 +58,16 @@
       <div class="clips-grid" id="clipsGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none;">
         Aucun clip pour l'instant — reviens après le prochain stream.
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="card" style="text-align:center;padding:44px 30px;">
+        <h2>Envie de voir la suite en <em class="accent">direct</em> ?</h2>
+        <p style="max-width:520px;margin:14px auto 26px;">Rejoins le Discord pour être prévenu des prochains streams et ne rater aucun futur clip.</p>
+        <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" class="btn btn-primary">Rejoindre le Discord</a>
       </div>
     </div>
   </section>
@@ -74,15 +85,7 @@
   </div>
 </footer>
 
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const nav = document.getElementById('nav');
-  navToggle.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    document.body.classList.toggle('nav-open', open);
-    navToggle.setAttribute('aria-expanded', open);
-  });
-</script>
+<script src="main.js"></script>
 
 <script>
 /* ════════════════════════════════════════════════════════

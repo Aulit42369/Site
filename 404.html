@@ -6,12 +6,15 @@
 <title>Page introuvable — AULIT42369</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <style>
   .error-wrap { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; }
   .error-code { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: clamp(4rem, 14vw, 8rem); color: var(--cyan); text-shadow: 0 0 20px #00f5ff, 0 0 60px rgba(0,245,255,.45); line-height: 1; }
+  .error-wrap h1 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; letter-spacing: 0.02em; margin-top: 18px; }
 </style>
 </head>
 <body>
@@ -36,7 +39,7 @@
   <div class="error-wrap">
     <div class="eyebrow">// Erreur 404</div>
     <div class="error-code">404</div>
-    <h2 style="margin-top:18px;">Cette page n'existe <em class="accent">pas</em></h2>
+    <h1>Cette page n'existe <em class="accent">pas</em></h1>
     <p class="lead" style="margin:14px auto 30px;">Le lien est peut-être périmé, ou l'adresse mal tapée.</p>
     <a href="index.html" class="btn btn-primary">Retour à l'accueil</a>
   </div>
@@ -54,15 +57,7 @@
   </div>
 </footer>
 
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const nav = document.getElementById('nav');
-  navToggle.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    document.body.classList.toggle('nav-open', open);
-    navToggle.setAttribute('aria-expanded', open);
-  });
-</script>
+<script src="main.js"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

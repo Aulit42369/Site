@@ -16,8 +16,9 @@
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Présentation de la chaîne AULIT42369 — multigaming, jeu coop, communauté.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <style>
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; } }
@@ -49,7 +50,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow">// La chaîne</div>
-      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">À <em class="accent">propos</em></h1>
+      <h1 class="h1-page">À <em class="accent">propos</em></h1>
     </div>
   </section>
 
@@ -108,15 +109,7 @@
   </div>
 </footer>
 
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const nav = document.getElementById('nav');
-  navToggle.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    document.body.classList.toggle('nav-open', open);
-    navToggle.setAttribute('aria-expanded', open);
-  });
-</script>
+<script src="main.js"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
