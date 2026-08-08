@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Streamers</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Aperçu Discord / réseaux sociaux -->
+<meta property="og:title" content="AULIT42369 — Streamers">
+<meta property="og:description" content="Les streamers et chaînes que la communauté AULIT42369 conseille et soutient.">
+<meta property="og:url" content="https://aulit42369.github.io/Site/streamers.html">
+<meta property="og:image" content="https://aulit42369.github.io/Site/og/streamers-og.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#00f5ff">
+<meta name="description" content="Les streamers et chaînes que la communauté AULIT42369 conseille et soutient.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5">
+<style>
+  .streamers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .streamer-card { display: flex; flex-direction: column; gap: 14px; }
+  .streamer-head { display: flex; align-items: center; gap: 12px; }
+  .streamer-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--cyan); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; font-weight: 900; flex-shrink: 0; }
+  .streamer-name { font-weight: 700; font-size: 1.05rem; }
+  .streamer-desc { color: #c3cadb; font-size: 0.92rem; line-height: 1.5; flex: 1; }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="streamers.html" class="active">Streamers</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// La communauté</div>
+      <h1 class="h1-page">Streamers qu'on <em class="accent">conseille</em></h1>
+      <p class="lead" style="margin-top:14px;">Des chaînes qu'on suit, qu'on raid, et qu'on a envie de faire découvrir.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="streamers-grid" id="streamersGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        La liste arrive bientôt.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:var(--dim);font-size:0.78rem;">Mentions légales</a></div>
+    <div class="socials">
+      <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/aulit42369/?hl=fr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@aulit42369_" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   ✏️  AJOUTE TES STREAMERS ICI
+   ────────────────────────────────────────────────────────
+   Pour chaque streamer :
+     name        → son pseudo
+     url         → le lien vers sa chaîne (Twitch, YouTube...)
+     description → une phrase sur pourquoi tu le/la conseilles
+
+   Le plus mis en avant en premier dans la liste.
+════════════════════════════════════════════════════════ */
+const STREAMERS = [
+  // { name: 'Pseudo', url: 'https://www.twitch.tv/pseudo', description: 'Une phrase sur pourquoi tu conseilles cette chaîne.' },
+  // Optionnel : ajoute avatar: 'https://...' pour forcer une image précise
+  // au lieu de la récupération automatique depuis Twitch.
+];
+
+const grid = document.getElementById('streamersGrid');
+const empty = document.getElementById('emptyState');
+
+/* Extrait le pseudo depuis une URL Twitch (dernier segment du chemin). */
+function twitchUsername(url) {
+  try {
+    return new URL(url).pathname.split('/').filter(Boolean).pop() || '';
+  } catch {
+    return '';
+  }
+}
+
+/* Remplace la lettre par la photo une fois chargée avec succès ;
+   si ça échoue (service indisponible, pseudo introuvable...), la
+   lettre reste affichée — jamais d'icône d'image cassée. */
+function applyAvatarPhoto(avatarEl, photoUrl) {
+  const img = new Image();
+  img.onload = () => {
+    avatarEl.style.backgroundImage = `url('${photoUrl}')`;
+    avatarEl.style.backgroundSize = 'cover';
+    avatarEl.style.backgroundPosition = 'center';
+    avatarEl.textContent = '';
+  };
+  img.src = photoUrl;
+}
+
+if (STREAMERS.length === 0) {
+  empty.style.display = 'block';
+} else {
+  STREAMERS.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'card streamer-card';
+    const initial = s.name.trim().charAt(0).toUpperCase();
+    const avatarId = 'streamer-avatar-' + i;
+    card.innerHTML = `
+      <div class="streamer-head">
+        <div class="streamer-avatar" id="${avatarId}">${initial}</div>
+        <div class="streamer-name">${s.name}</div>
+      </div>
+      <p class="streamer-desc">${s.description}</p>
+      <a href="${s.url}" target="_blank" rel="noopener" class="btn btn-secondary">Voir la chaîne</a>
+    `;
+    grid.appendChild(card);
+
+    const avatarEl = document.getElementById(avatarId);
+
+    if (s.avatar) {
+      applyAvatarPhoto(avatarEl, s.avatar);
+    } else {
+      const username = twitchUsername(s.url);
+      if (username) {
+        // decapi.me : service tiers gratuit et communautaire qui résout
+        // un pseudo Twitch vers l'URL de sa photo de profil actuelle.
+        // Nécessaire car Twitch n'expose pas cette info sans clé API,
+        // qu'on ne peut pas utiliser en toute sécurité sur un site
+        // statique. Si le service ne répond pas, la lettre reste.
+        fetch('https://decapi.me/twitch/avatar/' + encodeURIComponent(username))
+          .then(r => (r.ok ? r.text() : Promise.reject()))
+          .then(photoUrl => {
+            photoUrl = photoUrl.trim();
+            if (photoUrl.startsWith('http')) applyAvatarPhoto(avatarEl, photoUrl);
+          })
+          .catch(() => {});
+      }
+    }
+  });
+}
+</script>
+
+<script data-goatcounter="https://aulit42369.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
