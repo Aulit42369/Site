@@ -20,12 +20,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=5">
 <style>
-  .streamers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .streamer-card { display: flex; flex-direction: column; gap: 14px; }
-  .streamer-head { display: flex; align-items: center; gap: 12px; }
-  .streamer-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--cyan); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; font-weight: 900; flex-shrink: 0; }
+  .streamers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 940px;
+    margin: 0 auto;
+  }
+  @media (max-width: 700px) {
+    .streamers-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 460px) {
+    .streamers-grid { grid-template-columns: 1fr; max-width: 320px; }
+  }
+  .streamer-card {
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 26px 22px;
+  }
+  .streamer-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--cyan); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.3rem; flex-shrink: 0; }
   .streamer-name { font-weight: 700; font-size: 1.05rem; }
-  .streamer-desc { color: #c3cadb; font-size: 0.92rem; line-height: 1.5; flex: 1; }
+  .streamer-desc { color: #c3cadb; font-size: 0.88rem; line-height: 1.45; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+  .streamer-card .btn { margin-top: auto; align-self: center; font-size: 0.85rem; padding: 9px 18px; }
+  .streamer-live-badge { display: none; position: absolute; top: 12px; right: 12px; align-items: center; gap: 5px; font-family: 'Orbitron', sans-serif; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 7px; border-radius: 3px; background: var(--surface2); border: 1px solid var(--line); color: var(--dim); }
+  .streamer-live-badge.is-live, .streamer-live-badge.is-offline { display: inline-flex; }
+  .streamer-live-badge.is-live { color: var(--magenta); border-color: var(--magenta); }
+  .streamer-live-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+  .streamer-live-badge.is-live .dot { box-shadow: 0 0 6px var(--magenta); }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
@@ -128,6 +154,25 @@ function applyAvatarPhoto(avatarEl, photoUrl) {
   img.src = photoUrl;
 }
 
+/* Affiche "En direct" ou "Hors ligne" une fois qu'on sait réellement
+   lequel des deux s'applique ; le badge reste invisible tant qu'on
+   n'a pas de réponse (ou si le service ne répond pas). */
+function checkLiveStatus(badgeEl, username) {
+  fetch('https://decapi.me/twitch/uptime/' + encodeURIComponent(username) + '?offline_msg=OFFLINE')
+    .then(r => (r.ok ? r.text() : Promise.reject()))
+    .then(text => {
+      const label = badgeEl.querySelector('.label');
+      if (text.trim() === 'OFFLINE') {
+        badgeEl.classList.add('is-offline');
+        label.textContent = 'Hors ligne';
+      } else {
+        badgeEl.classList.add('is-live');
+        label.textContent = 'En direct';
+      }
+    })
+    .catch(() => {});
+}
+
 if (STREAMERS.length === 0) {
   empty.style.display = 'block';
 } else {
@@ -136,36 +181,38 @@ if (STREAMERS.length === 0) {
     card.className = 'card streamer-card';
     const initial = s.name.trim().charAt(0).toUpperCase();
     const avatarId = 'streamer-avatar-' + i;
+    const liveId = 'streamer-live-' + i;
     card.innerHTML = `
-      <div class="streamer-head">
-        <div class="streamer-avatar" id="${avatarId}">${initial}</div>
-        <div class="streamer-name">${s.name}</div>
-      </div>
+      <div class="streamer-live-badge" id="${liveId}"><span class="dot"></span><span class="label"></span></div>
+      <div class="streamer-avatar" id="${avatarId}">${initial}</div>
+      <div class="streamer-name">${s.name}</div>
       <p class="streamer-desc">${s.description}</p>
       <a href="${s.url}" target="_blank" rel="noopener" class="btn btn-secondary">Voir la chaîne</a>
     `;
     grid.appendChild(card);
 
     const avatarEl = document.getElementById(avatarId);
+    const username = twitchUsername(s.url);
 
+    // decapi.me : service tiers gratuit et communautaire, utilisé par
+    // beaucoup de streamers pour leurs bots/overlays. Nécessaire ici
+    // car Twitch n'expose ni la photo ni le statut live sans clé API,
+    // qu'on ne peut pas utiliser en toute sécurité sur un site statique.
+    // Si le service ne répond pas : lettre gardée, badge invisible.
     if (s.avatar) {
       applyAvatarPhoto(avatarEl, s.avatar);
-    } else {
-      const username = twitchUsername(s.url);
-      if (username) {
-        // decapi.me : service tiers gratuit et communautaire qui résout
-        // un pseudo Twitch vers l'URL de sa photo de profil actuelle.
-        // Nécessaire car Twitch n'expose pas cette info sans clé API,
-        // qu'on ne peut pas utiliser en toute sécurité sur un site
-        // statique. Si le service ne répond pas, la lettre reste.
-        fetch('https://decapi.me/twitch/avatar/' + encodeURIComponent(username))
-          .then(r => (r.ok ? r.text() : Promise.reject()))
-          .then(photoUrl => {
-            photoUrl = photoUrl.trim();
-            if (photoUrl.startsWith('http')) applyAvatarPhoto(avatarEl, photoUrl);
-          })
-          .catch(() => {});
-      }
+    } else if (username) {
+      fetch('https://decapi.me/twitch/avatar/' + encodeURIComponent(username))
+        .then(r => (r.ok ? r.text() : Promise.reject()))
+        .then(photoUrl => {
+          photoUrl = photoUrl.trim();
+          if (photoUrl.startsWith('http')) applyAvatarPhoto(avatarEl, photoUrl);
+        })
+        .catch(() => {});
+    }
+
+    if (username) {
+      checkLiveStatus(document.getElementById(liveId), username);
     }
   });
 }
