@@ -45,7 +45,8 @@
 }
 </script>
 <style>
-  .clips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .clips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+@media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
   .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
   .clip-title { padding: 14px 18px; font-weight: 700; font-size: 1rem; }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
