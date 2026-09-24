@@ -18,7 +18,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,9 +43,10 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="style.css?v=5">
 <style>
   .clips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-@media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
   .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
   .clip-title { padding: 14px 18px; font-weight: 700; font-size: 1rem; }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
@@ -79,7 +79,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow">// Meilleurs moments</div>
-      <h1 class="h1-page">Derniers <em class="accent">clips</em></h1>
+      <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Derniers <em class="accent">clips</em></h1>
       <p class="lead" style="margin-top:14px;">Une sélection à la main, mise à jour après chaque stream.</p>
     </div>
   </section>
@@ -89,16 +89,6 @@
       <div class="clips-grid" id="clipsGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none;">
         Aucun clip pour l'instant — reviens après le prochain stream.
-      </div>
-    </div>
-  </section>
-
-  <section class="tight">
-    <div class="container">
-      <div class="card" style="text-align:center;padding:44px 30px;">
-        <h2>Envie de voir la suite en <em class="accent">direct</em> ?</h2>
-        <p style="max-width:520px;margin:14px auto 26px;">Rejoins le Discord pour être prévenu des prochains streams et ne rater aucun futur clip.</p>
-        <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" class="btn btn-primary">Rejoindre le Discord</a>
       </div>
     </div>
   </section>
@@ -119,39 +109,32 @@
 <script src="main.js"></script>
 
 <script>
-/* ════════════════════════════════════════════════════════
-   ✏️  AJOUTE TES CLIPS ICI
-   ────────────────────────────────────────────────────────
-   Pour chaque clip : ouvre-le sur Twitch, copie la partie de
-   l'adresse après "clips.twitch.tv/" (le "slug") — par exemple
-   pour https://clips.twitch.tv/AwkwardSalamanderSwiftRage
-   le slug est "AwkwardSalamanderSwiftRage".
-
-   Le plus récent en premier dans la liste.
-════════════════════════════════════════════════════════ */
-const CLIPS = [
-  // { slug: 'ColleIciLeSlugDuClip', title: 'Titre du clip' },
-   { slug: 'RepletePoisedTireHeyGuys-EjpUKx2z4EzXDudl', title: 'capout' },
-   
-  { slug: 'ImpartialProudQuailBlargNaut-yuC_Ko9dKA5FpRpZ', title: 'Hago se jette dans le vide sans aucune hésitation et gaspille l\'argent du groupe' },
-];
-
+/* ================================================================
+   La liste des clips vient de data/clips.json — gérée via la page
+   d'administration (admin.html), plus besoin d'éditer ce fichier
+   à la main.
+   ================================================================ */
 const grid = document.getElementById('clipsGrid');
 const empty = document.getElementById('emptyState');
 
-if (CLIPS.length === 0) {
-  empty.style.display = 'block';
-} else {
-  CLIPS.forEach(clip => {
-    const card = document.createElement('div');
-    card.className = 'broadcast-frame clip-card';
-    card.innerHTML = `
-      <iframe src="https://clips.twitch.tv/embed?clip=${clip.slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
-      <div class="clip-title">${clip.title}</div>
-    `;
-    grid.appendChild(card);
+fetch('data/clips.json')
+  .then(r => (r.ok ? r.json() : []))
+  .catch(() => [])
+  .then(clips => {
+    if (clips.length === 0) {
+      empty.style.display = 'block';
+      return;
+    }
+    clips.forEach(clip => {
+      const card = document.createElement('div');
+      card.className = 'broadcast-frame clip-card';
+      card.innerHTML = `
+        <iframe src="https://clips.twitch.tv/embed?clip=${clip.slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
+        <div class="clip-title">${clip.title}</div>
+      `;
+      grid.appendChild(card);
+    });
   });
-}
 </script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"

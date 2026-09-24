@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Administration — AULIT42369</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5">
+<style>
+  .admin-wrap { max-width: 760px; margin: 0 auto; padding: 48px 28px 80px; }
+  .admin-wrap h1 { font-size: 1.8rem; margin-bottom: 8px; }
+  .admin-note { color: var(--muted); font-size: 0.92rem; margin-bottom: 28px; }
+  .admin-note.warn { color: #ffb020; }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 6px; }
+  .field input, .field textarea {
+    width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 4px;
+    padding: 11px 14px; color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 1rem;
+  }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--cyan); }
+  .field textarea { resize: vertical; min-height: 70px; }
+
+  .admin-tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .admin-tabs button {
+    background: none; border: none; color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 700;
+    font-size: 0.95rem; padding: 10px 4px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .admin-tabs button.active { color: var(--cyan); border-color: var(--cyan); }
+  .admin-tabs .spacer { flex: 1; }
+  .admin-tabs .logout { color: var(--dim); font-size: 0.82rem; font-weight: 600; align-self: center; }
+
+  .entry-card {
+    background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line);
+    border-radius: 4px; padding: 16px 18px; margin-bottom: 12px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .entry-card .entry-body { flex: 1; min-width: 0; }
+  .entry-card .entry-title { font-weight: 700; }
+  .entry-card .entry-sub { color: var(--muted); font-size: 0.88rem; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .entry-card .entry-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .entry-card .entry-actions button {
+    background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 3px;
+    padding: 6px 10px; font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; cursor: pointer;
+  }
+  .entry-card .entry-actions button:hover { border-color: var(--cyan); color: var(--cyan); }
+  .entry-card .entry-actions button.danger:hover { border-color: var(--magenta); color: var(--magenta); }
+
+  .add-form { border: 1px dashed var(--line); border-radius: 4px; padding: 18px; margin-top: 8px; }
+  .add-form .form-actions { display: flex; gap: 10px; margin-top: 6px; }
+
+  #statusMsg { margin-top: 20px; font-size: 0.88rem; padding: 10px 14px; border-radius: 4px; display: none; }
+  #statusMsg.show { display: block; }
+  #statusMsg.ok { background: rgba(0,245,255,0.08); border: 1px solid var(--cyan); color: var(--cyan); }
+  #statusMsg.err { background: rgba(255,45,120,0.08); border: 1px solid var(--magenta); color: var(--magenta); }
+  #statusMsg.pending { background: var(--surface2); border: 1px solid var(--line); color: var(--muted); }
+
+  .empty-row { color: var(--muted); font-size: 0.9rem; padding: 14px 0; }
+</style>
+</head>
+<body>
+
+<div class="admin-wrap">
+  <h1>Administration</h1>
+  <p class="admin-note">Ajoute, modifie ou supprime des streamers et des clips sans toucher au code. Chaque action crée un commit directement sur GitHub.</p>
+
+  <div id="authGate">
+    <div class="field">
+      <label for="tokenInput">Jeton d'accès GitHub (fine-grained, limité à ce dépôt)</label>
+      <input type="password" id="tokenInput" placeholder="github_pat_...">
+    </div>
+    <button class="btn btn-primary" id="connectBtn">Se connecter</button>
+    <p class="admin-note" style="margin-top:20px;">
+      Pas encore de jeton ? Sur GitHub : <strong>Settings</strong> (ton compte, pas le repo) → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Fine-grained tokens</strong> → <strong>Generate new token</strong>.
+      Repository access : <strong>Only select repositories</strong> → choisis <code>Site</code>. Permissions → <strong>Contents</strong> → <strong>Read and write</strong>. Rien d'autre à cocher.
+    </p>
+    <p class="admin-note warn">Le jeton reste uniquement dans ce navigateur (localStorage) — ne l'utilise pas sur un ordinateur partagé, et ne le colle nulle part ailleurs. Tu peux le révoquer à tout moment depuis GitHub.</p>
+  </div>
+
+  <div id="adminPanel" style="display:none;">
+    <div class="admin-tabs">
+      <button data-tab="streamers" class="active">Streamers</button>
+      <button data-tab="clips">Clips</button>
+      <div class="spacer"></div>
+      <button class="logout" id="logoutBtn">Se déconnecter</button>
+    </div>
+
+    <div id="streamersPanel" class="admin-panel">
+      <div id="streamersList"></div>
+      <button class="btn btn-secondary" id="addStreamerBtn" style="margin-top:8px;">+ Ajouter un streamer</button>
+      <div id="streamerForm" class="add-form" style="display:none;">
+        <div class="field"><label>Pseudo</label><input type="text" id="sfName"></div>
+        <div class="field"><label>URL de la chaîne</label><input type="text" id="sfUrl" placeholder="https://www.twitch.tv/pseudo"></div>
+        <div class="field"><label>Description</label><textarea id="sfDesc"></textarea></div>
+        <div class="field"><label>Avatar personnalisé (optionnel)</label><input type="text" id="sfAvatar" placeholder="Laisse vide pour la récupération automatique"></div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="sfSave">Enregistrer</button>
+          <button class="btn btn-secondary" id="sfCancel">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="clipsPanel" class="admin-panel" style="display:none;">
+      <div id="clipsList"></div>
+      <button class="btn btn-secondary" id="addClipBtn" style="margin-top:8px;">+ Ajouter un clip</button>
+      <div id="clipForm" class="add-form" style="display:none;">
+        <div class="field"><label>Slug du clip</label><input type="text" id="cfSlug" placeholder="ex : AwkwardSalamanderSwiftRage"></div>
+        <div class="field"><label>Titre</label><input type="text" id="cfTitle"></div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="cfSave">Enregistrer</button>
+          <button class="btn btn-secondary" id="cfCancel">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="statusMsg"></div>
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   Admin AULIT42369 — lit/écrit data/streamers.json et data/clips.json
+   directement sur GitHub via l'API Contents, avec un jeton personnel
+   gardé dans ce navigateur uniquement. Change ici si le dépôt bouge.
+   ================================================================ */
+const OWNER = 'aulit42369';
+const REPO = 'Site';
+const TOKEN_KEY = 'aulit_admin_token';
+
+const authGate = document.getElementById('authGate');
+const adminPanel = document.getElementById('adminPanel');
+const statusMsg = document.getElementById('statusMsg');
+
+function getToken() { return localStorage.getItem(TOKEN_KEY); }
+function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
+function clearToken() { localStorage.removeItem(TOKEN_KEY); }
+
+function showStatus(text, kind) {
+  statusMsg.textContent = text;
+  statusMsg.className = 'show ' + kind;
+}
+function hideStatus() { statusMsg.className = ''; }
+
+function utf8ToB64(str) { return btoa(unescape(encodeURIComponent(str))); }
+function b64ToUtf8(str) { return decodeURIComponent(escape(atob(str))); }
+
+async function githubRequest(path, options = {}) {
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      Accept: 'application/vnd.github+json',
+      ...(options.headers || {}),
+    },
+  });
+  if (res.status === 401) throw new Error('Jeton invalide ou expiré.');
+  if (res.status === 403) throw new Error('Accès refusé — vérifie les permissions du jeton (Contents: Read and write).');
+  return res;
+}
+
+/* Lit un fichier JSON du repo. Renvoie { data, sha } ; si le fichier
+   n'existe pas encore, { data: [], sha: null } pour pouvoir le créer
+   au premier enregistrement. */
+async function readJsonFile(path) {
+  const res = await githubRequest(path);
+  if (res.status === 404) return { data: [], sha: null };
+  if (!res.ok) throw new Error('Lecture échouée (' + res.status + ')');
+  const body = await res.json();
+  return { data: JSON.parse(b64ToUtf8(body.content)), sha: body.sha };
+}
+
+/* Ecrit un fichier JSON (créé s'il n'existe pas). */
+async function writeJsonFile(path, data, sha, message) {
+  const res = await githubRequest(path, {
+    method: 'PUT',
+    body: JSON.stringify({
+      message,
+      content: utf8ToB64(JSON.stringify(data, null, 2)),
+      ...(sha ? { sha } : {}),
+    }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.message || 'Écriture échouée (' + res.status + ')');
+  }
+  return res.json();
+}
+
+/* ── état en mémoire ── */
+let streamersState = { data: [], sha: null };
+let clipsState = { data: [], sha: null };
+
+/* ── Streamers ── */
+function renderStreamers() {
+  const list = document.getElementById('streamersList');
+  if (streamersState.data.length === 0) {
+    list.innerHTML = '<div class="empty-row">Aucun streamer pour l\'instant.</div>';
+    return;
+  }
+  list.innerHTML = '';
+  streamersState.data.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'entry-card';
+    card.innerHTML = `
+      <div class="entry-body">
+        <div class="entry-title">${s.name}</div>
+        <div class="entry-sub">${s.description || ''}</div>
+      </div>
+      <div class="entry-actions">
+        <button data-edit="${i}">Modifier</button>
+        <button data-delete="${i}" class="danger">Supprimer</button>
+      </div>`;
+    list.appendChild(card);
+  });
+  list.querySelectorAll('[data-edit]').forEach((btn) =>
+    btn.addEventListener('click', () => openStreamerForm(Number(btn.dataset.edit)))
+  );
+  list.querySelectorAll('[data-delete]').forEach((btn) =>
+    btn.addEventListener('click', () => deleteStreamer(Number(btn.dataset.delete)))
+  );
+}
+
+let editingStreamerIndex = null;
+function openStreamerForm(index) {
+  editingStreamerIndex = index;
+  const s = index === null ? { name: '', url: '', description: '', avatar: '' } : streamersState.data[index];
+  document.getElementById('sfName').value = s.name || '';
+  document.getElementById('sfUrl').value = s.url || '';
+  document.getElementById('sfDesc').value = s.description || '';
+  document.getElementById('sfAvatar').value = s.avatar || '';
+  document.getElementById('streamerForm').style.display = 'block';
+}
+function closeStreamerForm() {
+  document.getElementById('streamerForm').style.display = 'none';
+  editingStreamerIndex = null;
+}
+
+async function saveStreamer() {
+  const name = document.getElementById('sfName').value.trim();
+  const url = document.getElementById('sfUrl').value.trim();
+  const description = document.getElementById('sfDesc').value.trim();
+  const avatar = document.getElementById('sfAvatar').value.trim();
+  if (!name || !url || !description) {
+    showStatus('Pseudo, URL et description sont obligatoires.', 'err');
+    return;
+  }
+  const entry = { name, url, description };
+  if (avatar) entry.avatar = avatar;
+
+  const next = [...streamersState.data];
+  if (editingStreamerIndex === null) next.push(entry);
+  else next[editingStreamerIndex] = entry;
+
+  showStatus('Enregistrement...', 'pending');
+  try {
+    const result = await writeJsonFile('data/streamers.json', next, streamersState.sha,
+      (editingStreamerIndex === null ? 'Ajout streamer : ' : 'Modification streamer : ') + name);
+    streamersState = { data: next, sha: result.content.sha };
+    renderStreamers();
+    closeStreamerForm();
+    showStatus('Enregistré.', 'ok');
+  } catch (e) {
+    showStatus('Échec : ' + e.message, 'err');
+  }
+}
+
+async function deleteStreamer(index) {
+  const s = streamersState.data[index];
+  if (!confirm(`Supprimer "${s.name}" ?`)) return;
+  const next = streamersState.data.filter((_, i) => i !== index);
+  showStatus('Suppression...', 'pending');
+  try {
+    const result = await writeJsonFile('data/streamers.json', next, streamersState.sha, 'Suppression streamer : ' + s.name);
+    streamersState = { data: next, sha: result.content.sha };
+    renderStreamers();
+    showStatus('Supprimé.', 'ok');
+  } catch (e) {
+    showStatus('Échec : ' + e.message, 'err');
+  }
+}
+
+/* ── Clips ── */
+function renderClips() {
+  const list = document.getElementById('clipsList');
+  if (clipsState.data.length === 0) {
+    list.innerHTML = '<div class="empty-row">Aucun clip pour l\'instant.</div>';
+    return;
+  }
+  list.innerHTML = '';
+  clipsState.data.forEach((c, i) => {
+    const card = document.createElement('div');
+    card.className = 'entry-card';
+    card.innerHTML = `
+      <div class="entry-body">
+        <div class="entry-title">${c.title}</div>
+        <div class="entry-sub">${c.slug}</div>
+      </div>
+      <div class="entry-actions">
+        <button data-edit="${i}">Modifier</button>
+        <button data-delete="${i}" class="danger">Supprimer</button>
+      </div>`;
+    list.appendChild(card);
+  });
+  list.querySelectorAll('[data-edit]').forEach((btn) =>
+    btn.addEventListener('click', () => openClipForm(Number(btn.dataset.edit)))
+  );
+  list.querySelectorAll('[data-delete]').forEach((btn) =>
+    btn.addEventListener('click', () => deleteClip(Number(btn.dataset.delete)))
+  );
+}
+
+let editingClipIndex = null;
+function openClipForm(index) {
+  editingClipIndex = index;
+  const c = index === null ? { slug: '', title: '' } : clipsState.data[index];
+  document.getElementById('cfSlug').value = c.slug || '';
+  document.getElementById('cfTitle').value = c.title || '';
+  document.getElementById('clipForm').style.display = 'block';
+}
+function closeClipForm() {
+  document.getElementById('clipForm').style.display = 'none';
+  editingClipIndex = null;
+}
+
+async function saveClip() {
+  const slug = document.getElementById('cfSlug').value.trim();
+  const title = document.getElementById('cfTitle').value.trim();
+  if (!slug || !title) {
+    showStatus('Slug et titre sont obligatoires.', 'err');
+    return;
+  }
+  const entry = { slug, title };
+  const next = [entry, ...clipsState.data];
+  const finalNext = editingClipIndex === null ? next : clipsState.data.map((c, i) => (i === editingClipIndex ? entry : c));
+
+  showStatus('Enregistrement...', 'pending');
+  try {
+    const result = await writeJsonFile('data/clips.json', finalNext, clipsState.sha,
+      (editingClipIndex === null ? 'Ajout clip : ' : 'Modification clip : ') + title);
+    clipsState = { data: finalNext, sha: result.content.sha };
+    renderClips();
+    closeClipForm();
+    showStatus('Enregistré.', 'ok');
+  } catch (e) {
+    showStatus('Échec : ' + e.message, 'err');
+  }
+}
+
+async function deleteClip(index) {
+  const c = clipsState.data[index];
+  if (!confirm(`Supprimer "${c.title}" ?`)) return;
+  const next = clipsState.data.filter((_, i) => i !== index);
+  showStatus('Suppression...', 'pending');
+  try {
+    const result = await writeJsonFile('data/clips.json', next, clipsState.sha, 'Suppression clip : ' + c.title);
+    clipsState = { data: next, sha: result.content.sha };
+    renderClips();
+    showStatus('Supprimé.', 'ok');
+  } catch (e) {
+    showStatus('Échec : ' + e.message, 'err');
+  }
+}
+
+/* ── Onglets ── */
+document.querySelectorAll('.admin-tabs [data-tab]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.admin-tabs [data-tab]').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('streamersPanel').style.display = btn.dataset.tab === 'streamers' ? 'block' : 'none';
+    document.getElementById('clipsPanel').style.display = btn.dataset.tab === 'clips' ? 'block' : 'none';
+    hideStatus();
+  });
+});
+
+/* ── Formulaires : boutons ouvrir/annuler/enregistrer ── */
+document.getElementById('addStreamerBtn').addEventListener('click', () => openStreamerForm(null));
+document.getElementById('sfCancel').addEventListener('click', closeStreamerForm);
+document.getElementById('sfSave').addEventListener('click', saveStreamer);
+
+document.getElementById('addClipBtn').addEventListener('click', () => openClipForm(null));
+document.getElementById('cfCancel').addEventListener('click', closeClipForm);
+document.getElementById('cfSave').addEventListener('click', saveClip);
+
+/* ── Connexion / déconnexion ── */
+async function init() {
+  const token = getToken();
+  if (!token) return;
+  authGate.style.display = 'none';
+  adminPanel.style.display = 'block';
+  showStatus('Chargement...', 'pending');
+  try {
+    streamersState = await readJsonFile('data/streamers.json');
+    clipsState = await readJsonFile('data/clips.json');
+    renderStreamers();
+    renderClips();
+    hideStatus();
+  } catch (e) {
+    showStatus('Échec du chargement : ' + e.message, 'err');
+  }
+}
+
+document.getElementById('connectBtn').addEventListener('click', () => {
+  const value = document.getElementById('tokenInput').value.trim();
+  if (!value) return;
+  setToken(value);
+  init();
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  clearToken();
+  adminPanel.style.display = 'none';
+  authGate.style.display = 'block';
+  document.getElementById('tokenInput').value = '';
+});
+
+init();
+</script>
+</body>
+</html>

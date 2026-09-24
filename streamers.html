@@ -137,26 +137,15 @@
 <script src="main.js"></script>
 
 <script>
-/* ════════════════════════════════════════════════════════
-   ✏️  AJOUTE TES STREAMERS ICI
-   ────────────────────────────────────────────────────────
-   Pour chaque streamer :
-     name        → son pseudo
-     url         → le lien vers sa chaîne (Twitch, YouTube...)
-     description → une phrase sur pourquoi tu le/la conseilles
-
-   Le plus mis en avant en premier dans la liste.
-════════════════════════════════════════════════════════ */
-const STREAMERS = [
-  // { name: 'Pseudo', url: 'https://www.twitch.tv/pseudo', description: 'Une phrase sur pourquoi tu conseilles cette chaîne.' },
-  // Optionnel : ajoute avatar: 'https://...' pour forcer une image précise
-  // au lieu de la récupération automatique depuis Twitch.
-];
-
+/* ================================================================
+   La liste des streamers vient de data/streamers.json — gérée via
+   la page d'administration (admin.html), plus besoin d'éditer ce
+   fichier à la main. avatar/statut live viennent de
+   data/twitch-status.json (voir main.js).
+   ================================================================ */
 const grid = document.getElementById('streamersGrid');
 const empty = document.getElementById('emptyState');
 
-/* Extrait le pseudo depuis une URL Twitch (dernier segment du chemin). */
 function twitchUsername(url) {
   try {
     return new URL(url).pathname.split('/').filter(Boolean).pop() || '';
@@ -165,8 +154,6 @@ function twitchUsername(url) {
   }
 }
 
-/* Remplace la lettre par la photo une fois chargée avec succès ;
-   si ça échoue, la lettre reste affichée — jamais d'icône cassée. */
 function applyAvatarPhoto(avatarEl, photoUrl) {
   const img = new Image();
   img.onload = () => {
@@ -183,8 +170,12 @@ function applyLiveState(badgeEl, isLive) {
   badgeEl.classList.add(isLive ? 'is-live' : 'is-offline');
 }
 
-function renderStreamers(statusData) {
-  STREAMERS.forEach((s, i) => {
+function renderStreamers(streamers, statusData) {
+  if (streamers.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  streamers.forEach((s, i) => {
     const card = document.createElement('div');
     card.className = 'card streamer-card';
     const initial = s.name.trim().charAt(0).toUpperCase();
@@ -215,19 +206,10 @@ function renderStreamers(statusData) {
   });
 }
 
-if (STREAMERS.length === 0) {
-  empty.style.display = 'block';
-} else {
-  // data/twitch-status.json est généré par une GitHub Action toutes les
-  // 10 min depuis l'API Twitch officielle (remplace decapi.me) : un seul
-  // fetch pour tous les streamers de la page, au lieu d'un appel par
-  // chaîne. Si le fichier n'existe pas encore, les cartes s'affichent
-  // quand même — juste avec la lettre et sans badge de statut.
-  fetch('data/twitch-status.json')
-    .then(r => (r.ok ? r.json() : Promise.reject()))
-    .then(statusData => renderStreamers(statusData))
-    .catch(() => renderStreamers({}));
-}
+Promise.all([
+  fetch('data/streamers.json').then(r => (r.ok ? r.json() : [])).catch(() => []),
+  fetch('data/twitch-status.json').then(r => (r.ok ? r.json() : {})).catch(() => ({})),
+]).then(([streamers, statusData]) => renderStreamers(streamers, statusData));
 </script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
