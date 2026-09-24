@@ -18,7 +18,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,6 +43,7 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="style.css?v=5">
 <style>
   .streamers-grid {
     display: grid;
@@ -166,8 +166,7 @@ function twitchUsername(url) {
 }
 
 /* Remplace la lettre par la photo une fois chargée avec succès ;
-   si ça échoue (service indisponible, pseudo introuvable...), la
-   lettre reste affichée — jamais d'icône d'image cassée. */
+   si ça échoue, la lettre reste affichée — jamais d'icône cassée. */
 function applyAvatarPhoto(avatarEl, photoUrl) {
   const img = new Image();
   img.onload = () => {
@@ -179,28 +178,12 @@ function applyAvatarPhoto(avatarEl, photoUrl) {
   img.src = photoUrl;
 }
 
-/* Affiche "En direct" ou "Hors ligne" une fois qu'on sait réellement
-   lequel des deux s'applique ; le badge reste invisible tant qu'on
-   n'a pas de réponse (ou si le service ne répond pas). */
-function checkLiveStatus(badgeEl, username) {
-  fetch('https://decapi.me/twitch/uptime/' + encodeURIComponent(username) + '?offline_msg=OFFLINE')
-    .then(r => (r.ok ? r.text() : Promise.reject()))
-    .then(text => {
-      const label = badgeEl.querySelector('.label');
-      if (text.trim() === 'OFFLINE') {
-        badgeEl.classList.add('is-offline');
-        label.textContent = 'Hors ligne';
-      } else {
-        badgeEl.classList.add('is-live');
-        label.textContent = 'En direct';
-      }
-    })
-    .catch(() => {});
+function applyLiveState(badgeEl, isLive) {
+  badgeEl.querySelector('.label').textContent = isLive ? 'En direct' : 'Hors ligne';
+  badgeEl.classList.add(isLive ? 'is-live' : 'is-offline');
 }
 
-if (STREAMERS.length === 0) {
-  empty.style.display = 'block';
-} else {
+function renderStreamers(statusData) {
   STREAMERS.forEach((s, i) => {
     const card = document.createElement('div');
     card.className = 'card streamer-card';
@@ -217,29 +200,33 @@ if (STREAMERS.length === 0) {
     grid.appendChild(card);
 
     const avatarEl = document.getElementById(avatarId);
-    const username = twitchUsername(s.url);
+    const username = twitchUsername(s.url).toLowerCase();
+    const info = statusData[username];
 
-    // decapi.me : service tiers gratuit et communautaire, utilisé par
-    // beaucoup de streamers pour leurs bots/overlays. Nécessaire ici
-    // car Twitch n'expose ni la photo ni le statut live sans clé API,
-    // qu'on ne peut pas utiliser en toute sécurité sur un site statique.
-    // Si le service ne répond pas : lettre gardée, badge invisible.
     if (s.avatar) {
       applyAvatarPhoto(avatarEl, s.avatar);
-    } else if (username) {
-      fetch('https://decapi.me/twitch/avatar/' + encodeURIComponent(username))
-        .then(r => (r.ok ? r.text() : Promise.reject()))
-        .then(photoUrl => {
-          photoUrl = photoUrl.trim();
-          if (photoUrl.startsWith('http')) applyAvatarPhoto(avatarEl, photoUrl);
-        })
-        .catch(() => {});
+    } else if (info && info.avatar) {
+      applyAvatarPhoto(avatarEl, info.avatar);
     }
 
-    if (username) {
-      checkLiveStatus(document.getElementById(liveId), username);
+    if (info) {
+      applyLiveState(document.getElementById(liveId), !!info.live);
     }
   });
+}
+
+if (STREAMERS.length === 0) {
+  empty.style.display = 'block';
+} else {
+  // data/twitch-status.json est généré par une GitHub Action toutes les
+  // 10 min depuis l'API Twitch officielle (remplace decapi.me) : un seul
+  // fetch pour tous les streamers de la page, au lieu d'un appel par
+  // chaîne. Si le fichier n'existe pas encore, les cartes s'affichent
+  // quand même — juste avec la lettre et sans badge de statut.
+  fetch('data/twitch-status.json')
+    .then(r => (r.ok ? r.json() : Promise.reject()))
+    .then(statusData => renderStreamers(statusData))
+    .catch(() => renderStreamers({}));
 }
 </script>
 

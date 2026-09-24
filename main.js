@@ -10,17 +10,18 @@ navToggle.addEventListener('click', () => {
   navToggle.setAttribute('aria-expanded', open);
 });
 
-/* Bandeau "EN DIRECT" du header, sur toutes les pages : vérifie si
-   la chaîne est actuellement live via decapi.me (Twitch n'expose pas
-   cette info sans clé API, inutilisable en toute sécurité ici) et
-   affiche le bandeau seulement si c'est le cas. Si le service ne
-   répond pas, le bandeau reste simplement invisible. */
+/* Bandeau "EN DIRECT" du header, sur toutes les pages : lit
+   data/twitch-status.json (généré côté serveur par une GitHub
+   Action toutes les 10 min depuis l'API Twitch officielle — decapi.me
+   n'est plus utilisé) et affiche le bandeau si la chaîne y est
+   marquée live. Si le fichier n'existe pas encore ou ne répond pas,
+   le bandeau reste simplement invisible. */
 const liveBanner = document.getElementById('liveBanner');
 if (liveBanner) {
-  fetch('https://decapi.me/twitch/uptime/aulit42369?offline_msg=OFFLINE')
-    .then(r => (r.ok ? r.text() : Promise.reject()))
-    .then(text => {
-      if (text.trim() !== 'OFFLINE') liveBanner.classList.add('is-live');
+  fetch('data/twitch-status.json')
+    .then(r => (r.ok ? r.json() : Promise.reject()))
+    .then(data => {
+      if (data.aulit42369 && data.aulit42369.live) liveBanner.classList.add('is-live');
     })
     .catch(() => {});
 }
