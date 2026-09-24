@@ -37,16 +37,20 @@
     background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line);
     border-radius: 4px; padding: 16px 18px; margin-bottom: 12px; display: flex; gap: 14px; align-items: flex-start;
   }
+  .entry-card .entry-order { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
   .entry-card .entry-body { flex: 1; min-width: 0; }
   .entry-card .entry-title { font-weight: 700; }
   .entry-card .entry-sub { color: var(--muted); font-size: 0.88rem; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .entry-card .entry-actions { display: flex; gap: 8px; flex-shrink: 0; }
-  .entry-card .entry-actions button {
+  .entry-card .entry-actions button, .entry-card .entry-order button {
     background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 3px;
     padding: 6px 10px; font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; cursor: pointer;
   }
-  .entry-card .entry-actions button:hover { border-color: var(--cyan); color: var(--cyan); }
+  .entry-card .entry-order button { padding: 3px 8px; line-height: 1; }
+  .entry-card .entry-actions button:hover, .entry-card .entry-order button:hover { border-color: var(--cyan); color: var(--cyan); }
   .entry-card .entry-actions button.danger:hover { border-color: var(--magenta); color: var(--magenta); }
+  .entry-card .entry-order button:disabled { opacity: 0.25; cursor: not-allowed; }
+  .entry-card .entry-order button:disabled:hover { border-color: var(--line); color: var(--muted); }
 
   .add-form { border: 1px dashed var(--line); border-radius: 4px; padding: 18px; margin-top: 8px; }
   .add-form .form-actions { display: flex; gap: 10px; margin-top: 6px; }
@@ -64,7 +68,7 @@
 
 <div class="admin-wrap">
   <h1>Administration</h1>
-  <p class="admin-note">Ajoute, modifie ou supprime des streamers et des clips sans toucher au code. Chaque action crée un commit directement sur GitHub.</p>
+  <p class="admin-note">Ajoute, modifie, réordonne ou supprime des streamers et des clips sans toucher au code. Chaque action crée un commit directement sur GitHub.</p>
 
   <div id="authGate">
     <div class="field">
@@ -160,9 +164,6 @@ async function githubRequest(path, options = {}) {
   return res;
 }
 
-/* Lit un fichier JSON du repo. Renvoie { data, sha } ; si le fichier
-   n'existe pas encore, { data: [], sha: null } pour pouvoir le créer
-   au premier enregistrement. */
 async function readJsonFile(path) {
   const res = await githubRequest(path);
   if (res.status === 404) return { data: [], sha: null };
@@ -171,7 +172,6 @@ async function readJsonFile(path) {
   return { data: JSON.parse(b64ToUtf8(body.content)), sha: body.sha };
 }
 
-/* Ecrit un fichier JSON (créé s'il n'existe pas). */
 async function writeJsonFile(path, data, sha, message) {
   const res = await githubRequest(path, {
     method: 'PUT',
@@ -200,10 +200,15 @@ function renderStreamers() {
     return;
   }
   list.innerHTML = '';
+  const last = streamersState.data.length - 1;
   streamersState.data.forEach((s, i) => {
     const card = document.createElement('div');
     card.className = 'entry-card';
     card.innerHTML = `
+      <div class="entry-order">
+        <button data-up="${i}" ${i === 0 ? 'disabled' : ''} title="Monter">▲</button>
+        <button data-down="${i}" ${i === last ? 'disabled' : ''} title="Descendre">▼</button>
+      </div>
       <div class="entry-body">
         <div class="entry-title">${s.name}</div>
         <div class="entry-sub">${s.description || ''}</div>
@@ -214,12 +219,34 @@ function renderStreamers() {
       </div>`;
     list.appendChild(card);
   });
+  list.querySelectorAll('[data-up]').forEach((btn) =>
+    btn.addEventListener('click', () => moveStreamer(Number(btn.dataset.up), -1))
+  );
+  list.querySelectorAll('[data-down]').forEach((btn) =>
+    btn.addEventListener('click', () => moveStreamer(Number(btn.dataset.down), 1))
+  );
   list.querySelectorAll('[data-edit]').forEach((btn) =>
     btn.addEventListener('click', () => openStreamerForm(Number(btn.dataset.edit)))
   );
   list.querySelectorAll('[data-delete]').forEach((btn) =>
     btn.addEventListener('click', () => deleteStreamer(Number(btn.dataset.delete)))
   );
+}
+
+async function moveStreamer(index, dir) {
+  const target = index + dir;
+  if (target < 0 || target >= streamersState.data.length) return;
+  const next = [...streamersState.data];
+  [next[index], next[target]] = [next[target], next[index]];
+  showStatus('Réorganisation...', 'pending');
+  try {
+    const result = await writeJsonFile('data/streamers.json', next, streamersState.sha, 'Réorganisation streamers');
+    streamersState = { data: next, sha: result.content.sha };
+    renderStreamers();
+    showStatus('Ordre mis à jour.', 'ok');
+  } catch (e) {
+    showStatus('Échec : ' + e.message, 'err');
+  }
 }
 
 let editingStreamerIndex = null;
@@ -289,10 +316,15 @@ function renderClips() {
     return;
   }
   list.innerHTML = '';
+  const last = clipsState.data.length - 1;
   clipsState.data.forEach((c, i) => {
     const card = document.createElement('div');
     card.className = 'entry-card';
     card.innerHTML = `
+      <div class="entry-order">
+        <button data-up="${i}" ${i === 0 ? 'disabled' : ''} title="Monter">▲</button>
+        <button data-down="${i}" ${i === last ? 'disabled' : ''} title="Descendre">▼</button>
+      </div>
       <div class="entry-body">
         <div class="entry-title">${c.title}</div>
         <div class="entry-sub">${c.slug}</div>
@@ -303,12 +335,34 @@ function renderClips() {
       </div>`;
     list.appendChild(card);
   });
+  list.querySelectorAll('[data-up]').forEach((btn) =>
+    btn.addEventListener('click', () => moveClip(Number(btn.dataset.up), -1))
+  );
+  list.querySelectorAll('[data-down]').forEach((btn) =>
+    btn.addEventListener('click', () => moveClip(Number(btn.dataset.down), 1))
+  );
   list.querySelectorAll('[data-edit]').forEach((btn) =>
     btn.addEventListener('click', () => openClipForm(Number(btn.dataset.edit)))
   );
   list.querySelectorAll('[data-delete]').forEach((btn) =>
     btn.addEventListener('click', () => deleteClip(Number(btn.dataset.delete)))
   );
+}
+
+async function moveClip(index, dir) {
+  const target = index + dir;
+  if (target < 0 || target >= clipsState.data.length) return;
+  const next = [...clipsState.data];
+  [next[index], next[target]] = [next[target], next[index]];
+  showStatus('Réorganisation...', 'pending');
+  try {
+    const result = await writeJsonFile('data/clips.json', next, clipsState.sha, 'Réorganisation clips');
+    clipsState = { data: next, sha: result.content.sha };
+    renderClips();
+    showStatus('Ordre mis à jour.', 'ok');
+  } catch (e) {
+    showStatus('Échec : ' + e.message, 'err');
+  }
 }
 
 let editingClipIndex = null;
@@ -332,14 +386,15 @@ async function saveClip() {
     return;
   }
   const entry = { slug, title };
-  const next = [entry, ...clipsState.data];
-  const finalNext = editingClipIndex === null ? next : clipsState.data.map((c, i) => (i === editingClipIndex ? entry : c));
+  const next = editingClipIndex === null
+    ? [entry, ...clipsState.data]
+    : clipsState.data.map((c, i) => (i === editingClipIndex ? entry : c));
 
   showStatus('Enregistrement...', 'pending');
   try {
-    const result = await writeJsonFile('data/clips.json', finalNext, clipsState.sha,
+    const result = await writeJsonFile('data/clips.json', next, clipsState.sha,
       (editingClipIndex === null ? 'Ajout clip : ' : 'Modification clip : ') + title);
-    clipsState = { data: finalNext, sha: result.content.sha };
+    clipsState = { data: next, sha: result.content.sha };
     renderClips();
     closeClipForm();
     showStatus('Enregistré.', 'ok');
