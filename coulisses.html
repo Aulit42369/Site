@@ -107,8 +107,8 @@
           <div class="project-eyebrow" style="color:var(--cyan);">// Régie Mobile</div>
           <h2>Piloter le stream depuis le <em class="accent">téléphone</em></h2>
           <div class="project-desc">
-            <p>Une appli pour gérer le stream sans être devant l'ordinateur : changer de scène OBS, régler l'audio, publier sur Bluesky, modérer le chat YouTube en direct — chaque plateforme a son propre onglet d'événements.</p>
-            <p>Construite en Node.js et React sans aucune dépendance externe. Un système de nouvelles tentatives a été ajouté pour les cas où OBS met du temps à charger scènes et pistes audio, et la mise en page s'adapte aussi bien à un écran de bureau qu'à un téléphone.</p>
+            <p>Gérer le stream sans être devant l'ordinateur : titre, catégorie et tags sauvegardés directement sur Twitch, minuteur de démarrage qui déclenche scène et micro à la fin, pause pub programmable, grille de scènes OBS, suggestions de raid dans la catégorie en cours, streamers suivis avec leur statut live, et gestion des récompenses de points de chaîne.</p>
+            <p>Un générateur d'image d'annonce reprend l'identité visuelle du site pour prévenir que le stream commence, avec publication directe sur Instagram et Bluesky. Un moniteur de santé (débit, FPS, images perdues, CPU OBS) fait vibrer le téléphone si ça dégrade, et un simulateur teste les alertes sans attendre un vrai événement. En fin de session, le résumé s'exporte en Excel.</p>
           </div>
           <div class="project-stack">Node.js · React · zéro dépendance</div>
         </div>
@@ -139,28 +139,31 @@
             </svg>
           </div>
           <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (approximatif)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="472" height="182" rx="10" fill="none" stroke="#1a2540"/>
-              <text x="24" y="34" fill="#00f5ff" font-family="Orbitron, sans-serif" font-size="13" font-weight="900" letter-spacing="1">RÉGIE MOBILE</text>
-              <rect x="24" y="50" width="88" height="26" rx="13" fill="none" stroke="#00f5ff"/>
-              <text x="68" y="67" text-anchor="middle" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Twitch</text>
-              <rect x="120" y="50" width="98" height="26" rx="13" fill="none" stroke="#1a2540"/>
-              <text x="169" y="67" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">YouTube</text>
-              <rect x="226" y="50" width="94" height="26" rx="13" fill="none" stroke="#1a2540"/>
-              <text x="273" y="67" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Bluesky</text>
-              <rect x="24" y="94" width="100" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="74" y="124" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Cam seule</text>
-              <rect x="132" y="94" width="100" height="52" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="182" y="124" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Jeu</text>
-              <rect x="240" y="94" width="100" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="290" y="124" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Pause</text>
-              <rect x="348" y="94" width="100" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="398" y="124" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Fin</text>
-              <text x="24" y="171" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Audio</text>
-              <line x1="70" y1="167" x2="448" y2="167" stroke="#1a2540" stroke-width="4" stroke-linecap="round"/>
-              <line x1="70" y1="167" x2="300" y2="167" stroke="#00f5ff" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="300" cy="167" r="6" fill="#00f5ff"/>
+            <div class="preview-label">Aperçu de l'interface (d'après capture d'écran réelle)</div>
+            <svg class="project-preview-svg" viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="472" height="192" rx="10" fill="none" stroke="#1a2540"/>
+              <text x="20" y="28" fill="#00f5ff" font-family="Orbitron, sans-serif" font-size="13" font-weight="900" letter-spacing="1">RÉGIE MOBILE</text>
+              <circle cx="330" cy="24" r="4" fill="#00f5ff"/>
+              <text x="338" y="27" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">OBS</text>
+              <circle cx="372" cy="24" r="4" fill="#00f5ff"/>
+              <text x="380" y="27" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Twitch</text>
+              <circle cx="424" cy="24" r="4" fill="#00f5ff"/>
+              <text x="432" y="27" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">YouTube</text>
+              <text x="20" y="52" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">TITRE</text>
+              <rect x="20" y="58" width="440" height="24" rx="4" fill="none" stroke="#1a2540"/>
+              <text x="28" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12">On tente le rang silver ce soir</text>
+              <text x="20" y="100" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">CATÉGORIE</text>
+              <rect x="20" y="106" width="200" height="24" rx="4" fill="none" stroke="#1a2540"/>
+              <text x="28" y="122" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12">VALORANT</text>
+              <text x="20" y="152" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">SCÈNES OBS</text>
+              <rect x="20" y="158" width="105" height="34" rx="5" fill="none" stroke="#1a2540"/>
+              <text x="72" y="179" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="11" font-weight="600">Just Chatting</text>
+              <rect x="133" y="158" width="105" height="34" rx="5" fill="none" stroke="#1a2540"/>
+              <text x="185" y="179" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="11" font-weight="600">Je reviens</text>
+              <rect x="246" y="158" width="120" height="34" rx="5" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+              <text x="306" y="179" text-anchor="middle" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="11" font-weight="700">Stream en cours</text>
+              <rect x="374" y="158" width="86" height="34" rx="5" fill="none" stroke="#1a2540"/>
+              <text x="417" y="179" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="11" font-weight="600">Fin</text>
             </svg>
           </div>
         </div>
@@ -212,7 +215,7 @@
               <circle cx="296" cy="50" r="14" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
               <text x="296" y="55" text-anchor="middle" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">♥</text>
               <text x="320" y="44" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="11" font-weight="700">NOUVEAU FOLLOW</text>
-              <text x="320" y="62" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Pseudo_Viewer</text>
+              <text x="320" y="62" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Viewer_1</text>
               <rect x="286" y="86" width="160" height="10" rx="4" fill="none" stroke="#1a2540"/>
               <rect x="300" y="100" width="146" height="10" rx="4" fill="none" stroke="#1a2540"/>
               <text x="270" y="140" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">File d'attente : 2 en attente</text>
@@ -229,6 +232,7 @@
             <p>Plutôt que de dépendre de Streamlabs, ces deux ponts (Twitch et YouTube) récupèrent les événements et les écrivent directement dans de simples fichiers <code>.txt</code>, lus par des panneaux HTML dans OBS.</p>
             <p>Pas d'overlay complexe à charger, pas de service externe à surveiller — juste des fichiers texte relus à chaque changement. La solution la plus simple qui marche.</p>
           </div>
+          <div class="status-note"><span class="dot"></span>Intégré dans un overlay entièrement fait main — aucun asset ni template acheté, juste du code</div>
           <div class="project-stack">Node.js · fichiers texte locaux</div>
         </div>
         <div class="project-visuals">
@@ -257,12 +261,23 @@
             </svg>
           </div>
           <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (approximatif)</div>
+            <div class="preview-label">Aperçu de l'interface (d'après capture d'écran réelle)</div>
             <svg class="project-preview-svg" viewBox="0 0 480 130" xmlns="http://www.w3.org/2000/svg">
-              <text x="20" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Panneaux OBS (texte brut)</text>
-              <text x="20" y="56" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="15">Dernier follow : <tspan fill="#9b5cff" font-weight="600">Pseudo_Viewer</tspan></text>
-              <text x="20" y="82" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="15">Dernier sub : <tspan fill="#9b5cff" font-weight="600">Pseudo2</tspan> (2 mois)</text>
-              <text x="20" y="108" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="15">Dernier raid : <tspan fill="#9b5cff" font-weight="600">Pseudo3</tspan> (12 viewers)</text>
+              <text x="0" y="18" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Barre d'overlay (bas d'écran, mise à jour en direct)</text>
+              <rect x="0" y="34" width="112" height="72" rx="4" fill="none" stroke="#1a2540"/>
+              <text x="10" y="52" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">// DERNIER FOLLOW</text>
+              <text x="10" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">Viewer_1</text>
+              <rect x="122" y="34" width="112" height="72" rx="4" fill="none" stroke="#1a2540"/>
+              <text x="132" y="52" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">// DERNIER SUB</text>
+              <text x="132" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">Viewer_2</text>
+              <rect x="244" y="34" width="112" height="72" rx="4" fill="none" stroke="#1a2540"/>
+              <text x="254" y="52" fill="#ffb020" font-family="Rajdhani, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">// DERNIER DON</text>
+              <text x="254" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">Viewer_3</text>
+              <text x="254" y="90" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">100 bits</text>
+              <rect x="366" y="34" width="112" height="72" rx="4" fill="none" stroke="#1a2540"/>
+              <text x="376" y="52" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">// DERNIER RAID</text>
+              <text x="376" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">Viewer_4</text>
+              <text x="376" y="90" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">5 viewers</text>
             </svg>
           </div>
         </div>
@@ -332,7 +347,7 @@
           <h2>Le suivi des chaînes de la <em class="accent">communauté</em></h2>
           <div class="project-desc">
             <p>Le suivi existait d'abord dans un fichier Excel : Power Query pour récupérer followers et données de stream via l'API Twitch, une macro VBA pour les snapshots quotidiens, et des métriques SullyGnome ajoutées à la main — pas de scraping automatique, contraire à leurs conditions d'utilisation.</p>
-            <p>La Cabane en est la version web : toute l'équipe staff peut y donner son avis sur chaque chaîne suivie, avec classification par rôle et évolution des followers sur 7 jours. Les données vivent dans un dépôt privé séparé, seule la page de lecture publique est exposée sur GitHub Pages.</p>
+            <p>La Cabane en est la version web, avec deux vues : un annuaire des streamers suivis (statut, rôle, historique de follows daté, liens vers SullyGnome et TwitchTracker) et un pipeline de propositions où chaque chaîne passe par un vote du staff — pour, contre ou neutre — avant d'être acceptée. Les données vivent dans un dépôt privé séparé, seule la page de lecture publique est exposée sur GitHub Pages.</p>
           </div>
           <div class="status-note"><span class="dot"></span>Volontairement séparée de la page Streamers de ce site — deux outils distincts, pas de pont entre les deux</div>
           <div class="project-stack">Power Query · VBA · JSON · GitHub Pages</div>
@@ -363,28 +378,30 @@
             </svg>
           </div>
           <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (approximatif)</div>
+            <div class="preview-label">Aperçu de l'interface (d'après capture d'écran réelle)</div>
             <svg class="project-preview-svg" viewBox="0 0 480 170" xmlns="http://www.w3.org/2000/svg">
               <text x="20" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Chaîne</text>
-              <text x="220" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Followers</text>
-              <text x="320" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Évolution 7j</text>
-              <text x="420" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Rôle</text>
+              <text x="220" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Statut</text>
+              <text x="320" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Rôle</text>
+              <text x="410" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Follows</text>
               <line x1="16" y1="36" x2="464" y2="36" stroke="#1a2540"/>
               <text x="20" y="62" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Chaîne_A</text>
-              <text x="220" y="62" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">1 240</text>
-              <text x="320" y="62" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="13">▲ +18</text>
-              <text x="420" y="62" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="12">Staff</text>
+              <circle cx="105" cy="58" r="3" fill="#ff2d78"/>
+              <text x="112" y="62" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="10" font-weight="700">LIVE</text>
+              <text x="220" y="62" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="12">Présent</text>
+              <text x="320" y="62" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="12">Admin</text>
+              <text x="410" y="62" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">615</text>
               <line x1="16" y1="76" x2="464" y2="76" stroke="#141c30"/>
               <text x="20" y="98" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Chaîne_B</text>
-              <text x="220" y="98" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">860</text>
-              <text x="320" y="98" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="13">▼ -4</text>
-              <text x="420" y="98" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="12">Membre</text>
+              <text x="220" y="98" fill="#4a5568" font-family="Rajdhani, sans-serif" font-size="12">À renseigner</text>
+              <text x="320" y="98" fill="#4a5568" font-family="Rajdhani, sans-serif" font-size="12">—</text>
+              <text x="410" y="98" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">252</text>
               <line x1="16" y1="112" x2="464" y2="112" stroke="#141c30"/>
               <text x="20" y="134" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Chaîne_C</text>
-              <text x="220" y="134" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">2 015</text>
-              <text x="320" y="134" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="13">▲ +42</text>
-              <text x="420" y="134" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="12">Staff</text>
-              <text x="20" y="158" fill="#4a5568" font-family="Rajdhani, sans-serif" font-size="10">Avis manuels + données Twitch — exemple</text>
+              <text x="220" y="134" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="12">Présent</text>
+              <text x="320" y="134" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="12">Streamer</text>
+              <text x="410" y="134" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">396</text>
+              <text x="20" y="158" fill="#4a5568" font-family="Rajdhani, sans-serif" font-size="10">Suivi via l'API Twitch, relevés datés — exemple</text>
             </svg>
           </div>
         </div>
