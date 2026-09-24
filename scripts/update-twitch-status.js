@@ -1,8 +1,9 @@
 /* ================================================================
    Récupère avatar + statut live pour ta chaîne et tous les
-   streamers listés dans streamers.html, via l'API Twitch officielle
-   (pas decapi.me). Écrit le résultat dans data/twitch-status.json,
-   que le site lit ensuite directement, sans appel réseau tiers.
+   streamers listés dans data/streamers.json, via l'API Twitch
+   officielle (pas decapi.me). Écrit le résultat dans
+   data/twitch-status.json, que le site lit ensuite directement,
+   sans appel réseau tiers.
 
    Lancé par .github/workflows/twitch-status.yml toutes les 10 min.
    ================================================================ */
@@ -12,7 +13,7 @@ const path = require('path');
 const CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
-const STREAMERS_HTML_PATH = path.join(__dirname, '..', 'streamers.html');
+const STREAMERS_JSON_PATH = path.join(__dirname, '..', 'data', 'streamers.json');
 const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'twitch-status.json');
 const OWN_CHANNEL = 'aulit42369';
 
@@ -21,17 +22,26 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
   process.exit(1);
 }
 
-/* Lit streamers.html et en extrait les pseudos Twitch depuis les
-   entrées `url: 'https://www.twitch.tv/pseudo'` du tableau STREAMERS.
-   Rien à maintenir en double : la liste vient de ce que tu as déjà
-   rempli sur la page. */
+/* Lit data/streamers.json (la liste gérée par admin.html) et en
+   extrait les pseudos Twitch depuis le champ `url` de chaque entrée.
+   Rien à maintenir en double : la liste vient de ce que le panneau
+   admin a déjà enregistré. Si le fichier n'existe pas encore (premier
+   lancement, avant tout ajout), on continue avec juste ta chaîne. */
 function extractUsernames() {
-  const html = fs.readFileSync(STREAMERS_HTML_PATH, 'utf-8');
-  const regex = /url:\s*['"]https:\/\/www\.twitch\.tv\/([a-zA-Z0-9_]+)['"]/g;
   const usernames = new Set([OWN_CHANNEL]);
-  let match;
-  while ((match = regex.exec(html)) !== null) {
-    usernames.add(match[1].toLowerCase());
+  let streamers = [];
+  try {
+    streamers = JSON.parse(fs.readFileSync(STREAMERS_JSON_PATH, 'utf-8'));
+  } catch {
+    return [...usernames];
+  }
+  for (const s of streamers) {
+    try {
+      const username = new URL(s.url).pathname.split('/').filter(Boolean).pop();
+      if (username) usernames.add(username.toLowerCase());
+    } catch {
+      // URL absente ou mal formée sur cette entrée : ignorée, le reste continue
+    }
   }
   return [...usernames];
 }
