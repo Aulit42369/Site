@@ -19,6 +19,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=5">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/"
+    },
+    {
+      "@type": "Person",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/",
+      "description": "Chaine Twitch multigaming, jeux coop entre potes.",
+      "sameAs": [
+        "https://www.twitch.tv/aulit42369",
+        "https://discord.com/invite/Amgaz5YNVg",
+        "https://www.youtube.com/@Aulit42369",
+        "https://www.instagram.com/aulit42369/",
+        "https://www.tiktok.com/@aulit42369_"
+      ]
+    }
+  ]
+}
+</script>
 <style>
   .clips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
   .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
@@ -30,7 +55,10 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+    <div class="header-left">
+      <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+      <a href="index.html" class="live-banner" id="liveBanner"><span class="dot"></span><span class="label">En direct</span></a>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -39,6 +67,7 @@
       <a href="planning.html">Planning</a>
       <a href="clips.html" class="active">Clips</a>
       <a href="streamers.html">Streamers</a>
+      <a href="coulisses.html">Coulisses</a>
       <a href="apropos.html">À propos</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -101,14 +130,9 @@
 ════════════════════════════════════════════════════════ */
 const CLIPS = [
   // { slug: 'ColleIciLeSlugDuClip', title: 'Titre du clip' },
-    { slug: 'SparklyDeterminedOysterYouDontSay-47OsF27oDDGA3uS8', title: 'On est des enfants et on kiff cela' },
-  
-    { slug: 'EphemeralElegantChickenBabyRage-4cMh0q-pBo-sR9gP', title: 'On fait cuire Tidus, on as FAIM' },
-  
-    { slug: 'InquisitiveBrainyPieBrokeBack-zwolSPlNRbEBmMfO', title: 'Combat de Beyblade' },
-  
-    { slug: 'LaconicBillowingRingAMPEnergyCherry-BQ-1dXrrtY063wLH', title: 'De la tristesse à la joie' },
-  
+   { slug: 'RepletePoisedTireHeyGuys-EjpUKx2z4EzXDudl', title: 'capout' },
+   
+  { slug: 'ImpartialProudQuailBlargNaut-yuC_Ko9dKA5FpRpZ', title: 'Hago se jette dans le vide sans aucune hésitation et gaspille l\'argent du groupe' },
 ];
 
 const grid = document.getElementById('clipsGrid');

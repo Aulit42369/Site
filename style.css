@@ -57,6 +57,15 @@ img { max-width: 100%; display: block; }
 .site-header .container { display: flex; align-items: center; justify-content: space-between; height: 74px; }
 .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.15rem; letter-spacing: 0.04em; display: flex; align-items: center; gap: 10px; }
 .logo .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); box-shadow: var(--glow-c); }
+.header-left { display: flex; align-items: center; gap: 14px; }
+.live-banner { display: none; align-items: center; gap: 7px; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 6px 12px; border-radius: 3px; border: 1px solid var(--magenta); color: var(--magenta); }
+.live-banner.is-live { display: inline-flex; }
+.live-banner .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--magenta); box-shadow: 0 0 8px var(--magenta); animation: liveDotPulse 1.6s ease-in-out infinite; }
+@keyframes liveDotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@media (max-width: 480px) {
+  .live-banner .label { display: none; }
+  .live-banner.is-live { padding: 6px; }
+}
 .nav { display: flex; align-items: center; gap: 6px; }
 .nav a {
   font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem;

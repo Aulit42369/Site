@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Coulisses techniques</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Aperçu Discord / réseaux sociaux -->
+<meta property="og:title" content="AULIT42369 — Coulisses techniques">
+<meta property="og:description" content="Les outils et systèmes développés sur-mesure pour faire tourner le stream.">
+<meta property="og:url" content="https://aulit42369.github.io/Site/coulisses.html">
+<meta property="og:image" content="https://aulit42369.github.io/Site/og/coulisses-og.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#00f5ff">
+<meta name="description" content="Les outils et systèmes développés sur-mesure pour faire tourner le stream.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/"
+    },
+    {
+      "@type": "Person",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/",
+      "description": "Chaine Twitch multigaming, jeux coop entre potes.",
+      "sameAs": [
+        "https://www.twitch.tv/aulit42369",
+        "https://discord.com/invite/Amgaz5YNVg",
+        "https://www.youtube.com/@Aulit42369",
+        "https://www.instagram.com/aulit42369/",
+        "https://www.tiktok.com/@aulit42369_"
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="style.css?v=5">
+<style>
+  .project-block { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; padding: 48px 0; border-bottom: 1px solid var(--line); }
+  .project-block:first-of-type { padding-top: 0; }
+  .project-block:last-child { border-bottom: none; }
+  .project-block.reverse .project-diagram { order: -1; }
+  @media (max-width: 900px) {
+    .project-block { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
+    .project-block.reverse .project-diagram { order: 0; }
+  }
+  .project-eyebrow { font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
+  .project-desc { margin-top: 14px; }
+  .project-desc p { margin-top: 12px; }
+  .project-desc p:first-child { margin-top: 0; }
+  .project-stack { font-size: 0.8rem; color: var(--muted); margin-top: 16px; letter-spacing: 0.02em; }
+  .project-diagram { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 4px; padding: 22px; display: flex; align-items: center; }
+  .project-diagram-svg { width: 100%; height: auto; display: block; }
+  .status-note { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-top: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; }
+  .status-note .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-left">
+      <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+      <a href="index.html" class="live-banner" id="liveBanner"><span class="dot"></span><span class="label">En direct</span></a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="streamers.html">Streamers</a>
+      <a href="coulisses.html" class="active">Coulisses</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// Sous le capot</div>
+      <h1 class="h1-page">Coulisses <em class="accent">techniques</em></h1>
+      <p class="lead" style="margin-top:14px;">Les outils qui tournent derrière le stream, construits sur-mesure plutôt qu'avec des solutions toutes faites — développés ici avec Claude. Comment ils sont pensés, et ce qu'il a fallu résoudre pour que ça marche.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+
+      <div class="project-block">
+        <div>
+          <div class="project-eyebrow" style="color:var(--cyan);">// Régie Mobile</div>
+          <h2>Piloter le stream depuis le <em class="accent">téléphone</em></h2>
+          <div class="project-desc">
+            <p>Une appli pour gérer le stream sans être devant l'ordinateur : changer de scène OBS, régler l'audio, publier sur Bluesky, modérer le chat YouTube en direct — chaque plateforme a son propre onglet d'événements.</p>
+            <p>Construite en Node.js et React sans aucune dépendance externe. Un système de nouvelles tentatives a été ajouté pour les cas où OBS met du temps à charger scènes et pistes audio, et la mise en page s'adapte aussi bien à un écran de bureau qu'à un téléphone.</p>
+          </div>
+          <div class="project-stack">Node.js · React · zéro dépendance</div>
+        </div>
+        <div class="project-diagram">
+          <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow-rm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
+              </marker>
+            </defs>
+            <line x1="130" y1="130" x2="196" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+            <line x1="336" y1="116" x2="396" y2="60" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+            <line x1="336" y1="130" x2="396" y2="129" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+            <line x1="336" y1="144" x2="396" y2="198" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+            <rect x="16" y="100" width="114" height="60" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="73" y="134" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Téléphone</text>
+            <rect x="200" y="94" width="136" height="72" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+            <text x="268" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Serveur</text>
+            <text x="268" y="146" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Node.js</text>
+            <rect x="400" y="34" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="452" y="62" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">OBS</text>
+            <rect x="400" y="106" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="452" y="134" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Bluesky</text>
+            <rect x="400" y="178" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="452" y="198" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Chat</text>
+            <text x="452" y="214" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">YouTube</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="project-block reverse">
+        <div>
+          <div class="project-eyebrow" style="color:var(--magenta);">// twitch-alerts-bridge</div>
+          <h2>Toutes les alertes, <em class="accent">sans latence</em></h2>
+          <div class="project-desc">
+            <p>Follows, subs, resubs, dons groupés, bits, raids, dons — un système bâti sur les webhooks EventSub de Twitch, avec ses propres sons synthétisés, un système anti-doublons et une file d'attente pour l'affichage dans l'overlay OBS.</p>
+            <p>Le plus dur n'a pas été le code mais le débogage : des redirections OAuth qui ne correspondaient pas, le pare-feu Windows qui bloquait des ports locaux, et un filtrage non documenté par Twitch qui ignore les follows de comptes trop récents.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span>Complété par un script Lua qui coupe l'écran de fin de raid automatiquement, avec délais réglables</div>
+          <div class="project-stack">Node.js · Twitch EventSub · OBS Lua</div>
+        </div>
+        <div class="project-diagram">
+          <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow-ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#ff2d78"/>
+              </marker>
+            </defs>
+            <line x1="136" y1="130" x2="206" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ab)"/>
+            <line x1="360" y1="108" x2="410" y2="90" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ab)"/>
+            <line x1="360" y1="152" x2="410" y2="170" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ab)"/>
+            <rect x="16" y="100" width="120" height="60" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="76" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Twitch</text>
+            <text x="76" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">EventSub</text>
+            <rect x="210" y="85" width="150" height="90" rx="6" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
+            <text x="285" y="120" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Bridge</text>
+            <text x="285" y="140" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Node.js</text>
+            <text x="285" y="158" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">dédoublonnage + file</text>
+            <rect x="414" y="60" width="100" height="56" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="464" y="84" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Overlay</text>
+            <text x="464" y="100" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">OBS</text>
+            <rect x="414" y="146" width="100" height="56" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="464" y="170" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Son</text>
+            <text x="464" y="186" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">synthétisé</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
+          <div class="project-eyebrow" style="color:var(--violet);">// labels-bridges</div>
+          <h2>Le remplaçant maison de <em class="accent">Stream Labels</em></h2>
+          <div class="project-desc">
+            <p>Plutôt que de dépendre de Streamlabs, ces deux ponts (Twitch et YouTube) récupèrent les événements et les écrivent directement dans de simples fichiers <code>.txt</code>, lus par des panneaux HTML dans OBS.</p>
+            <p>Pas d'overlay complexe à charger, pas de service externe à surveiller — juste des fichiers texte relus à chaque changement. La solution la plus simple qui marche.</p>
+          </div>
+          <div class="project-stack">Node.js · fichiers texte locaux</div>
+        </div>
+        <div class="project-diagram">
+          <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow-lb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#9b5cff"/>
+              </marker>
+            </defs>
+            <line x1="126" y1="130" x2="146" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-lb)"/>
+            <line x1="266" y1="130" x2="286" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-lb)"/>
+            <line x1="392" y1="130" x2="412" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-lb)"/>
+            <rect x="8" y="105" width="118" height="50" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="67" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">API Twitch</text>
+            <text x="67" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">YouTube</text>
+            <rect x="148" y="100" width="118" height="60" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
+            <text x="207" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bridge</text>
+            <text x="207" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Node.js</text>
+            <rect x="288" y="105" width="104" height="50" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="340" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">.txt</text>
+            <text x="340" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">locaux</text>
+            <rect x="414" y="105" width="100" height="50" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="464" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Panneaux</text>
+            <text x="464" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">OBS</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="project-block reverse">
+        <div>
+          <div class="project-eyebrow" style="color:var(--cyan);">// Carte à collectionner</div>
+          <h2>Une extension Twitch <em class="accent">multi-chaînes</em></h2>
+          <div class="project-desc">
+            <p>Les viewers dépensent des points de chaîne pour ouvrir des packs de cartes à collectionner. Hébergée sur Render avec MongoDB Atlas, l'extension gère le français et l'anglais, des effets de cartes holographiques, un mode d'image pleine largeur, l'import de cartes en masse, et un bouton en libre-service pour que chacun supprime ses propres données.</p>
+            <p>Le morceau le plus coriace a été un problème de cache des sources navigateur OBS qui empêchait les nouvelles formes de pack de s'afficher correctement.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span>En cours : l'animation d'ouverture de pack dans l'overlay OBS</div>
+          <div class="project-stack">Extension Twitch · Render · MongoDB Atlas</div>
+        </div>
+        <div class="project-diagram">
+          <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow-cc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
+              </marker>
+            </defs>
+            <line x1="133" y1="130" x2="213" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-cc)"/>
+            <line x1="375" y1="108" x2="416" y2="86" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-cc)"/>
+            <line x1="375" y1="152" x2="416" y2="174" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-cc)"/>
+            <rect x="8" y="100" width="125" height="60" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="70" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Points de</text>
+            <text x="70" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">chaîne</text>
+            <rect x="215" y="80" width="160" height="100" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+            <text x="295" y="112" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Extension</text>
+            <text x="295" y="132" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Twitch</text>
+            <text x="295" y="152" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">multi-chaînes</text>
+            <text x="295" y="166" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Render + MongoDB</text>
+            <rect x="420" y="55" width="95" height="56" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="467" y="79" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Pack de</text>
+            <text x="467" y="95" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">cartes</text>
+            <rect x="420" y="150" width="95" height="56" rx="6" fill="none" stroke="#1a2540"/>
+            <text x="467" y="174" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Overlay</text>
+            <text x="467" y="190" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">OBS</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:var(--dim);font-size:0.78rem;">Mentions légales</a></div>
+    <div class="socials">
+      <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/aulit42369/?hl=fr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@aulit42369_" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+
+<script data-goatcounter="https://aulit42369.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
