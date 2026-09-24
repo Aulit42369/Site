@@ -1,4 +1,20 @@
 {
+  "aly0806": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
+    "live": false
+  },
+  "calo_vt": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
+    "live": true
+  },
+  "galyssiane": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
+    "live": false
+  },
+  "meyuuart": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
+    "live": false
+  },
   "aulit42369": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
     "live": false
@@ -7,5 +23,9 @@
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
     "live": false
   },
-  "_updated_at": "2026-09-24T18:20:14.763Z"
+  "eiwen_": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
+    "live": false
+  },
+  "_updated_at": "2026-09-24T18:59:48.644Z"
 }
