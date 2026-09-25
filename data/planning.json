@@ -1,0 +1,58 @@
+[
+  {
+    "day": "Lundi",
+    "on": true,
+    "time": "21:00",
+    "end": "00:00",
+    "game": "Watch Dogs",
+    "color": "#00f5ff"
+  },
+  {
+    "day": "Mardi",
+    "on": true,
+    "time": "21:00",
+    "end": "00:00",
+    "game": "Minecraft",
+    "color": "#ff2d78"
+  },
+  {
+    "day": "Mercredi",
+    "on": true,
+    "time": "21:00",
+    "end": "00:00",
+    "game": "Lockdown Protocol",
+    "color": "#9b5cff"
+  },
+  {
+    "day": "Jeudi",
+    "on": true,
+    "time": "21:00",
+    "end": "00:00",
+    "game": "Jeux coop avec les copains",
+    "color": "#9b5cff"
+  },
+  {
+    "day": "Vendredi",
+    "on": true,
+    "time": "21:00",
+    "end": "00:00",
+    "game": "Watch Dogs",
+    "color": "#00f5ff"
+  },
+  {
+    "day": "Samedi",
+    "on": true,
+    "time": "21:00",
+    "end": "00:00",
+    "game": "Non Déterminé",
+    "color": "#ff2d78"
+  },
+  {
+    "day": "Dimanche",
+    "on": true,
+    "time": "21:00",
+    "end": "00:00",
+    "game": "Non Déterminé",
+    "color": "#00f5ff"
+  }
+]

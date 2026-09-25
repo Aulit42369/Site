@@ -62,6 +62,15 @@
   #statusMsg.pending { background: var(--surface2); border: 1px solid var(--line); color: var(--muted); }
 
   .empty-row { color: var(--muted); font-size: 0.9rem; padding: 14px 0; }
+
+  .planning-day-card { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px; margin-bottom: 12px; }
+  .planning-day-name { font-weight: 700; font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.9rem; margin-bottom: 10px; }
+  .planning-on { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--muted); margin-bottom: 12px; cursor: pointer; }
+  .planning-on input { width: 16px; height: 16px; }
+  .planning-day-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .planning-day-fields .field { margin-bottom: 0; }
+  .planning-day-fields .field label { font-size: 0.68rem; margin-bottom: 4px; }
+  .planning-day-fields select { width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; }
 </style>
 </head>
 <body>
@@ -87,6 +96,7 @@
     <div class="admin-tabs">
       <button data-tab="streamers" class="active">Streamers</button>
       <button data-tab="clips">Clips</button>
+      <button data-tab="planning">Planning</button>
       <div class="spacer"></div>
       <button class="logout" id="logoutBtn">Se déconnecter</button>
     </div>
@@ -117,6 +127,11 @@
           <button class="btn btn-secondary" id="cfCancel">Annuler</button>
         </div>
       </div>
+    </div>
+
+    <div id="planningPanel" class="admin-panel" style="display:none;">
+      <div id="planningList"></div>
+      <button class="btn btn-primary" id="savePlanningBtn" style="margin-top:8px;">Enregistrer le planning</button>
     </div>
 
     <div id="statusMsg"></div>
@@ -150,8 +165,8 @@ function hideStatus() { statusMsg.className = ''; }
 function utf8ToB64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function b64ToUtf8(str) { return decodeURIComponent(escape(atob(str))); }
 
-async function githubRequest(path, options = {}) {
-  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+async function githubRequest(path, options = {}, repo = REPO) {
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${repo}/contents/${path}`, {
     ...options,
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -160,19 +175,19 @@ async function githubRequest(path, options = {}) {
     },
   });
   if (res.status === 401) throw new Error('Jeton invalide ou expiré.');
-  if (res.status === 403) throw new Error('Accès refusé — vérifie les permissions du jeton (Contents: Read and write).');
+  if (res.status === 403) throw new Error('Accès refusé — vérifie que le jeton a accès au dépôt "' + repo + '" (Contents: Read and write).');
   return res;
 }
 
-async function readJsonFile(path) {
-  const res = await githubRequest(path);
+async function readJsonFile(path, repo = REPO) {
+  const res = await githubRequest(path, {}, repo);
   if (res.status === 404) return { data: [], sha: null };
   if (!res.ok) throw new Error('Lecture échouée (' + res.status + ')');
   const body = await res.json();
   return { data: JSON.parse(b64ToUtf8(body.content)), sha: body.sha };
 }
 
-async function writeJsonFile(path, data, sha, message) {
+async function writeJsonFile(path, data, sha, message, repo = REPO) {
   const res = await githubRequest(path, {
     method: 'PUT',
     body: JSON.stringify({
@@ -180,7 +195,7 @@ async function writeJsonFile(path, data, sha, message) {
       content: utf8ToB64(JSON.stringify(data, null, 2)),
       ...(sha ? { sha } : {}),
     }),
-  });
+  }, repo);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.message || 'Écriture échouée (' + res.status + ')');
@@ -191,6 +206,7 @@ async function writeJsonFile(path, data, sha, message) {
 /* ── état en mémoire ── */
 let streamersState = { data: [], sha: null };
 let clipsState = { data: [], sha: null };
+let planningState = { data: [], sha: null };
 
 /* ── Streamers ── */
 function renderStreamers() {
@@ -418,6 +434,60 @@ async function deleteClip(index) {
   }
 }
 
+/* ── Planning ── */
+const PLANNING_COLORS = [
+  { value: '#00f5ff', label: 'Cyan' },
+  { value: '#9b5cff', label: 'Violet' },
+  { value: '#ff2d78', label: 'Magenta' },
+  { value: '#4a5568', label: 'Gris (repos)' },
+];
+
+function renderPlanning() {
+  const container = document.getElementById('planningList');
+  if (planningState.data.length === 0) {
+    container.innerHTML = '<div class="empty-row">Rien à afficher — vérifie que le jeton a accès au dépôt "planning".</div>';
+    return;
+  }
+  container.innerHTML = '';
+  planningState.data.forEach((d, i) => {
+    const row = document.createElement('div');
+    row.className = 'planning-day-card';
+    const options = PLANNING_COLORS.map(
+      (c) => `<option value="${c.value}" ${d.color === c.value ? 'selected' : ''}>${c.label}</option>`
+    ).join('');
+    row.innerHTML = `
+      <div class="planning-day-name">${d.day}</div>
+      <label class="planning-on"><input type="checkbox" ${d.on ? 'checked' : ''} data-i="${i}" data-field="on"> Stream ce jour</label>
+      <div class="planning-day-fields">
+        <div class="field"><label>Début</label><input type="time" value="${d.time || ''}" data-i="${i}" data-field="time"></div>
+        <div class="field"><label>Fin</label><input type="time" value="${d.end || ''}" data-i="${i}" data-field="end"></div>
+        <div class="field"><label>Jeu</label><input type="text" value="${d.game || ''}" data-i="${i}" data-field="game"></div>
+        <div class="field"><label>Couleur</label><select data-i="${i}" data-field="color">${options}</select></div>
+      </div>`;
+    container.appendChild(row);
+  });
+  container.querySelectorAll('[data-field]').forEach((el) => {
+    el.addEventListener('change', () => {
+      const i = Number(el.dataset.i);
+      const field = el.dataset.field;
+      planningState.data[i][field] = field === 'on' ? el.checked : el.value;
+    });
+  });
+}
+
+async function savePlanning() {
+  showStatus('Enregistrement...', 'pending');
+  try {
+    const result = await writeJsonFile('data/planning.json', planningState.data, planningState.sha, 'Mise à jour planning');
+    planningState.sha = result.content.sha;
+    showStatus('Planning enregistré.', 'ok');
+  } catch (e) {
+    showStatus('Échec : ' + e.message, 'err');
+  }
+}
+
+document.getElementById('savePlanningBtn').addEventListener('click', savePlanning);
+
 /* ── Onglets ── */
 document.querySelectorAll('.admin-tabs [data-tab]').forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -425,6 +495,7 @@ document.querySelectorAll('.admin-tabs [data-tab]').forEach((btn) => {
     btn.classList.add('active');
     document.getElementById('streamersPanel').style.display = btn.dataset.tab === 'streamers' ? 'block' : 'none';
     document.getElementById('clipsPanel').style.display = btn.dataset.tab === 'clips' ? 'block' : 'none';
+    document.getElementById('planningPanel').style.display = btn.dataset.tab === 'planning' ? 'block' : 'none';
     hideStatus();
   });
 });
@@ -445,15 +516,29 @@ async function init() {
   authGate.style.display = 'none';
   adminPanel.style.display = 'block';
   showStatus('Chargement...', 'pending');
+
+  const errors = [];
   try {
     streamersState = await readJsonFile('data/streamers.json');
-    clipsState = await readJsonFile('data/clips.json');
     renderStreamers();
-    renderClips();
-    hideStatus();
   } catch (e) {
-    showStatus('Échec du chargement : ' + e.message, 'err');
+    errors.push('Streamers : ' + e.message);
   }
+  try {
+    clipsState = await readJsonFile('data/clips.json');
+    renderClips();
+  } catch (e) {
+    errors.push('Clips : ' + e.message);
+  }
+  try {
+    planningState = await readJsonFile('data/planning.json');
+    renderPlanning();
+  } catch (e) {
+    errors.push('Planning : ' + e.message);
+  }
+
+  if (errors.length) showStatus(errors.join(' — '), 'err');
+  else hideStatus();
 }
 
 document.getElementById('connectBtn').addEventListener('click', () => {

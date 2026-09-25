@@ -18,7 +18,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,9 +43,18 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="style.css?v=5">
 <style>
-  .planning-frame { width: 100%; aspect-ratio: 16 / 9; border: none; display: block; }
-  .planning-wide { max-width: 1600px; }
+  .planning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .planning-card { display: flex; flex-direction: column; min-height: 150px; }
+  .planning-card.off { opacity: 0.5; }
+  .planning-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; }
+  .planning-day { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.05rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .planning-today-badge { font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px; background: var(--accent, var(--cyan)); color: var(--bg); font-weight: 700; border-radius: 2px; flex-shrink: 0; }
+  .planning-game { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
+  .planning-time { color: var(--muted); font-size: 0.88rem; }
+  .planning-off-label { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin: auto 0; text-align: center; }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -71,16 +79,24 @@
   </div>
 </header>
 <main>
-  <section class="tight" style="padding-top:56px;">
-    <div class="container planning-wide">
-      <h1 class="sr-only">Planning de la semaine — AULIT42369</h1>
-      <div class="broadcast-frame">
-        <iframe class="planning-frame" id="planningFrame" title="Planning de la semaine AULIT42369" loading="lazy"></iframe>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// Programme de la semaine</div>
+      <h1 class="h1-page">Planning <em class="accent">stream</em></h1>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="planning-grid" id="planningGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        Le planning arrive bientôt.
       </div>
     </div>
   </section>
+
   <section class="tight">
-    <div class="container planning-wide">
+    <div class="container">
       <div class="card" style="text-align:center;">
         <p style="margin:0;">
           Le planning peut évoluer d'une semaine à l'autre — le plus fiable
@@ -102,12 +118,55 @@
   </div>
 </footer>
 <script src="main.js"></script>
+
 <script>
-  // Un paramètre différent à chaque visite force le navigateur à aller
-  // rechercher la dernière version, plutôt que de réutiliser une copie
-  // en mémoire de l'ancien planning.
-  document.getElementById('planningFrame').src = 'https://aulit42369.github.io/planning/?v=' + Date.now();
+/* ================================================================
+   Le planning vient de data/planning.json — géré via la page
+   d'administration (admin.html), plus besoin d'un site séparé ni
+   d'éditer de code pour le mettre à jour.
+   ================================================================ */
+const JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+const aujourdhui = JOURS[new Date().getDay()];
+
+const grid = document.getElementById('planningGrid');
+const empty = document.getElementById('emptyState');
+
+fetch('data/planning.json')
+  .then(r => (r.ok ? r.json() : []))
+  .catch(() => [])
+  .then(planning => {
+    if (planning.length === 0) {
+      empty.style.display = 'block';
+      return;
+    }
+    planning.forEach(item => {
+      const isToday = item.day === aujourdhui;
+      const card = document.createElement('div');
+      card.className = 'card planning-card' + (item.on ? '' : ' off');
+      card.style.setProperty('--accent', item.color);
+
+      if (item.on) {
+        card.innerHTML = `
+          <div class="planning-card-head">
+            <div class="planning-day">${item.day}</div>
+            ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : ''}
+          </div>
+          <div class="planning-game">${item.game}</div>
+          <div class="planning-time">${item.time} – ${item.end} · Heure FR (CET)</div>
+        `;
+      } else {
+        card.innerHTML = `
+          <div class="planning-card-head">
+            <div class="planning-day">${item.day}</div>
+          </div>
+          <div class="planning-off-label">— Repos —</div>
+        `;
+      }
+      grid.appendChild(card);
+    });
+  });
 </script>
+
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>
