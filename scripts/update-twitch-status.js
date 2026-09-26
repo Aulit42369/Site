@@ -1,7 +1,8 @@
 /* ================================================================
    Récupère avatar + statut live pour ta chaîne et tous les
    streamers listés dans data/streamers.json, via l'API Twitch
-   officielle (pas decapi.me). Écrit le résultat dans
+   officielle (pas decapi.me). Récupère aussi ton nombre d'abonnés
+   Twitch (ta chaîne uniquement). Écrit le résultat dans
    data/twitch-status.json, que le site lit ensuite directement,
    sans appel réseau tiers.
 
@@ -77,6 +78,34 @@ async function fetchTwitchData(usernames, token) {
       live: liveSet.has(login),
     };
   }
+
+  /* Nombre d'abonnés : uniquement pour ta propre chaîne (pas pour les
+     streamers recommandés). L'endpoint "Get Channel Followers" renvoie
+     le total sans avoir besoin d'un scope particulier tant qu'on ne
+     demande pas la liste nominative des abonnés (ça, ça demanderait un
+     jeton utilisateur avec moderator:read:followers) — un jeton
+     d'application (Client Credentials, celui déjà utilisé ici) suffit
+     pour juste le total. */
+  const ownUser = usersData.data.find((u) => u.login.toLowerCase() === OWN_CHANNEL);
+  if (ownUser) {
+    try {
+      const followersRes = await fetch(
+        `https://api.twitch.tv/helix/channels/followers?broadcaster_id=${ownUser.id}`,
+        { headers }
+      );
+      if (followersRes.ok) {
+        const followersData = await followersRes.json();
+        if (result[OWN_CHANNEL] && typeof followersData.total === 'number') {
+          result[OWN_CHANNEL].followers = followersData.total;
+        }
+      } else {
+        console.error('Echec /channels/followers : ' + followersRes.status);
+      }
+    } catch (err) {
+      console.error('Echec /channels/followers :', err.message);
+    }
+  }
+
   return result;
 }
 

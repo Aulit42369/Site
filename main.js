@@ -10,18 +10,27 @@ navToggle.addEventListener('click', () => {
   navToggle.setAttribute('aria-expanded', open);
 });
 
-/* Bandeau "EN DIRECT" du header, sur toutes les pages : lit
-   data/twitch-status.json (généré côté serveur par une GitHub
-   Action toutes les 10 min depuis l'API Twitch officielle — decapi.me
-   n'est plus utilisé) et affiche le bandeau si la chaîne y est
-   marquée live. Si le fichier n'existe pas encore ou ne répond pas,
-   le bandeau reste simplement invisible. */
+/* Bandeau "EN DIRECT" du header (sur toutes les pages) + nombre
+   d'abonnés Twitch (affiché seulement là où l'élément #followerCount
+   existe, ex. l'accueil) : les deux lisent data/twitch-status.json,
+   généré côté serveur par une GitHub Action toutes les 10 min depuis
+   l'API Twitch officielle (decapi.me n'est plus utilisé). Si le
+   fichier n'existe pas encore ou ne répond pas, ces éléments restent
+   simplement invisibles. */
 const liveBanner = document.getElementById('liveBanner');
-if (liveBanner) {
+const followerStat = document.getElementById('followerStat');
+const followerCount = document.getElementById('followerCount');
+if (liveBanner || followerCount) {
   fetch('data/twitch-status.json')
     .then(r => (r.ok ? r.json() : Promise.reject()))
     .then(data => {
-      if (data.aulit42369 && data.aulit42369.live) liveBanner.classList.add('is-live');
+      const chaine = data.aulit42369;
+      if (!chaine) return;
+      if (liveBanner && chaine.live) liveBanner.classList.add('is-live');
+      if (followerCount && typeof chaine.followers === 'number') {
+        followerCount.textContent = chaine.followers.toLocaleString('fr-FR');
+        if (followerStat) followerStat.style.display = '';
+      }
     })
     .catch(() => {});
 }
