@@ -2,9 +2,13 @@
    Récupère avatar + statut live pour ta chaîne et tous les
    streamers listés dans data/streamers.json, via l'API Twitch
    officielle (pas decapi.me). Récupère aussi ton nombre d'abonnés
-   Twitch (ta chaîne uniquement). Écrit le résultat dans
+   et le jeu en cours quand tu es live. Écrit le résultat dans
    data/twitch-status.json, que le site lit ensuite directement,
    sans appel réseau tiers.
+
+   Tient aussi à jour data/recent-games.json : un petit historique
+   des derniers jeux joués (les 8 plus récents, sans doublon
+   consécutif), affiché sur la page À propos.
 
    Lancé par .github/workflows/twitch-status.yml toutes les 10 min.
    ================================================================ */
@@ -16,6 +20,8 @@ const CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 
 const STREAMERS_JSON_PATH = path.join(__dirname, '..', 'data', 'streamers.json');
 const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'twitch-status.json');
+const RECENT_GAMES_PATH = path.join(__dirname, '..', 'data', 'recent-games.json');
+const MAX_RECENT_GAMES = 8;
 const OWN_CHANNEL = 'aulit42369';
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
@@ -118,6 +124,31 @@ async function fetchTwitchData(usernames, token) {
   return result;
 }
 
+/* Ajoute `currentGame` en tête de data/recent-games.json s'il diffère
+   du dernier jeu enregistré (évite de ré-écrire la même entrée à
+   chaque passage de 10 min pendant un même stream). Garde uniquement
+   les MAX_RECENT_GAMES plus récents. */
+function updateRecentGames(currentGame) {
+  if (!currentGame) return;
+
+  let history = [];
+  try {
+    history = JSON.parse(fs.readFileSync(RECENT_GAMES_PATH, 'utf-8'));
+    if (!Array.isArray(history)) history = [];
+  } catch {
+    history = [];
+  }
+
+  if (history.length > 0 && history[0].game === currentGame) return;
+
+  history.unshift({ game: currentGame, date: new Date().toISOString().slice(0, 10) });
+  history = history.slice(0, MAX_RECENT_GAMES);
+
+  fs.mkdirSync(path.dirname(RECENT_GAMES_PATH), { recursive: true });
+  fs.writeFileSync(RECENT_GAMES_PATH, JSON.stringify(history, null, 2));
+  console.log('Nouveau jeu enregistré dans l\'historique :', currentGame);
+}
+
 async function main() {
   const usernames = extractUsernames();
   console.log('Pseudos trouvés :', usernames.join(', '));
@@ -129,6 +160,11 @@ async function main() {
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(data, null, 2));
   console.log('Ecrit dans', OUTPUT_PATH, '—', usernames.length, 'chaînes.');
+
+  const ownStatus = data[OWN_CHANNEL];
+  if (ownStatus && ownStatus.live && ownStatus.game) {
+    updateRecentGames(ownStatus.game);
+  }
 }
 
 main().catch((err) => {

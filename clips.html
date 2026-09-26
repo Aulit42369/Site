@@ -48,7 +48,10 @@
   .clips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   @media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
   .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
-  .clip-title { padding: 14px 18px; font-weight: 700; font-size: 1rem; }
+  .clip-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; }
+  .clip-title { font-weight: 700; font-size: 1rem; }
+  .share-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .share-btn:hover { border-color: var(--cyan); color: var(--cyan); }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
@@ -126,13 +129,30 @@ fetch('data/clips.json')
       return;
     }
     clips.forEach(clip => {
+      const clipUrl = `https://clips.twitch.tv/${clip.slug}`;
       const card = document.createElement('div');
       card.className = 'broadcast-frame clip-card';
       card.innerHTML = `
         <iframe src="https://clips.twitch.tv/embed?clip=${clip.slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
-        <div class="clip-title">${clip.title}</div>
+        <div class="clip-footer">
+          <div class="clip-title">${clip.title}</div>
+          <button type="button" class="share-btn" aria-label="Partager ce clip">Partager</button>
+        </div>
       `;
       grid.appendChild(card);
+
+      const shareBtn = card.querySelector('.share-btn');
+      shareBtn.addEventListener('click', () => {
+        if (navigator.share) {
+          navigator.share({ title: clip.title, url: clipUrl }).catch(() => {});
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(clipUrl).then(() => {
+            const original = shareBtn.textContent;
+            shareBtn.textContent = 'Lien copié !';
+            setTimeout(() => { shareBtn.textContent = original; }, 1800);
+          }).catch(() => {});
+        }
+      });
     });
   });
 </script>

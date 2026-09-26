@@ -51,6 +51,7 @@
   .rule-list li { padding: 10px 0 10px 26px; position: relative; border-bottom: 1px solid var(--line); color: #c3cadb; }
   .rule-list li::before { content: '//'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
   .rule-list li:last-child { border-bottom: none; }
+  .game-tag { display: inline-block; padding: 6px 14px; border: 1px solid var(--line); border-radius: 20px; font-size: 0.85rem; color: var(--white); background: var(--surface2); }
 </style>
 </head>
 <body>
@@ -99,6 +100,10 @@
             Pas de planning de jeu figé — le choix se fait à l'ambiance du
             soir, entre amis.
           </p>
+          <div id="recentGames" style="display:none;margin-top:18px;">
+            <div style="font-family:'Orbitron',sans-serif;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Récemment sur la chaîne</div>
+            <div id="recentGamesList" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+          </div>
         </div>
 
         <div class="card v">
@@ -140,6 +145,27 @@
 </footer>
 
 <script src="main.js"></script>
+
+<script>
+/* "Récemment sur la chaîne" — lit data/recent-games.json, tenu à
+   jour par la même GitHub Action que le reste (rien à gérer à la
+   main). Reste simplement caché si le fichier n'existe pas encore
+   ou est vide. */
+fetch('data/recent-games.json')
+  .then(r => (r.ok ? r.json() : []))
+  .catch(() => [])
+  .then(games => {
+    if (!Array.isArray(games) || games.length === 0) return;
+    const list = document.getElementById('recentGamesList');
+    games.forEach(g => {
+      const tag = document.createElement('span');
+      tag.className = 'game-tag';
+      tag.textContent = g.game;
+      list.appendChild(tag);
+    });
+    document.getElementById('recentGames').style.display = 'block';
+  });
+</script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
