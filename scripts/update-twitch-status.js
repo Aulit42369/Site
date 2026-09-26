@@ -68,15 +68,24 @@ async function fetchTwitchData(usernames, token) {
   if (!streamsRes.ok) throw new Error('Echec /streams : ' + streamsRes.status);
   const streamsData = await streamsRes.json();
 
-  const liveSet = new Set(streamsData.data.map((s) => s.user_login.toLowerCase()));
+  /* Map pseudo -> jeu en cours, pour les chaînes actuellement live
+     (game_name est déjà fourni par /streams, aucun appel en plus). */
+  const liveInfo = new Map(
+    streamsData.data.map((s) => [s.user_login.toLowerCase(), s.game_name])
+  );
 
   const result = {};
   for (const user of usersData.data) {
     const login = user.login.toLowerCase();
+    const isLive = liveInfo.has(login);
     result[login] = {
       avatar: user.profile_image_url,
-      live: liveSet.has(login),
+      live: isLive,
     };
+    if (isLive) {
+      const gameName = liveInfo.get(login);
+      if (gameName) result[login].game = gameName;
+    }
   }
 
   /* Nombre d'abonnés : uniquement pour ta propre chaîne (pas pour les

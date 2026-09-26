@@ -26,7 +26,13 @@ if (liveBanner || followerCount) {
     .then(data => {
       const chaine = data.aulit42369;
       if (!chaine) return;
-      if (liveBanner && chaine.live) liveBanner.classList.add('is-live');
+      if (liveBanner && chaine.live) {
+        liveBanner.classList.add('is-live');
+        if (chaine.game) {
+          const label = liveBanner.querySelector('.label');
+          if (label) label.textContent = 'En direct — ' + chaine.game;
+        }
+      }
       if (followerCount && typeof chaine.followers === 'number') {
         followerCount.textContent = chaine.followers.toLocaleString('fr-FR');
         if (followerStat) followerStat.style.display = '';
