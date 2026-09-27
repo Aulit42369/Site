@@ -6,6 +6,15 @@
 <title>Administration — AULIT42369</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- Installable comme application (Chrome, "Installer l'application") -->
+<link rel="manifest" href="admin-manifest.json">
+<meta name="theme-color" content="#070a10">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Admin AULIT">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=5">
@@ -71,6 +80,20 @@
   .planning-day-fields .field { margin-bottom: 0; }
   .planning-day-fields .field label { font-size: 0.68rem; margin-bottom: 4px; }
   .planning-day-fields select { width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; }
+
+  /* ── Aperçu avant publication : copie fidèle des styles de
+     streamers.html / clips.html, pour que l'aperçu ici corresponde
+     exactement à ce qui s'affichera sur le site. ── */
+  .preview-label { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .streamer-card { aspect-ratio: 1 / 1; border-radius: 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 26px 22px; }
+  .streamer-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--cyan); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.3rem; flex-shrink: 0; }
+  .streamer-name { font-weight: 700; font-size: 1.05rem; }
+  .streamer-desc { color: #c3cadb; font-size: 0.88rem; line-height: 1.45; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+  .streamer-card .btn { margin-top: auto; align-self: center; font-size: 0.85rem; padding: 9px 18px; }
+  .clip-preview-thumb { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; color: var(--dim); font-size: 0.85rem; background: var(--surface2); }
+  .clip-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; }
+  .clip-title { font-weight: 700; font-size: 1rem; }
+  .share-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem; padding: 6px 12px; border-radius: 4px; opacity: 0.6; }
 </style>
 </head>
 <body>
@@ -98,6 +121,7 @@
       <button data-tab="clips">Clips</button>
       <button data-tab="planning">Planning</button>
       <div class="spacer"></div>
+      <button class="logout" id="backupBtn" title="Télécharger une sauvegarde JSON de tes streamers, clips et planning">Sauvegarder</button>
       <button class="logout" id="logoutBtn">Se déconnecter</button>
     </div>
 
@@ -111,7 +135,14 @@
         <div class="field"><label>Avatar personnalisé (optionnel)</label><input type="text" id="sfAvatar" placeholder="Laisse vide pour la récupération automatique"></div>
         <div class="form-actions">
           <button class="btn btn-primary" id="sfSave">Enregistrer</button>
+          <button class="btn btn-secondary" type="button" id="sfPreviewBtn">Aperçu</button>
           <button class="btn btn-secondary" id="sfCancel">Annuler</button>
+        </div>
+        <div id="sfPreviewBox" style="display:none;margin-top:20px;padding-top:20px;border-top:1px dashed var(--line);">
+          <div class="preview-label">Aperçu — tel qu'affiché sur le site</div>
+          <div style="max-width:260px;">
+            <div class="card streamer-card" id="sfPreviewCard"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -124,7 +155,14 @@
         <div class="field"><label>Titre</label><input type="text" id="cfTitle"></div>
         <div class="form-actions">
           <button class="btn btn-primary" id="cfSave">Enregistrer</button>
+          <button class="btn btn-secondary" type="button" id="cfPreviewBtn">Aperçu</button>
           <button class="btn btn-secondary" id="cfCancel">Annuler</button>
+        </div>
+        <div id="cfPreviewBox" style="display:none;margin-top:20px;padding-top:20px;border-top:1px dashed var(--line);">
+          <div class="preview-label">Aperçu — tel qu'affiché sur le site</div>
+          <div style="max-width:340px;">
+            <div class="broadcast-frame clip-card" id="cfPreviewCard"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -147,6 +185,13 @@
 const OWNER = 'aulit42369';
 const REPO = 'Site';
 const TOKEN_KEY = 'aulit_admin_token';
+
+/* Service worker requis par Chrome pour proposer l'installation de
+   cette page comme application (surtout sur téléphone). Ne fait
+   aucun cache, voir sw-admin.js. */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw-admin.js', { scope: 'admin.html' }).catch(() => {});
+}
 
 const authGate = document.getElementById('authGate');
 const adminPanel = document.getElementById('adminPanel');
@@ -274,11 +319,54 @@ function openStreamerForm(index) {
   document.getElementById('sfDesc').value = s.description || '';
   document.getElementById('sfAvatar').value = s.avatar || '';
   document.getElementById('streamerForm').style.display = 'block';
+  document.getElementById('sfPreviewBox').style.display = 'none';
 }
 function closeStreamerForm() {
   document.getElementById('streamerForm').style.display = 'none';
+  document.getElementById('sfPreviewBox').style.display = 'none';
   editingStreamerIndex = null;
 }
+
+/* Aperçu fidèle de la carte streamer telle qu'elle apparaît sur
+   streamers.html, à partir des valeurs en cours du formulaire (pas
+   encore enregistrées). S'actualise en direct pendant la saisie une
+   fois ouvert. */
+function renderStreamerPreview() {
+  const name = document.getElementById('sfName').value.trim() || 'Nom du streamer';
+  const desc = document.getElementById('sfDesc').value.trim() || 'Description à venir.';
+  const url = document.getElementById('sfUrl').value.trim() || '#';
+  const avatar = document.getElementById('sfAvatar').value.trim();
+  const initial = name.trim().charAt(0).toUpperCase() || '?';
+  const card = document.getElementById('sfPreviewCard');
+  card.innerHTML = `
+    <div class="streamer-avatar" id="sfPreviewAvatar">${initial}</div>
+    <div class="streamer-name">${name}</div>
+    <p class="streamer-desc">${desc}</p>
+    <a href="${url}" target="_blank" rel="noopener" class="btn btn-secondary">Voir la chaîne</a>
+  `;
+  if (avatar) {
+    const avatarEl = document.getElementById('sfPreviewAvatar');
+    const img = new Image();
+    img.onload = () => {
+      avatarEl.style.backgroundImage = `url('${avatar}')`;
+      avatarEl.style.backgroundSize = 'cover';
+      avatarEl.style.backgroundPosition = 'center';
+      avatarEl.textContent = '';
+    };
+    img.src = avatar;
+  }
+}
+document.getElementById('sfPreviewBtn').addEventListener('click', () => {
+  const box = document.getElementById('sfPreviewBox');
+  const opening = box.style.display === 'none';
+  box.style.display = opening ? 'block' : 'none';
+  if (opening) renderStreamerPreview();
+});
+['sfName', 'sfUrl', 'sfDesc', 'sfAvatar'].forEach((id) => {
+  document.getElementById(id).addEventListener('input', () => {
+    if (document.getElementById('sfPreviewBox').style.display !== 'none') renderStreamerPreview();
+  });
+});
 
 async function saveStreamer() {
   const name = document.getElementById('sfName').value.trim();
@@ -388,11 +476,39 @@ function openClipForm(index) {
   document.getElementById('cfSlug').value = c.slug || '';
   document.getElementById('cfTitle').value = c.title || '';
   document.getElementById('clipForm').style.display = 'block';
+  document.getElementById('cfPreviewBox').style.display = 'none';
 }
 function closeClipForm() {
   document.getElementById('clipForm').style.display = 'none';
+  document.getElementById('cfPreviewBox').style.display = 'none';
   editingClipIndex = null;
 }
+
+/* Aperçu fidèle de la carte clip telle qu'elle apparaît sur
+   clips.html (hors lecteur vidéo, remplacé par un cadre neutre —
+   le slug n'a pas besoin d'être valide pour prévisualiser le titre). */
+function renderClipPreview() {
+  const title = document.getElementById('cfTitle').value.trim() || 'Titre du clip';
+  const card = document.getElementById('cfPreviewCard');
+  card.innerHTML = `
+    <div class="clip-preview-thumb">Aperçu vidéo</div>
+    <div class="clip-footer">
+      <div class="clip-title">${title}</div>
+      <button type="button" class="share-btn" disabled>Partager</button>
+    </div>
+  `;
+}
+document.getElementById('cfPreviewBtn').addEventListener('click', () => {
+  const box = document.getElementById('cfPreviewBox');
+  const opening = box.style.display === 'none';
+  box.style.display = opening ? 'block' : 'none';
+  if (opening) renderClipPreview();
+});
+['cfSlug', 'cfTitle'].forEach((id) => {
+  document.getElementById(id).addEventListener('input', () => {
+    if (document.getElementById('cfPreviewBox').style.display !== 'none') renderClipPreview();
+  });
+});
 
 async function saveClip() {
   const slug = document.getElementById('cfSlug').value.trim();
@@ -445,7 +561,7 @@ const PLANNING_COLORS = [
 function renderPlanning() {
   const container = document.getElementById('planningList');
   if (planningState.data.length === 0) {
-    container.innerHTML = '<div class="empty-row">Rien à afficher — vérifie que le jeton a accès au dépôt "planning".</div>';
+    container.innerHTML = '<div class="empty-row">Rien à afficher — vérifie que data/planning.json existe dans le dépôt.</div>';
     return;
   }
   container.innerHTML = '';
@@ -487,6 +603,26 @@ async function savePlanning() {
 }
 
 document.getElementById('savePlanningBtn').addEventListener('click', savePlanning);
+
+/* ── Sauvegarde ── */
+function downloadBackup() {
+  const backup = {
+    exported_at: new Date().toISOString(),
+    streamers: streamersState.data,
+    clips: clipsState.data,
+    planning: planningState.data,
+  };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sauvegarde-aulit42369-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+document.getElementById('backupBtn').addEventListener('click', downloadBackup);
 
 /* ── Onglets ── */
 document.querySelectorAll('.admin-tabs [data-tab]').forEach((btn) => {
