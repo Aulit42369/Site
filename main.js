@@ -2,6 +2,25 @@
    AULIT42369 — script partagé
    Menu mobile, chargé sur toutes les pages du site.
    ================================================================ */
+
+/* Lien d'accès rapide au contenu : invisible tant qu'il n'a pas le
+   focus, visible dès qu'on y arrive au clavier (touche Tab). Permet
+   de sauter directement au contenu de la page sans repasser par tout
+   le menu à chaque fois — utile au clavier et aux lecteurs d'écran.
+   Ajouté en JS (comme le reste de ce fichier) plutôt que dans chaque
+   page HTML. */
+const mainEl = document.querySelector('main');
+if (mainEl) {
+  if (!mainEl.id) mainEl.id = 'main-content';
+  mainEl.setAttribute('tabindex', '-1');
+
+  const skipLink = document.createElement('a');
+  skipLink.className = 'skip-link';
+  skipLink.href = '#' + mainEl.id;
+  skipLink.textContent = 'Aller au contenu';
+  document.body.insertBefore(skipLink, document.body.firstChild);
+}
+
 const navToggle = document.getElementById('navToggle');
 const nav = document.getElementById('nav');
 navToggle.addEventListener('click', () => {
