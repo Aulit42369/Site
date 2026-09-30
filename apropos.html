@@ -54,6 +54,21 @@
   .rule-list li:last-child { border-bottom: none; }
   .game-tag { display: inline-flex; align-items: center; padding: 6px 14px; border: 1px solid var(--line); border-radius: 20px; font-size: 0.85rem; color: var(--white); background: var(--surface2); }
   .game-tag-art { width: 20px; height: 27px; object-fit: cover; border-radius: 2px; margin-right: 8px; flex-shrink: 0; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item summary {
+    list-style: none; cursor: pointer; padding: 18px 34px 18px 0;
+    position: relative; font-weight: 700; color: var(--white);
+  }
+  .faq-item summary::-webkit-details-marker, .faq-item summary::marker { display: none; content: ''; }
+  .faq-item summary::before {
+    content: '+'; position: absolute; top: 16px; right: 4px; color: var(--cyan);
+    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; line-height: 1;
+  }
+  .faq-item[open] summary::before { content: '–'; }
+  .faq-item p { margin: 0 0 18px; color: var(--muted); padding-right: 34px; line-height: 1.5; }
+  .faq-item p a { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
+  .faq-item p a:hover { color: var(--white); }
 </style>
 </head>
 <body>
@@ -119,6 +134,30 @@
             <li><code>!regles</code> — le règlement du chat</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <h2 style="margin-bottom:24px;">Questions <em class="accent">fréquentes</em></h2>
+      <div class="card">
+        <details class="faq-item">
+          <summary>Comment participer aux streams ou échanger avec la communauté ?</summary>
+          <p>Le plus simple est de rejoindre le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a> : c'est là que ça se passe en dehors des lives. Le <a href="planning.html">planning</a> donne les prochaines dates prévues.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Y a-t-il des règles à respecter dans le chat ?</summary>
+          <p>Oui — tape <code>!regles</code> dans le tchat Twitch pendant un live pour afficher le règlement complet du salon.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Peut-on proposer un jeu à faire en live ?</summary>
+          <p><!-- ✏️ Réponse à confirmer --> Passe par le Discord pour proposer une idée : selon l'ambiance et le planning, ça peut atterrir au programme d'un prochain stream.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quel matériel utilises-tu pour streamer ?</summary>
+          <p><!-- ✏️ À compléter : PC, micro, capture, etc. --> Le setup est amené à évoluer — rien d'exceptionnel, l'essentiel reste surtout de passer un bon moment ensemble.</p>
+        </details>
       </div>
     </div>
   </section>
