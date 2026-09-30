@@ -61,6 +61,22 @@ async function getAccessToken() {
   return data.access_token;
 }
 
+/* Récupère l'URL de la jaquette (box art) d'un jeu par son id, dans
+   un format d'image raisonnable (144x192). Renvoie null en silence
+   en cas de souci — la jaquette est un bonus visuel, jamais bloquant. */
+async function fetchBoxArt(gameId, headers) {
+  try {
+    const res = await fetch(`https://api.twitch.tv/helix/games?id=${encodeURIComponent(gameId)}`, { headers });
+    if (!res.ok) return null;
+    const body = await res.json();
+    const game = body.data && body.data[0];
+    if (!game || !game.box_art_url) return null;
+    return game.box_art_url.replace('{width}', '144').replace('{height}', '192');
+  } catch {
+    return null;
+  }
+}
+
 async function fetchTwitchData(usernames, token) {
   const headers = { 'Client-ID': CLIENT_ID, Authorization: `Bearer ${token}` };
 
@@ -74,24 +90,32 @@ async function fetchTwitchData(usernames, token) {
   if (!streamsRes.ok) throw new Error('Echec /streams : ' + streamsRes.status);
   const streamsData = await streamsRes.json();
 
-  /* Map pseudo -> jeu en cours, pour les chaînes actuellement live
-     (game_name est déjà fourni par /streams, aucun appel en plus). */
+  /* Map pseudo -> { jeu, id du jeu }, pour les chaînes actuellement
+     live (déjà fourni par /streams, aucun appel en plus). L'id sert
+     ensuite à retrouver la jaquette du jeu, pour ta seule chaîne. */
   const liveInfo = new Map(
-    streamsData.data.map((s) => [s.user_login.toLowerCase(), s.game_name])
+    streamsData.data.map((s) => [s.user_login.toLowerCase(), { game: s.game_name, gameId: s.game_id }])
   );
 
   const result = {};
   for (const user of usersData.data) {
     const login = user.login.toLowerCase();
-    const isLive = liveInfo.has(login);
+    const info = liveInfo.get(login);
+    const isLive = !!info;
     result[login] = {
       avatar: user.profile_image_url,
       live: isLive,
     };
-    if (isLive) {
-      const gameName = liveInfo.get(login);
-      if (gameName) result[login].game = gameName;
-    }
+    if (isLive && info.game) result[login].game = info.game;
+  }
+
+  /* Jaquette du jeu en cours : uniquement pour ta chaîne (comme pour
+     les abonnés). L'id du jeu vient déjà de /streams, un seul appel
+     en plus vers /games pour récupérer l'image. */
+  const ownLiveInfo = liveInfo.get(OWN_CHANNEL);
+  if (ownLiveInfo && ownLiveInfo.gameId && result[OWN_CHANNEL]) {
+    const boxArt = await fetchBoxArt(ownLiveInfo.gameId, headers);
+    if (boxArt) result[OWN_CHANNEL].gameArt = boxArt;
   }
 
   /* Nombre d'abonnés : uniquement pour ta propre chaîne (pas pour les
@@ -128,7 +152,7 @@ async function fetchTwitchData(usernames, token) {
    du dernier jeu enregistré (évite de ré-écrire la même entrée à
    chaque passage de 10 min pendant un même stream). Garde uniquement
    les MAX_RECENT_GAMES plus récents. */
-function updateRecentGames(currentGame) {
+function updateRecentGames(currentGame, gameArt) {
   if (!currentGame) return;
 
   let history = [];
@@ -141,7 +165,9 @@ function updateRecentGames(currentGame) {
 
   if (history.length > 0 && history[0].game === currentGame) return;
 
-  history.unshift({ game: currentGame, date: new Date().toISOString().slice(0, 10) });
+  const entry = { game: currentGame, date: new Date().toISOString().slice(0, 10) };
+  if (gameArt) entry.art = gameArt;
+  history.unshift(entry);
   history = history.slice(0, MAX_RECENT_GAMES);
 
   fs.mkdirSync(path.dirname(RECENT_GAMES_PATH), { recursive: true });
@@ -163,7 +189,7 @@ async function main() {
 
   const ownStatus = data[OWN_CHANNEL];
   if (ownStatus && ownStatus.live && ownStatus.game) {
-    updateRecentGames(ownStatus.game);
+    updateRecentGames(ownStatus.game, ownStatus.gameArt);
   }
 }
 

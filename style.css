@@ -62,9 +62,11 @@ img { max-width: 100%; display: block; }
 .live-banner.is-live { display: inline-flex; }
 .live-banner .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--magenta); box-shadow: 0 0 8px var(--magenta); animation: liveDotPulse 1.6s ease-in-out infinite; }
 .live-banner .label { max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.live-banner-art { width: 16px; height: 21px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
 @keyframes liveDotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 @media (max-width: 480px) {
   .live-banner .label { display: none; }
+  .live-banner-art { display: none; }
   .live-banner.is-live { padding: 6px; }
 }
 .nav { display: flex; align-items: center; gap: 6px; }
@@ -183,6 +185,39 @@ section.tight { padding: 56px 0; }
 .site-footer .socials { display: flex; gap: 14px; }
 .site-footer .socials a { font-size: 0.85rem; color: var(--muted); font-weight: 700; }
 .site-footer .socials a:hover { color: var(--cyan); }
+
+/* ---------- bouton "retour en haut" ---------- */
+/* Apparaît après un peu de défilement (voir main.js). L'apparition et
+   la disparition sont une transition CSS, déjà neutralisée pour les
+   personnes en mouvement réduit par la règle générale plus bas ; le
+   défilement fluide déclenché au clic est lui géré explicitement en
+   JS, qui vérifie cette même préférence de son côté. */
+#backToTop {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--cyan);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity .2s ease, transform .2s ease, border-color .15s ease;
+  z-index: 40;
+}
+#backToTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+#backToTop:hover { border-color: var(--cyan); box-shadow: var(--glow-c); }
+#backToTop svg { width: 18px; height: 18px; }
+@media (max-width: 480px) {
+  #backToTop { right: 14px; bottom: 14px; width: 40px; height: 40px; }
+}
 
 /* respecte les préférences de mouvement réduit */
 /* Les iframes (lecteur Twitch, planning intégré) ignorent parfois

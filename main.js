@@ -32,6 +32,14 @@ if (liveBanner || followerCount) {
           const label = liveBanner.querySelector('.label');
           if (label) label.textContent = 'En direct — ' + chaine.game;
         }
+        if (chaine.gameArt) {
+          const art = document.createElement('img');
+          art.className = 'live-banner-art';
+          art.alt = '';
+          art.src = chaine.gameArt;
+          const dot = liveBanner.querySelector('.dot');
+          liveBanner.insertBefore(art, dot.nextSibling);
+        }
       }
       if (followerCount && typeof chaine.followers === 'number') {
         followerCount.textContent = chaine.followers.toLocaleString('fr-FR');
@@ -40,3 +48,24 @@ if (liveBanner || followerCount) {
     })
     .catch(() => {});
 }
+
+/* Bouton "retour en haut", sur toutes les pages. Le survol et
+   l'apparition sont des transitions CSS (déjà neutralisées en
+   mouvement réduit par style.css) ; le défilement fluide déclenché
+   ici est du JS, donc on vérifie nous-mêmes la préférence avant de
+   l'utiliser. */
+const backToTop = document.createElement('button');
+backToTop.id = 'backToTop';
+backToTop.type = 'button';
+backToTop.setAttribute('aria-label', 'Retourner en haut de la page');
+backToTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>';
+document.body.appendChild(backToTop);
+
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('show', window.scrollY > 500);
+}, { passive: true });
+
+backToTop.addEventListener('click', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+});

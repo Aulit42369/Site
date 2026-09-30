@@ -51,7 +51,8 @@
   .rule-list li { padding: 10px 0 10px 26px; position: relative; border-bottom: 1px solid var(--line); color: #c3cadb; }
   .rule-list li::before { content: '//'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
   .rule-list li:last-child { border-bottom: none; }
-  .game-tag { display: inline-block; padding: 6px 14px; border: 1px solid var(--line); border-radius: 20px; font-size: 0.85rem; color: var(--white); background: var(--surface2); }
+  .game-tag { display: inline-flex; align-items: center; padding: 6px 14px; border: 1px solid var(--line); border-radius: 20px; font-size: 0.85rem; color: var(--white); background: var(--surface2); }
+  .game-tag-art { width: 20px; height: 27px; object-fit: cover; border-radius: 2px; margin-right: 8px; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -160,7 +161,14 @@ fetch('data/recent-games.json')
     games.forEach(g => {
       const tag = document.createElement('span');
       tag.className = 'game-tag';
-      tag.textContent = g.game;
+      if (g.art) {
+        const art = document.createElement('img');
+        art.className = 'game-tag-art';
+        art.alt = '';
+        art.src = g.art;
+        tag.appendChild(art);
+      }
+      tag.appendChild(document.createTextNode(g.game));
       list.appendChild(tag);
     });
     document.getElementById('recentGames').style.display = 'block';
