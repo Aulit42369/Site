@@ -17,7 +17,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=dc1183d5">
+<link rel="stylesheet" href="style.min.css?v=f5614e35">
 <style>
   .admin-wrap { max-width: 760px; margin: 0 auto; padding: 48px 28px 80px; }
   .admin-wrap h1 { font-size: 1.8rem; margin-bottom: 8px; }
@@ -94,6 +94,7 @@
   .clip-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; }
   .clip-title { font-weight: 700; font-size: 1rem; }
   .share-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem; padding: 6px 12px; border-radius: 4px; opacity: 0.6; }
+  .badge-new { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 10px; font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bg); background: var(--cyan); vertical-align: middle; }
 </style>
 </head>
 <body>
@@ -126,6 +127,7 @@
     </div>
 
     <div id="streamersPanel" class="admin-panel">
+      <div id="brokenLinksWarning" class="admin-note warn" style="display:none;margin-top:0;"></div>
       <div id="streamersList"></div>
       <button class="btn btn-secondary" id="addStreamerBtn" style="margin-top:8px;">+ Ajouter un streamer</button>
       <div id="streamerForm" class="add-form" style="display:none;">
@@ -412,6 +414,35 @@ async function deleteStreamer(index) {
   }
 }
 
+/* Signale les streamers dont le lien Twitch ne répond plus (compte
+   supprimé ou renommé) — détecté côté GitHub Action, voir
+   scripts/update-twitch-status.js, écrit dans data/broken-links.json.
+   Purement informatif : rien n'est modifié ni supprimé ici. */
+async function checkBrokenLinks() {
+  const warning = document.getElementById('brokenLinksWarning');
+  try {
+    const res = await fetch('data/broken-links.json');
+    if (!res.ok) return;
+    const broken = await res.json();
+    if (!Array.isArray(broken) || broken.length === 0) return;
+    const names = streamersState.data
+      .filter((s) => {
+        try {
+          const username = new URL(s.url).pathname.split('/').filter(Boolean).pop().toLowerCase();
+          return broken.includes(username);
+        } catch {
+          return false;
+        }
+      })
+      .map((s) => s.name);
+    if (names.length === 0) return;
+    warning.textContent = '⚠ Lien Twitch introuvable pour : ' + names.join(', ') + ' (chaîne supprimée ou renommée ? à vérifier).';
+    warning.style.display = 'block';
+  } catch {
+    // silencieux : purement informatif, ne doit jamais bloquer le reste de l'admin
+  }
+}
+
 /* ── Clips ── */
 function renderClips() {
   const list = document.getElementById('clipsList');
@@ -489,11 +520,12 @@ function closeClipForm() {
    le slug n'a pas besoin d'être valide pour prévisualiser le titre). */
 function renderClipPreview() {
   const title = document.getElementById('cfTitle').value.trim() || 'Titre du clip';
+  const badge = editingClipIndex === null ? ' <span class="badge-new">Nouveau</span>' : '';
   const card = document.getElementById('cfPreviewCard');
   card.innerHTML = `
     <div class="clip-preview-thumb">Aperçu vidéo</div>
     <div class="clip-footer">
-      <div class="clip-title">${title}</div>
+      <div class="clip-title">${title}${badge}</div>
       <button type="button" class="share-btn" disabled>Partager</button>
     </div>
   `;
@@ -517,7 +549,12 @@ async function saveClip() {
     showStatus('Slug et titre sont obligatoires.', 'err');
     return;
   }
-  const entry = { slug, title };
+  /* Un nouveau clip est daté du jour (pour le badge "Nouveau" sur
+     clips.html, 7 jours) ; une modification garde la date d'origine
+     du clip au lieu de la rajeunir. */
+  const entry = editingClipIndex === null
+    ? { slug, title, dateAdded: new Date().toISOString().slice(0, 10) }
+    : { ...clipsState.data[editingClipIndex], slug, title };
   const next = editingClipIndex === null
     ? [entry, ...clipsState.data]
     : clipsState.data.map((c, i) => (i === editingClipIndex ? entry : c));
@@ -657,6 +694,7 @@ async function init() {
   try {
     streamersState = await readJsonFile('data/streamers.json');
     renderStreamers();
+    checkBrokenLinks();
   } catch (e) {
     errors.push('Streamers : ' + e.message);
   }

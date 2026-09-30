@@ -11,6 +11,7 @@
 <meta property="og:title" content="AULIT42369 — Clips">
 <meta property="og:description" content="Les derniers clips marquants de la chaîne AULIT42369.">
 <meta property="og:url" content="https://aulit42369.github.io/Site/clips.html">
+<link rel="canonical" href="https://aulit42369.github.io/Site/clips.html">
 <meta property="og:image" content="https://aulit42369.github.io/Site/og/clips-og.png">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#00f5ff">
@@ -43,7 +44,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.css?v=dc1183d5">
+<link rel="stylesheet" href="style.min.css?v=f5614e35">
 <style>
   .clips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   @media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
@@ -52,6 +53,7 @@
   .clip-title { font-weight: 700; font-size: 1rem; }
   .share-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
   .share-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .badge-new { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 10px; font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bg); background: var(--cyan); vertical-align: middle; }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
@@ -109,7 +111,7 @@
   </div>
 </footer>
 
-<script src="main.js?v=1f12bbf7"></script>
+<script src="main.min.js?v=87c1434e"></script>
 
 <script>
 /* ================================================================
@@ -119,6 +121,17 @@
    ================================================================ */
 const grid = document.getElementById('clipsGrid');
 const empty = document.getElementById('emptyState');
+
+/* Badge "Nouveau" pour les clips ajoutés il y a 7 jours ou moins.
+   clip.dateAdded (AAAA-MM-JJ) est écrit par admin.html au moment de
+   l'ajout ; absent sur les clips ajoutés avant cette fonctionnalité,
+   qui n'affichent donc simplement pas le badge. */
+function isRecentClip(dateStr) {
+  if (!dateStr) return false;
+  const added = new Date(dateStr + 'T00:00:00');
+  const diffDays = (Date.now() - added.getTime()) / 86400000;
+  return diffDays >= 0 && diffDays <= 7;
+}
 
 fetch('data/clips.json')
   .then(r => (r.ok ? r.json() : []))
@@ -130,12 +143,13 @@ fetch('data/clips.json')
     }
     clips.forEach(clip => {
       const clipUrl = `https://clips.twitch.tv/${clip.slug}`;
+      const badge = isRecentClip(clip.dateAdded) ? ' <span class="badge-new">Nouveau</span>' : '';
       const card = document.createElement('div');
       card.className = 'broadcast-frame clip-card';
       card.innerHTML = `
         <iframe src="https://clips.twitch.tv/embed?clip=${clip.slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
         <div class="clip-footer">
-          <div class="clip-title">${clip.title}</div>
+          <div class="clip-title">${clip.title}${badge}</div>
           <button type="button" class="share-btn" aria-label="Partager ce clip">Partager</button>
         </div>
       `;

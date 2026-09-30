@@ -21,6 +21,7 @@ const CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 const STREAMERS_JSON_PATH = path.join(__dirname, '..', 'data', 'streamers.json');
 const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'twitch-status.json');
 const RECENT_GAMES_PATH = path.join(__dirname, '..', 'data', 'recent-games.json');
+const BROKEN_LINKS_PATH = path.join(__dirname, '..', 'data', 'broken-links.json');
 const MAX_RECENT_GAMES = 8;
 const OWN_CHANNEL = 'aulit42369';
 
@@ -85,6 +86,15 @@ async function fetchTwitchData(usernames, token) {
   if (!usersRes.ok) throw new Error('Echec /users : ' + usersRes.status);
   const usersData = await usersRes.json();
 
+  /* Pseudos qui ne correspondent plus à aucun compte Twitch existant
+     (chaîne supprimée ou renommée depuis son ajout à streamers.json) —
+     Twitch omet simplement ces pseudos de la réponse, sans erreur.
+     Utile pour repérer un lien mort à corriger dans l'admin. Ta propre
+     chaîne est exclue : si elle ne répond pas, c'est un souci d'API,
+     pas un lien à corriger. */
+  const foundLogins = new Set(usersData.data.map((u) => u.login.toLowerCase()));
+  const brokenUsernames = usernames.filter((u) => u !== OWN_CHANNEL && !foundLogins.has(u));
+
   const streamQuery = usernames.map((u) => `user_login=${encodeURIComponent(u)}`).join('&');
   const streamsRes = await fetch(`https://api.twitch.tv/helix/streams?${streamQuery}`, { headers });
   if (!streamsRes.ok) throw new Error('Echec /streams : ' + streamsRes.status);
@@ -145,7 +155,7 @@ async function fetchTwitchData(usernames, token) {
     }
   }
 
-  return result;
+  return { result, brokenUsernames };
 }
 
 /* Ajoute `currentGame` en tête de data/recent-games.json s'il diffère
@@ -180,12 +190,17 @@ async function main() {
   console.log('Pseudos trouvés :', usernames.join(', '));
 
   const token = await getAccessToken();
-  const data = await fetchTwitchData(usernames, token);
+  const { result: data, brokenUsernames } = await fetchTwitchData(usernames, token);
   data._updated_at = new Date().toISOString();
 
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(data, null, 2));
   console.log('Ecrit dans', OUTPUT_PATH, '—', usernames.length, 'chaînes.');
+
+  fs.writeFileSync(BROKEN_LINKS_PATH, JSON.stringify(brokenUsernames, null, 2));
+  if (brokenUsernames.length) {
+    console.warn('Pseudos introuvables sur Twitch (lien à vérifier) :', brokenUsernames.join(', '));
+  }
 
   const ownStatus = data[OWN_CHANNEL];
   if (ownStatus && ownStatus.live && ownStatus.game) {
