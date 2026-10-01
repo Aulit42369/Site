@@ -135,7 +135,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=87c1434e"></script>
+<script src="main.min.js?v=80f736fe"></script>
 
 <script>
 /* ================================================================
@@ -171,11 +171,23 @@ function applyLiveState(badgeEl, isLive) {
   badgeEl.classList.add(isLive ? 'is-live' : 'is-offline');
 }
 
+/* Le planning GitHub Actions ("toutes les 10 min") n'est qu'indicatif
+   — GitHub peut largement espacer les exécutions automatiques sans
+   prévenir. Si la donnée est trop vieille, on ne fait plus confiance
+   à "live" : mieux vaut afficher "Hors ligne" que montrer quelqu'un
+   en direct depuis des heures alors que son stream est terminé. */
+function isStatusFresh(data) {
+  const STALE_AFTER_MS = 30 * 60 * 1000; // 30 min
+  const updatedAt = data._updated_at ? new Date(data._updated_at).getTime() : NaN;
+  return !Number.isNaN(updatedAt) && (Date.now() - updatedAt) < STALE_AFTER_MS;
+}
+
 function renderStreamers(streamers, statusData) {
   if (streamers.length === 0) {
     empty.style.display = 'block';
     return;
   }
+  const fresh = isStatusFresh(statusData);
   streamers.forEach((s, i) => {
     const card = document.createElement('div');
     card.className = 'card streamer-card';
@@ -202,7 +214,7 @@ function renderStreamers(streamers, statusData) {
     }
 
     if (info) {
-      applyLiveState(document.getElementById(liveId), !!info.live);
+      applyLiveState(document.getElementById(liveId), !!info.live && fresh);
     }
   });
 }

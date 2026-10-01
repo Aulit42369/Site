@@ -36,6 +36,19 @@ navToggle.addEventListener('click', () => {
    l'API Twitch officielle (decapi.me n'est plus utilisé). Si le
    fichier n'existe pas encore ou ne répond pas, ces éléments restent
    simplement invisibles. */
+
+/* Le planning GitHub Actions ("toutes les 10 min") n'est qu'indicatif
+   — GitHub peut largement espacer les exécutions automatiques sans
+   prévenir. Si la donnée est trop vieille, on ne fait plus confiance
+   à "live" : mieux vaut ne pas afficher "en direct" que d'afficher un
+   direct terminé depuis des heures. Les autres infos (abonnés, etc.)
+   ne posent pas ce problème et restent affichées même si anciennes. */
+function isStatusFresh(data) {
+  const STALE_AFTER_MS = 30 * 60 * 1000; // 30 min
+  const updatedAt = data._updated_at ? new Date(data._updated_at).getTime() : NaN;
+  return !Number.isNaN(updatedAt) && (Date.now() - updatedAt) < STALE_AFTER_MS;
+}
+
 const liveBanner = document.getElementById('liveBanner');
 const followerStat = document.getElementById('followerStat');
 const followerCount = document.getElementById('followerCount');
@@ -45,7 +58,7 @@ if (liveBanner || followerCount) {
     .then(data => {
       const chaine = data.aulit42369;
       if (!chaine) return;
-      if (liveBanner && chaine.live) {
+      if (liveBanner && chaine.live && isStatusFresh(data)) {
         liveBanner.classList.add('is-live');
         if (chaine.game) {
           const label = liveBanner.querySelector('.label');
