@@ -1,4 +1,17 @@
 {
+  "meyuuart": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
+    "live": false
+  },
+  "aulit42369": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
+    "live": false,
+    "followers": 178
+  },
+  "hagosan": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
+    "live": false
+  },
   "eiwen_": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
     "live": false
@@ -13,23 +26,7 @@
   },
   "calo_vt": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
-    "live": true,
-    "game": "R.E.P.O."
-  },
-  "meyuuart": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
     "live": false
   },
-  "aulit42369": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": true,
-    "game": "Graveyard Keeper II",
-    "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/2106755390_IGDB-144x192.jpg",
-    "followers": 177
-  },
-  "hagosan": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
-    "live": false
-  },
-  "_updated_at": "2026-10-01T21:00:15.698Z"
+  "_updated_at": "2026-10-02T00:42:58.001Z"
 }
