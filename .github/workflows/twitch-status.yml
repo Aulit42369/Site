@@ -2,7 +2,11 @@ name: Mise à jour statut Twitch
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    # Décalé de 4 min par rapport aux horaires ronds (:00, :10, :20...) :
+    # GitHub signale que les crons qui tombent pile sur ces horaires
+    # subissent plus de retards, vu le nombre de dépôts qui les utilisent
+    # aussi. Toujours un rythme de 10 min, juste déphasé.
+    - cron: '4,14,24,34,44,54 * * * *'
   workflow_dispatch:
 
 jobs:
