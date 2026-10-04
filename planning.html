@@ -44,7 +44,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=778b7003">
+<link rel="stylesheet" href="style.min.css?v=509511f9">
 <style>
   .planning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
   .planning-card { display: flex; flex-direction: column; min-height: 150px; }
@@ -149,16 +149,16 @@ fetch('data/planning.json')
       if (item.on) {
         card.innerHTML = `
           <div class="planning-card-head">
-            <div class="planning-day">${item.day}</div>
+            <div class="planning-day">${escapeHtml(item.day)}</div>
             ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : ''}
           </div>
-          <div class="planning-game">${item.game}</div>
-          <div class="planning-time">${item.time} – ${item.end} · Heure FR (CET)</div>
+          <div class="planning-game">${escapeHtml(item.game)}</div>
+          <div class="planning-time">${escapeHtml(item.time)} – ${escapeHtml(item.end)} · Heure FR (CET)</div>
         `;
       } else {
         card.innerHTML = `
           <div class="planning-card-head">
-            <div class="planning-day">${item.day}</div>
+            <div class="planning-day">${escapeHtml(item.day)}</div>
           </div>
           <div class="planning-off-label">— Repos —</div>
         `;

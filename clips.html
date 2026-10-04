@@ -44,7 +44,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=778b7003">
+<link rel="stylesheet" href="style.min.css?v=509511f9">
 <style>
   .clips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   @media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
@@ -142,14 +142,15 @@ fetch('data/clips.json')
       return;
     }
     clips.forEach(clip => {
-      const clipUrl = `https://clips.twitch.tv/${clip.slug}`;
+      const slug = encodeURIComponent(clip.slug);
+      const clipUrl = `https://clips.twitch.tv/${slug}`;
       const badge = isRecentClip(clip.dateAdded) ? ' <span class="badge-new">Nouveau</span>' : '';
       const card = document.createElement('div');
       card.className = 'broadcast-frame clip-card';
       card.innerHTML = `
-        <iframe src="https://clips.twitch.tv/embed?clip=${clip.slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io" allowfullscreen loading="lazy"></iframe>
         <div class="clip-footer">
-          <div class="clip-title">${clip.title}${badge}</div>
+          <div class="clip-title">${escapeHtml(clip.title)}${badge}</div>
           <button type="button" class="share-btn" aria-label="Partager ce clip">Partager</button>
         </div>
       `;

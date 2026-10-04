@@ -87,7 +87,12 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 920px) {
-  .nav { display: none; position: fixed; top: 74px; left: 0; right: 0; bottom: 0; z-index: 999; background: #070a10; flex-direction: column; padding: 24px; gap: 10px; }
+  /* hauteur explicite plutôt que top+bottom : le flou (backdrop-filter)
+     du header transforme ce dernier en repère de positionnement pour ses
+     enfants en position fixed, donc "bottom:0" ne se mesure plus par
+     rapport à l'écran mais par rapport au header (~74px) — le menu ne
+     s'étirait pas et son fond n'était pas couvrant. Indépendant de ça. */
+  .nav { display: none; position: fixed; top: 74px; left: 0; right: 0; height: calc(100vh - 74px); overflow-y: auto; z-index: 999; background: #070a10; flex-direction: column; padding: 24px; gap: 10px; }
   .nav.open { display: flex; }
   .nav a { width: 100%; text-align: center; padding: 14px; font-size: 1.1rem; }
   .nav-toggle {

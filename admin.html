@@ -17,7 +17,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.min.css?v=778b7003">
+<link rel="stylesheet" href="style.min.css?v=509511f9">
 <style>
   .admin-wrap { max-width: 760px; margin: 0 auto; padding: 48px 28px 80px; }
   .admin-wrap h1 { font-size: 1.8rem; margin-bottom: 8px; }
@@ -188,6 +188,18 @@ const OWNER = 'aulit42369';
 const REPO = 'Site';
 const TOKEN_KEY = 'aulit_admin_token';
 
+/* Échappe le texte réinjecté en HTML ci-dessous (liste + aperçus) —
+   cette page ne charge pas main.js (voir plus haut), copie locale de
+   la même fonction que streamers.html / clips.html / planning.html. */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 /* Service worker requis par Chrome pour proposer l'installation de
    cette page comme application (surtout sur téléphone). Ne fait
    aucun cache, voir sw-admin.js. */
@@ -273,8 +285,8 @@ function renderStreamers() {
         <button data-down="${i}" ${i === last ? 'disabled' : ''} title="Descendre">▼</button>
       </div>
       <div class="entry-body">
-        <div class="entry-title">${s.name}</div>
-        <div class="entry-sub">${s.description || ''}</div>
+        <div class="entry-title">${escapeHtml(s.name)}</div>
+        <div class="entry-sub">${escapeHtml(s.description || '')}</div>
       </div>
       <div class="entry-actions">
         <button data-edit="${i}">Modifier</button>
@@ -341,10 +353,10 @@ function renderStreamerPreview() {
   const initial = name.trim().charAt(0).toUpperCase() || '?';
   const card = document.getElementById('sfPreviewCard');
   card.innerHTML = `
-    <div class="streamer-avatar" id="sfPreviewAvatar">${initial}</div>
-    <div class="streamer-name">${name}</div>
-    <p class="streamer-desc">${desc}</p>
-    <a href="${url}" target="_blank" rel="noopener" class="btn btn-secondary">Voir la chaîne</a>
+    <div class="streamer-avatar" id="sfPreviewAvatar">${escapeHtml(initial)}</div>
+    <div class="streamer-name">${escapeHtml(name)}</div>
+    <p class="streamer-desc">${escapeHtml(desc)}</p>
+    <a href="${escapeHtml(url)}" target="_blank" rel="noopener" class="btn btn-secondary">Voir la chaîne</a>
   `;
   if (avatar) {
     const avatarEl = document.getElementById('sfPreviewAvatar');
@@ -461,8 +473,8 @@ function renderClips() {
         <button data-down="${i}" ${i === last ? 'disabled' : ''} title="Descendre">▼</button>
       </div>
       <div class="entry-body">
-        <div class="entry-title">${c.title}</div>
-        <div class="entry-sub">${c.slug}</div>
+        <div class="entry-title">${escapeHtml(c.title)}</div>
+        <div class="entry-sub">${escapeHtml(c.slug)}</div>
       </div>
       <div class="entry-actions">
         <button data-edit="${i}">Modifier</button>
@@ -525,7 +537,7 @@ function renderClipPreview() {
   card.innerHTML = `
     <div class="clip-preview-thumb">Aperçu vidéo</div>
     <div class="clip-footer">
-      <div class="clip-title">${title}${badge}</div>
+      <div class="clip-title">${escapeHtml(title)}${badge}</div>
       <button type="button" class="share-btn" disabled>Partager</button>
     </div>
   `;
@@ -609,7 +621,7 @@ function renderPlanning() {
       (c) => `<option value="${c.value}" ${d.color === c.value ? 'selected' : ''}>${c.label}</option>`
     ).join('');
     row.innerHTML = `
-      <div class="planning-day-name">${d.day}</div>
+      <div class="planning-day-name">${escapeHtml(d.day)}</div>
       <label class="planning-on"><input type="checkbox" ${d.on ? 'checked' : ''} data-i="${i}" data-field="on"> Stream ce jour</label>
       <div class="planning-day-fields">
         <div class="field"><label>Début</label><input type="time" value="${d.time || ''}" data-i="${i}" data-field="time"></div>

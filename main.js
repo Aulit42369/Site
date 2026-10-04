@@ -3,6 +3,20 @@
    Menu mobile, chargé sur toutes les pages du site.
    ================================================================ */
 
+/* Échappe le texte injecté dans du HTML (via innerHTML) sur les pages
+   qui affichent du contenu saisi dans admin.html (streamers, clips,
+   planning) : un pseudo ou un titre contenant "<" ou "&" ne doit pas
+   être interprété comme du HTML. Utilisée par ces pages — voir leur
+   script en bas de fichier, chargé après celui-ci. */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 /* Lien d'accès rapide au contenu : invisible tant qu'il n'a pas le
    focus, visible dès qu'on y arrive au clavier (touche Tab). Permet
    de sauter directement au contenu de la page sans repasser par tout

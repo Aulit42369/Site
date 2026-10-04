@@ -44,7 +44,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=778b7003">
+<link rel="stylesheet" href="style.min.css?v=509511f9">
 <style>
   .streamers-grid {
     display: grid;
@@ -187,10 +187,10 @@ function renderStreamers(streamers, statusData) {
     const liveId = 'streamer-live-' + i;
     card.innerHTML = `
       <div class="streamer-live-badge" id="${liveId}"><span class="dot"></span><span class="label"></span></div>
-      <div class="streamer-avatar" id="${avatarId}">${initial}</div>
-      <div class="streamer-name">${s.name}</div>
-      <p class="streamer-desc">${s.description}</p>
-      <a href="${s.url}" target="_blank" rel="noopener" class="btn btn-secondary">Voir la chaîne</a>
+      <div class="streamer-avatar" id="${avatarId}">${escapeHtml(initial)}</div>
+      <div class="streamer-name">${escapeHtml(s.name)}</div>
+      <p class="streamer-desc">${escapeHtml(s.description)}</p>
+      <a href="${escapeHtml(s.url)}" target="_blank" rel="noopener" class="btn btn-secondary">Voir la chaîne</a>
     `;
     grid.appendChild(card);
 
