@@ -171,17 +171,8 @@ function applyLiveState(badgeEl, isLive) {
   badgeEl.classList.add(isLive ? 'is-live' : 'is-offline');
 }
 
-/* Le planning GitHub Actions ("toutes les 10 min") n'est qu'indicatif
-   — GitHub peut largement espacer les exécutions automatiques sans
-   prévenir. Si la donnée est trop vieille, on ne fait plus confiance
-   à "live" : mieux vaut afficher "Hors ligne" que montrer quelqu'un
-   en direct depuis des heures alors que son stream est terminé. */
-function isStatusFresh(data) {
-  const STALE_AFTER_MS = 30 * 60 * 1000; // 30 min
-  const updatedAt = data._updated_at ? new Date(data._updated_at).getTime() : NaN;
-  return !Number.isNaN(updatedAt) && (Date.now() - updatedAt) < STALE_AFTER_MS;
-}
-
+/* isStatusFresh() vient de main.js (chargé juste au-dessus, avant ce
+   script) — inutile de la redéfinir ici, c'est la même fonction. */
 function renderStreamers(streamers, statusData) {
   if (streamers.length === 0) {
     empty.style.display = 'block';
