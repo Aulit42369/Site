@@ -53,6 +53,7 @@
   @media (max-width: 980px) {
     .project-block { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
   }
+  .project-text-only { grid-template-columns: minmax(0, 760px); }
   .project-eyebrow { font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
   .project-desc { margin-top: 14px; }
   .project-desc p { margin-top: 12px; }
@@ -94,9 +95,9 @@
 <main>
   <section class="grid-bg">
     <div class="container container-wide">
-      <div class="eyebrow">// Sous le capot</div>
+      <div class="eyebrow" data-edit="coulisses.eyebrow" data-edit-label="Coulisses — sur-titre">// Sous le capot</div>
       <h1 class="h1-page">Coulisses <em class="accent">techniques</em></h1>
-      <p class="lead" style="margin-top:14px;">Les outils qui tournent derrière le stream, construits sur-mesure plutôt qu'avec des solutions toutes faites — développés ici avec Claude. Comment ils sont pensés, et ce qu'il a fallu résoudre pour que ça marche.</p>
+      <p class="lead" style="margin-top:14px;" data-edit="coulisses.lead" data-edit-label="Coulisses — introduction">Les outils qui tournent derrière le stream, construits sur-mesure plutôt qu'avec des solutions toutes faites — développés ici avec Claude. Comment ils sont pensés, et ce qu'il a fallu résoudre pour que ça marche.</p>
     </div>
   </section>
 
@@ -105,13 +106,13 @@
 
       <div class="project-block">
         <div>
-          <div class="project-eyebrow" style="color:var(--cyan);">// Régie Mobile</div>
-          <h2>Piloter le stream depuis le <em class="accent">téléphone</em></h2>
+          <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p1.eyebrow" data-edit-label="Coulisses · Régie Mobile — sur-titre">// Régie Mobile</div>
+          <h2 data-edit="coulisses.p1.title" data-edit-label="Coulisses · Régie Mobile — titre">Piloter le stream depuis le <em class="accent">téléphone</em></h2>
           <div class="project-desc">
-            <p>Gérer le stream sans être devant l'ordinateur : titre, catégorie et tags sauvegardés directement sur Twitch, minuteur de démarrage qui déclenche scène et micro à la fin, pause pub programmable, grille de scènes OBS, suggestions de raid dans la catégorie en cours, modération du chat YouTube en direct, streamers suivis avec leur statut live, et gestion des récompenses de points de chaîne.</p>
-            <p>Un générateur d'image d'annonce reprend l'identité visuelle du site pour prévenir que le stream commence, avec publication directe sur Instagram et Bluesky. Un moniteur de santé (débit, FPS, images perdues, CPU OBS) fait vibrer le téléphone si ça dégrade, et un simulateur teste les alertes sans attendre un vrai événement. En fin de session, le résumé s'exporte en Excel.</p>
+            <p data-edit="coulisses.p1.desc1" data-edit-label="Coulisses · Régie Mobile — paragraphe 1">Gérer le stream sans être devant l'ordinateur : titre, catégorie et tags sauvegardés directement sur Twitch, minuteur de démarrage qui déclenche scène et micro à la fin, pause pub programmable, grille de scènes OBS, suggestions de raid dans la catégorie en cours, modération du chat YouTube en direct, streamers suivis avec leur statut live, et gestion des récompenses de points de chaîne.</p>
+            <p data-edit="coulisses.p1.desc2" data-edit-label="Coulisses · Régie Mobile — paragraphe 2">Un générateur d'image d'annonce reprend l'identité visuelle du site pour prévenir que le stream commence, avec publication directe sur Instagram et Bluesky. Un moniteur de santé (débit, FPS, images perdues, CPU OBS) fait vibrer le téléphone si ça dégrade, et un simulateur teste les alertes sans attendre un vrai événement. En fin de session, le résumé s'exporte en Excel.</p>
           </div>
-          <div class="project-stack">Node.js · React · zéro dépendance</div>
+          <div class="project-stack" data-edit="coulisses.p1.stack" data-edit-label="Coulisses · Régie Mobile — technologies">Node.js · React · zéro dépendance</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -172,14 +173,14 @@
 
       <div class="project-block">
         <div>
-          <div class="project-eyebrow" style="color:var(--magenta);">// twitch-alerts-bridge</div>
-          <h2>Toutes les alertes, <em class="accent">sans latence</em></h2>
+          <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.p2.eyebrow" data-edit-label="Coulisses · twitch-alerts-bridge — sur-titre">// twitch-alerts-bridge</div>
+          <h2 data-edit="coulisses.p2.title" data-edit-label="Coulisses · twitch-alerts-bridge — titre">Toutes les alertes, <em class="accent">sans latence</em></h2>
           <div class="project-desc">
-            <p>Follows, subs, resubs, dons groupés, bits, raids, dons — un système bâti sur les webhooks EventSub de Twitch, avec ses propres sons synthétisés, un système anti-doublons et une file d'attente pour l'affichage dans l'overlay OBS.</p>
-            <p>Le plus dur n'a pas été le code mais le débogage : des redirections OAuth qui ne correspondaient pas, le pare-feu Windows qui bloquait des ports locaux, et un filtrage non documenté par Twitch qui ignore les follows de comptes trop récents.</p>
+            <p data-edit="coulisses.p2.desc1" data-edit-label="Coulisses · twitch-alerts-bridge — paragraphe 1">Follows, subs, resubs, dons groupés, bits, raids, dons — un système bâti sur les webhooks EventSub de Twitch, avec ses propres sons synthétisés, un système anti-doublons et une file d'attente pour l'affichage dans l'overlay OBS.</p>
+            <p data-edit="coulisses.p2.desc2" data-edit-label="Coulisses · twitch-alerts-bridge — paragraphe 2">Le plus dur n'a pas été le code mais le débogage : des redirections OAuth qui ne correspondaient pas, le pare-feu Windows qui bloquait des ports locaux, et un filtrage non documenté par Twitch qui ignore les follows de comptes trop récents.</p>
           </div>
-          <div class="status-note"><span class="dot"></span>Complété par un script Lua qui coupe l'écran de fin de raid automatiquement, avec délais réglables</div>
-          <div class="project-stack">Node.js · Twitch EventSub · OBS Lua</div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p2.status" data-edit-label="Coulisses · twitch-alerts-bridge — note">Complété par un script Lua qui coupe l'écran de fin de raid automatiquement, avec délais réglables</span></div>
+          <div class="project-stack" data-edit="coulisses.p2.stack" data-edit-label="Coulisses · twitch-alerts-bridge — technologies">Node.js · Twitch EventSub · OBS Lua</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -227,14 +228,14 @@
 
       <div class="project-block">
         <div>
-          <div class="project-eyebrow" style="color:var(--violet);">// labels-bridges</div>
-          <h2>Le remplaçant maison de <em class="accent">Stream Labels</em></h2>
+          <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p3.eyebrow" data-edit-label="Coulisses · labels-bridges — sur-titre">// labels-bridges</div>
+          <h2 data-edit="coulisses.p3.title" data-edit-label="Coulisses · labels-bridges — titre">Le remplaçant maison de <em class="accent">Stream Labels</em></h2>
           <div class="project-desc">
-            <p>Plutôt que de dépendre de Streamlabs, ces deux ponts (Twitch et YouTube) récupèrent les événements et les écrivent directement dans de simples fichiers <code>.txt</code>, lus par des panneaux HTML dans OBS.</p>
-            <p>Pas d'overlay complexe à charger, pas de service externe à surveiller — juste des fichiers texte relus à chaque changement. La solution la plus simple qui marche.</p>
+            <p data-edit="coulisses.p3.desc1" data-edit-label="Coulisses · labels-bridges — paragraphe 1">Plutôt que de dépendre de Streamlabs, ces deux ponts (Twitch et YouTube) récupèrent les événements et les écrivent directement dans de simples fichiers <code>.txt</code>, lus par des panneaux HTML dans OBS.</p>
+            <p data-edit="coulisses.p3.desc2" data-edit-label="Coulisses · labels-bridges — paragraphe 2">Pas d'overlay complexe à charger, pas de service externe à surveiller — juste des fichiers texte relus à chaque changement. La solution la plus simple qui marche.</p>
           </div>
-          <div class="status-note"><span class="dot"></span>Intégré dans un overlay entièrement fait main — aucun asset ni template acheté, juste du code</div>
-          <div class="project-stack">Node.js · fichiers texte locaux</div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p3.status" data-edit-label="Coulisses · labels-bridges — note">Intégré dans un overlay entièrement fait main — aucun asset ni template acheté, juste du code</span></div>
+          <div class="project-stack" data-edit="coulisses.p3.stack" data-edit-label="Coulisses · labels-bridges — technologies">Node.js · fichiers texte locaux</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -286,14 +287,14 @@
 
       <div class="project-block">
         <div>
-          <div class="project-eyebrow" style="color:var(--cyan);">// Carte à collectionner</div>
-          <h2>Une extension Twitch <em class="accent">multi-chaînes</em></h2>
+          <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p4.eyebrow" data-edit-label="Coulisses · Carte à collectionner — sur-titre">// Carte à collectionner</div>
+          <h2 data-edit="coulisses.p4.title" data-edit-label="Coulisses · Carte à collectionner — titre">Une extension Twitch <em class="accent">multi-chaînes</em></h2>
           <div class="project-desc">
-            <p>Les viewers dépensent des points de chaîne pour ouvrir des packs de cartes à collectionner. Hébergée sur Render avec MongoDB Atlas, l'extension gère le français et l'anglais, des effets de cartes holographiques, un mode d'image pleine largeur, l'import de cartes en masse, et un bouton en libre-service pour que chacun supprime ses propres données.</p>
-            <p>Le morceau le plus coriace a été un problème de cache des sources navigateur OBS qui empêchait les nouvelles formes de pack de s'afficher correctement.</p>
+            <p data-edit="coulisses.p4.desc1" data-edit-label="Coulisses · Carte à collectionner — paragraphe 1">Les viewers dépensent des points de chaîne pour ouvrir des packs de cartes à collectionner. Hébergée sur Render avec MongoDB Atlas, l'extension gère le français et l'anglais, des effets de cartes holographiques, un mode d'image pleine largeur, l'import de cartes en masse, et un bouton en libre-service pour que chacun supprime ses propres données.</p>
+            <p data-edit="coulisses.p4.desc2" data-edit-label="Coulisses · Carte à collectionner — paragraphe 2">Le morceau le plus coriace a été un problème de cache des sources navigateur OBS qui empêchait les nouvelles formes de pack de s'afficher correctement.</p>
           </div>
-          <div class="status-note"><span class="dot"></span>En cours : l'animation d'ouverture de pack dans l'overlay OBS</div>
-          <div class="project-stack">Extension Twitch · Render · MongoDB Atlas</div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p4.status" data-edit-label="Coulisses · Carte à collectionner — note">En cours : l'animation d'ouverture de pack dans l'overlay OBS</span></div>
+          <div class="project-stack" data-edit="coulisses.p4.stack" data-edit-label="Coulisses · Carte à collectionner — technologies">Extension Twitch · Render · MongoDB Atlas</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -362,14 +363,14 @@
 
       <div class="project-block">
         <div>
-          <div class="project-eyebrow" style="color:var(--cyan);">// La Cabane</div>
-          <h2>Le suivi des chaînes de la <em class="accent">communauté</em></h2>
+          <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p5.eyebrow" data-edit-label="Coulisses · La Cabane — sur-titre">// La Cabane</div>
+          <h2 data-edit="coulisses.p5.title" data-edit-label="Coulisses · La Cabane — titre">Le suivi des chaînes de la <em class="accent">communauté</em></h2>
           <div class="project-desc">
-            <p>Le suivi existait d'abord dans un fichier Excel : Power Query pour récupérer followers et données de stream via l'API Twitch, une macro VBA pour les snapshots quotidiens, et des métriques SullyGnome ajoutées à la main — pas de scraping automatique, contraire à leurs conditions d'utilisation.</p>
-            <p>La Cabane en est la version web, avec deux vues : un annuaire des streamers suivis (statut, rôle, historique de follows daté, liens vers SullyGnome et TwitchTracker) et un pipeline de propositions où chaque chaîne passe par un vote du staff — pour, contre ou neutre — avant d'être acceptée. Les données vivent dans un dépôt privé séparé, seule la page de lecture publique est exposée sur GitHub Pages.</p>
+            <p data-edit="coulisses.p5.desc1" data-edit-label="Coulisses · La Cabane — paragraphe 1">Le suivi existait d'abord dans un fichier Excel : Power Query pour récupérer followers et données de stream via l'API Twitch, une macro VBA pour les snapshots quotidiens, et des métriques SullyGnome ajoutées à la main — pas de scraping automatique, contraire à leurs conditions d'utilisation.</p>
+            <p data-edit="coulisses.p5.desc2" data-edit-label="Coulisses · La Cabane — paragraphe 2">La Cabane en est la version web, avec deux vues : un annuaire des streamers suivis (statut, rôle, historique de follows daté, liens vers SullyGnome et TwitchTracker) et un pipeline de propositions où chaque chaîne passe par un vote du staff — pour, contre ou neutre — avant d'être acceptée. Les données vivent dans un dépôt privé séparé, seule la page de lecture publique est exposée sur GitHub Pages.</p>
           </div>
-          <div class="status-note"><span class="dot"></span>Volontairement séparée de la page Streamers de ce site — deux outils distincts, pas de pont entre les deux</div>
-          <div class="project-stack">Power Query · VBA · JSON · GitHub Pages</div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p5.status" data-edit-label="Coulisses · La Cabane — note">Volontairement séparée de la page Streamers de ce site — deux outils distincts, pas de pont entre les deux</span></div>
+          <div class="project-stack" data-edit="coulisses.p5.stack" data-edit-label="Coulisses · La Cabane — technologies">Power Query · VBA · JSON · GitHub Pages</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -428,13 +429,13 @@
 
       <div class="project-block">
         <div>
-          <div class="project-eyebrow" style="color:var(--violet);">// Bot Discord</div>
-          <h2>Le gardien du serveur <em class="accent">d'entraide</em></h2>
+          <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p6.eyebrow" data-edit-label="Coulisses · Bot Discord — sur-titre">// Bot Discord</div>
+          <h2 data-edit="coulisses.p6.title" data-edit-label="Coulisses · Bot Discord — titre">Le gardien du serveur <em class="accent">d'entraide</em></h2>
           <div class="project-desc">
-            <p>Le bot qui fait tourner le serveur d'entraide entre streamers. L'entrée est filtrée : les nouveaux membres acceptent le règlement puis soumettent leur chaîne Twitch ou YouTube pour vérification avant d'obtenir l'accès complet — pas une communauté ouverte à tout le monde.</p>
-            <p>Au-delà de l'accueil, il couvre à peu près tout ce qu'un serveur actif demande : modération avec escalade automatique après un nombre d'avertissements, anniversaires, sondages à vote par boutons, salons vocaux temporaires créés à la demande, une zone promo avec délai minimum entre deux posts, un annuaire des membres, et des annonces automatiques (chaînes Twitch suivies qui passent en direct, jeux gratuits du moment, paliers de followers). Un panneau d'administration web permet de gérer tout ça sans passer par les commandes Discord.</p>
+            <p data-edit="coulisses.p6.desc1" data-edit-label="Coulisses · Bot Discord — paragraphe 1">Le bot qui fait tourner le serveur d'entraide entre streamers. L'entrée est filtrée : les nouveaux membres acceptent le règlement puis soumettent leur chaîne Twitch ou YouTube pour vérification avant d'obtenir l'accès complet — pas une communauté ouverte à tout le monde.</p>
+            <p data-edit="coulisses.p6.desc2" data-edit-label="Coulisses · Bot Discord — paragraphe 2">Au-delà de l'accueil, il couvre à peu près tout ce qu'un serveur actif demande : modération avec escalade automatique après un nombre d'avertissements, anniversaires, sondages à vote par boutons, salons vocaux temporaires créés à la demande, une zone promo avec délai minimum entre deux posts, un annuaire des membres, et des annonces automatiques (chaînes Twitch suivies qui passent en direct, jeux gratuits du moment, paliers de followers). Un panneau d'administration web permet de gérer tout ça sans passer par les commandes Discord.</p>
           </div>
-          <div class="project-stack">Discord · commandes slash · panneau d'admin web</div>
+          <div class="project-stack" data-edit="coulisses.p6.stack" data-edit-label="Coulisses · Bot Discord — technologies">Discord · commandes slash · panneau d'admin web</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -484,13 +485,13 @@
 
       <div class="project-block">
         <div>
-          <div class="project-eyebrow" style="color:var(--magenta);">// Panneaux Twitch</div>
-          <h2>Ce qui vit sous le <em class="accent">direct</em></h2>
+          <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.p7.eyebrow" data-edit-label="Coulisses · Panneaux Twitch — sur-titre">// Panneaux Twitch</div>
+          <h2 data-edit="coulisses.p7.title" data-edit-label="Coulisses · Panneaux Twitch — titre">Ce qui vit sous le <em class="accent">direct</em></h2>
           <div class="project-desc">
-            <p>Les panneaux sous le stream : présentation de la chaîne, setup PC, réseaux, soutien, règles du chat, et un panneau planning qui renvoie directement vers le planning intégré à ce site plutôt que de dupliquer l'info à deux endroits.</p>
-            <p>Faits en HTML plutôt qu'avec l'éditeur de panneaux par défaut de Twitch, pour garder la même identité graphique que le reste de la chaîne.</p>
+            <p data-edit="coulisses.p7.desc1" data-edit-label="Coulisses · Panneaux Twitch — paragraphe 1">Les panneaux sous le stream : présentation de la chaîne, setup PC, réseaux, soutien, règles du chat, et un panneau planning qui renvoie directement vers le planning intégré à ce site plutôt que de dupliquer l'info à deux endroits.</p>
+            <p data-edit="coulisses.p7.desc2" data-edit-label="Coulisses · Panneaux Twitch — paragraphe 2">Faits en HTML plutôt qu'avec l'éditeur de panneaux par défaut de Twitch, pour garder la même identité graphique que le reste de la chaîne.</p>
           </div>
-          <div class="project-stack">Panneaux Twitch · HTML sur mesure</div>
+          <div class="project-stack" data-edit="coulisses.p7.stack" data-edit-label="Coulisses · Panneaux Twitch — technologies">Panneaux Twitch · HTML sur mesure</div>
         </div>
         <div class="project-visuals">
           <div class="project-preview">
@@ -537,6 +538,32 @@
 </footer>
 
 <script src="main.min.js?v=6110e9b7"></script>
+
+<script>
+/* Projets supplémentaires (texte seul) ajoutés depuis l'admin, onglet
+   « Textes des pages » : data/pages.json → extraProjects. Ils
+   s'affichent à la suite des projets ci-dessus. */
+window.pagesDataPromise.then(d => {
+  const list = d && Array.isArray(d.extraProjects) ? d.extraProjects : [];
+  const wrap = document.querySelector('main section.tight .container');
+  const colors = ['--cyan', '--magenta', '--violet'];
+  let n = 0;
+  list.forEach(p => {
+    if (!p || typeof p.title !== 'string' || !p.title.trim()) return;
+    const paragraphs = (Array.isArray(p.paragraphs) ? p.paragraphs : []).filter(x => typeof x === 'string' && x.trim());
+    const block = document.createElement('div');
+    block.className = 'project-block project-text-only';
+    block.innerHTML = '<div>' +
+      (p.eyebrow ? '<div class="project-eyebrow" style="color:var(' + colors[n % 3] + ');">// ' + escapeHtml(p.eyebrow) + '</div>' : '') +
+      '<h2>' + renderRichText(p.title) + '</h2>' +
+      '<div class="project-desc">' + paragraphs.map(x => '<p>' + renderRichText(x) + '</p>').join('') + '</div>' +
+      (p.stack ? '<div class="project-stack">' + escapeHtml(p.stack) + '</div>' : '') +
+      '</div>';
+    wrap.appendChild(block);
+    n++;
+  });
+});
+</script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

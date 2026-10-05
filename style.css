@@ -262,3 +262,24 @@ body.nav-open iframe { visibility: hidden; }
 .skip-link:focus { top: 12px; }
 
 :focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+/* ---------- bandeau d'annonce (géré depuis l'admin, voir main.js) ---------- */
+.announce {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 9px 52px 9px 20px; position: relative; text-align: center;
+  background: linear-gradient(90deg, rgba(0, 245, 255, 0.14), rgba(155, 92, 255, 0.14));
+  border-bottom: 1px solid var(--cyan);
+  font-weight: 600; font-size: 0.95rem; color: var(--white);
+}
+.announce-alerte { background: rgba(255, 45, 120, 0.16); border-bottom-color: var(--magenta); }
+.announce-link { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.announce-alerte .announce-link { color: var(--white); }
+.announce-close {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; background: none; border: none; color: var(--muted);
+  font-size: 1.5rem; line-height: 1; cursor: pointer;
+}
+.announce-close:hover, .announce-close:focus-visible { color: var(--white); }
+@media (max-width: 600px) {
+  .announce { flex-direction: column; gap: 4px; font-size: 0.88rem; }
+}

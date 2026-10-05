@@ -55,6 +55,14 @@
   .planning-game { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
   .planning-time { color: var(--muted); font-size: 0.88rem; }
   .planning-off-label { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin: auto 0; text-align: center; }
+  .exceptions { margin-bottom: 28px; }
+  .exceptions-title { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+  .exceptions-list { display: grid; gap: 10px; }
+  .exception-card { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; padding: 12px 18px; border: 1px solid var(--line); border-left: 3px solid var(--cyan); border-radius: 4px; background: linear-gradient(180deg, var(--surface), var(--surface2)); }
+  .exception-card.off { border-left-color: var(--magenta); }
+  .exception-date { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.85rem; }
+  .exception-text { color: var(--muted); }
+  .exception-text strong { color: var(--white); }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
@@ -82,15 +90,19 @@
 <main>
   <section class="grid-bg">
     <div class="container">
-      <div class="eyebrow">// Programme de la semaine</div>
+      <div class="eyebrow" data-edit="planning.eyebrow" data-edit-label="Planning — sur-titre">// Programme de la semaine</div>
       <h1 class="h1-page">Planning <em class="accent">stream</em></h1>
     </div>
   </section>
 
   <section class="tight">
     <div class="container">
+      <div class="exceptions" id="exceptions" style="display:none;">
+        <div class="exceptions-title">Changements à venir</div>
+        <div class="exceptions-list" id="exceptionsList"></div>
+      </div>
       <div class="planning-grid" id="planningGrid"></div>
-      <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-state" id="emptyState" style="display:none;" data-edit="planning.empty" data-edit-label="Planning — message si vide">
         Le planning arrive bientôt.
       </div>
     </div>
@@ -99,7 +111,7 @@
   <section class="tight">
     <div class="container">
       <div class="card" style="text-align:center;">
-        <p style="margin:0;">
+        <p style="margin:0;" data-edit="planning.note" data-edit-label="Planning — note du bas">
           Le planning peut évoluer d'une semaine à l'autre — le plus fiable
           reste toujours le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" style="color:var(--cyan);">Discord de la chaine</a>.
         </p>
@@ -166,6 +178,39 @@ fetch('data/planning.json')
       grid.appendChild(card);
     });
   });
+
+/* Changements ponctuels (stream en plus, jour de repos exceptionnel…) :
+   data/planning-exceptions.json, géré depuis l'admin (onglet Planning).
+   Seules les dates à venir ou du jour s'affichent — les passées
+   disparaissent toutes seules. */
+(function () {
+  const d = new Date();
+  const todayStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  fetch('data/planning-exceptions.json')
+    .then(r => (r.ok ? r.json() : []))
+    .catch(() => [])
+    .then(list => {
+      if (!Array.isArray(list)) return;
+      const upcoming = list
+        .filter(e => e && typeof e.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.date >= todayStr)
+        .sort((a, b) => a.date.localeCompare(b.date));
+      if (upcoming.length === 0) return;
+      const box = document.getElementById('exceptionsList');
+      upcoming.forEach(e => {
+        const raw = new Date(e.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+        const label = raw.charAt(0).toUpperCase() + raw.slice(1);
+        const note = e.note ? ' — ' + escapeHtml(e.note) : '';
+        const text = e.on
+          ? '<strong>' + escapeHtml(e.game || 'Stream') + '</strong>' + (e.time ? ' · ' + escapeHtml(e.time) + (e.end ? ' – ' + escapeHtml(e.end) : '') : '') + note
+          : '<strong>Pas de stream</strong>' + note;
+        const card = document.createElement('div');
+        card.className = 'exception-card' + (e.on ? '' : ' off');
+        card.innerHTML = '<div class="exception-date">' + escapeHtml(label) + '</div><div class="exception-text">' + text + '</div>';
+        box.appendChild(card);
+      });
+      document.getElementById('exceptions').style.display = '';
+    });
+})();
 </script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"

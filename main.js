@@ -17,14 +17,23 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+/* Si le Discord a été changé dans l'admin (onglet « Liens & annonce »),
+   toute invitation Discord du site pointe vers la nouvelle adresse —
+   voir applySiteConfig() plus bas. */
+function siteDiscordUrl(u) {
+  if (window.__siteDiscord && /^https:\/\/(discord\.com\/invite|discord\.gg)\//i.test(u)) return window.__siteDiscord;
+  return u;
+}
+
 /* Texte riche minimal pour les contenus saisis dans admin.html
-   (À propos / FAQ) : échappe tout le HTML d'abord, puis n'autorise que
-   [texte](lien) (http(s):// ou une page du site en .html), `code` et
-   les retours à la ligne. Rien d'autre ne peut devenir une balise. */
+   (À propos, textes des pages) : échappe tout le HTML d'abord, puis
+   n'autorise que [texte](lien) (http(s):// ou une page du site en
+   .html), *mot* (mot en couleur d'accent), `code` et les retours à la
+   ligne. Rien d'autre ne peut devenir une balise. */
 function renderRichText(str) {
   let out = escapeHtml(str);
   out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (all, label, url) => {
-    const u = url.replace(/&amp;/g, '&');
+    const u = siteDiscordUrl(url.replace(/&amp;/g, '&'));
     if (/^https?:\/\//i.test(u)) {
       return '<a href="' + escapeHtml(u) + '" target="_blank" rel="noopener">' + label + '</a>';
     }
@@ -34,6 +43,7 @@ function renderRichText(str) {
     return all;
   });
   out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
+  out = out.replace(/\*([^*\n]+)\*/g, '<em class="accent">$1</em>');
   return out.replace(/\n/g, '<br>');
 }
 
@@ -114,6 +124,97 @@ if (liveBanner || followerCount) {
     })
     .catch(() => {});
 }
+
+/* ================================================================
+   Réglages du site gérés depuis l'admin (onglet « Liens & annonce »)
+   data/site.json : { socials: [{label, url}], announcement: {...} }
+   Absent ou invalide → le HTML d'origine reste tel quel.
+   ================================================================ */
+const isHttpUrl = (u) => typeof u === 'string' && /^https?:\/\//i.test(u);
+
+function applySocials(socials) {
+  if (!Array.isArray(socials)) return;
+  const list = socials.filter((s) => s && typeof s.label === 'string' && s.label.trim() && isHttpUrl(s.url));
+  if (list.length === 0) return;
+  const discord = list.find((s) => /^discord$/i.test(s.label.trim()));
+  if (discord) window.__siteDiscord = discord.url;
+  document.querySelectorAll('.site-footer .socials').forEach((box) => {
+    box.innerHTML = list.map((s) =>
+      '<a href="' + escapeHtml(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.label) + '</a>').join('');
+  });
+  if (discord) {
+    document.querySelectorAll('a[href^="https://discord.com/invite/"], a[href^="https://discord.gg/"]').forEach((a) => {
+      a.setAttribute('href', discord.url);
+    });
+  }
+}
+
+/* Date AAAA-MM-JJ de l'admin → fin de journée / début de journée locale */
+function announcementActive(a) {
+  if (!a || !a.enabled || typeof a.text !== 'string' || !a.text.trim()) return false;
+  const now = Date.now();
+  if (a.from && /^\d{4}-\d{2}-\d{2}$/.test(a.from) && now < new Date(a.from + 'T00:00:00').getTime()) return false;
+  if (a.until && /^\d{4}-\d{2}-\d{2}$/.test(a.until) && now > new Date(a.until + 'T23:59:59').getTime()) return false;
+  return true;
+}
+
+function applyAnnouncement(a) {
+  if (!announcementActive(a)) return;
+  const key = 'announce-closed';
+  try { if (sessionStorage.getItem(key) === a.text) return; } catch (e) {}
+  const bar = document.createElement('div');
+  bar.className = 'announce' + (a.tone === 'alerte' ? ' announce-alerte' : '');
+  bar.setAttribute('role', 'status');
+  const text = document.createElement('span');
+  text.className = 'announce-text';
+  text.textContent = a.text;
+  bar.appendChild(text);
+  if (isHttpUrl(a.linkUrl) || (typeof a.linkUrl === 'string' && /^[a-z0-9_-]+\.html$/i.test(a.linkUrl))) {
+    const link = document.createElement('a');
+    link.className = 'announce-link';
+    link.href = a.linkUrl;
+    link.textContent = (typeof a.linkLabel === 'string' && a.linkLabel.trim()) || 'En savoir plus';
+    if (isHttpUrl(a.linkUrl)) { link.target = '_blank'; link.rel = 'noopener'; }
+    bar.appendChild(link);
+  }
+  const close = document.createElement('button');
+  close.type = 'button';
+  close.className = 'announce-close';
+  close.setAttribute('aria-label', "Fermer l'annonce");
+  close.textContent = '×';
+  close.addEventListener('click', () => {
+    bar.remove();
+    try { sessionStorage.setItem(key, a.text); } catch (e) {}
+  });
+  bar.appendChild(close);
+  const header = document.querySelector('.site-header');
+  if (header) header.parentNode.insertBefore(bar, header);
+  else document.body.insertBefore(bar, document.body.firstChild);
+}
+
+fetch('data/site.json')
+  .then((r) => (r.ok ? r.json() : null))
+  .catch(() => null)
+  .then((cfg) => {
+    if (!cfg || typeof cfg !== 'object' || Array.isArray(cfg)) return;
+    applySocials(cfg.socials);
+    applyAnnouncement(cfg.announcement);
+  });
+
+/* Textes des pages modifiables depuis l'admin (onglet « Textes des
+   pages ») : data/pages.json { texts: { clé: "texte" }, extraProjects: [...] }.
+   Les éléments concernés portent data-edit="clé" ; leur contenu HTML
+   sert de texte par défaut et n'est remplacé que si la clé existe. */
+window.pagesDataPromise = document.querySelector('[data-edit], [data-uses-pages]')
+  ? fetch('data/pages.json').then((r) => (r.ok ? r.json() : null)).catch(() => null)
+  : Promise.resolve(null);
+window.pagesDataPromise.then((d) => {
+  if (!d || typeof d !== 'object' || !d.texts || typeof d.texts !== 'object') return;
+  document.querySelectorAll('[data-edit]').forEach((el) => {
+    const v = d.texts[el.dataset.edit];
+    if (typeof v === 'string' && v.trim()) el.innerHTML = renderRichText(v);
+  });
+});
 
 /* Bouton "retour en haut", sur toutes les pages. Le survol et
    l'apparition sont des transitions CSS (déjà neutralisées en
