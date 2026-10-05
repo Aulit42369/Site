@@ -87,16 +87,16 @@
 <main>
   <section class="grid-bg">
     <div class="container">
-      <div class="eyebrow">// Meilleurs moments</div>
+      <div class="eyebrow" data-edit="clips.eyebrow" data-edit-label="Clips — sur-titre">// Meilleurs moments</div>
       <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Derniers <em class="accent">clips</em></h1>
-      <p class="lead" style="margin-top:14px;">Une sélection à la main, mise à jour après chaque stream.</p>
+      <p class="lead" style="margin-top:14px;" data-edit="clips.lead" data-edit-label="Clips — introduction">Une sélection à la main, mise à jour après chaque stream.</p>
     </div>
   </section>
 
   <section class="tight">
     <div class="container">
       <div class="clips-grid" id="clipsGrid"></div>
-      <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-state" id="emptyState" style="display:none;" data-edit="clips.empty" data-edit-label="Clips — message si vide">
         Aucun clip pour l'instant — reviens après le prochain stream.
       </div>
     </div>

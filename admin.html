@@ -114,6 +114,46 @@
   .ap-btns button:disabled:hover { border-color: var(--line); color: var(--muted); }
   .ap-add { margin-top: 4px; }
   .ap-empty { color: var(--muted); font-size: 0.88rem; padding: 6px 0 10px; }
+  /* ── Nouveaux onglets : textes, liens & annonce, santé, historique ── */
+  .tx-group { border: 1px solid var(--line); border-radius: 4px; margin-bottom: 12px; background: linear-gradient(180deg, var(--surface), var(--surface2)); }
+  .tx-group > summary { cursor: pointer; padding: 14px 18px; font-family: 'Orbitron', sans-serif; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--cyan); list-style: none; }
+  .tx-group > summary::-webkit-details-marker { display: none; }
+  .tx-group > summary::before { content: '+ '; }
+  .tx-group[open] > summary::before { content: '– '; }
+  .tx-group .tx-count { color: var(--muted); font-size: 0.72rem; margin-left: 8px; text-transform: none; letter-spacing: 0; font-family: 'Rajdhani', sans-serif; }
+  .tx-body { padding: 4px 18px 8px; }
+  .tx-field { margin-bottom: 14px; }
+  .tx-field label { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .tx-field.modified label::after { content: 'modifié'; color: var(--cyan); font-size: 0.62rem; letter-spacing: 0.08em; }
+  .tx-field textarea { min-height: 44px; }
+  .tx-reset { background: none; border: none; color: var(--dim); font-size: 0.72rem; font-family: 'Rajdhani', sans-serif; cursor: pointer; text-decoration: underline; padding: 0; display: none; }
+  .tx-field.modified .tx-reset { display: inline; }
+  .ap-inline { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .ap-inline .field { margin-bottom: 0; }
+  .ap-inline select, .ap-fields select { width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; }
+  .ex-row.past { opacity: 0.45; }
+  .ex-past-tag { font-size: 0.68rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.06em; }
+  .health-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+  .health-row:last-child { border-bottom: none; }
+  .health-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; background: var(--dim); }
+  .health-dot.ok { background: #2ee6a6; box-shadow: 0 0 8px #2ee6a6; }
+  .health-dot.warn { background: #ffb020; box-shadow: 0 0 8px #ffb020; }
+  .health-dot.err { background: var(--magenta); box-shadow: 0 0 8px var(--magenta); }
+  .health-title { font-weight: 700; }
+  .health-detail { color: var(--muted); font-size: 0.9rem; }
+  .health-detail a { color: var(--cyan); text-decoration: underline; }
+  .hist-row { display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--line); flex-wrap: wrap; }
+  .hist-row:last-child { border-bottom: none; }
+  .hist-meta { min-width: 0; flex: 1; }
+  .hist-date { font-weight: 700; font-size: 0.92rem; }
+  .hist-msg { color: var(--muted); font-size: 0.85rem; overflow-wrap: anywhere; }
+  .hist-pre { width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; font-size: 0.75rem; color: var(--muted); max-height: 220px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+  .announce { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 9px 20px; text-align: center; background: linear-gradient(90deg, rgba(0, 245, 255, 0.14), rgba(155, 92, 255, 0.14)); border: 1px solid var(--cyan); border-radius: 4px; font-weight: 600; font-size: 0.95rem; color: var(--white); }
+  .announce-alerte { background: rgba(255, 45, 120, 0.16); border-color: var(--magenta); }
+  .announce-link { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+  .announce-alerte .announce-link { color: var(--white); }
+  .ap-check { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.92rem; cursor: pointer; margin-bottom: 14px; }
+  .ap-check input { width: 16px; height: 16px; }
 </style>
 </head>
 <body>
@@ -141,6 +181,10 @@
       <button data-tab="clips">Clips</button>
       <button data-tab="planning">Planning</button>
       <button data-tab="apropos">À propos</button>
+      <button data-tab="textes">Textes des pages</button>
+      <button data-tab="site">Liens &amp; annonce</button>
+      <button data-tab="sante">Santé du site</button>
+      <button data-tab="historique">Historique</button>
       <div class="spacer"></div>
       <button class="logout" id="backupBtn" title="Télécharger une sauvegarde JSON de tes streamers, clips et planning">Sauvegarder</button>
       <button class="logout" id="logoutBtn">Se déconnecter</button>
@@ -192,12 +236,47 @@
     <div id="planningPanel" class="admin-panel" style="display:none;">
       <div id="planningList"></div>
       <button class="btn btn-primary" id="savePlanningBtn" style="margin-top:8px;">Enregistrer le planning</button>
+      <div class="ap-section" style="margin-top:32px;">
+        <h2>Changements ponctuels</h2>
+        <p class="admin-note" style="margin-bottom:16px;">Un stream en plus ou un jour de repos exceptionnel à une date précise, sans toucher à la semaine type. Ça s'affiche au-dessus du planning et disparaît tout seul une fois la date passée.</p>
+        <div id="exceptionsEditor"></div>
+        <button type="button" class="ap-add" id="addExceptionBtn">+ Ajouter une date</button>
+        <div style="margin-top:14px;"><button class="btn btn-primary" id="saveExceptionsBtn">Enregistrer les changements ponctuels</button></div>
+      </div>
     </div>
 
     <div id="aproposPanel" class="admin-panel" style="display:none;">
       <p class="admin-note">Textes de la page À propos et FAQ. Les modifications restent ici tant que tu n'as pas cliqué sur « Enregistrer » en bas. Dans un texte : <code>[mot](https://lien)</code> ou <code>[mot](planning.html)</code> pour un lien, <code>`!commande`</code> pour du code, Entrée pour un retour à la ligne.</p>
       <div id="aproposEditor"></div>
       <button class="btn btn-primary" id="saveAproposBtn" style="margin-top:8px;">Enregistrer la page À propos</button>
+    </div>
+
+    <div id="textesPanel" class="admin-panel" style="display:none;">
+      <p class="admin-note">Tous les textes courts du site (accueil, planning, clips, streamers, coulisses, contact, mentions légales). Le texte actuel est pré-rempli : modifie ce que tu veux, le reste n'est pas touché. « Rétablir » ou un champ vidé remet le texte d'origine. Dans un texte : <code>*mot*</code> pour le mot en couleur, <code>[mot](https://lien)</code> ou <code>[mot](planning.html)</code> pour un lien, <code>`code`</code>, Entrée pour un retour à la ligne.</p>
+      <div id="textesEditor"><div class="ap-empty">Chargement des pages…</div></div>
+      <div id="extraEditor"></div>
+      <button class="btn btn-primary" id="saveTextesBtn" style="margin-top:8px;">Enregistrer les textes</button>
+    </div>
+
+    <div id="sitePanel" class="admin-panel" style="display:none;">
+      <p class="admin-note">Réglages valables sur toutes les pages. Le lien « Discord » remplace aussi toutes les invitations Discord du site (boutons, FAQ, mentions…).</p>
+      <div id="siteEditor"></div>
+      <button class="btn btn-primary" id="saveSiteBtn" style="margin-top:8px;">Enregistrer</button>
+    </div>
+
+    <div id="santePanel" class="admin-panel" style="display:none;">
+      <p class="admin-note">État des automatisations et des données du site, lu en direct.</p>
+      <div id="santeBox"></div>
+      <div class="form-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+        <button class="btn btn-secondary" id="santeRefreshBtn" type="button">Actualiser</button>
+        <button class="btn btn-primary" id="twitchRunBtn" type="button">Relancer la mise à jour Twitch</button>
+      </div>
+    </div>
+
+    <div id="historiquePanel" class="admin-panel" style="display:none;">
+      <p class="admin-note">Chaque enregistrement fait depuis l'admin est une version sauvegardée sur GitHub. Choisis un contenu, puis restaure une version précédente en un clic (la version actuelle reste dans l'historique : tu peux toujours revenir en arrière).</p>
+      <div class="field"><label for="histFile">Contenu</label><select id="histFile" style="width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--white);font-family:'Rajdhani',sans-serif;font-size:1rem;"></select></div>
+      <div id="histList"></div>
     </div>
 
     <div id="statusMsg"></div>
@@ -877,6 +956,576 @@ async function saveApropos() {
 }
 document.getElementById('saveAproposBtn').addEventListener('click', saveApropos);
 
+/* ================================================================
+   Nouveaux onglets : changements ponctuels du planning, textes des
+   pages, liens & annonce, santé du site, historique.
+   ================================================================ */
+async function ghApi(path, options = {}) {
+  return fetch(`https://api.github.com/repos/${OWNER}/${REPO}${path}`, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      Accept: 'application/vnd.github+json',
+      ...(options.headers || {}),
+    },
+  });
+}
+const strOr = (v, f = '') => (typeof v === 'string' ? v : f);
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function frDate(s) {
+  const d = new Date(s + 'T12:00:00');
+  return Number.isNaN(d.getTime()) ? s : d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+}
+function agoText(ms) {
+  const m = Math.round(ms / 60000);
+  if (m < 1) return "à l'instant";
+  if (m < 90) return 'il y a ' + m + ' min';
+  const h = Math.round(m / 60);
+  if (h < 48) return 'il y a ' + h + ' h';
+  return 'il y a ' + Math.round(h / 24) + ' jours';
+}
+
+/* ── Planning : changements ponctuels (data/planning-exceptions.json) ── */
+let exState = { data: [], sha: null };
+function normalizeEx(d) {
+  if (!Array.isArray(d)) return [];
+  return d.filter((e) => e && typeof e === 'object').map((e) => ({
+    date: strOr(e.date), on: e.on !== false, game: strOr(e.game), time: strOr(e.time), end: strOr(e.end), note: strOr(e.note),
+  }));
+}
+function renderExceptions() {
+  const box = document.getElementById('exceptionsEditor');
+  if (exState.data.length === 0) {
+    box.innerHTML = '<div class="ap-empty">Aucun changement prévu.</div>';
+    return;
+  }
+  const today = todayStr();
+  box.innerHTML = exState.data.map((e, i) => `
+    <div class="ap-row ex-row ${e.date && e.date < today ? 'past' : ''}">
+      <div class="ap-fields">
+        <div class="ap-inline">
+          <div class="field"><label>Date ${e.date && e.date < today ? '<span class="ex-past-tag">· passée</span>' : ''}</label><input type="date" data-ex="${i}" data-f="date" value="${escapeHtml(e.date)}"></div>
+          <div class="field"><label>Début</label><input type="time" data-ex="${i}" data-f="time" value="${escapeHtml(e.time)}"></div>
+          <div class="field"><label>Fin</label><input type="time" data-ex="${i}" data-f="end" value="${escapeHtml(e.end)}"></div>
+          <div class="field"><label>Jeu</label><input type="text" data-ex="${i}" data-f="game" value="${escapeHtml(e.game)}"></div>
+        </div>
+        <div class="field"><label>Précision (facultatif)</label><input type="text" data-ex="${i}" data-f="note" value="${escapeHtml(e.note)}" placeholder="ex : session spéciale avec les abonnés"></div>
+        <label class="ap-check" style="margin:0;"><input type="checkbox" data-ex="${i}" data-f="on" ${e.on ? 'checked' : ''}> Il y a stream ce jour-là (décoché = pas de stream)</label>
+      </div>
+      <div class="ap-btns"><button type="button" class="danger" data-ex-del="${i}" title="Supprimer cette date">✕</button></div>
+    </div>`).join('');
+}
+(function wireExceptions() {
+  const box = document.getElementById('exceptionsEditor');
+  box.addEventListener('input', (e) => {
+    const el = e.target;
+    if (el.dataset.ex === undefined) return;
+    exState.data[Number(el.dataset.ex)][el.dataset.f] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ex-del]');
+    if (!b) return;
+    exState.data.splice(Number(b.dataset.exDel), 1);
+    renderExceptions();
+  });
+  document.getElementById('addExceptionBtn').addEventListener('click', () => {
+    exState.data.push({ date: '', on: true, game: '', time: '21:00', end: '00:00', note: '' });
+    renderExceptions();
+    const dates = box.querySelectorAll('[data-f="date"]');
+    if (dates.length) dates[dates.length - 1].focus();
+  });
+})();
+async function saveExceptions() {
+  const clean = exState.data
+    .filter((e) => /^\d{4}-\d{2}-\d{2}$/.test(e.date))
+    .map((e) => ({ date: e.date, on: !!e.on, game: e.game.trim(), time: e.time, end: e.end, note: e.note.trim() }))
+    .sort((a, b) => a.date.localeCompare(b.date));
+  showStatus('Enregistrement...', 'pending');
+  try {
+    const result = await writeJsonFile('data/planning-exceptions.json', clean, exState.sha, 'Mise à jour des changements ponctuels du planning');
+    exState = { data: clean, sha: result.content.sha };
+    renderExceptions();
+    showStatus('Changements ponctuels enregistrés.', 'ok');
+  } catch (err) {
+    showStatus('Échec : ' + err.message, 'err');
+  }
+}
+document.getElementById('saveExceptionsBtn').addEventListener('click', saveExceptions);
+
+/* ── Liens & annonce (data/site.json) ── */
+const DEFAULT_SITE = {
+  socials: [
+    { label: 'Discord', url: 'https://discord.com/invite/Amgaz5YNVg' },
+    { label: 'YouTube', url: 'https://www.youtube.com/@Aulit42369' },
+    { label: 'Instagram', url: 'https://www.instagram.com/aulit42369/?hl=fr' },
+    { label: 'TikTok', url: 'https://www.tiktok.com/@aulit42369_' },
+  ],
+  announcement: { enabled: false, text: '', linkLabel: '', linkUrl: '', tone: 'info', from: '', until: '' },
+};
+function normalizeSite(d) {
+  const def = JSON.parse(JSON.stringify(DEFAULT_SITE));
+  if (!d || typeof d !== 'object' || Array.isArray(d)) return def;
+  const a = d.announcement && typeof d.announcement === 'object' ? d.announcement : {};
+  return {
+    socials: Array.isArray(d.socials) ? d.socials.map((s) => ({ label: strOr(s && s.label), url: strOr(s && s.url) })) : def.socials,
+    announcement: {
+      enabled: !!a.enabled, text: strOr(a.text), linkLabel: strOr(a.linkLabel), linkUrl: strOr(a.linkUrl),
+      tone: a.tone === 'alerte' ? 'alerte' : 'info', from: strOr(a.from), until: strOr(a.until),
+    },
+  };
+}
+let siteState = { data: normalizeSite(null), sha: null };
+function announcementStatus(a) {
+  if (!a.text.trim()) return 'Aucun texte saisi.';
+  if (!a.enabled) return 'Désactivée — rien ne s\'affiche sur le site.';
+  const t = todayStr();
+  if (a.from && t < a.from) return 'Programmée — elle apparaîtra le ' + frDate(a.from) + '.';
+  if (a.until && t > a.until) return 'Expirée — elle ne s\'affiche plus.';
+  return 'Affichée sur toutes les pages' + (a.until ? ' jusqu\'au ' + frDate(a.until) + ' inclus' : ' (sans date de fin)') + '.';
+}
+function updateAnnPreview() {
+  const a = siteState.data.announcement;
+  const prev = document.getElementById('annPreview');
+  if (!prev) return;
+  prev.className = 'announce' + (a.tone === 'alerte' ? ' announce-alerte' : '');
+  prev.innerHTML = '<span>' + escapeHtml(a.text || 'Ton message apparaîtra ici') + '</span>' +
+    (a.linkUrl ? '<span class="announce-link">' + escapeHtml(a.linkLabel || 'En savoir plus') + '</span>' : '');
+  document.getElementById('annStatus').textContent = announcementStatus(a);
+}
+function renderSite() {
+  const d = siteState.data, a = d.announcement;
+  const last = d.socials.length - 1;
+  const socials = d.socials.map((s, i) => `
+    <div class="ap-row">
+      <div class="ap-fields">
+        <div class="field"><label>Nom affiché</label><input type="text" data-sl="${i}" data-f="label" value="${escapeHtml(s.label)}"></div>
+        <div class="field"><label>Adresse (https://…)</label><input type="text" data-sl="${i}" data-f="url" value="${escapeHtml(s.url)}"></div>
+      </div>
+      <div class="ap-btns">
+        <button type="button" data-sact="up" data-i="${i}" ${i === 0 ? 'disabled' : ''} title="Monter">▲</button>
+        <button type="button" data-sact="down" data-i="${i}" ${i === last ? 'disabled' : ''} title="Descendre">▼</button>
+        <button type="button" class="danger" data-sact="del" data-i="${i}" title="Supprimer ce lien">✕</button>
+      </div>
+    </div>`).join('') || '<div class="ap-empty">Aucun lien — le pied de page garde ses liens d\'origine.</div>';
+  document.getElementById('siteEditor').innerHTML = `
+    <div class="ap-section">
+      <h2>Liens du pied de page</h2>
+      ${socials}
+      <button type="button" class="ap-add" data-sact="add">+ Ajouter un lien</button>
+    </div>
+    <div class="ap-section">
+      <h2>Bandeau d'annonce</h2>
+      <label class="ap-check"><input type="checkbox" data-ann="enabled" ${a.enabled ? 'checked' : ''}> Afficher le bandeau</label>
+      <div class="field"><label>Message</label><input type="text" data-ann="text" maxlength="200" value="${escapeHtml(a.text)}" placeholder="ex : Pas de stream ce soir — retour demain 21h !"></div>
+      <div class="ap-inline" style="margin-bottom:16px;">
+        <div class="field"><label>Style</label><select data-ann="tone"><option value="info" ${a.tone === 'info' ? 'selected' : ''}>Information</option><option value="alerte" ${a.tone === 'alerte' ? 'selected' : ''}>Alerte (rose)</option></select></div>
+        <div class="field"><label>Texte du lien (facultatif)</label><input type="text" data-ann="linkLabel" value="${escapeHtml(a.linkLabel)}" placeholder="ex : Voir le planning"></div>
+        <div class="field"><label>Adresse du lien</label><input type="text" data-ann="linkUrl" value="${escapeHtml(a.linkUrl)}" placeholder="https://… ou planning.html"></div>
+      </div>
+      <div class="ap-inline" style="margin-bottom:16px;">
+        <div class="field"><label>Affichée à partir du (facultatif)</label><input type="date" data-ann="from" value="${escapeHtml(a.from)}"></div>
+        <div class="field"><label>Jusqu'au, inclus (facultatif)</label><input type="date" data-ann="until" value="${escapeHtml(a.until)}"></div>
+      </div>
+      <div class="preview-label">Aperçu</div>
+      <div id="annPreview" class="announce"></div>
+      <p class="admin-note" id="annStatus" style="margin:12px 0 0;"></p>
+    </div>`;
+  updateAnnPreview();
+}
+(function wireSite() {
+  const ed = document.getElementById('siteEditor');
+  ed.addEventListener('input', (e) => {
+    const el = e.target;
+    if (el.dataset.sl !== undefined) {
+      siteState.data.socials[Number(el.dataset.sl)][el.dataset.f] = el.value;
+    } else if (el.dataset.ann) {
+      siteState.data.announcement[el.dataset.ann] = el.type === 'checkbox' ? el.checked : el.value;
+      updateAnnPreview();
+    }
+  });
+  ed.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-sact]');
+    if (!b) return;
+    const list = siteState.data.socials, i = Number(b.dataset.i), act = b.dataset.sact;
+    if (act === 'add') list.push({ label: '', url: '' });
+    else if (act === 'del') list.splice(i, 1);
+    else if (act === 'up' && i > 0) [list[i - 1], list[i]] = [list[i], list[i - 1]];
+    else if (act === 'down' && i < list.length - 1) [list[i + 1], list[i]] = [list[i], list[i + 1]];
+    renderSite();
+    if (act === 'add') {
+      const f = ed.querySelectorAll('[data-sl][data-f="label"]');
+      if (f.length) f[f.length - 1].focus();
+    }
+  });
+})();
+async function saveSite() {
+  const d = siteState.data, a = d.announcement;
+  const socials = d.socials.map((s) => ({ label: s.label.trim(), url: s.url.trim() })).filter((s) => s.label || s.url);
+  const bad = socials.find((s) => !s.label || !/^https?:\/\//i.test(s.url));
+  if (bad) return showStatus('Chaque lien a besoin d\'un nom et d\'une adresse qui commence par https://', 'err');
+  const linkUrl = a.linkUrl.trim();
+  if (linkUrl && !/^https?:\/\//i.test(linkUrl) && !/^[a-z0-9_-]+\.html$/i.test(linkUrl)) {
+    return showStatus('Adresse du lien de l\'annonce : https://… ou une page du site (ex : planning.html).', 'err');
+  }
+  if (a.from && a.until && a.until < a.from) return showStatus('La date de fin est avant la date de début.', 'err');
+  const clean = {
+    socials,
+    announcement: { enabled: !!a.enabled, text: a.text.trim(), linkLabel: a.linkLabel.trim(), linkUrl, tone: a.tone === 'alerte' ? 'alerte' : 'info', from: a.from, until: a.until },
+  };
+  showStatus('Enregistrement...', 'pending');
+  try {
+    const result = await writeJsonFile('data/site.json', clean, siteState.sha, 'Mise à jour liens et annonce');
+    siteState = { data: normalizeSite(clean), sha: result.content.sha };
+    renderSite();
+    showStatus('Liens et annonce enregistrés.', 'ok');
+  } catch (err) {
+    showStatus('Échec : ' + err.message, 'err');
+  }
+}
+document.getElementById('saveSiteBtn').addEventListener('click', saveSite);
+
+/* ── Textes des pages (data/pages.json) ── */
+const TEXT_PAGES = [
+  ['index.html', 'Accueil'], ['planning.html', 'Planning'], ['clips.html', 'Clips'], ['streamers.html', 'Streamers'],
+  ['apropos.html', 'À propos'], ['coulisses.html', 'Coulisses'], ['contact.html', 'Contact'], ['mentions-legales.html', 'Mentions légales'],
+];
+function normalizePages(d) {
+  const out = { texts: {}, extraProjects: [] };
+  if (d && typeof d === 'object' && !Array.isArray(d)) {
+    if (d.texts && typeof d.texts === 'object') {
+      Object.keys(d.texts).forEach((k) => { if (typeof d.texts[k] === 'string') out.texts[k] = d.texts[k]; });
+    }
+    if (Array.isArray(d.extraProjects)) {
+      out.extraProjects = d.extraProjects.filter((p) => p && typeof p === 'object').map((p) => ({
+        eyebrow: strOr(p.eyebrow), title: strOr(p.title), stack: strOr(p.stack),
+        ptext: (Array.isArray(p.paragraphs) ? p.paragraphs.map(String) : []).join('\n\n'),
+      }));
+    }
+  }
+  return out;
+}
+let pagesState = { data: normalizePages(null), sha: null };
+let textesModel = null;
+
+/* HTML d'une page → texte à balisage simple (l'inverse de renderRichText de main.js) */
+function domToMarkup(node) {
+  let out = '';
+  node.childNodes.forEach((n) => {
+    if (n.nodeType === 3) out += n.nodeValue.replace(/\s+/g, ' ');
+    else if (n.nodeType === 1) {
+      const inner = domToMarkup(n);
+      if (n.tagName === 'EM') out += '*' + inner + '*';
+      else if (n.tagName === 'A') out += '[' + inner + '](' + (n.getAttribute('href') || '') + ')';
+      else if (n.tagName === 'CODE') out += '`' + inner + '`';
+      else if (n.tagName === 'BR') out += '\n';
+      else out += inner;
+    }
+  });
+  return out;
+}
+function markupOf(el) { return domToMarkup(el).replace(/ *\n */g, '\n').trim(); }
+
+async function loadTextes() {
+  if (textesModel) return;
+  const box = document.getElementById('textesEditor');
+  box.innerHTML = '<div class="ap-empty">Chargement des pages…</div>';
+  try {
+    const t = Date.now();
+    const groups = [];
+    for (const [file, title] of TEXT_PAGES) {
+      const res = await fetch(file + '?t=' + t, { cache: 'no-store' });
+      if (!res.ok) continue;
+      const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+      const fields = [...doc.querySelectorAll('[data-edit]')].map((el) => {
+        const key = el.getAttribute('data-edit');
+        const def = markupOf(el);
+        const ov = pagesState.data.texts[key];
+        const rawLabel = el.getAttribute('data-edit-label') || key;
+        const label = /élément \d+$/.test(rawLabel) ? rawLabel.replace(/élément \d+$/, '« ' + def.slice(0, 45).replace(/[`*\[\]]/g, '') + (def.length > 45 ? '…' : '') + ' »') : rawLabel;
+        return { key, label, def, value: typeof ov === 'string' && ov.trim() ? ov : def };
+      });
+      if (fields.length) groups.push({ file, title, fields });
+    }
+    textesModel = groups;
+    renderTextes();
+  } catch (e) {
+    box.innerHTML = '<div class="ap-empty">Impossible de charger les pages : ' + escapeHtml(e.message) + '</div>';
+  }
+}
+function renderTextes() {
+  const box = document.getElementById('textesEditor');
+  const openFiles = new Set([...box.querySelectorAll('details[open]')].map((d) => d.dataset.file));
+  box.innerHTML = textesModel.map((g) => {
+    const modified = g.fields.filter((f) => f.value !== f.def).length;
+    return `<details class="tx-group" data-file="${escapeHtml(g.file)}" ${openFiles.has(g.file) ? 'open' : ''}><summary>${escapeHtml(g.title)}<span class="tx-count">${g.fields.length} textes${modified ? ' · ' + modified + ' modifié' + (modified > 1 ? 's' : '') : ''}</span></summary>
+      <div class="tx-body">${g.fields.map((f) => `
+        <div class="field tx-field ${f.value !== f.def ? 'modified' : ''}">
+          <label>${escapeHtml(f.label)}<button type="button" class="tx-reset" data-reset="${escapeHtml(f.key)}">Rétablir</button></label>
+          <textarea data-tk="${escapeHtml(f.key)}" rows="${Math.min(10, Math.max(1, Math.ceil(f.value.length / 80) + (f.value.match(/\n/g) || []).length))}">${escapeHtml(f.value)}</textarea>
+        </div>`).join('')}</div></details>`;
+  }).join('') || '<div class="ap-empty">Aucun texte éditable trouvé.</div>';
+}
+function textField(key) {
+  for (const g of textesModel || []) for (const f of g.fields) if (f.key === key) return f;
+  return null;
+}
+(function wireTextes() {
+  const box = document.getElementById('textesEditor');
+  box.addEventListener('input', (e) => {
+    const el = e.target;
+    if (!el.dataset.tk) return;
+    const f = textField(el.dataset.tk);
+    if (!f) return;
+    f.value = el.value;
+    el.closest('.tx-field').classList.toggle('modified', el.value.trim() !== '' && el.value !== f.def);
+  });
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-reset]');
+    if (!b) return;
+    const f = textField(b.dataset.reset);
+    if (!f) return;
+    f.value = f.def;
+    const wrap = b.closest('.tx-field');
+    wrap.querySelector('textarea').value = f.def;
+    wrap.classList.remove('modified');
+  });
+})();
+
+/* projets supplémentaires de la page Coulisses */
+function renderExtra() {
+  const list = pagesState.data.extraProjects;
+  const last = list.length - 1;
+  const rows = list.map((p, i) => `
+    <div class="ap-row">
+      <div class="ap-fields">
+        <div class="field"><label>Sur-titre (ex : Mon nouvel outil)</label><input type="text" data-xp="${i}" data-f="eyebrow" value="${escapeHtml(p.eyebrow)}"></div>
+        <div class="field"><label>Titre (<code>*mot*</code> = mot en couleur)</label><input type="text" data-xp="${i}" data-f="title" value="${escapeHtml(p.title)}"></div>
+        <div class="field"><label>Description (une ligne vide = nouveau paragraphe)</label><textarea data-xp="${i}" data-f="ptext" rows="5">${escapeHtml(p.ptext)}</textarea></div>
+        <div class="field"><label>Technologies (facultatif)</label><input type="text" data-xp="${i}" data-f="stack" value="${escapeHtml(p.stack)}"></div>
+      </div>
+      <div class="ap-btns">
+        <button type="button" data-xact="up" data-i="${i}" ${i === 0 ? 'disabled' : ''} title="Monter">▲</button>
+        <button type="button" data-xact="down" data-i="${i}" ${i === last ? 'disabled' : ''} title="Descendre">▼</button>
+        <button type="button" class="danger" data-xact="del" data-i="${i}" title="Supprimer ce projet">✕</button>
+      </div>
+    </div>`).join('') || '<div class="ap-empty">Aucun projet supplémentaire.</div>';
+  document.getElementById('extraEditor').innerHTML = `
+    <div class="ap-section" style="margin-top:20px;">
+      <h2>Projets supplémentaires (page Coulisses)</h2>
+      <p class="admin-note" style="margin-bottom:16px;">Texte seul (sans schéma), affichés à la suite des projets existants.</p>
+      ${rows}
+      <button type="button" class="ap-add" data-xact="add">+ Ajouter un projet</button>
+    </div>`;
+}
+(function wireExtra() {
+  const box = document.getElementById('extraEditor');
+  box.addEventListener('input', (e) => {
+    const el = e.target;
+    if (el.dataset.xp === undefined) return;
+    pagesState.data.extraProjects[Number(el.dataset.xp)][el.dataset.f] = el.value;
+  });
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-xact]');
+    if (!b) return;
+    const list = pagesState.data.extraProjects, i = Number(b.dataset.i), act = b.dataset.xact;
+    if (act === 'add') list.push({ eyebrow: '', title: '', ptext: '', stack: '' });
+    else if (act === 'del') list.splice(i, 1);
+    else if (act === 'up' && i > 0) [list[i - 1], list[i]] = [list[i], list[i - 1]];
+    else if (act === 'down' && i < list.length - 1) [list[i + 1], list[i]] = [list[i], list[i + 1]];
+    renderExtra();
+    if (act === 'add') {
+      const f = box.querySelectorAll('[data-f="eyebrow"]');
+      if (f.length) f[f.length - 1].focus();
+    }
+  });
+})();
+async function saveTextes() {
+  const texts = {};
+  if (textesModel) {
+    const known = new Set();
+    textesModel.forEach((g) => g.fields.forEach((f) => {
+      known.add(f.key);
+      if (f.value.trim() && f.value !== f.def) texts[f.key] = f.value;
+    }));
+    // garde les modifications de pages qu'on n'a pas pu relire
+    Object.keys(pagesState.data.texts).forEach((k) => { if (!known.has(k)) texts[k] = pagesState.data.texts[k]; });
+  } else {
+    Object.assign(texts, pagesState.data.texts);
+  }
+  const extraProjects = pagesState.data.extraProjects.map((p) => ({
+    eyebrow: p.eyebrow.trim(), title: p.title.trim(), stack: p.stack.trim(),
+    paragraphs: p.ptext.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean),
+  })).filter((p) => p.title);
+  const clean = { texts, extraProjects };
+  showStatus('Enregistrement...', 'pending');
+  try {
+    const result = await writeJsonFile('data/pages.json', clean, pagesState.sha, 'Mise à jour des textes des pages');
+    pagesState = { data: normalizePages(clean), sha: result.content.sha };
+    renderExtra();
+    if (textesModel) renderTextes();
+    showStatus('Textes enregistrés.', 'ok');
+  } catch (err) {
+    showStatus('Échec : ' + err.message, 'err');
+  }
+}
+document.getElementById('saveTextesBtn').addEventListener('click', saveTextes);
+
+/* ── Santé du site ── */
+async function loadSante() {
+  const box = document.getElementById('santeBox');
+  box.innerHTML = '<div class="ap-empty">Analyse en cours…</div>';
+  const t = Date.now();
+  const getJson = async (p) => {
+    try { const r = await fetch(p + '?t=' + t, { cache: 'no-store' }); return r.ok ? await r.json() : null; } catch (e) { return null; }
+  };
+  const rows = [];
+  const [status, broken, games] = await Promise.all([
+    getJson('data/twitch-status.json'), getJson('data/broken-links.json'), getJson('data/recent-games.json'),
+  ]);
+
+  if (!status || !status._updated_at) {
+    rows.push({ level: 'err', title: 'Statut Twitch', detail: 'Fichier absent ou sans date — l\'automatisation n\'a jamais tourné ?' });
+  } else {
+    const age = Date.now() - new Date(status._updated_at).getTime();
+    const level = age < 30 * 60000 ? 'ok' : age < 3 * 3600000 ? 'warn' : 'err';
+    rows.push({
+      level, title: 'Statut Twitch (direct, abonnés, avatars)',
+      detail: 'Dernière mise à jour ' + agoText(age) + '.' + (level === 'ok' ? '' : ' Le bandeau « En direct » est masqué au-delà de 30 min : lance une mise à jour ci-dessous, et vérifie le cron-job.org si ça se répète.'),
+    });
+  }
+  if (Array.isArray(broken)) {
+    rows.push(broken.length === 0
+      ? { level: 'ok', title: 'Liens de streamers', detail: 'Aucun lien Twitch introuvable.' }
+      : { level: 'warn', title: 'Liens de streamers', detail: 'Pseudos introuvables sur Twitch : ' + broken.map(escapeHtml).join(', ') + ' (chaîne supprimée ou renommée ?).' });
+  }
+  if (Array.isArray(games) && games.length) {
+    const last = games.map((g) => g.date).filter(Boolean).sort().pop();
+    if (last) {
+      const days = Math.round((Date.now() - new Date(last + 'T12:00:00').getTime()) / 86400000);
+      rows.push({ level: days <= 14 ? 'ok' : 'warn', title: 'Jeux récents (page À propos)', detail: 'Dernier jeu enregistré le ' + escapeHtml(frDate(last)) + (days > 14 ? ' — ça fait un moment, pas de stream ou automatisation en panne ?' : '.') });
+    }
+  }
+
+  // Workflows GitHub Actions + dernier déploiement Pages (nécessitent un jeton avec accès Actions / Pages en lecture)
+  try {
+    const res = await ghApi('/actions/runs?per_page=40');
+    if (res.ok) {
+      const body = await res.json();
+      const latest = {};
+      (body.workflow_runs || []).forEach((r) => { if (!latest[r.name]) latest[r.name] = r; });
+      const names = Object.keys(latest);
+      if (names.length === 0) rows.push({ level: 'warn', title: 'Automatisations GitHub', detail: 'Aucune exécution récente trouvée.' });
+      names.forEach((n) => {
+        const r = latest[n];
+        const level = r.status !== 'completed' ? 'ok' : r.conclusion === 'success' ? 'ok' : r.conclusion === 'skipped' || r.conclusion === 'cancelled' ? 'warn' : 'err';
+        const state = r.status !== 'completed' ? 'en cours' : ({ success: 'réussie', failure: 'échouée', cancelled: 'annulée', skipped: 'ignorée', timed_out: 'expirée' }[r.conclusion] || r.conclusion);
+        rows.push({ level, title: 'Automatisation : ' + n, detail: 'Dernière exécution ' + state + ', ' + agoText(Date.now() - new Date(r.updated_at).getTime()) + (level === 'err' ? ' — <a href="' + escapeHtml(r.html_url) + '" target="_blank" rel="noopener">voir le détail sur GitHub</a>' : '') + '.' });
+      });
+    } else {
+      rows.push({ level: 'warn', title: 'Automatisations GitHub', detail: 'Lecture impossible (' + res.status + ') : le jeton doit avoir la permission « Actions : Read » pour afficher leur état.' });
+    }
+  } catch (e) {
+    rows.push({ level: 'warn', title: 'Automatisations GitHub', detail: 'Lecture impossible (' + escapeHtml(e.message) + ').' });
+  }
+  try {
+    const res = await ghApi('/pages/builds/latest');
+    if (res.ok) {
+      const b = await res.json();
+      const level = b.status === 'built' ? 'ok' : b.status === 'errored' ? 'err' : 'warn';
+      rows.push({ level, title: 'Publication du site (GitHub Pages)', detail: (b.status === 'built' ? 'Dernière publication réussie, ' : 'Statut « ' + escapeHtml(b.status) + ' », ') + agoText(Date.now() - new Date(b.updated_at).getTime()) + '.' });
+    }
+  } catch (e) { /* purement informatif */ }
+
+  box.innerHTML = `<div class="ap-section" style="margin-bottom:0;">${rows.map((r) => `
+    <div class="health-row"><span class="health-dot ${r.level}"></span><div><div class="health-title">${escapeHtml(r.title)}</div><div class="health-detail">${r.detail}</div></div></div>`).join('')}</div>`;
+}
+document.getElementById('santeRefreshBtn').addEventListener('click', loadSante);
+document.getElementById('twitchRunBtn').addEventListener('click', async () => {
+  showStatus('Demande envoyée à GitHub...', 'pending');
+  try {
+    const res = await ghApi('/actions/workflows/twitch-status.yml/dispatches', { method: 'POST', body: JSON.stringify({ ref: 'main' }) });
+    if (res.status === 204) showStatus('Mise à jour Twitch lancée — compte environ une minute, puis clique sur « Actualiser ».', 'ok');
+    else if (res.status === 403 || res.status === 404) showStatus('Refusé par GitHub : le jeton doit avoir la permission « Actions : Read and write ».', 'err');
+    else showStatus('Échec du lancement (' + res.status + ').', 'err');
+  } catch (e) {
+    showStatus('Échec : ' + e.message, 'err');
+  }
+});
+
+/* ── Historique et restauration ── */
+const HIST_FILES = [
+  ['streamers', 'Streamers'], ['clips', 'Clips'], ['planning', 'Planning (semaine type)'],
+  ['planning-exceptions', 'Planning (changements ponctuels)'], ['apropos', 'À propos / FAQ'],
+  ['pages', 'Textes des pages'], ['site', 'Liens & annonce'],
+];
+document.getElementById('histFile').innerHTML = HIST_FILES.map(([v, l]) => `<option value="${v}">${escapeHtml(l)}</option>`).join('');
+async function loadHistory() {
+  const file = document.getElementById('histFile').value;
+  const box = document.getElementById('histList');
+  box.innerHTML = '<div class="ap-empty">Chargement…</div>';
+  try {
+    const res = await ghApi('/commits?path=' + encodeURIComponent('data/' + file + '.json') + '&per_page=20');
+    if (!res.ok) throw new Error('Lecture impossible (' + res.status + ')');
+    const commits = await res.json();
+    if (!Array.isArray(commits) || commits.length === 0) {
+      box.innerHTML = '<div class="ap-empty">Aucune version enregistrée pour ce contenu (rien n\'a encore été sauvegardé depuis l\'admin).</div>';
+      return;
+    }
+    box.innerHTML = '<div class="ap-section" style="margin-bottom:0;">' + commits.map((c, i) => {
+      const when = new Date(c.commit.author.date).toLocaleString('fr-FR', { dateStyle: 'medium', timeStyle: 'short' });
+      return `<div class="hist-row">
+        <div class="hist-meta"><div class="hist-date">${escapeHtml(when)}${i === 0 ? ' · version actuelle' : ''}</div><div class="hist-msg">${escapeHtml((c.commit.message || '').split('\n')[0])}</div></div>
+        <div class="ap-btns" style="flex-direction:row;">
+          <button type="button" data-hview="${c.sha}">Voir</button>
+          ${i === 0 ? '' : `<button type="button" data-hrestore="${c.sha}" data-when="${escapeHtml(when)}">Restaurer</button>`}
+        </div>
+        <pre class="hist-pre" style="display:none;"></pre>
+      </div>`;
+    }).join('') + '</div>';
+  } catch (e) {
+    box.innerHTML = '<div class="ap-empty">' + escapeHtml(e.message) + '</div>';
+  }
+}
+async function readJsonAt(file, sha) {
+  const res = await githubRequest('data/' + file + '.json?ref=' + sha);
+  if (!res.ok) throw new Error('Lecture de cette version impossible (' + res.status + ')');
+  const body = await res.json();
+  return JSON.parse(b64ToUtf8(body.content));
+}
+document.getElementById('histFile').addEventListener('change', loadHistory);
+document.getElementById('histList').addEventListener('click', async (e) => {
+  const file = document.getElementById('histFile').value;
+  const view = e.target.closest('[data-hview]');
+  const restore = e.target.closest('[data-hrestore]');
+  if (view) {
+    const pre = view.closest('.hist-row').querySelector('.hist-pre');
+    if (pre.style.display !== 'none') { pre.style.display = 'none'; return; }
+    pre.style.display = 'block';
+    pre.textContent = 'Chargement…';
+    try {
+      const data = await readJsonAt(file, view.dataset.hview);
+      const txt = JSON.stringify(data, null, 2);
+      pre.textContent = txt.length > 4000 ? txt.slice(0, 4000) + '\n…' : txt;
+    } catch (err) { pre.textContent = err.message; }
+  } else if (restore) {
+    if (!confirm('Restaurer la version du ' + restore.dataset.when + ' ?\nLa version actuelle reste dans l\'historique.')) return;
+    showStatus('Restauration...', 'pending');
+    try {
+      const data = await readJsonAt(file, restore.dataset.hrestore);
+      const cur = await readJsonFile('data/' + file + '.json');
+      await writeJsonFile('data/' + file + '.json', data, cur.sha, 'Restauration de data/' + file + '.json (version du ' + restore.dataset.when + ')');
+      await loadAllContent();
+      showStatus('Version du ' + restore.dataset.when + ' restaurée.', 'ok');
+      loadHistory();
+    } catch (err) {
+      showStatus('Échec : ' + err.message, 'err');
+    }
+  }
+});
+
 /* ── Sauvegarde ── */
 function downloadBackup() {
   const backup = {
@@ -885,6 +1534,9 @@ function downloadBackup() {
     clips: clipsState.data,
     planning: planningState.data,
     apropos: aproposState.data,
+    planning_exceptions: exState.data,
+    site: siteState.data,
+    pages: { texts: pagesState.data.texts, extraProjects: pagesState.data.extraProjects },
   };
   const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -899,15 +1551,18 @@ function downloadBackup() {
 document.getElementById('backupBtn').addEventListener('click', downloadBackup);
 
 /* ── Onglets ── */
+const TAB_NAMES = ['streamers', 'clips', 'planning', 'apropos', 'textes', 'site', 'sante', 'historique'];
 document.querySelectorAll('.admin-tabs [data-tab]').forEach((btn) => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.admin-tabs [data-tab]').forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('streamersPanel').style.display = btn.dataset.tab === 'streamers' ? 'block' : 'none';
-    document.getElementById('clipsPanel').style.display = btn.dataset.tab === 'clips' ? 'block' : 'none';
-    document.getElementById('planningPanel').style.display = btn.dataset.tab === 'planning' ? 'block' : 'none';
-    document.getElementById('aproposPanel').style.display = btn.dataset.tab === 'apropos' ? 'block' : 'none';
+    TAB_NAMES.forEach((name) => {
+      document.getElementById(name + 'Panel').style.display = btn.dataset.tab === name ? 'block' : 'none';
+    });
     hideStatus();
+    if (btn.dataset.tab === 'textes') loadTextes();
+    if (btn.dataset.tab === 'sante') loadSante();
+    if (btn.dataset.tab === 'historique') loadHistory();
   });
 });
 
@@ -921,13 +1576,9 @@ document.getElementById('cfCancel').addEventListener('click', closeClipForm);
 document.getElementById('cfSave').addEventListener('click', saveClip);
 
 /* ── Connexion / déconnexion ── */
-async function init() {
-  const token = getToken();
-  if (!token) return;
-  authGate.style.display = 'none';
-  adminPanel.style.display = 'block';
-  showStatus('Chargement...', 'pending');
-
+/* Charge (ou recharge) tous les contenus depuis GitHub. Renvoie la
+   liste des erreurs éventuelles. */
+async function loadAllContent() {
   const errors = [];
   try {
     streamersState = await readJsonFile('data/streamers.json');
@@ -949,13 +1600,45 @@ async function init() {
     errors.push('Planning : ' + e.message);
   }
   try {
+    const r = await readJsonFile('data/planning-exceptions.json');
+    exState = { data: normalizeEx(r.data), sha: r.sha };
+    renderExceptions();
+  } catch (e) {
+    errors.push('Changements ponctuels : ' + e.message);
+  }
+  try {
     const r = await readJsonFile('data/apropos.json');
     aproposState = { data: normalizeApropos(r.data), sha: r.sha };
     renderApropos();
   } catch (e) {
     errors.push('À propos : ' + e.message);
   }
+  try {
+    const r = await readJsonFile('data/site.json');
+    siteState = { data: normalizeSite(r.data), sha: r.sha };
+    renderSite();
+  } catch (e) {
+    errors.push('Liens & annonce : ' + e.message);
+  }
+  try {
+    const r = await readJsonFile('data/pages.json');
+    pagesState = { data: normalizePages(r.data), sha: r.sha };
+    renderExtra();
+    textesModel = null;
+    if (document.getElementById('textesPanel').style.display !== 'none') loadTextes();
+  } catch (e) {
+    errors.push('Textes des pages : ' + e.message);
+  }
+  return errors;
+}
 
+async function init() {
+  const token = getToken();
+  if (!token) return;
+  authGate.style.display = 'none';
+  adminPanel.style.display = 'block';
+  showStatus('Chargement...', 'pending');
+  const errors = await loadAllContent();
   if (errors.length) showStatus(errors.join(' — '), 'err');
   else hideStatus();
 }
