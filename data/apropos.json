@@ -1,0 +1,53 @@
+{
+  "chaine": {
+    "title": "La chaîne",
+    "paragraphs": [
+      "Bienvenue dans mon univers : ici on fait du multigaming, du jeu coop, on rage, on rigole et on troll les copains. Installe-toi et viens dire des bêtises avec nous.",
+      "Pas de planning de jeu figé pour le moment — le choix se fait à l'ambiance du soir, entre amis."
+    ]
+  },
+  "twitch": {
+    "title": "Sur Twitch",
+    "intro": "Quelques commandes utiles dans le tchat :",
+    "commands": [
+      {
+        "cmd": "!commandes",
+        "desc": "la liste complète"
+      },
+      {
+        "cmd": "!gameinfos",
+        "desc": "infos sur le jeu en cours"
+      },
+      {
+        "cmd": "!discord",
+        "desc": "le lien du serveur"
+      },
+      {
+        "cmd": "!wishliststeam",
+        "desc": "la wishlist Steam"
+      },
+      {
+        "cmd": "!regles",
+        "desc": "le règlement du chat"
+      }
+    ]
+  },
+  "faq": [
+    {
+      "q": "Comment participer aux streams ou échanger avec la communauté ?",
+      "a": "Le plus simple est de rejoindre le [Discord](https://discord.com/invite/Amgaz5YNVg) : c'est là que ça se passe en dehors des lives. Le [planning](planning.html) donne les prochaines dates prévues."
+    },
+    {
+      "q": "Y a-t-il des règles à respecter dans le chat ?",
+      "a": "Oui — tape `!regles` dans le tchat Twitch pendant un live pour afficher le règlement complet du salon."
+    },
+    {
+      "q": "Peut-on proposer un jeu à faire en live ?",
+      "a": "Passe par le Discord pour proposer une idée : selon l'ambiance et le planning, ça peut atterrir au programme d'un prochain stream."
+    },
+    {
+      "q": "Quel matériel utilises-tu pour streamer ?",
+      "a": "Le setup est amené à évoluer — rien d'exceptionnel, l'essentiel reste surtout de passer un bon moment ensemble."
+    }
+  ]
+}
