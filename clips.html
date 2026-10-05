@@ -54,6 +54,10 @@
   .share-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
   .share-btn:hover { border-color: var(--cyan); color: var(--cyan); }
   .badge-new { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 10px; font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bg); background: var(--cyan); vertical-align: middle; }
+  /* Petit repère technique pour moi seul (pas un élément de partage,
+     voir le script plus bas) : cliquer copie le slug du clip. */
+  .clip-slug { padding: 0 18px 14px; font-size: 0.72rem; color: var(--dim); cursor: pointer; user-select: all; transition: color 0.15s ease; }
+  .clip-slug:hover, .clip-slug:focus-visible { color: var(--cyan); }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
@@ -153,9 +157,12 @@ fetch('data/clips.json')
           <div class="clip-title">${escapeHtml(clip.title)}${badge}</div>
           <button type="button" class="share-btn" aria-label="Partager ce clip">Partager</button>
         </div>
+        <div class="clip-slug" tabindex="0" role="button" aria-label="Copier le slug du clip">${escapeHtml(clip.slug)}</div>
       `;
       grid.appendChild(card);
 
+      /* Bouton "Partager" : ne transmet que le titre et le lien du
+         clip, jamais le slug — voir juste en dessous pour ça. */
       const shareBtn = card.querySelector('.share-btn');
       shareBtn.addEventListener('click', () => {
         if (navigator.share) {
@@ -167,6 +174,23 @@ fetch('data/clips.json')
             setTimeout(() => { shareBtn.textContent = original; }, 1800);
           }).catch(() => {});
         }
+      });
+
+      /* Slug affiché sous la vidéo pour mon propre usage (le
+         retrouver sans repasser par l'admin) — clic pour copier,
+         complètement à part du bouton "Partager" ci-dessus. */
+      const slugEl = card.querySelector('.clip-slug');
+      const copySlug = () => {
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText(clip.slug).then(() => {
+          const original = slugEl.textContent;
+          slugEl.textContent = 'Copié !';
+          setTimeout(() => { slugEl.textContent = original; }, 1200);
+        }).catch(() => {});
+      };
+      slugEl.addEventListener('click', copySlug);
+      slugEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copySlug(); }
       });
     });
   });

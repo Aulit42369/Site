@@ -95,6 +95,8 @@
   .clip-title { font-weight: 700; font-size: 1rem; }
   .share-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem; padding: 6px 12px; border-radius: 4px; opacity: 0.6; }
   .badge-new { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 10px; font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bg); background: var(--cyan); vertical-align: middle; }
+  .clip-slug { padding: 0 18px 14px; font-size: 0.72rem; color: var(--dim); cursor: pointer; user-select: all; transition: color 0.15s ease; }
+  .clip-slug:hover, .clip-slug:focus-visible { color: var(--cyan); }
 </style>
 </head>
 <body>
@@ -153,7 +155,7 @@
       <div id="clipsList"></div>
       <button class="btn btn-secondary" id="addClipBtn" style="margin-top:8px;">+ Ajouter un clip</button>
       <div id="clipForm" class="add-form" style="display:none;">
-        <div class="field"><label>Slug du clip</label><input type="text" id="cfSlug" placeholder="ex : AwkwardSalamanderSwiftRage"></div>
+        <div class="field"><label>Slug du clip</label><input type="text" id="cfSlug" placeholder="ex : AwkwardSalamanderSwiftRage (ou colle l'URL du clip)"></div>
         <div class="field"><label>Titre</label><input type="text" id="cfTitle"></div>
         <div class="form-actions">
           <button class="btn btn-primary" id="cfSave">Enregistrer</button>
@@ -532,6 +534,7 @@ function closeClipForm() {
    le slug n'a pas besoin d'être valide pour prévisualiser le titre). */
 function renderClipPreview() {
   const title = document.getElementById('cfTitle').value.trim() || 'Titre du clip';
+  const slug = document.getElementById('cfSlug').value.trim() || 'slug-du-clip';
   const badge = editingClipIndex === null ? ' <span class="badge-new">Nouveau</span>' : '';
   const card = document.getElementById('cfPreviewCard');
   card.innerHTML = `
@@ -540,6 +543,7 @@ function renderClipPreview() {
       <div class="clip-title">${escapeHtml(title)}${badge}</div>
       <button type="button" class="share-btn" disabled>Partager</button>
     </div>
+    <div class="clip-slug">${escapeHtml(slug)}</div>
   `;
 }
 document.getElementById('cfPreviewBtn').addEventListener('click', () => {
@@ -548,6 +552,28 @@ document.getElementById('cfPreviewBtn').addEventListener('click', () => {
   box.style.display = opening ? 'block' : 'none';
   if (opening) renderClipPreview();
 });
+
+/* Si un lien de clip complet est collé dans le champ "Slug" (le
+   réflexe naturel en copiant depuis la barre d'adresse), on en
+   extrait automatiquement le slug plutôt que de laisser l'URL
+   entière — clips.twitch.tv/SLUG et twitch.tv/chaine/clip/SLUG,
+   avec ou sans paramètres après. Un slug déjà saisi tel quel ne
+   correspond à aucun des deux motifs et reste inchangé. */
+function extractClipSlug(value) {
+  const v = value.trim();
+  let m = v.match(/clips\.twitch\.tv\/([A-Za-z0-9_-]+)/);
+  if (m) return m[1];
+  m = v.match(/twitch\.tv\/[^/\s]+\/clip\/([A-Za-z0-9_-]+)/);
+  if (m) return m[1];
+  return null;
+}
+document.getElementById('cfSlug').addEventListener('input', (e) => {
+  const extracted = extractClipSlug(e.target.value);
+  if (extracted && extracted !== e.target.value.trim()) {
+    e.target.value = extracted;
+  }
+});
+
 ['cfSlug', 'cfTitle'].forEach((id) => {
   document.getElementById(id).addEventListener('input', () => {
     if (document.getElementById('cfPreviewBox').style.display !== 'none') renderClipPreview();
