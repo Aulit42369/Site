@@ -18,9 +18,9 @@
     }
   ],
   "announcement": {
-    "enabled": true,
-    "text": "test sdfhsdkuhfksd hfsdkjhfkj sd pozjoeihfiuosdfh fjnoisdhjf osid",
-    "linkLabel": "TEST",
+    "enabled": false,
+    "text": "",
+    "linkLabel": "",
     "linkUrl": "",
     "tone": "info",
     "from": "2026-10-05",
