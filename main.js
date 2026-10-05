@@ -17,6 +17,26 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+/* Texte riche minimal pour les contenus saisis dans admin.html
+   (À propos / FAQ) : échappe tout le HTML d'abord, puis n'autorise que
+   [texte](lien) (http(s):// ou une page du site en .html), `code` et
+   les retours à la ligne. Rien d'autre ne peut devenir une balise. */
+function renderRichText(str) {
+  let out = escapeHtml(str);
+  out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (all, label, url) => {
+    const u = url.replace(/&amp;/g, '&');
+    if (/^https?:\/\//i.test(u)) {
+      return '<a href="' + escapeHtml(u) + '" target="_blank" rel="noopener">' + label + '</a>';
+    }
+    if (/^[a-z0-9_-]+\.html(#[\w-]*)?$/i.test(u)) {
+      return '<a href="' + escapeHtml(u) + '">' + label + '</a>';
+    }
+    return all;
+  });
+  out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
+  return out.replace(/\n/g, '<br>');
+}
+
 /* Lien d'accès rapide au contenu : invisible tant qu'il n'a pas le
    focus, visible dès qu'on y arrive au clavier (touche Tab). Permet
    de sauter directement au contenu de la page sans repasser par tout
