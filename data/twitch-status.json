@@ -1,4 +1,14 @@
 {
+  "meyuuart": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
+    "live": true,
+    "game": "Art"
+  },
+  "aulit42369": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
+    "live": false,
+    "followers": 178
+  },
   "hagosan": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
     "live": false
@@ -20,15 +30,5 @@
     "live": true,
     "game": "The Unworthy"
   },
-  "meyuuart": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
-    "live": true,
-    "game": "Art"
-  },
-  "aulit42369": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": false,
-    "followers": 178
-  },
-  "_updated_at": "2026-10-06T14:20:25.153Z"
+  "_updated_at": "2026-10-06T14:30:40.738Z"
 }
