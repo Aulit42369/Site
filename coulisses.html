@@ -44,7 +44,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=88420ac9">
+<link rel="stylesheet" href="style.min.css?v=bd22f6ce">
 <style>
   .container-wide { max-width: 1440px; }
   .project-block { display: grid; grid-template-columns: minmax(0, 440px) 1fr; gap: 48px; align-items: center; padding: 48px 0; border-bottom: 1px solid var(--line); }
@@ -363,6 +363,73 @@
 
       <div class="project-block">
         <div>
+          <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.escape.eyebrow" data-edit-label="Coulisses · Escape Fragments — sur-titre">// Escape Fragments</div>
+          <h2 data-edit="coulisses.escape.title" data-edit-label="Coulisses · Escape Fragments — titre">Une escape room que le chat résout <em class="accent">ensemble</em></h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.escape.desc1" data-edit-label="Coulisses · Escape Fragments — paragraphe 1">Chaque viewer reçoit un fragment d'indice différent, et personne ne peut résoudre l'énigme seul : il faut mettre les indices en commun dans le tchat. Les fragments arrivent via une extension Twitch (le viewer partage son identité, sans rien taper), via la page joueur ou avec une commande dans le chat. Le serveur vérifie la signature Twitch de chaque viewer.</p>
+            <p data-edit="coulisses.escape.desc2" data-edit-label="Coulisses · Escape Fragments — paragraphe 2">Autour du jeu : 27 scénarios dont 12 thématiques pour les fêtes du calendrier français, 28 thèmes visuels, une régie à onglets, un éditeur de scénarios avec aperçu en direct de l'overlay (couleurs, polices, image de fond), des profils d'agents avec classement, une télécommande installable sur téléphone et des annonces Discord. Chaque option — indices automatiques, mode traître, indice secret du streamer, mode versus, énigme entre streams — s'active depuis la régie.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.escape.status" data-edit-label="Coulisses · Escape Fragments — note">Les cartes de résultat de fin de partie ne sont jamais publiées automatiquement : tout reste sous contrôle du streamer</span></div>
+          <div class="project-stack" data-edit="coulisses.escape.stack" data-edit-label="Coulisses · Escape Fragments — technologies">Node.js · Extension Twitch · EventSub · MongoDB Atlas · Render</div>
+        </div>
+        <div class="project-visuals">
+          <div class="project-diagram">
+            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-ef" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#ff2d78"/>
+                </marker>
+              </defs>
+              <line x1="128" y1="130" x2="188" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-start="url(#arrow-ef)" marker-end="url(#arrow-ef)"/>
+              <line x1="332" y1="104" x2="398" y2="46" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ef)"/>
+              <line x1="332" y1="130" x2="398" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ef)"/>
+              <line x1="332" y1="156" x2="398" y2="214" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ef)"/>
+              <line x1="260" y1="192" x2="260" y2="216" stroke="#ff2d78" stroke-width="1.5" marker-start="url(#arrow-ef)" marker-end="url(#arrow-ef)"/>
+              <rect x="8" y="84" width="120" height="92" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="68" y="122" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Viewers</text>
+              <text x="68" y="140" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">tchat · extension</text>
+              <text x="68" y="154" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">page joueur</text>
+              <rect x="190" y="68" width="142" height="124" rx="6" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
+              <text x="261" y="116" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Serveur</text>
+              <text x="261" y="136" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Escape Fragments</text>
+              <text x="261" y="156" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Node.js · EventSub</text>
+              <text x="261" y="170" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">fragments répartis</text>
+              <rect x="400" y="22" width="112" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="456" y="51" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Overlay OBS</text>
+              <rect x="400" y="106" width="112" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="456" y="127" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Régie +</text>
+              <text x="456" y="143" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">télécommande</text>
+              <rect x="400" y="190" width="112" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="456" y="219" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Discord</text>
+              <rect x="200" y="218" width="122" height="34" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="261" y="239" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">MongoDB</text>
+            </svg>
+          </div>
+          <div class="project-preview">
+            <div class="preview-label">Aperçu schématique de la page joueur (illustration)</div>
+            <svg class="project-preview-svg" viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="472" height="182" rx="10" fill="none" stroke="#1a2540"/>
+              <text x="20" y="28" fill="#ff2d78" font-family="Orbitron, sans-serif" font-size="13" font-weight="900" letter-spacing="1">ESCAPE FRAGMENTS</text>
+              <text x="20" y="54" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">TON FRAGMENT</text>
+              <rect x="20" y="60" width="270" height="64" rx="6" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
+              <text x="34" y="84" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12">Indice : « ▒▒▒▒ ▒▒▒ ▒▒▒▒▒▒ »</text>
+              <text x="34" y="106" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Les autres viewers ont les morceaux qui te manquent</text>
+              <text x="310" y="54" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">ÉQUIPE</text>
+              <rect x="310" y="60" width="150" height="64" rx="6" fill="none" stroke="#1a2540"/>
+              <circle cx="334" cy="82" r="8" fill="none" stroke="#00f5ff"/>
+              <circle cx="364" cy="82" r="8" fill="none" stroke="#9b5cff"/>
+              <circle cx="394" cy="82" r="8" fill="none" stroke="#ff2d78"/>
+              <circle cx="424" cy="82" r="8" fill="none" stroke="#1a2540"/>
+              <text x="385" y="112" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">fragments mis en commun</text>
+              <rect x="20" y="140" width="440" height="32" rx="5" fill="none" stroke="#1a2540"/>
+              <text x="34" y="160" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Écris la solution dans le tchat pour valider l'énigme</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p5.eyebrow" data-edit-label="Coulisses · La Cabane — sur-titre">// La Cabane</div>
           <h2 data-edit="coulisses.p5.title" data-edit-label="Coulisses · La Cabane — titre">Le suivi des chaînes de la <em class="accent">communauté</em></h2>
           <div class="project-desc">
@@ -537,7 +604,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=5c8b6d82"></script>
+<script src="main.min.js?v=6110e9b7"></script>
 
 <script>
 /* Projets supplémentaires (texte seul) ajoutés depuis l'admin, onglet
