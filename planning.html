@@ -16,9 +16,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Le programme de la semaine sur la chaîne AULIT42369.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,7 +42,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=bd22f6ce">
+<link rel="stylesheet" href="style.min.css?v=88420ac9">
 <style>
   .planning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
   .planning-card { display: flex; flex-direction: column; min-height: 150px; }
@@ -130,7 +128,7 @@
     </div>
   </div>
 </footer>
-<script src="main.min.js?v=6110e9b7"></script>
+<script src="main.min.js?v=6cd1e469"></script>
 
 <script>
 /* ================================================================
@@ -144,9 +142,7 @@ const aujourdhui = JOURS[new Date().getDay()];
 const grid = document.getElementById('planningGrid');
 const empty = document.getElementById('emptyState');
 
-fetch('data/planning.json')
-  .then(r => (r.ok ? r.json() : []))
-  .catch(() => [])
+loadJson('data/planning.json', [])
   .then(planning => {
     if (planning.length === 0) {
       empty.style.display = 'block';
@@ -186,9 +182,7 @@ fetch('data/planning.json')
 (function () {
   const d = new Date();
   const todayStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  fetch('data/planning-exceptions.json')
-    .then(r => (r.ok ? r.json() : []))
-    .catch(() => [])
+  loadJson('data/planning-exceptions.json', [])
     .then(list => {
       if (!Array.isArray(list)) return;
       const upcoming = list

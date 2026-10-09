@@ -1,0 +1,6 @@
+{
+  "name": "aulit42369-tests",
+  "private": true,
+  "description": "Tests de bout en bout du site et de l'admin (Playwright). Lancer : cd tests && npm install && node run-all.js",
+  "dependencies": { "playwright": "^1.48.0" }
+}

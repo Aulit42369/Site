@@ -1,0 +1,41 @@
+name: Qualité (données, parité admin, navigation)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'data/**'
+      - 'main.js'
+      - 'admin.js'
+      - 'scripts/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Syntaxe JavaScript
+        run: |
+          node --check main.js
+          node --check admin.js
+          node --check sw-admin.js
+
+      - name: Données valides (data/*.json)
+        run: node scripts/validate-data.js
+
+      - name: Parité site ↔ admin
+        run: node scripts/check-admin-parity.js
+
+      - name: Menus identiques sur toutes les pages
+        run: node scripts/sync-nav.js --check
+
+      - name: Liens internes
+        run: node scripts/check-internal-links.js

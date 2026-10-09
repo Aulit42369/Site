@@ -13,7 +13,7 @@
    besoin d'y penser ni de changer un numéro à la main.
 
    Lancé par .github/workflows/asset-versioning.yml à chaque push sur
-   main qui touche style.css ou main.js.
+   main qui touche style.css, main.js ou admin.js.
    ================================================================ */
 const fs = require('fs');
 const path = require('path');
@@ -42,6 +42,10 @@ async function main() {
   fs.writeFileSync(path.join(ROOT, 'style.min.css'), minifiedCss);
   fs.writeFileSync(path.join(ROOT, 'main.min.js'), minifiedJs);
 
+  /* admin.js n'est pas minifié (page privée, lisible en cas de souci),
+     mais il est versionné pour que l'admin ne garde jamais une
+     ancienne copie en cache. */
+  const adminHash = shortHash(fs.readFileSync(path.join(ROOT, 'admin.js'), 'utf-8'));
   const cssHash = shortHash(minifiedCss);
   const jsHash = shortHash(minifiedJs);
 
@@ -59,7 +63,8 @@ async function main() {
        idempotent d'un passage à l'autre. */
     const after = before
       .replace(/(href=["'])style(?:\.min)?\.css(?:\?v=[^"']*)?(["'])/g, `$1style.min.css?v=${cssHash}$2`)
-      .replace(/(src=["'])main(?:\.min)?\.js(?:\?v=[^"']*)?(["'])/g, `$1main.min.js?v=${jsHash}$2`);
+      .replace(/(src=["'])main(?:\.min)?\.js(?:\?v=[^"']*)?(["'])/g, `$1main.min.js?v=${jsHash}$2`)
+      .replace(/(src=["'])admin\.js(?:\?v=[^"']*)?(["'])/g, `$1admin.js?v=${adminHash}$2`);
 
     if (after !== before) {
       fs.writeFileSync(filePath, after);
@@ -67,7 +72,7 @@ async function main() {
     }
   }
 
-  console.log(`style.min.css -> v=${cssHash}, main.min.js -> v=${jsHash} (${updated} page(s) mise(s) à jour)`);
+  console.log(`style.min.css -> v=${cssHash}, main.min.js -> v=${jsHash}, admin.js -> v=${adminHash} (${updated} page(s) mise(s) à jour)`);
 }
 
 main().catch((err) => {

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Escape Fragments</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Aperçu Discord / réseaux sociaux -->
+<meta property="og:title" content="AULIT42369 — Escape Fragments">
+<meta property="og:description" content="Le classement des agents d'Escape Fragments, l'escape room que le chat résout ensemble.">
+<meta property="og:url" content="https://aulit42369.github.io/Site/escape-fragments.html">
+<link rel="canonical" href="https://aulit42369.github.io/Site/escape-fragments.html">
+<meta property="og:image" content="https://aulit42369.github.io/Site/og-image.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#00f5ff">
+<meta name="description" content="Le classement des agents d'Escape Fragments, l'escape room que le chat résout ensemble.">
+
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.min.css?v=88420ac9">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/"
+    },
+    {
+      "@type": "Person",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/",
+      "description": "Chaine Twitch multigaming, jeux coop entre potes.",
+      "sameAs": [
+        "https://www.twitch.tv/aulit42369",
+        "https://discord.com/invite/Amgaz5YNVg",
+        "https://www.youtube.com/@Aulit42369",
+        "https://www.instagram.com/aulit42369/",
+        "https://www.tiktok.com/@aulit42369_"
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  .ef-podium { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 14px; align-items: end; margin-bottom: 28px; }
+  .ef-pod { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 8px; text-align: center; padding: 20px 10px; }
+  .ef-pod .rank { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 2rem; }
+  .ef-pod .icon { font-size: 1.8rem; line-height: 1.2; }
+  .ef-pod b { display: block; font-size: 1.15rem; margin-top: 4px; overflow-wrap: anywhere; }
+  .ef-pod span { color: var(--muted); font-size: 0.9rem; }
+  .ef-pod.p1 { border-color: #f5c542; box-shadow: 0 0 28px rgba(245, 197, 66, 0.22); padding-top: 30px; padding-bottom: 30px; }
+  .ef-pod.p1 .rank { color: #f5c542; }
+  .ef-pod.p2 .rank { color: #d3d8e2; }
+  .ef-pod.p3 .rank { color: #d59a6a; }
+  .ef-table { width: 100%; border-collapse: collapse; background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .ef-table th, .ef-table td { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+  .ef-table th { font-family: 'Orbitron', sans-serif; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .ef-table td.num, .ef-table th.num { text-align: right; }
+  .ef-table tr:last-child td { border-bottom: none; }
+  .ef-status { text-align: center; padding: 50px 20px; color: var(--muted); }
+  .ef-status .spin { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--line); border-top-color: var(--cyan); border-radius: 50%; animation: efspin 0.9s linear infinite; vertical-align: -3px; margin-right: 8px; }
+  @keyframes efspin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .ef-status .spin { animation: none; } }
+  @media (max-width: 560px) { .ef-podium { grid-template-columns: 1fr; } .ef-pod.p1 { order: -1; } .ef-table .hide-s { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-left">
+      <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+      <a href="index.html" class="live-banner" id="liveBanner"><span class="dot"></span><span class="label">En direct</span></a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="streamers.html">Streamers</a>
+      <a href="coulisses.html">Coulisses</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow" data-edit="escape.eyebrow" data-edit-label="Escape Fragments (page) — sur-titre">// Le jeu du chat</div>
+      <h1 class="h1-page" data-edit="escape.title" data-edit-label="Escape Fragments (page) — titre">Classement des <em class="accent">agents</em></h1>
+      <p class="lead" style="margin-top:14px;" data-edit="escape.lead" data-edit-label="Escape Fragments (page) — introduction">Escape Fragments : chaque viewer détient un fragment d'indice, et il faut tout mettre en commun pour s'évader. Voici les meilleurs agents de la chaîne.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div id="efBox" class="ef-status"><span class="spin"></span><span id="efMsg">Chargement du classement…</span></div>
+      <p style="text-align:center;margin-top:22px;display:none;" id="efFull"><a class="btn btn-secondary" id="efFullLink" href="#" target="_blank" rel="noopener" data-edit="escape.fullLink" data-edit-label="Escape Fragments (page) — lien classement complet">Voir le classement complet</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:var(--dim);font-size:0.78rem;">Mentions légales</a></div>
+    <div class="socials">
+      <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/aulit42369/?hl=fr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@aulit42369_" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.min.js?v=6cd1e469"></script>
+
+<script>
+/* ================================================================
+   Classement lu en direct sur le serveur du jeu (GET /api/classement),
+   dont l'adresse se règle dans l'admin (onglet « Liens & annonce »).
+   Le serveur est hébergé sur une offre gratuite qui se met en veille :
+   le premier chargement peut prendre jusqu'à une minute, on le dit.
+   ================================================================ */
+const efBox = document.getElementById('efBox');
+const efMsg = document.getElementById('efMsg');
+const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+
+function efStatus(text) {
+  efBox.className = 'ef-status';
+  efBox.textContent = text;
+}
+
+function efRender(top) {
+  const list = (Array.isArray(top) ? top : []).filter((p) => p && (p.display || p.login));
+  if (list.length === 0) {
+    efStatus("Aucun agent classé pour l'instant — la première partie reste à jouer !");
+    return;
+  }
+  const name = (p) => String(p.display || p.login);
+  const icon = (p) => (typeof p.icone === 'string' ? p.icone : '');
+  const grade = (p) => (typeof p.grade === 'string' ? p.grade : p.grade && typeof p.grade.nom === 'string' ? p.grade.nom : '');
+  const pod = list.slice(0, 3).map((p, i) =>
+    '<div class="ef-pod p' + (i + 1) + '"><div class="rank">' + (i + 1) + '</div><div class="icon">' + escapeHtml(icon(p)) + '</div><b>' + escapeHtml(name(p)) + '</b><span>' + num(p.points) + ' pts · ' + num(p.victoires) + ' victoires</span></div>');
+  // le podium s'affiche dans l'ordre 2 – 1 – 3
+  const order = [pod[1], pod[0], pod[2]].filter(Boolean).join('');
+  const rows = list.map((p, i) =>
+    '<tr><td>' + (i + 1) + '</td><td>' + escapeHtml(icon(p)) + ' ' + escapeHtml(name(p)) + (grade(p) ? ' <span style="color:var(--dim);font-size:0.85rem;">' + escapeHtml(grade(p)) + '</span>' : '') + '</td><td class="num">' + num(p.points) + '</td><td class="num hide-s">' + num(p.victoires) + '</td><td class="num hide-s">' + num(p.mvp) + '</td></tr>').join('');
+  efBox.className = '';
+  efBox.innerHTML = '<div class="ef-podium">' + order + '</div>' +
+    '<table class="ef-table"><thead><tr><th>#</th><th>Agent</th><th class="num">Points</th><th class="num hide-s">Victoires</th><th class="num hide-s">MVP</th></tr></thead><tbody>' + rows + '</tbody></table>';
+}
+
+async function efFetch(url) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 70000);
+  try {
+    const r = await fetch(url + '/api/classement', { signal: ctrl.signal });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return await r.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+loadJson('data/site.json', null).then(async (cfg) => {
+  const url = cfg && typeof cfg.escapeServerUrl === 'string' && /^https:\/\//i.test(cfg.escapeServerUrl) ? cfg.escapeServerUrl.replace(/\/+$/, '') : '';
+  if (!url) {
+    efStatus('Le classement arrive bientôt.');
+    return;
+  }
+  document.getElementById('efFullLink').href = url + '/classement';
+  document.getElementById('efFull').style.display = '';
+  const wake = setTimeout(() => { efMsg.textContent = 'Réveil du serveur du jeu… ça peut prendre jusqu\'à une minute.'; }, 4000);
+  try {
+    const data = await efFetch(url);
+    efRender(data && data.top);
+  } catch (e) {
+    try {
+      efRender((await efFetch(url)).top);
+    } catch (e2) {
+      efStatus('Classement indisponible pour le moment — réessaie dans un instant.');
+    }
+  } finally {
+    clearTimeout(wake);
+  }
+});
+</script>
+
+<script data-goatcounter="https://aulit42369.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

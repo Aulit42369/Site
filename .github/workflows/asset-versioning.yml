@@ -6,6 +6,7 @@ on:
     paths:
       - 'style.css'
       - 'main.js'
+      - 'admin.js'
   workflow_dispatch:
 
 jobs:

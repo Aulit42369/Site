@@ -1,0 +1,32 @@
+name: Tests (navigateur)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'main.js'
+      - 'admin.js'
+      - 'style.css'
+      - 'tests/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installer Playwright et Chromium
+        working-directory: tests
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Lancer les tests (sur une copie temporaire, data/ intact)
+        run: node tests/run-all.js
