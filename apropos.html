@@ -16,10 +16,8 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Présentation de la chaîne AULIT42369 — multigaming, jeu coop, communauté.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.min.css?v=bd22f6ce">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.min.css?v=88420ac9">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -187,15 +185,13 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=6110e9b7"></script>
+<script src="main.min.js?v=6cd1e469"></script>
 
 <script>
 /* Textes éditables depuis admin.html (onglet "À propos") : data/apropos.json.
    Le HTML ci-dessus sert de contenu de secours tant que le fichier
    n'existe pas ou est invalide. */
-fetch('data/apropos.json')
-  .then(r => (r.ok ? r.json() : null))
-  .catch(() => null)
+loadJson('data/apropos.json', null)
   .then(d => {
     if (!d || typeof d !== 'object' || Array.isArray(d)) return;
     const $ = id => document.getElementById(id);
@@ -229,9 +225,7 @@ fetch('data/apropos.json')
    jour par la même GitHub Action que le reste (rien à gérer à la
    main). Reste simplement caché si le fichier n'existe pas encore
    ou est vide. */
-fetch('data/recent-games.json')
-  .then(r => (r.ok ? r.json() : []))
-  .catch(() => [])
+loadJson('data/recent-games.json', [])
   .then(games => {
     if (!Array.isArray(games) || games.length === 0) return;
     const list = document.getElementById('recentGamesList');

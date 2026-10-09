@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Aperçu Discord / réseaux sociaux -->
+<meta property="og:title" content="AULIT42369">
+<meta property="og:description" content="AULIT42369 — chaîne Twitch multigaming.">
+<meta property="og:url" content="https://aulit42369.github.io/Site/page.html">
+<meta property="og:image" content="https://aulit42369.github.io/Site/og-image.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#00f5ff">
+<meta name="description" content="AULIT42369 — chaîne Twitch multigaming.">
+
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.min.css?v=88420ac9">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/"
+    },
+    {
+      "@type": "Person",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/",
+      "description": "Chaine Twitch multigaming, jeux coop entre potes.",
+      "sameAs": [
+        "https://www.twitch.tv/aulit42369",
+        "https://discord.com/invite/Amgaz5YNVg",
+        "https://www.youtube.com/@Aulit42369",
+        "https://www.instagram.com/aulit42369/",
+        "https://www.tiktok.com/@aulit42369_"
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  .cp-wrap { max-width: 760px; }
+  .cp-wrap > * + * { margin-top: 18px; }
+  .cp-wrap h2 { margin-top: 36px; }
+  .cp-wrap h2:first-child { margin-top: 0; }
+  .cp-list { list-style: none; padding: 0; margin: 0; }
+  .cp-list li { padding: 10px 0 10px 26px; position: relative; border-bottom: 1px solid var(--line); color: #c3cadb; }
+  .cp-list li::before { content: '//'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
+  .cp-list li:last-child { border-bottom: none; }
+  .cp-wrap p a { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
+  .cp-wrap img { max-width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 6px; }
+  .cp-wrap figure { margin: 0; }
+  .cp-wrap figcaption { color: var(--muted); font-size: 0.85rem; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-left">
+      <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+      <a href="index.html" class="live-banner" id="liveBanner"><span class="dot"></span><span class="label">En direct</span></a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="streamers.html">Streamers</a>
+      <a href="coulisses.html">Coulisses</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <h1 class="h1-page" id="cpTitle">&nbsp;</h1>
+      <p class="lead" id="cpIntro" style="margin-top:14px;display:none;"></p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="cp-wrap" id="cpBlocks"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:var(--dim);font-size:0.78rem;">Mentions légales</a></div>
+    <div class="socials">
+      <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/aulit42369/?hl=fr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@aulit42369_" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.min.js?v=6cd1e469"></script>
+
+<script>
+/* ================================================================
+   Page personnalisée : son contenu (titre, introduction, blocs) vient
+   de data/custom-pages.json, géré dans l'admin (onglet « Pages »).
+   Adresse : page.html?p=identifiant
+   ================================================================ */
+const cpSlug = (new URLSearchParams(location.search).get('p') || '').toLowerCase();
+const cpOkLink = (u) => typeof u === 'string' && (/^https?:\/\//i.test(u) || /^[a-z0-9_-]+\.html(\?[\w=&%-]*)?(#[\w-]*)?$/i.test(u));
+const cpOkImage = (u) => typeof u === 'string' && !u.includes('..') && (/^https:\/\//i.test(u) || /^[A-Za-z0-9_./-]+\.(png|jpe?g|gif|webp|svg)$/i.test(u));
+
+function cpRenderBlock(b) {
+  if (!b || typeof b !== 'object') return '';
+  const t = typeof b.text === 'string' ? b.text : '';
+  switch (b.type) {
+    case 'heading': return t.trim() ? '<h2>' + escapeHtml(t) + '</h2>' : '';
+    case 'text': return t.trim() ? '<p>' + renderRichText(t) + '</p>' : '';
+    case 'list': {
+      const items = (Array.isArray(b.items) ? b.items : []).filter((x) => typeof x === 'string' && x.trim());
+      return items.length ? '<ul class="cp-list">' + items.map((x) => '<li>' + renderRichText(x) + '</li>').join('') + '</ul>' : '';
+    }
+    case 'button': {
+      if (!cpOkLink(b.url) || typeof b.label !== 'string' || !b.label.trim()) return '';
+      const ext = /^https?:/i.test(b.url);
+      return '<p><a class="btn btn-primary" href="' + escapeHtml(b.url) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + escapeHtml(b.label) + '</a></p>';
+    }
+    case 'image': {
+      if (!cpOkImage(b.url)) return '';
+      const alt = typeof b.alt === 'string' ? b.alt : '';
+      return '<figure><img src="' + escapeHtml(b.url) + '" alt="' + escapeHtml(alt) + '" loading="lazy">' + (alt ? '<figcaption>' + escapeHtml(alt) + '</figcaption>' : '') + '</figure>';
+    }
+    default: return '';
+  }
+}
+
+window.customPagesPromise.then((d) => {
+  const pages = d && Array.isArray(d.pages) ? d.pages.filter(isValidCustomPage) : [];
+  const page = pages.find((p) => p.slug === cpSlug);
+  const title = document.getElementById('cpTitle');
+  if (!page) {
+    document.title = 'AULIT42369 — Page introuvable';
+    const robots = document.createElement('meta');
+    robots.name = 'robots';
+    robots.content = 'noindex';
+    document.head.appendChild(robots);
+    title.textContent = 'Page introuvable';
+    document.getElementById('cpBlocks').innerHTML = '<p>Cette page n\'existe pas ou n\'est plus publiée. <a href="index.html">Retour à l\'accueil</a>.</p>';
+    return;
+  }
+  title.textContent = page.title;
+  document.title = 'AULIT42369 — ' + page.title;
+  const intro = typeof page.intro === 'string' ? page.intro.trim() : '';
+  if (intro) {
+    const el = document.getElementById('cpIntro');
+    el.innerHTML = renderRichText(intro);
+    el.style.display = '';
+  }
+  const blocks = Array.isArray(page.blocks) ? page.blocks : [];
+  document.getElementById('cpBlocks').innerHTML = blocks.map(cpRenderBlock).join('');
+  const firstText = blocks.find((b) => b && b.type === 'text' && typeof b.text === 'string' && b.text.trim());
+  const desc = (intro || (firstText && firstText.text) || '').replace(/[*`\[\]()]/g, '').slice(0, 160);
+  if (desc) {
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', desc);
+  }
+});
+</script>
+
+<script data-goatcounter="https://aulit42369.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

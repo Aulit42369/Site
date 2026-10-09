@@ -16,9 +16,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Les streamers et chaînes que la communauté AULIT42369 conseille et soutient.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,7 +42,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=bd22f6ce">
+<link rel="stylesheet" href="style.min.css?v=88420ac9">
 <style>
   .streamers-grid {
     display: grid;
@@ -135,7 +133,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=6110e9b7"></script>
+<script src="main.min.js?v=6cd1e469"></script>
 
 <script>
 /* ================================================================
@@ -211,8 +209,8 @@ function renderStreamers(streamers, statusData) {
 }
 
 Promise.all([
-  fetch('data/streamers.json').then(r => (r.ok ? r.json() : [])).catch(() => []),
-  fetch('data/twitch-status.json').then(r => (r.ok ? r.json() : {})).catch(() => ({})),
+  loadJson('data/streamers.json', []),
+  loadJson('data/twitch-status.json', {}),
 ]).then(([streamers, statusData]) => renderStreamers(streamers, statusData));
 </script>
 

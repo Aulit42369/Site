@@ -16,9 +16,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Les derniers clips marquants de la chaîne AULIT42369.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,7 +42,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=bd22f6ce">
+<link rel="stylesheet" href="style.min.css?v=88420ac9">
 <style>
   .clips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   @media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
@@ -115,7 +113,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=6110e9b7"></script>
+<script src="main.min.js?v=6cd1e469"></script>
 
 <script>
 /* ================================================================
@@ -137,9 +135,7 @@ function isRecentClip(dateStr) {
   return diffDays >= 0 && diffDays <= 7;
 }
 
-fetch('data/clips.json')
-  .then(r => (r.ok ? r.json() : []))
-  .catch(() => [])
+loadJson('data/clips.json', [])
   .then(clips => {
     if (clips.length === 0) {
       empty.style.display = 'block';

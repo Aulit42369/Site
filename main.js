@@ -17,6 +17,39 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+/* Lecture d'un fichier data/*.json avec valeur de secours : jamais
+   d'exception, jamais de page cassée si le fichier manque ou est
+   invalide. "no-cache" = le navigateur revalide à chaque visite
+   (requête conditionnelle, très légère) au lieu de garder le fichier
+   jusqu'à 10 min — une modification faite dans l'admin se voit tout de
+   suite. Utilisée par toutes les pages. */
+function loadJson(path, fallback) {
+  return fetch(path, { cache: 'no-cache' })
+    .then((r) => (r.ok ? r.json() : fallback))
+    .catch(() => fallback);
+}
+
+/* ================================================================
+   Registre des pages : LA liste du site (menu, vérifications, plan du
+   site). Le HTML statique de chaque page garde son menu en secours
+   (sans JavaScript) ; scripts/sync-nav.js le régénère depuis cette
+   liste et la CI vérifie qu'ils sont identiques.
+   menu:true → dans le menu ; last:true → toujours en dernier.
+   ================================================================ */
+const CORE_PAGES = [
+  { file: 'index.html', label: 'Accueil', menu: true },
+  { file: 'planning.html', label: 'Planning', menu: true },
+  { file: 'clips.html', label: 'Clips', menu: true },
+  { file: 'streamers.html', label: 'Streamers', menu: true },
+  { file: 'coulisses.html', label: 'Coulisses', menu: true },
+  { file: 'apropos.html', label: 'À propos', menu: true },
+  { file: 'contact.html', label: 'Contact', menu: true, last: true },
+  { file: 'escape-fragments.html', label: 'Escape Fragments', menu: false },
+  { file: 'mentions-legales.html', label: 'Mentions légales', menu: false, sitemap: false },
+  { file: 'page.html', label: 'Page personnalisée', menu: false, generic: true },
+  { file: '404.html', label: 'Page introuvable', menu: false, sitemap: false },
+];
+
 /* Si le Discord a été changé dans l'admin (onglet « Liens & annonce »),
    toute invitation Discord du site pointe vers la nouvelle adresse —
    voir applySiteConfig() plus bas. */
@@ -97,9 +130,9 @@ const liveBanner = document.getElementById('liveBanner');
 const followerStat = document.getElementById('followerStat');
 const followerCount = document.getElementById('followerCount');
 if (liveBanner || followerCount) {
-  fetch('data/twitch-status.json')
-    .then(r => (r.ok ? r.json() : Promise.reject()))
+  loadJson('data/twitch-status.json', null)
     .then(data => {
+      if (!data) return;
       const chaine = data.aulit42369;
       if (!chaine) return;
       if (liveBanner && chaine.live && isStatusFresh(data)) {
@@ -192,9 +225,7 @@ function applyAnnouncement(a) {
   else document.body.insertBefore(bar, document.body.firstChild);
 }
 
-fetch('data/site.json')
-  .then((r) => (r.ok ? r.json() : null))
-  .catch(() => null)
+loadJson('data/site.json', null)
   .then((cfg) => {
     if (!cfg || typeof cfg !== 'object' || Array.isArray(cfg)) return;
     applySocials(cfg.socials);
@@ -206,7 +237,7 @@ fetch('data/site.json')
    Les éléments concernés portent data-edit="clé" ; leur contenu HTML
    sert de texte par défaut et n'est remplacé que si la clé existe. */
 window.pagesDataPromise = document.querySelector('[data-edit], [data-uses-pages]')
-  ? fetch('data/pages.json').then((r) => (r.ok ? r.json() : null)).catch(() => null)
+  ? loadJson('data/pages.json', null)
   : Promise.resolve(null);
 window.pagesDataPromise.then((d) => {
   if (!d || typeof d !== 'object' || !d.texts || typeof d.texts !== 'object') return;
@@ -214,6 +245,39 @@ window.pagesDataPromise.then((d) => {
     const v = d.texts[el.dataset.edit];
     if (typeof v === 'string' && v.trim()) el.innerHTML = renderRichText(v);
   });
+});
+
+/* Pages créées depuis l'admin (data/custom-pages.json) : celles qui
+   demandent une entrée de menu sont ajoutées au menu, avant Contact.
+   La liste est gardée en cache local pour que le menu ne « saute » pas
+   à l'affichage ; le fichier frais la remplace dès qu'il arrive.
+   window.customPagesPromise est aussi utilisée par page.html. */
+function isValidCustomPage(p) {
+  return !!p && p.published !== false && typeof p.slug === 'string' && /^[a-z0-9-]{1,60}$/.test(p.slug) && typeof p.title === 'string' && p.title.trim() !== '';
+}
+function renderNav(customMenu) {
+  if (!nav) return;
+  const here = location.pathname.split('/').pop() || 'index.html';
+  const slug = new URLSearchParams(location.search).get('p');
+  const items = CORE_PAGES.filter((p) => p.menu && !p.last).map((p) => ({ href: p.file, label: p.label, active: p.file === here }));
+  customMenu.forEach((p) => items.push({ href: 'page.html?p=' + encodeURIComponent(p.slug), label: p.title, active: here === 'page.html' && slug === p.slug }));
+  CORE_PAGES.filter((p) => p.menu && p.last).forEach((p) => items.push({ href: p.file, label: p.label, active: p.file === here }));
+  nav.innerHTML = items.map((i) => '<a href="' + escapeHtml(i.href) + '"' + (i.active ? ' class="active"' : '') + '>' + escapeHtml(i.label) + '</a>').join('\n');
+}
+const CUSTOM_NAV_KEY = 'custom-nav';
+let cachedCustomNav = [];
+try {
+  const c = JSON.parse(localStorage.getItem(CUSTOM_NAV_KEY) || '[]');
+  if (Array.isArray(c)) cachedCustomNav = c.filter(isValidCustomPage);
+} catch (e) { /* stockage indisponible : sans importance */ }
+if (cachedCustomNav.length) renderNav(cachedCustomNav);
+window.customPagesPromise = loadJson('data/custom-pages.json', null);
+window.customPagesPromise.then((d) => {
+  const pages = d && Array.isArray(d.pages) ? d.pages.filter(isValidCustomPage) : null;
+  if (!pages) return;
+  const menu = pages.filter((p) => p.menu).map((p) => ({ slug: p.slug, title: p.title }));
+  try { localStorage.setItem(CUSTOM_NAV_KEY, JSON.stringify(menu)); } catch (e) { /* idem */ }
+  if (menu.length || cachedCustomNav.length) renderNav(menu);
 });
 
 /* Bouton "retour en haut", sur toutes les pages. Le survol et
