@@ -96,6 +96,7 @@
       <div class="eyebrow" data-edit="escape.eyebrow" data-edit-label="Escape Fragments (page) — sur-titre">// Le jeu du chat</div>
       <h1 class="h1-page" data-edit="escape.title" data-edit-label="Escape Fragments (page) — titre">Classement des <em class="accent">agents</em></h1>
       <p class="lead" style="margin-top:14px;" data-edit="escape.lead" data-edit-label="Escape Fragments (page) — introduction">Escape Fragments : chaque viewer détient un fragment d'indice, et il faut tout mettre en commun pour s'évader. Voici les meilleurs agents de la chaîne.</p>
+      <p style="margin-top:20px;display:none;" id="efPlay"><a class="btn btn-primary" id="efPlayLink" href="#" target="_blank" rel="noopener" data-edit="escape.play" data-edit-label="Escape Fragments (page) — bouton « tes indices »">Jouer · Tes indices</a></p>
     </div>
   </section>
 
@@ -175,6 +176,8 @@ loadJson('data/site.json', null).then(async (cfg) => {
     efStatus('Le classement arrive bientôt.');
     return;
   }
+  document.getElementById('efPlayLink').href = url + '/jouer';
+  document.getElementById('efPlay').style.display = '';
   document.getElementById('efFullLink').href = url + '/classement';
   document.getElementById('efFull').style.display = '';
   const wake = setTimeout(() => { efMsg.textContent = 'Réveil du serveur du jeu… ça peut prendre jusqu\'à une minute.'; }, 4000);
