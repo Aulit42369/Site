@@ -1,8 +1,4 @@
 {
-  "hagosan": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
-    "live": false
-  },
   "eiwen_": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
     "live": false
@@ -30,5 +26,9 @@
     "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/1312531552_IGDB-144x192.jpg",
     "followers": 181
   },
-  "_updated_at": "2026-10-10T22:20:27.506Z"
+  "hagosan": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
+    "live": false
+  },
+  "_updated_at": "2026-10-10T22:30:45.064Z"
 }
