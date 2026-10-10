@@ -1,9 +1,4 @@
 {
-  "meyuuart": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
-    "live": true,
-    "game": "Art"
-  },
   "aulit42369": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
     "live": false,
@@ -30,5 +25,10 @@
     "live": true,
     "game": "R.E.P.O."
   },
-  "_updated_at": "2026-10-10T14:50:27.501Z"
+  "meyuuart": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
+    "live": true,
+    "game": "Art"
+  },
+  "_updated_at": "2026-10-10T15:00:58.998Z"
 }
