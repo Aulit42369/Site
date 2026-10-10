@@ -1,7 +1,23 @@
 {
+  "aulit42369": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
+    "live": true,
+    "game": "R.E.P.O.",
+    "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/1294658629_IGDB-144x192.jpg",
+    "followers": 179
+  },
+  "hagosan": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
+    "live": false
+  },
+  "eiwen_": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
+    "live": false
+  },
   "aly0806": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
-    "live": false
+    "live": true,
+    "game": "R.E.P.O."
   },
   "galyssiane": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
@@ -16,18 +32,5 @@
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
     "live": false
   },
-  "aulit42369": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": false,
-    "followers": 179
-  },
-  "hagosan": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
-    "live": false
-  },
-  "eiwen_": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
-    "live": false
-  },
-  "_updated_at": "2026-10-10T18:50:26.952Z"
+  "_updated_at": "2026-10-10T19:00:56.472Z"
 }
