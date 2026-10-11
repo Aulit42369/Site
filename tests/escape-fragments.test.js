@@ -29,6 +29,7 @@ const check = (l, c) => { console.log((c ? 'PASS' : 'FAIL') + ' — ' + l); c ? 
   check('pseudo HTML échappé (pas d\'injection)', await p.locator('#efBox img').count() === 0);
   check('valeur non numérique ramenée à 0', (await p.locator('.ef-table tbody tr').nth(2).textContent()).includes('0'));
   check('lien vers le classement complet', (await p.getAttribute('#efFullLink', 'href')) === 'https://jeu.example.test/classement');
+  check('bouton « Tes indices » vers /jouer', (await p.getAttribute('#efPlayLink', 'href')) === 'https://jeu.example.test/jouer' && await p.isVisible('#efPlay'));
   await p.close();
 
   p = await open({ escapeServerUrl: 'https://jeu.example.test' }, (r) => r.fulfill({ status: 503, headers: { 'access-control-allow-origin': '*' }, body: 'x' }));
