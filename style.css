@@ -74,8 +74,13 @@ img { max-width: 100%; display: block; }
   font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem;
   letter-spacing: 0.03em; text-transform: uppercase;
   padding: 9px 16px; border-radius: 3px; color: var(--muted);
-  border: 1px solid transparent;
+  border: 1px solid transparent; white-space: nowrap;
   transition: color .15s ease, border-color .15s ease;
+}
+/* écrans moyens : le menu a 8 entrées, on resserre pour tenir sur une ligne */
+@media (min-width: 921px) and (max-width: 1180px) {
+  .nav { gap: 2px; }
+  .nav a { padding: 9px 9px; font-size: 0.88rem; letter-spacing: 0.02em; }
 }
 .nav a:hover { color: var(--white); }
 .nav a.active { color: var(--cyan); border-color: var(--cyan); text-shadow: var(--glow-c); }

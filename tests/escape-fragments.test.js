@@ -7,9 +7,10 @@ const check = (l, c) => { console.log((c ? 'PASS' : 'FAIL') + ' — ' + l); c ? 
 (async () => {
   const browser = await chromium.launch(launchOpts);
   const ctx = await browser.newContext({ viewport: { width: 1100, height: 900 } });
-  const errs = [];
+  const errs = [], reqs = [];
   async function open(site, api) {
     const page = await ctx.newPage();
+    page.on('request', (r) => { if (r.url().includes('/api/classement')) reqs.push(r.url()); });
     page.on('pageerror', (e) => errs.push(e.message));
     await page.route('**/data/site.json*', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(site) }));
     await page.route('https://jeu.example.test/**', api);
@@ -25,6 +26,9 @@ const check = (l, c) => { console.log((c ? 'PASS' : 'FAIL') + ' — ' + l); c ? 
     status: 200, headers: { 'access-control-allow-origin': '*' }, contentType: 'application/json',
     body: JSON.stringify({ top: [{ icone: '🕵️', display: '<img src=x onerror=alert(1)>', points: 120, victoires: 4, mvp: 2 }, { icone: '🔍', display: 'Zoé', points: 80, victoires: 2, mvp: 0 }, { display: 'Max', points: 'abc' }] }),
   }));
+  check('entrée « Escape Fragments » dans le menu', await p.locator('#nav a', { hasText: 'Escape Fragments' }).count() === 1 && await p.locator('#nav a.active', { hasText: 'Escape Fragments' }).count() === 1);
+  check('horodatage de mise à jour affiché', (await p.textContent('#efStamp')).includes('Actualisé à'));
+  check('requête sans cache (anti-périmé)', reqs.length > 0 && reqs.every((u) => /[?&]t=\d+/.test(u)));
   check('podium + tableau rendus', await p.locator('.ef-pod').count() === 3 && await p.locator('.ef-table tbody tr').count() === 3);
   check('pseudo HTML échappé (pas d\'injection)', await p.locator('#efBox img').count() === 0);
   check('valeur non numérique ramenée à 0', (await p.locator('.ef-table tbody tr').nth(2).textContent()).includes('0'));
