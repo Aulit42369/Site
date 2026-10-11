@@ -131,6 +131,7 @@
    Le serveur est hébergé sur une offre gratuite qui se met en veille :
    le premier chargement peut prendre jusqu'à une minute, on le dit.
    ================================================================ */
+const EF_DEFAULT_SERVER = 'https://escape-fragments.onrender.com';
 const efBox = document.getElementById('efBox');
 const efMsg = document.getElementById('efMsg');
 const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
@@ -173,11 +174,8 @@ async function efFetch(url) {
 }
 
 loadJson('data/site.json', null).then(async (cfg) => {
-  const url = cfg && typeof cfg.escapeServerUrl === 'string' && /^https:\/\//i.test(cfg.escapeServerUrl) ? cfg.escapeServerUrl.replace(/\/+$/, '') : '';
-  if (!url) {
-    efStatus('Le classement arrive bientôt.');
-    return;
-  }
+  // adresse réglée dans l'admin (Liens & annonce) ; à défaut, le serveur officiel du jeu
+  const url = (cfg && typeof cfg.escapeServerUrl === 'string' && /^https:\/\//i.test(cfg.escapeServerUrl) ? cfg.escapeServerUrl : EF_DEFAULT_SERVER).replace(/\/+$/, '');
   document.getElementById('efPlayLink').href = url + '/jouer';
   document.getElementById('efPlay').style.display = '';
   document.getElementById('efFullLink').href = url + '/classement';

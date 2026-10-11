@@ -867,8 +867,8 @@ function renderSite() {
     </div>
     <div class="ap-section">
       <h2>Jeu Escape Fragments</h2>
-      <div class="field"><label>Adresse du serveur du jeu (https://…)</label><input type="text" data-esc="escapeServerUrl" value="${escapeHtml(d.escapeServerUrl)}" placeholder="https://ton-serveur.onrender.com"></div>
-      <p class="admin-note" style="margin:0;">Sert à la page « Classement des agents ». Vide = la page affiche un message d'attente. L'état du serveur est visible dans « Santé du site ».</p>
+      <div class="field"><label>Adresse du serveur du jeu (https://…)</label><input type="text" data-esc="escapeServerUrl" value="${escapeHtml(d.escapeServerUrl)}" placeholder="https://escape-fragments.onrender.com"></div>
+      <p class="admin-note" style="margin:0;">Sert à la page « Classement des agents ». Vide = adresse par défaut (https://escape-fragments.onrender.com). L'état du serveur est visible dans « Santé du site ».</p>
     </div>
     <div class="ap-section">
       <h2>Bandeau d'annonce</h2>

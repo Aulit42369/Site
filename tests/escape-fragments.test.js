@@ -14,12 +14,13 @@ const check = (l, c) => { console.log((c ? 'PASS' : 'FAIL') + ' — ' + l); c ? 
     page.on('pageerror', (e) => errs.push(e.message));
     await page.route('**/data/site.json*', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(site) }));
     await page.route('https://jeu.example.test/**', api);
+    await page.route('https://escape-fragments.onrender.com/**', api);
     await page.goto(BASE + '/escape-fragments.html');
     await page.waitForTimeout(900);
     return page;
   }
   let p = await open({}, (r) => r.abort());
-  check('sans serveur configuré : message d\'attente', (await p.textContent('#efBox')).includes('bientôt'));
+  check('sans réglage : adresse par défaut utilisée (bouton jouer)', (await p.getAttribute('#efPlayLink', 'href')) === 'https://escape-fragments.onrender.com/jouer' && await p.isVisible('#efPlay'));
   await p.close();
 
   p = await open({ escapeServerUrl: 'https://jeu.example.test/' }, (r) => r.fulfill({
