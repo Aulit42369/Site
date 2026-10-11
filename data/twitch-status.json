@@ -1,4 +1,8 @@
 {
+  "aly0806": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
+    "live": false
+  },
   "galyssiane": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
     "live": false
@@ -24,9 +28,5 @@
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
     "live": false
   },
-  "aly0806": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
-    "live": false
-  },
-  "_updated_at": "2026-10-11T05:10:26.238Z"
+  "_updated_at": "2026-10-11T05:20:25.116Z"
 }
