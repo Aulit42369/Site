@@ -41,6 +41,7 @@ const CORE_PAGES = [
   { file: 'planning.html', label: 'Planning', menu: true },
   { file: 'clips.html', label: 'Clips', menu: true },
   { file: 'streamers.html', label: 'Streamers', menu: true },
+  { file: 'jeux.html', label: 'Jeux', menu: true },
   { file: 'coulisses.html', label: 'Coulisses', menu: true },
   { file: 'apropos.html', label: 'À propos', menu: true },
   { file: 'escape-fragments.html', label: 'Escape Fragments', menu: true },

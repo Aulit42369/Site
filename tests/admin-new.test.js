@@ -47,7 +47,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   await page.addInitScript(()=>localStorage.setItem('aulit_admin_token','fake'));
   await page.goto(BASE+'/admin.html'); await page.waitForFunction(()=>!document.getElementById('statusMsg').classList.contains('show'),null,{timeout:10000});
   check('admin loaded without error banner', !(await page.isVisible('#statusMsg.err')));
-  check('9 tabs', await page.locator('.admin-tabs [data-tab]').count()===9);
+  check('10 tabs', await page.locator('.admin-tabs [data-tab]').count()===10);
 
   // ---- Exceptions ----
   await page.click('[data-tab="planning"]');
@@ -97,7 +97,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   // ---- Textes ----
   await page.click('[data-tab="textes"]'); await page.waitForTimeout(800);
   const groups = await page.locator('#textesEditor .tx-group').count();
-  check('9 page groups loaded', groups===9);
+  check('10 page groups loaded', groups===10);
   await page.locator('#textesEditor .tx-group summary').first().click(); await page.locator('#textesEditor .tx-group summary').nth(7).click();
   const lead = page.locator('[data-tk="index.lead"]');
   const def = await lead.inputValue();

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AULIT42369 — Jeux</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Aperçu Discord / réseaux sociaux -->
+<meta property="og:title" content="AULIT42369 — Jeux">
+<meta property="og:description" content="Les jeux mobiles d\'Aulit42369 : LUMEN, ÉCHO, Résonance et Fragments. Jouables dans le navigateur et installables comme une appli.">
+<meta property="og:url" content="https://aulit42369.github.io/Site/jeux.html">
+<link rel="canonical" href="https://aulit42369.github.io/Site/jeux.html">
+<meta property="og:image" content="https://aulit42369.github.io/Site/og-image.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#00f5ff">
+<meta name="description" content="Les jeux mobiles d\'Aulit42369 : LUMEN, ÉCHO, Résonance et Fragments. Jouables dans le navigateur et installables comme une appli.">
+
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.min.css?v=1de905aa">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/"
+    },
+    {
+      "@type": "Person",
+      "name": "AULIT42369",
+      "url": "https://aulit42369.github.io/Site/",
+      "description": "Chaine Twitch multigaming, jeux coop entre potes.",
+      "sameAs": [
+        "https://www.twitch.tv/aulit42369",
+        "https://discord.com/invite/Amgaz5YNVg",
+        "https://www.youtube.com/@Aulit42369",
+        "https://www.instagram.com/aulit42369/",
+        "https://www.tiktok.com/@aulit42369_"
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  .jx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 22px; }
+  .jx-card { display: flex; flex-direction: column; gap: 16px; padding: 28px; --accent: var(--cyan); }
+  .jx-card.violet { --accent: var(--violet); }
+  .jx-card.magenta { --accent: var(--magenta); }
+  .jx-card.gold { --accent: #f5c542; }
+  .jx-top { display: flex; gap: 18px; align-items: center; }
+  .jx-orb { flex: none; width: 76px; height: 76px; border-radius: 50%; position: relative; background: radial-gradient(circle at 35% 30%, #fff 0%, var(--accent) 38%, transparent 72%), radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%); box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 55%, transparent), inset 0 0 18px color-mix(in srgb, var(--accent) 50%, transparent); }
+  .jx-orb.echo { background: repeating-radial-gradient(circle, var(--accent) 0 2px, transparent 2px 11px), #070a10; box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 45%, transparent); border: 1px solid var(--accent); }
+  .jx-orb.resonance { background: repeating-radial-gradient(circle at 50% 50%, transparent 0 7px, color-mix(in srgb, var(--accent) 85%, transparent) 7px 9px), radial-gradient(circle, var(--accent) 0 5px, transparent 6px), #070a10; border: 1px solid var(--accent); box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 45%, transparent); }
+  .jx-orb.fragments { border-radius: 14px; background: conic-gradient(from 20deg, var(--accent) 0 25%, transparent 0 28%, color-mix(in srgb, var(--accent) 60%, #070a10) 28% 55%, transparent 0 58%, color-mix(in srgb, var(--accent) 35%, #070a10) 58% 82%, transparent 0 85%, var(--accent) 85%); box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 45%, transparent); transform: rotate(8deg); }
+  .jx-name { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.55rem; letter-spacing: 0.04em; margin: 0; overflow-wrap: anywhere; }
+  .jx-tag { color: var(--accent); font-size: 1.05rem; margin: 2px 0 0; }
+  .jx-desc { color: var(--muted); font-size: 1.08rem; line-height: 1.55; margin: 0; }
+  .jx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .jx-chip { font-family: 'Orbitron', sans-serif; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 11px; border: 1px solid var(--line); border-radius: 3px; color: var(--muted); background: var(--surface2); }
+  .jx-chip.pwa { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+  .jx-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: auto; padding-top: 4px; }
+  .jx-card .btn-primary { background: var(--accent); }
+  .jx-card .btn-secondary { color: var(--accent); border-color: var(--accent); }
+  .jx-soon { font-family: 'Orbitron', sans-serif; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border: 1px dashed var(--line); padding: 12px 18px; border-radius: 4px; }
+  .jx-steps { list-style: none; counter-reset: jx; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .jx-steps li { counter-increment: jx; position: relative; background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 4px; padding: 58px 20px 20px; color: var(--white); font-size: 1.08rem; line-height: 1.45; }
+  .jx-steps li::before { content: counter(jx); position: absolute; top: 16px; left: 20px; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 0.9rem; color: var(--bg); background: var(--cyan); box-shadow: var(--glow-c); }
+  .jx-steps li .accent, .jx-steps li em { color: var(--cyan); font-style: normal; font-weight: 700; }
+  .jx-note { margin-top: 20px; color: var(--muted); font-size: 1.02rem; max-width: 760px; }
+  .jx-note p { margin: 0 0 8px; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <div class="header-left">
+      <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+      <a href="index.html" class="live-banner" id="liveBanner"><span class="dot"></span><span class="label">En direct</span></a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="streamers.html">Streamers</a>
+      <a href="jeux.html" class="active">Jeux</a>
+      <a href="coulisses.html">Coulisses</a>
+      <a href="apropos.html">À propos</a>
+      <a href="escape-fragments.html">Escape Fragments</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow" data-edit="jeux.eyebrow" data-edit-label="Jeux — sur-titre">// Mes jeux</div>
+      <h1 class="h1-page" data-edit="jeux.title" data-edit-label="Jeux — titre">Les jeux <em class="accent">d'Aulit</em></h1>
+      <p class="lead" style="margin-top:14px;" data-edit="jeux.lead" data-edit-label="Jeux — introduction">Quatre jeux à essayer directement dans ton navigateur, sans rien télécharger. Tu peux aussi les installer sur ton téléphone comme une vraie appli, en attendant leur arrivée sur Google Play.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="jx-grid" id="jxGrid"><div class="ef-status" style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0;">Chargement des jeux…</div></div>
+      <noscript><p class="jx-note">Active JavaScript pour voir la liste des jeux.</p></noscript>
+    </div>
+  </section>
+
+  <section class="tight" id="installer">
+    <div class="container">
+      <div class="eyebrow" data-edit="jeux.pwa.eyebrow" data-edit-label="Jeux — installation : sur-titre">// Installer sur ton téléphone</div>
+      <h2 data-edit="jeux.pwa.title" data-edit-label="Jeux — installation : titre">Installer un jeu en <em class="accent">4 étapes</em></h2>
+      <p class="lead" style="margin-top:10px;" data-edit="jeux.pwa.lead" data-edit-label="Jeux — installation : introduction">Pas besoin de boutique d'applications : chaque jeu s'installe directement depuis son lien. Une fois installé, il a son icône sur ton écran d'accueil et s'ouvre en plein écran.</p>
+      <ol class="jx-steps">
+        <li data-edit="jeux.pwa.s1" data-edit-label="Jeux — installation : étape 1">Ouvre le lien du jeu avec <em class="accent">Chrome</em> sur ton téléphone Android (bouton « Jouer maintenant »).</li>
+        <li data-edit="jeux.pwa.s2" data-edit-label="Jeux — installation : étape 2">Appuie sur le menu <em class="accent">⋮</em> (les trois points, en haut à droite).</li>
+        <li data-edit="jeux.pwa.s3" data-edit-label="Jeux — installation : étape 3">Choisis <em class="accent">« Installer l'application »</em> (ou « Ajouter à l'écran d'accueil »).</li>
+        <li data-edit="jeux.pwa.s4" data-edit-label="Jeux — installation : étape 4">Confirme : l'icône du jeu apparaît sur ton écran d'accueil. Lance-le comme n'importe quelle appli.</li>
+      </ol>
+      <div class="jx-note">
+        <p data-edit="jeux.pwa.ios" data-edit-label="Jeux — installation : note iPhone">Sur iPhone : ouvre le lien dans <em class="accent">Safari</em>, touche le bouton Partager, puis « Sur l'écran d'accueil ».</p>
+        <p data-edit="jeux.pwa.play" data-edit-label="Jeux — installation : note Google Play">Chaque jeu s'installe séparément. Les versions Google Play arriveront plus tard : d'ici là, cette installation te permet déjà de jouer comme avec une vraie appli.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:var(--dim);font-size:0.78rem;">Mentions légales</a></div>
+    <div class="socials">
+      <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/aulit42369/?hl=fr" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@aulit42369_" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.min.js?v=c04ae030"></script>
+
+<script>
+/* ================================================================
+   Page « Jeux » : la liste vient de data/games.json, modifiable dans
+   l'admin (onglet « Jeux »). À défaut, la liste ci-dessous s'affiche.
+   ATTENTION : DEFAULT_GAMES doit rester identique à celle de admin.js
+   (vérifié par scripts/check-admin-parity.js).
+   ================================================================ */
+const DEFAULT_GAMES = [
+  { "id": "lumen", "name": "LUMEN", "tagline": "Le puzzle des orbes lumineuses", "tags": "Puzzle, Solo", "description": "Fusionne des orbes identiques pour en créer de plus grosses et de plus lumineuses. Facile à prendre en main, difficile à lâcher : vise le meilleur score et garde de la place pour la suite.", "url": "", "playUrl": "", "status": "jouable", "accent": "gold" },
+  { "id": "echo", "name": "ÉCHO", "tagline": "Un labyrinthe dans le noir", "tags": "Labyrinthe, Solo", "description": "Tu avances à l'aveugle dans un labyrinthe plongé dans l'obscurité. Écoute, repère les échos et trouve la sortie avant de te perdre pour de bon.", "url": "", "playUrl": "", "status": "jouable", "accent": "cyan" },
+  { "id": "resonance", "name": "Résonance", "tagline": "Un jeu d'ondes", "tags": "Réflexion, Solo", "description": "Lance des ondes, regarde-les se propager et se croiser, et fais-les résonner au bon endroit au bon moment.", "url": "", "playUrl": "", "status": "jouable", "accent": "violet" },
+  { "id": "fragments", "name": "Fragments", "tagline": "L'évasion à plusieurs téléphones", "tags": "Party game, Multijoueur", "description": "Chaque joueur reçoit sur son téléphone des indices différents. Personne ne voit tout : il faut parler, comparer et mettre les fragments en commun pour s'évader ensemble.", "url": "", "playUrl": "", "status": "jouable", "accent": "magenta" }
+];
+
+const jxOkUrl = (u) => typeof u === 'string' && /^https:\/\/[^\s]+$/i.test(u.trim());
+
+function jxCard(g) {
+  const accent = ['violet', 'magenta', 'gold'].includes(g.accent) ? g.accent : 'cyan';
+  const orbKind = ['echo', 'resonance', 'fragments'].includes(g.id) ? g.id : '';
+  const tags = String(g.tags || '').split(',').map((t) => t.trim()).filter(Boolean);
+  const play = jxOkUrl(g.url);
+  const store = jxOkUrl(g.playUrl);
+  let actions = '';
+  if (g.status === 'bientot') actions = '<span class="jx-soon">Bientôt disponible</span>';
+  else if (play) actions = '<a class="btn btn-primary" href="' + escapeHtml(g.url.trim()) + '" target="_blank" rel="noopener">Jouer maintenant</a>';
+  else actions = '<span class="jx-soon">Lien bientôt disponible</span>';
+  if (store) actions += '<a class="btn btn-secondary" href="' + escapeHtml(g.playUrl.trim()) + '" target="_blank" rel="noopener">Google Play</a>';
+  const chips = tags.map((t) => '<span class="jx-chip">' + escapeHtml(t) + '</span>').join('') +
+    '<span class="jx-chip pwa">Jouable en ligne · installable</span>' +
+    (store ? '<span class="jx-chip pwa">Sur Google Play</span>' : '<span class="jx-chip">Google Play : bientôt</span>');
+  return '<article class="card jx-card ' + accent + '"><div class="jx-top"><div class="jx-orb ' + orbKind + '" aria-hidden="true"></div><div><h2 class="jx-name">' + escapeHtml(g.name) + '</h2>' +
+    (g.tagline ? '<p class="jx-tag">' + escapeHtml(g.tagline) + '</p>' : '') + '</div></div>' +
+    '<p class="jx-desc">' + renderRichText(String(g.description || '')) + '</p>' +
+    '<div class="jx-chips">' + chips + '</div><div class="jx-actions">' + actions + '</div></article>';
+}
+
+loadJson('data/games.json', null).then((d) => {
+  const list = d && Array.isArray(d.games) && d.games.length ? d.games.filter((g) => g && typeof g.name === 'string' && g.name.trim()) : DEFAULT_GAMES;
+  document.getElementById('jxGrid').innerHTML = (list.length ? list : DEFAULT_GAMES).map(jxCard).join('');
+});
+</script>
+
+<script data-goatcounter="https://aulit42369.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
