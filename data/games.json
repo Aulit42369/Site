@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "games": [
+    {
+      "id": "lumen",
+      "name": "LUMEN",
+      "tagline": "Le puzzle des orbes lumineuses",
+      "tags": "Puzzle, Solo",
+      "description": "Fusionne des orbes identiques pour en créer de plus grosses et de plus lumineuses. Facile à prendre en main, difficile à lâcher : vise le meilleur score et garde de la place pour la suite.",
+      "url": "https://lumen-jeu.github.io/",
+      "playUrl": "https://aulit42369.github.io/Echo/",
+      "status": "jouable",
+      "accent": "gold"
+    },
+    {
+      "id": "echo",
+      "name": "ÉCHO",
+      "tagline": "Un labyrinthe dans le noir",
+      "tags": "Labyrinthe, Solo",
+      "description": "Tu avances à l'aveugle dans un labyrinthe plongé dans l'obscurité. Écoute, repère les échos et trouve la sortie avant de te perdre pour de bon.",
+      "url": "",
+      "playUrl": "",
+      "status": "jouable",
+      "accent": "cyan"
+    },
+    {
+      "id": "resonance",
+      "name": "Résonance",
+      "tagline": "Un jeu d'ondes",
+      "tags": "Réflexion, Solo",
+      "description": "Lance des ondes, regarde-les se propager et se croiser, et fais-les résonner au bon endroit au bon moment.",
+      "url": "https://resonance-jeu.github.io/",
+      "playUrl": "",
+      "status": "jouable",
+      "accent": "violet"
+    },
+    {
+      "id": "fragments",
+      "name": "Fragments",
+      "tagline": "L'évasion à plusieurs téléphones",
+      "tags": "Party game, Multijoueur",
+      "description": "Chaque joueur reçoit sur son téléphone des indices différents. Personne ne voit tout : il faut parler, comparer et mettre les fragments en commun pour s'évader ensemble.",
+      "url": "https://fragments-jeu.github.io/",
+      "playUrl": "",
+      "status": "jouable",
+      "accent": "magenta"
+    }
+  ]
+}
