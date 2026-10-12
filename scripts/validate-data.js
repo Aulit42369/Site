@@ -76,6 +76,15 @@ const SCHEMAS = {
       }
     }
   } },
+  'games.json': { fn(d, f) {
+    check(isObj(d) && Array.isArray(d.games) && d.games.length > 0, f, 'doit contenir "games" (tableau non vide)'); version(d, f);
+    ((isObj(d) && d.games) || []).forEach((g, i) => {
+      check(isObj(g) && isStr(g.name) && g.name.trim(), f, `jeu #${i + 1} : nom manquant`);
+      if (!isObj(g)) return;
+      ['url', 'playUrl'].forEach((k) => check(!g[k] || https(g[k]), f, `jeu "${g.name}" : "${k}" doit commencer par https://`));
+      check(['jouable', 'bientot'].includes(g.status), f, `jeu "${g.name}" : statut invalide`);
+    });
+  } },
   'custom-pages.json': { fn(d, f) {
     check(isObj(d) && Array.isArray(d.pages), f, 'doit contenir "pages" (tableau)'); version(d, f);
     const seen = new Set();

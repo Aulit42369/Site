@@ -21,6 +21,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://aulit42369.github.io/Site/jeux.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://aulit42369.github.io/Site/coulisses.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

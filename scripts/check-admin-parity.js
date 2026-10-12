@@ -51,6 +51,14 @@ for (const name of used) {
   if (!hist.includes(`'${name}'`)) errors.push(`data/${name}.json n'est pas dans HIST_FILES (onglet Historique)`);
 }
 
+// la liste de jeux par défaut de jeux.html et celle de l'admin doivent rester identiques
+{
+  const grab = (src) => { const m = src.match(/const DEFAULT_GAMES = (\[[\s\S]*?\n\]);/); return m ? JSON.stringify(new Function('return ' + m[1])()) : null; };
+  const a = grab(read('jeux.html')), b = grab(admin);
+  if (!a || !b) errors.push('DEFAULT_GAMES introuvable dans jeux.html ou admin.js');
+  else if (a !== b) errors.push('DEFAULT_GAMES de jeux.html et de admin.js ont divergé (garde-les identiques)');
+}
+
 if (errors.length) {
   console.error('✗ Parité admin :\n' + errors.map((e) => '  - ' + e).join('\n'));
   process.exit(1);

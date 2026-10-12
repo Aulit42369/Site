@@ -13,7 +13,7 @@ const BASE = 'https://aulit42369.github.io/Site/';
 const META = {
   'index.html': ['weekly', '1.0'], 'planning.html': ['weekly', '0.8'], 'clips.html': ['weekly', '0.7'],
   'streamers.html': ['weekly', '0.6'], 'coulisses.html': ['monthly', '0.6'], 'apropos.html': ['monthly', '0.5'],
-  'contact.html': ['monthly', '0.5'], 'escape-fragments.html': ['weekly', '0.6'],
+  'contact.html': ['monthly', '0.5'], 'escape-fragments.html': ['weekly', '0.6'], 'jeux.html': ['weekly', '0.7'],
 };
 
 const entries = [];

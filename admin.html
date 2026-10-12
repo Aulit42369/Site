@@ -17,7 +17,7 @@
 <meta name="apple-mobile-web-app-title" content="Admin AULIT">
 
 <link rel="stylesheet" href="fonts.css">
-<link rel="stylesheet" href="style.min.css?v=95df1386">
+<link rel="stylesheet" href="style.min.css?v=1de905aa">
 <style>
   .admin-wrap { max-width: 760px; margin: 0 auto; padding: 48px 28px 80px; }
   .admin-wrap h1 { font-size: 1.8rem; margin-bottom: 8px; }
@@ -183,6 +183,7 @@
       <button data-tab="apropos">À propos</button>
       <button data-tab="textes">Textes des pages</button>
       <button data-tab="pages">Pages</button>
+      <button data-tab="jeux">Jeux</button>
       <button data-tab="site">Liens &amp; annonce</button>
       <button data-tab="sante">Santé du site</button>
       <button data-tab="historique">Historique</button>
@@ -275,6 +276,13 @@
       <div style="margin-top:14px;"><button class="btn btn-primary" id="savePagesBtn">Enregistrer les pages</button></div>
     </div>
 
+    <div id="jeuxPanel" class="admin-panel" style="display:none;">
+      <p class="admin-note">Les jeux de la page « Jeux » : texte, lien pour jouer, lien Google Play (à remplir le jour où l'appli est publiée), ordre d'affichage. Colle ici l'adresse de chaque jeu (<code>https://…</code>) : tant qu'elle est vide, la carte affiche « Lien bientôt disponible ». Dans la description : <code>*mot*</code> pour le mot en couleur, <code>[mot](https://lien)</code> pour un lien. Les textes d'installation du téléphone se modifient dans « Textes des pages » → Jeux.</p>
+      <div id="jeuxEditor"></div>
+      <button type="button" class="ap-add" id="addJeuBtn">+ Ajouter un jeu</button>
+      <div style="margin-top:14px;"><button class="btn btn-primary" id="saveJeuxBtn">Enregistrer les jeux</button></div>
+    </div>
+
     <div id="sitePanel" class="admin-panel" style="display:none;">
       <p class="admin-note">Réglages valables sur toutes les pages. Le lien « Discord » remplace aussi toutes les invitations Discord du site (boutons, FAQ, mentions…).</p>
       <div id="siteEditor"></div>
@@ -300,6 +308,6 @@
   </div>
 </div>
 
-<script src="admin.js?v=4f6381da"></script>
+<script src="admin.js?v=d5e7cf18"></script>
 </body>
 </html>
