@@ -8,7 +8,7 @@
       "tags": "Puzzle, Solo",
       "description": "Fusionne des orbes identiques pour en créer de plus grosses et de plus lumineuses. Facile à prendre en main, difficile à lâcher : vise le meilleur score et garde de la place pour la suite.",
       "url": "https://lumen-jeu.github.io/",
-      "playUrl": "https://aulit42369.github.io/Echo/",
+      "playUrl": "",
       "status": "jouable",
       "accent": "gold"
     },
@@ -18,7 +18,7 @@
       "tagline": "Un labyrinthe dans le noir",
       "tags": "Labyrinthe, Solo",
       "description": "Tu avances à l'aveugle dans un labyrinthe plongé dans l'obscurité. Écoute, repère les échos et trouve la sortie avant de te perdre pour de bon.",
-      "url": "",
+      "url": "https://aulit42369.github.io/Echo/",
       "playUrl": "",
       "status": "jouable",
       "accent": "cyan"
