@@ -231,7 +231,15 @@ loadJson('data/recent-games.json', [])
   .then(games => {
     if (!Array.isArray(games) || games.length === 0) return;
     const list = document.getElementById('recentGamesList');
-    games.forEach(g => {
+    /* un jeu n'apparaît qu'une fois (le plus récent d'abord), même si
+       le fichier contient des doublons */
+    const seen = new Set();
+    games.filter(g => {
+      const k = g && typeof g.game === 'string' ? g.game.trim().toLowerCase() : '';
+      if (!k || seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    }).forEach(g => {
       const tag = document.createElement('span');
       tag.className = 'game-tag';
       if (g.art) {
