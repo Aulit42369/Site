@@ -160,8 +160,9 @@ async function fetchTwitchData(usernames, token) {
 
 /* Ajoute `currentGame` en tête de data/recent-games.json s'il diffère
    du dernier jeu enregistré (évite de ré-écrire la même entrée à
-   chaque passage de 10 min pendant un même stream). Garde uniquement
-   les MAX_RECENT_GAMES plus récents. */
+   chaque passage de 10 min pendant un même stream). Chaque jeu n'est
+   présent qu'une fois (un jeu rejoué remonte en tête). Garde
+   uniquement les MAX_RECENT_GAMES plus récents. */
 function updateRecentGames(currentGame, gameArt) {
   if (!currentGame) return;
 
@@ -174,6 +175,19 @@ function updateRecentGames(currentGame, gameArt) {
   }
 
   if (history.length > 0 && history[0].game === currentGame) return;
+
+  /* Un jeu ne doit apparaître qu'une fois : s'il était déjà dans
+     l'historique (joué un autre jour), on le retire de sa place
+     d'avant et on le remonte en tête avec la date du jour. On
+     nettoie au passage les doublons déjà présents. */
+  const norm = (g) => String(g || '').trim().toLowerCase();
+  const seen = new Set([norm(currentGame)]);
+  history = history.filter((h) => {
+    const k = norm(h && h.game);
+    if (!k || seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
 
   const entry = { game: currentGame, date: new Date().toISOString().slice(0, 10) };
   if (gameArt) entry.art = gameArt;
