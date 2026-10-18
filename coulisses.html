@@ -62,6 +62,9 @@
   .project-diagram-svg { width: 100%; height: auto; display: block; }
   .project-preview { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 4px; padding: 18px 20px; }
   .project-preview-svg { width: 100%; height: auto; display: block; }
+  .project-shot { margin-bottom:16px; }
+  .project-shot img { width:100%; height:auto; display:block; border:1px solid var(--line); border-radius:4px; background:var(--surface); }
+  .project-shot .preview-label { margin-top:8px; }
   .preview-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
   .status-note { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-top: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; }
   .status-note .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); flex-shrink: 0; }
@@ -112,6 +115,7 @@
             <p data-edit="coulisses.p1.desc1" data-edit-label="Coulisses · Régie Mobile — paragraphe 1">Gérer le stream sans être devant l'ordinateur : titre, catégorie et tags sauvegardés directement sur Twitch, minuteur de démarrage qui déclenche scène et micro à la fin, pause pub programmable, grille de scènes OBS, suggestions de raid dans la catégorie en cours, modération du chat YouTube en direct, streamers suivis avec leur statut live, et gestion des récompenses de points de chaîne.</p>
             <p data-edit="coulisses.p1.desc2" data-edit-label="Coulisses · Régie Mobile — paragraphe 2">Un générateur d'image d'annonce reprend l'identité visuelle du site pour prévenir que le stream commence, avec publication directe sur Instagram et Bluesky. Un moniteur de santé (débit, FPS, images perdues, CPU OBS) fait vibrer le téléphone si ça dégrade, et un simulateur teste les alertes sans attendre un vrai événement. En fin de session, le résumé s'exporte en Excel.</p>
           </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p1.status" data-edit-label="Coulisses · Régie Mobile — note">Une version simple à configurer, sans connaissances informatiques, est prévue pour d'autres streamers</span></div>
           <div class="project-stack" data-edit="coulisses.p1.stack" data-edit-label="Coulisses · Régie Mobile — technologies">Node.js · React · zéro dépendance</div>
         </div>
         <div class="project-visuals">
@@ -287,6 +291,52 @@
 
       <div class="project-block">
         <div>
+          <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p8.eyebrow" data-edit-label="Coulisses · Overlays &amp; scripts OBS — sur-titre">// Overlays &amp; scripts OBS</div>
+          <h2 data-edit="coulisses.p8.title" data-edit-label="Coulisses · Overlays &amp; scripts OBS — titre">Des scènes faites main, qui changent avec les <em class="accent">saisons</em></h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.p8.desc1" data-edit-label="Coulisses · Overlays &amp; scripts OBS — paragraphe 1">Toutes les scènes du stream sont des pages web écrites maison et chargées dans OBS : une version de base et des versions festives ou saisonnières, avec les alertes et les labels intégrés directement dans l'overlay pour que tout reste uniforme. Le thème change à la main, par période, plutôt qu'à une date automatique.</p>
+            <p data-edit="coulisses.p8.desc2" data-edit-label="Coulisses · Overlays &amp; scripts OBS — paragraphe 2">Des scripts Lua pilotent OBS : un script de démarrage, un rafraîchissement des sources navigateur avec une case à cocher par source, et la coupure automatique de l'écran de fin de raid. Les mêmes éléments, anonymisés et documentés pas à pas, forment un kit réutilisable par quelqu'un qui débute.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p8.status" data-edit-label="Coulisses · Overlays &amp; scripts OBS — note">Un « super dossier » de 11 dossiers numérotés rassemble tout l'environnement : site, widgets, overlays, ponts d'alertes et de labels, Régie Mobile, scripts Lua et panneaux</span></div>
+          <div class="project-stack" data-edit="coulisses.p8.stack" data-edit-label="Coulisses · Overlays &amp; scripts OBS — technologies">HTML · CSS · JavaScript · OBS Lua</div>
+        </div>
+        <div class="project-visuals">
+          <div class="project-diagram">
+            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-ov" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
+                </marker>
+              </defs>
+              <line x1="150" y1="60" x2="198" y2="100" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)"/>
+              <line x1="150" y1="130" x2="198" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)"/>
+              <line x1="150" y1="200" x2="198" y2="160" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)"/>
+              <line x1="322" y1="130" x2="372" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)"/>
+              <line x1="260" y1="214" x2="260" y2="174" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)" marker-start="url(#arrow-ov)"/>
+              <rect x="8" y="34" width="142" height="52" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="58" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Ponts</text>
+              <text x="79" y="74" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">alertes · labels</text>
+              <rect x="8" y="104" width="142" height="52" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Thèmes</text>
+              <text x="79" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">base · festifs</text>
+              <rect x="8" y="174" width="142" height="52" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="198" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Panneaux</text>
+              <text x="79" y="214" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">HTML sur mesure</text>
+              <rect x="200" y="92" width="122" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+              <text x="261" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Overlay</text>
+              <text x="261" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">page HTML</text>
+              <rect x="374" y="92" width="138" height="76" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="443" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">OBS</text>
+              <text x="443" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">sources navigateur</text>
+              <rect x="200" y="218" width="122" height="34" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="261" y="239" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Scripts Lua</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p4.eyebrow" data-edit-label="Coulisses · Carte à collectionner — sur-titre">// Carte à collectionner</div>
           <h2 data-edit="coulisses.p4.title" data-edit-label="Coulisses · Carte à collectionner — titre">Une extension Twitch <em class="accent">multi-chaînes</em></h2>
           <div class="project-desc">
@@ -431,6 +481,54 @@
 
       <div class="project-block">
         <div>
+          <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p9.eyebrow" data-edit-label="Coulisses · Jeux mobiles — sur-titre">// Jeux mobiles</div>
+          <h2 data-edit="coulisses.p9.title" data-edit-label="Coulisses · Jeux mobiles — titre">Quatre jeux, jouables <em class="accent">partout</em></h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.p9.desc1" data-edit-label="Coulisses · Jeux mobiles — paragraphe 1">LUMEN (un puzzle de fusion d'orbes), ÉCHO (un labyrinthe dans le noir), Résonance (un jeu d'ondes) et Fragments (un party game d'évasion sur plusieurs téléphones, tiré d'Escape Fragments). Chacun se joue dans le navigateur et s'installe comme une appli (PWA), avec une version Android native visant le Google Play Store.</p>
+            <p data-edit="coulisses.p9.desc2" data-edit-label="Coulisses · Jeux mobiles — paragraphe 2">Chaque jeu a son propre dépôt, son propre domaine et ses propres textes, en français et en anglais d'abord, d'autres langues ensuite. Ils restent indépendants les uns des autres.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p9.status" data-edit-label="Coulisses · Jeux mobiles — note">Pas encore sur Google Play : en attendant, ils s'installent depuis la page Jeux</span></div>
+          <p style="margin-top:14px;"><a href="jeux.html" class="btn btn-secondary" style="font-size:0.85rem;padding:9px 18px;" data-edit="coulisses.p9.link" data-edit-label="Coulisses · Jeux mobiles — bouton">Voir les jeux</a></p>
+          <div class="project-stack" data-edit="coulisses.p9.stack" data-edit-label="Coulisses · Jeux mobiles — technologies">PWA · Android Studio · GitHub Pages</div>
+        </div>
+        <div class="project-visuals">
+          <div class="project-shot">
+            <img src="img/coulisses-jeux.png" alt="Capture réelle de la page Jeux de ce site" loading="lazy">
+            <div class="preview-label">Capture réelle de la page Jeux de ce site</div>
+          </div>
+          <div class="project-diagram">
+            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-jm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#9b5cff"/>
+                </marker>
+              </defs>
+              <line x1="130" y1="52" x2="196" y2="112" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
+              <line x1="130" y1="98" x2="196" y2="126" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
+              <line x1="130" y1="144" x2="196" y2="140" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
+              <line x1="130" y1="190" x2="196" y2="154" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
+              <line x1="332" y1="130" x2="386" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
+              <rect x="8" y="28" width="122" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="69" y="56" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">LUMEN</text>
+              <rect x="8" y="74" width="122" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="69" y="102" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">ÉCHO</text>
+              <rect x="8" y="120" width="122" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="69" y="148" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Résonance</text>
+              <rect x="8" y="166" width="122" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="69" y="194" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Fragments</text>
+              <rect x="198" y="90" width="134" height="80" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
+              <text x="265" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">PWA</text>
+              <text x="265" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">installable</text>
+              <rect x="388" y="90" width="124" height="80" rx="6" fill="none" stroke="#9b5cff"/>
+              <text x="450" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Google Play</text>
+              <text x="450" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">bientôt</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p5.eyebrow" data-edit-label="Coulisses · La Cabane — sur-titre">// La Cabane</div>
           <h2 data-edit="coulisses.p5.title" data-edit-label="Coulisses · La Cabane — titre">Le suivi des chaînes de la <em class="accent">communauté</em></h2>
           <div class="project-desc">
@@ -501,8 +599,9 @@
           <h2 data-edit="coulisses.p6.title" data-edit-label="Coulisses · Bot Discord — titre">Le gardien du serveur <em class="accent">d'entraide</em></h2>
           <div class="project-desc">
             <p data-edit="coulisses.p6.desc1" data-edit-label="Coulisses · Bot Discord — paragraphe 1">Le bot qui fait tourner le serveur d'entraide entre streamers. L'entrée est filtrée : les nouveaux membres acceptent le règlement puis soumettent leur chaîne Twitch ou YouTube pour vérification avant d'obtenir l'accès complet — pas une communauté ouverte à tout le monde.</p>
-            <p data-edit="coulisses.p6.desc2" data-edit-label="Coulisses · Bot Discord — paragraphe 2">Au-delà de l'accueil, il couvre à peu près tout ce qu'un serveur actif demande : modération avec escalade automatique après un nombre d'avertissements, anniversaires, sondages à vote par boutons, salons vocaux temporaires créés à la demande, une zone promo avec délai minimum entre deux posts, un annuaire des membres, et des annonces automatiques (chaînes Twitch suivies qui passent en direct, jeux gratuits du moment, paliers de followers). Un panneau d'administration web permet de gérer tout ça sans passer par les commandes Discord.</p>
+            <p data-edit="coulisses.p6.desc2" data-edit-label="Coulisses · Bot Discord — paragraphe 2">Au-delà de l'accueil, il couvre à peu près tout ce qu'un serveur actif demande : modération avec escalade automatique après un nombre d'avertissements, anniversaires, sondages à vote par boutons, salons vocaux temporaires créés à la demande, une zone promo avec délai minimum entre deux posts, un annuaire des membres, et des annonces automatiques (chaînes Twitch suivies qui passent en direct, jeux gratuits du moment, paliers de followers). Tickets privés, suggestions avec vote, concours avec tirage au sort, FAQ et bibliothèque de ressources complètent l'ensemble. Un panneau d'administration web permet de gérer tout ça sans passer par les commandes Discord.</p>
           </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p6.status" data-edit-label="Coulisses · Bot Discord — note">Le même bot tourne aussi sur d'autres serveurs, avec des réglages propres à chacun</span></div>
           <div class="project-stack" data-edit="coulisses.p6.stack" data-edit-label="Coulisses · Bot Discord — technologies">Discord · commandes slash · panneau d'admin web</div>
         </div>
         <div class="project-visuals">
@@ -584,6 +683,45 @@
               <text x="376" y="30" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Planning</text>
               <text x="346" y="58" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Horaires de la semaine</text>
               <text x="346" y="72" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">→ lien vers /planning</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
+          <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p10.eyebrow" data-edit-label="Coulisses · Ce site — sur-titre">// Ce site</div>
+          <h2 data-edit="coulisses.p10.title" data-edit-label="Coulisses · Ce site — titre">Un site qui se modifie <em class="accent">sans code</em></h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.p10.desc1" data-edit-label="Coulisses · Ce site — paragraphe 1">Ce site est écrit en HTML, CSS et JavaScript simples, hébergé sur GitHub Pages, sans outil de build. Une page d'administration privée permet de tout changer depuis le navigateur : streamers, clips, planning (semaine type et changements ponctuels), À propos et FAQ, textes de chaque page, liens et bandeau d'annonce, nouvelles pages, liste des jeux. Chaque enregistrement devient une version sauvegardée, restaurable en un clic.</p>
+            <p data-edit="coulisses.p10.desc2" data-edit-label="Coulisses · Ce site — paragraphe 2">Des automatisations GitHub font le reste : statut Twitch (direct, abonnés, avatars), jeux récents, minification avec mise à jour du cache, vérification des liens, contrôle de la forme des données, et des tests automatiques dans un vrai navigateur à chaque modification.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p10.status" data-edit-label="Coulisses · Ce site — note">Une règle maison : toute nouvelle page doit aussi être gérable depuis l'admin, et c'est vérifié automatiquement</span></div>
+          <div class="project-stack" data-edit="coulisses.p10.stack" data-edit-label="Coulisses · Ce site — technologies">HTML · CSS · JavaScript · GitHub Pages · GitHub Actions</div>
+        </div>
+        <div class="project-visuals">
+          <div class="project-diagram">
+            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-st" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
+                </marker>
+              </defs>
+              <line x1="150" y1="130" x2="198" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-st)"/>
+              <line x1="332" y1="130" x2="386" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-st)"/>
+              <line x1="260" y1="174" x2="260" y2="214" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-st)" marker-start="url(#arrow-st)"/>
+              <rect x="8" y="92" width="142" height="76" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Admin</text>
+              <text x="79" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">navigateur · sans code</text>
+              <rect x="200" y="92" width="132" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+              <text x="266" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">GitHub</text>
+              <text x="266" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">versions · données</text>
+              <rect x="388" y="92" width="124" height="76" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="450" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Site</text>
+              <text x="450" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">GitHub Pages</text>
+              <rect x="200" y="216" width="132" height="36" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="266" y="232" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Actions</text>
+              <text x="266" y="248" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Twitch · tests</text>
             </svg>
           </div>
         </div>

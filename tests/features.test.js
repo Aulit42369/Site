@@ -89,13 +89,13 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     check('coulisses title override', (await p.innerHTML('[data-edit="coulisses.p1.title"]')).includes('<em class="accent">neuf</em>'));
     check('extra project rendered (1 valid, empty dropped)', await p.locator('.project-text-only').count()===1);
     check('extra project content escaped', (await p.innerHTML('.project-text-only')).includes('&lt;b&gt;2&lt;/b&gt;') && (await p.innerHTML('.project-text-only h2')).includes('<em class="accent">outil</em>'));
-    check('extra project after the others', await p.evaluate(()=>{const b=[...document.querySelectorAll('.project-block')];return b[b.length-1].classList.contains('project-text-only')&&b.length===9;}));
+    check('extra project after the others', await p.evaluate(()=>{const b=[...document.querySelectorAll('.project-block')];return b[b.length-1].classList.contains('project-text-only')&&b.length===12;}));
     await p.screenshot({path:'coulisses-extra.png',clip:{x:0,y:0,width:1280,height:700}});
     check('no page errors (coulisses)', p.errs.length===0); await p.close();
     rm('pages.json'); rm('site.json');
     // pages without data keep default
     p = await newPage(); await p.goto(BASE+'/coulisses.html'); await p.waitForTimeout(300);
-    check('coulisses without pages.json: 7 blocks, no extras', await p.locator('.project-block').count()===8 && await p.locator('.project-text-only').count()===0);
+    check('coulisses without pages.json: 11 blocks, no extras', await p.locator('.project-block').count()===11 && await p.locator('.project-text-only').count()===0);
     check('no page errors (coulisses default)', p.errs.length===0); await p.close();
 
     // ===== planning exceptions =====
