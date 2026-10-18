@@ -62,9 +62,6 @@
   .project-diagram-svg { width: 100%; height: auto; display: block; }
   .project-preview { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 4px; padding: 18px 20px; }
   .project-preview-svg { width: 100%; height: auto; display: block; }
-  .project-shot { margin-bottom:16px; }
-  .project-shot img { width:100%; height:auto; display:block; border:1px solid var(--line); border-radius:4px; background:var(--surface); }
-  .project-shot .preview-label { margin-top:8px; }
   .preview-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
   .status-note { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-top: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; }
   .status-note .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); flex-shrink: 0; }
@@ -492,36 +489,70 @@
           <div class="project-stack" data-edit="coulisses.p9.stack" data-edit-label="Coulisses · Jeux mobiles — technologies">PWA · Android Studio · GitHub Pages</div>
         </div>
         <div class="project-visuals">
-          <div class="project-shot">
-            <img src="img/coulisses-jeux.png" alt="Capture réelle de la page Jeux de ce site" loading="lazy">
-            <div class="preview-label">Capture réelle de la page Jeux de ce site</div>
-          </div>
           <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+            <svg class="project-diagram-svg" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrations des quatre jeux : fusion d'orbes, labyrinthe dans le noir, ondes, évasion multi-téléphones">
               <defs>
-                <marker id="arrow-jm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#9b5cff"/>
-                </marker>
+                <radialGradient id="gO1" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff3c4"/><stop offset="0.5" stop-color="#ffb020"/><stop offset="1" stop-color="#8a4b00"/></radialGradient>
+                <radialGradient id="gO2" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset="0.35" stop-color="#ffd04d"/><stop offset="1" stop-color="#b86a00"/></radialGradient>
               </defs>
-              <line x1="130" y1="52" x2="196" y2="112" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
-              <line x1="130" y1="98" x2="196" y2="126" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
-              <line x1="130" y1="144" x2="196" y2="140" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
-              <line x1="130" y1="190" x2="196" y2="154" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
-              <line x1="332" y1="130" x2="386" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-jm)"/>
-              <rect x="8" y="28" width="122" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="69" y="56" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">LUMEN</text>
-              <rect x="8" y="74" width="122" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="69" y="102" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">ÉCHO</text>
-              <rect x="8" y="120" width="122" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="69" y="148" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Résonance</text>
-              <rect x="8" y="166" width="122" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="69" y="194" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Fragments</text>
-              <rect x="198" y="90" width="134" height="80" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
-              <text x="265" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">PWA</text>
-              <text x="265" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">installable</text>
-              <rect x="388" y="90" width="124" height="80" rx="6" fill="none" stroke="#9b5cff"/>
-              <text x="450" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Google Play</text>
-              <text x="450" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">bientôt</text>
+              <g transform="translate(0,0)">
+                <rect width="250" height="150" rx="8" fill="#0a1020" stroke="#1a2540"/>
+                <line x1="0" y1="0" x2="250" y2="0" stroke="#ffb020" stroke-width="2"/>
+                <text x="14" y="136" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">LUMEN</text>
+                <text x="67" y="136" fill="#ffb020" font-family="Rajdhani, sans-serif" font-size="10">fusion d'orbes</text>
+                <circle cx="62" cy="62" r="14" fill="url(#gO1)"/>
+                <circle cx="100" cy="68" r="14" fill="url(#gO1)"/>
+                <path d="M118 62 L142 62" stroke="#ffb020" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <path d="M138 56 L144 62 L138 68" fill="none" stroke="#ffb020" stroke-width="1.5"/>
+                <circle cx="188" cy="62" r="30" fill="url(#gO2)"/>
+                <circle cx="188" cy="62" r="42" fill="none" stroke="#ffb020" stroke-opacity="0.25"/>
+                <circle cx="80" cy="108" r="7" fill="url(#gO1)" opacity="0.7"/>
+                <circle cx="122" cy="104" r="9" fill="url(#gO1)" opacity="0.7"/>
+              </g>
+              <g transform="translate(270,0)">
+                <rect width="250" height="150" rx="8" fill="#0a1020" stroke="#1a2540"/>
+                <line x1="0" y1="0" x2="250" y2="0" stroke="#00f5ff" stroke-width="2"/>
+                <text x="14" y="136" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">ÉCHO</text>
+                <text x="58" y="136" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="10">labyrinthe dans le noir</text>
+                <g stroke="#1a2c4a" stroke-width="3" fill="none" stroke-linecap="round">
+                  <path d="M30 30 H100 V60 H60 V90 H150"/><path d="M130 30 H220 V70"/><path d="M180 100 H220 V50 H170"/><path d="M30 110 H110"/>
+                </g>
+                <circle cx="60" cy="75" r="5" fill="#00f5ff"/>
+                <circle cx="60" cy="75" r="16" fill="none" stroke="#00f5ff" stroke-opacity="0.7"/>
+                <circle cx="60" cy="75" r="32" fill="none" stroke="#00f5ff" stroke-opacity="0.4"/>
+                <circle cx="60" cy="75" r="50" fill="none" stroke="#00f5ff" stroke-opacity="0.18"/>
+                <path d="M120 90 H150" stroke="#00f5ff" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+                <rect x="212" y="62" width="10" height="16" rx="2" fill="none" stroke="#ffb020"/>
+              </g>
+              <g transform="translate(0,170)">
+                <rect width="250" height="150" rx="8" fill="#0a1020" stroke="#1a2540"/>
+                <line x1="0" y1="0" x2="250" y2="0" stroke="#9b5cff" stroke-width="2"/>
+                <text x="14" y="136" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Résonance</text>
+                <text x="103" y="136" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="10">jeu d'ondes</text>
+                <g fill="none" stroke="#9b5cff">
+                  <circle cx="90" cy="70" r="14" stroke-opacity="0.9"/><circle cx="90" cy="70" r="28" stroke-opacity="0.6"/><circle cx="90" cy="70" r="42" stroke-opacity="0.35"/><circle cx="90" cy="70" r="56" stroke-opacity="0.15"/>
+                </g>
+                <g fill="none" stroke="#ff2d78">
+                  <circle cx="165" cy="70" r="14" stroke-opacity="0.9"/><circle cx="165" cy="70" r="28" stroke-opacity="0.6"/><circle cx="165" cy="70" r="42" stroke-opacity="0.35"/><circle cx="165" cy="70" r="56" stroke-opacity="0.15"/>
+                </g>
+                <circle cx="127" cy="52" r="4" fill="#e8eaf6"/><circle cx="127" cy="88" r="4" fill="#e8eaf6"/>
+              </g>
+              <g transform="translate(270,170)">
+                <rect width="250" height="150" rx="8" fill="#0a1020" stroke="#1a2540"/>
+                <line x1="0" y1="0" x2="250" y2="0" stroke="#ff2d78" stroke-width="2"/>
+                <text x="14" y="136" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Fragments</text>
+                <text x="103" y="136" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="10">évasion multi-téléphones</text>
+                <rect x="30" y="22" width="44" height="82" rx="7" fill="#0d1428" stroke="#ff2d78"/>
+                <rect x="36" y="32" width="32" height="56" rx="3" fill="none" stroke="#ff2d78" stroke-opacity="0.4"/>
+                <path d="M{0} 40 l10 0 l0 14 l-10 0 z" fill="#ff2d78" opacity="0.8" transform="translate(40,0)"/>
+                <rect x="100" y="22" width="44" height="82" rx="7" fill="#0d1428" stroke="#00f5ff"/>
+                <rect x="106" y="32" width="32" height="56" rx="3" fill="none" stroke="#00f5ff" stroke-opacity="0.4"/>
+                <path d="M0 62 l10 0 l0 14 l-10 0 z" fill="#00f5ff" opacity="0.8" transform="translate(110,0)"/>
+                <rect x="170" y="22" width="44" height="82" rx="7" fill="#0d1428" stroke="#9b5cff"/>
+                <rect x="176" y="32" width="32" height="56" rx="3" fill="none" stroke="#9b5cff" stroke-opacity="0.4"/>
+                <path d="M0 40 l10 0 l0 14 l-10 0 z" fill="#9b5cff" opacity="0.8" transform="translate(180,0)"/>
+                <path d="M78 54 H98 M148 66 H168" stroke="#e8eaf6" stroke-opacity="0.5" stroke-dasharray="3 3"/>
+              </g>
             </svg>
           </div>
         </div>
