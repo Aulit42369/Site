@@ -25,8 +25,10 @@
   },
   "aulit42369": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": false,
+    "live": true,
+    "game": "7 Days to Die",
+    "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/271304_IGDB-144x192.jpg",
     "followers": 188
   },
-  "_updated_at": "2026-10-21T09:00:58.889Z"
+  "_updated_at": "2026-10-21T09:10:27.361Z"
 }

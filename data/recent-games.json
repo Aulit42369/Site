@@ -1,5 +1,10 @@
 [
   {
+    "game": "7 Days to Die",
+    "date": "2026-10-21",
+    "art": "https://static-cdn.jtvnw.net/ttv-boxart/271304_IGDB-144x192.jpg"
+  },
+  {
     "game": "Folded Fables: Tidy Up The Dragon Hoard",
     "date": "2026-10-20",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/21467144_IGDB-144x192.jpg"
@@ -8,11 +13,6 @@
     "game": "Outbound",
     "date": "2026-10-20",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/1731950274_IGDB-144x192.jpg"
-  },
-  {
-    "game": "7 Days to Die",
-    "date": "2026-10-16",
-    "art": "https://static-cdn.jtvnw.net/ttv-boxart/271304_IGDB-144x192.jpg"
   },
   {
     "game": "R.E.P.O.",
