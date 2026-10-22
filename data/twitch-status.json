@@ -1,11 +1,4 @@
 {
-  "aulit42369": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": true,
-    "game": "7 Days to Die",
-    "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/271304_IGDB-144x192.jpg",
-    "followers": 189
-  },
   "hagosan": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
     "live": false
@@ -31,5 +24,12 @@
     "live": true,
     "game": "Art"
   },
-  "_updated_at": "2026-10-22T16:20:30.056Z"
+  "aulit42369": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
+    "live": true,
+    "game": "7 Days to Die",
+    "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/271304_IGDB-144x192.jpg",
+    "followers": 189
+  },
+  "_updated_at": "2026-10-22T16:30:47.084Z"
 }
