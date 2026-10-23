@@ -34,6 +34,9 @@ const check = (l, c) => { console.log((c ? 'PASS' : 'FAIL') + ' — ' + l); c ? 
   await page.click('#savePagesBtn');
   check('URL de bouton dangereuse refusée', await page.isVisible('#statusMsg.err') && !gh.puts.some((x) => x.p === 'data/custom-pages.json'));
   await page.locator('[data-bi="1"][data-bf="url"]').fill('https://discord.com/invite/abc');
+  accept = false; dialogs.length = 0;
+  await page.click('#savePagesBtn');
+  check('brouillon : avertissement « lisible par tous » avant enregistrement', dialogs.some((m) => m.includes('brouillon') && m.includes('lisible par tous')) && !gh.puts.some((x) => x.p === 'data/custom-pages.json'));
   await page.locator('[data-pf="published"]').check();
   await page.locator('[data-pf="menu"]').check();
   accept = false; dialogs.length = 0;

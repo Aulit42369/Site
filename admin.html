@@ -167,12 +167,13 @@
       <label for="tokenInput">Jeton d'accès GitHub (fine-grained, limité à ce dépôt)</label>
       <input type="password" id="tokenInput" placeholder="github_pat_...">
     </div>
+    <label class="admin-note" style="display:flex;gap:8px;align-items:center;margin-bottom:12px;"><input type="checkbox" id="rememberToken"> Se souvenir de moi sur cet appareil (sinon le jeton est oublié à la fermeture de l'onglet)</label>
     <button class="btn btn-primary" id="connectBtn">Se connecter</button>
     <p class="admin-note" style="margin-top:20px;">
       Pas encore de jeton ? Sur GitHub : <strong>Settings</strong> (ton compte, pas le repo) → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Fine-grained tokens</strong> → <strong>Generate new token</strong>.
       Repository access : <strong>Only select repositories</strong> → choisis <code>Site</code>. Permissions → <strong>Contents</strong> → <strong>Read and write</strong>. Rien d'autre à cocher.
     </p>
-    <p class="admin-note warn">Le jeton reste uniquement dans ce navigateur (localStorage) — ne l'utilise pas sur un ordinateur partagé, et ne le colle nulle part ailleurs. Tu peux le révoquer à tout moment depuis GitHub.</p>
+    <p class="admin-note warn">Le jeton reste uniquement dans ce navigateur : dans cet onglet seulement par défaut, ou durablement (localStorage) si tu coches « Se souvenir de moi » — à éviter sur un ordinateur partagé. Ne le colle nulle part ailleurs. Tu peux le révoquer à tout moment depuis GitHub.</p>
   </div>
 
   <div id="adminPanel" style="display:none;">
@@ -270,7 +271,7 @@
     </div>
 
     <div id="pagesPanel" class="admin-panel" style="display:none;">
-      <p class="admin-note">Crée de nouvelles pages (règles, partenaires, FAQ d'un événement…) sans toucher au code. Chaque page est composée de blocs (titre, texte, liste, bouton, image). Une page <strong>publiée</strong> est accessible à l'adresse <code>page.html?p=identifiant</code> ; cochée <strong>Dans le menu</strong>, elle apparaît dans la navigation de tout le site.</p>
+      <p class="admin-note">Crée de nouvelles pages (règles, partenaires, FAQ d'un événement…) sans toucher au code. Chaque page est composée de blocs (titre, texte, liste, bouton, image). Une page <strong>publiée</strong> est accessible à l'adresse <code>page.html?p=identifiant</code> ; cochée <strong>Dans le menu</strong>, elle apparaît dans la navigation de tout le site. Un <strong>brouillon</strong> n'est pas affiché, mais son texte reste lisible par tous dans <code>data/custom-pages.json</code> : n'y mets rien de confidentiel.</p>
       <div id="pagesEditor"></div>
       <button type="button" class="ap-add" id="addPageBtn">+ Nouvelle page</button>
       <div style="margin-top:14px;"><button class="btn btn-primary" id="savePagesBtn">Enregistrer les pages</button></div>

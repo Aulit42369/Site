@@ -24,3 +24,10 @@ Une page créée depuis l'admin (onglet « Pages ») n'a rien de tout ça à fai
 ```
 cd tests && npm install && npx playwright install chromium && node run-all.js
 ```
+
+## Sécurité de l'admin (23/10)
+
+- **Jeton GitHub** (`admin.js`, `getToken` / `setToken`) : gardé par défaut en `sessionStorage` (oublié à la fermeture de l'onglet, invisible des autres onglets du site). Case « Se souvenir de moi sur cet appareil » → `localStorage` + drapeau `aulit_admin_token_remember`. Un ancien jeton laissé en `localStorage` sans ce drapeau est déplacé en `sessionStorage` au chargement.
+- **Piège** : l'origine `aulit42369.github.io` est partagée par toutes les pages publiques (et tous les dépôts Pages du compte). Tout script qu'elles chargent peut lire le `localStorage` — et le `sessionStorage` de l'onglet admin, car l'aperçu de l'onglet Textes ouvre une page publique en iframe de même origine.
+- **GoatCounter** : chargé en version figée `count.v4.js` avec `integrity` (SRI) + `crossorigin="anonymous"` sur les 12 pages publiques. Si GoatCounter sort une nouvelle version, ne PAS remettre `count.js` : recalculer le hash (`curl -s https://gc.zgo.at/count.vX.js | openssl dgst -sha384 -binary | openssl base64 -A`) et le mettre partout. Vérifié par `tests/admin-token.test.js`.
+- **Brouillons et annonces programmées ne sont pas secrets** (piège) : le site est statique et le dépôt public. Une page décochée « Publiée » reste entière dans `data/custom-pages.json`, une annonce désactivée ou programmée reste dans `data/site.json` (et tout reste dans l'historique git). Le filtre `published !== false` / `announcementActive` (`main.js`) ne fait que masquer l'affichage. L'admin le dit désormais (texte de l'onglet Pages, case « Publiée », confirmation d'enregistrement, état du bandeau). Vérifié par `tests/admin-features.test.js`. Pour un vrai brouillon privé, il faudrait le garder hors du dépôt (voir la question ouverte du 23/10).

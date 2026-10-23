@@ -30,10 +30,33 @@ const authGate = document.getElementById('authGate');
 const adminPanel = document.getElementById('adminPanel');
 const statusMsg = document.getElementById('statusMsg');
 
-function getToken() { return localStorage.getItem(TOKEN_KEY); }
+/* Jeton : par défaut en sessionStorage (oublié à la fermeture de l'onglet,
+   invisible des autres onglets du site). localStorage seulement si
+   « Se souvenir de moi » est coché : l'origine aulit42369.github.io est
+   partagée avec les pages publiques et leurs scripts. */
 const TOKEN_AT_KEY = 'aulit_admin_token_at';
-function setToken(t) { localStorage.setItem(TOKEN_KEY, t); localStorage.setItem(TOKEN_AT_KEY, String(Date.now())); }
-function clearToken() { localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(TOKEN_AT_KEY); }
+const TOKEN_REMEMBER_KEY = 'aulit_admin_token_remember';
+function getToken() {
+  const s = sessionStorage.getItem(TOKEN_KEY);
+  if (s) return s;
+  const l = localStorage.getItem(TOKEN_KEY);
+  // ancien jeton gardé sans « se souvenir » : on le déplace dans l'onglet
+  if (l && localStorage.getItem(TOKEN_REMEMBER_KEY) !== '1') {
+    sessionStorage.setItem(TOKEN_KEY, l);
+    localStorage.removeItem(TOKEN_KEY);
+  }
+  return l;
+}
+function setToken(t, remember) {
+  clearToken();
+  if (remember) { localStorage.setItem(TOKEN_KEY, t); localStorage.setItem(TOKEN_REMEMBER_KEY, '1'); }
+  else sessionStorage.setItem(TOKEN_KEY, t);
+  localStorage.setItem(TOKEN_AT_KEY, String(Date.now()));
+}
+function clearToken() {
+  sessionStorage.removeItem(TOKEN_KEY);
+  [TOKEN_KEY, TOKEN_AT_KEY, TOKEN_REMEMBER_KEY].forEach((k) => localStorage.removeItem(k));
+}
 
 function showStatus(text, kind) {
   statusMsg.textContent = text;
@@ -829,9 +852,9 @@ function normalizeSite(d) {
 let siteState = { data: normalizeSite(null), sha: null };
 function announcementStatus(a) {
   if (!a.text.trim()) return 'Aucun texte saisi.';
-  if (!a.enabled) return 'Désactivée — rien ne s\'affiche sur le site.';
+  if (!a.enabled) return 'Désactivée — rien ne s\'affiche sur le site (le texte reste lisible dans data/site.json).';
   const t = todayStr();
-  if (a.from && t < a.from) return 'Programmée — elle apparaîtra le ' + frDate(a.from) + '.';
+  if (a.from && t < a.from) return 'Programmée — elle apparaîtra le ' + frDate(a.from) + ' (le texte est déjà lisible dans data/site.json).';
   if (a.until && t > a.until) return 'Expirée — elle ne s\'affiche plus.';
   return 'Affichée sur toutes les pages' + (a.until ? ' jusqu\'au ' + frDate(a.until) + ' inclus' : ' (sans date de fin)') + '.';
 }
@@ -1401,7 +1424,7 @@ function renderPagesEditor() {
           <div class="field"><label>Identifiant (adresse)</label><input type="text" data-pi="${pi}" data-pf="slug" value="${escapeHtml(p.slug)}" placeholder="auto d'après le titre"></div>
         </div>
         <div class="field"><label>Introduction (facultatif)</label><textarea rows="2" data-pi="${pi}" data-pf="intro">${escapeHtml(p.intro)}</textarea></div>
-        <label class="ap-check"><input type="checkbox" data-pi="${pi}" data-pf="published" ${p.published ? 'checked' : ''}> Publiée (visible sur le site)</label>
+        <label class="ap-check"><input type="checkbox" data-pi="${pi}" data-pf="published" ${p.published ? 'checked' : ''}> Publiée (affichée sur le site — un brouillon n'est pas affiché, mais son texte reste lisible dans data/custom-pages.json)</label>
         <label class="ap-check"><input type="checkbox" data-pi="${pi}" data-pf="menu" ${p.menu ? 'checked' : ''}> Dans le menu de navigation</label>
         ${p.blocks.map((b, bi) => `
           <div class="ap-row">
@@ -1494,7 +1517,9 @@ async function savePages() {
     out.push({ slug, title, intro: p.intro.trim(), published: !!p.published, menu: !!p.menu, blocks });
   }
   const lines = out.map((p) => '• ' + p.title + ' — ' + (p.published ? 'publiée' : 'brouillon') + (p.menu ? ', dans le menu' : '')).join('\n');
-  if (!confirm('Enregistrer ' + out.length + ' page' + (out.length > 1 ? 's' : '') + ' ?\n\n' + lines)) return;
+  // Site statique + dépôt public : un brouillon est masqué à l'affichage, pas secret.
+  const draftWarn = out.some((p) => !p.published) ? '\n\nAttention : le texte des brouillons reste lisible par tous dans data/custom-pages.json (et dans l\'historique GitHub). N\'y mets rien de confidentiel.' : '';
+  if (!confirm('Enregistrer ' + out.length + ' page' + (out.length > 1 ? 's' : '') + ' ?\n\n' + lines + draftWarn)) return;
   showStatus('Enregistrement...', 'pending');
   try {
     await customCol.save({ pages: out }, 'Mise à jour des pages personnalisées');
@@ -1814,7 +1839,7 @@ async function init() {
 document.getElementById('connectBtn').addEventListener('click', () => {
   const value = document.getElementById('tokenInput').value.trim();
   if (!value) return;
-  setToken(value);
+  setToken(value, document.getElementById('rememberToken').checked);
   init();
 });
 
