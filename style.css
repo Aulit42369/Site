@@ -288,3 +288,66 @@ body.nav-open iframe { visibility: hidden; }
 @media (max-width: 600px) {
   .announce { flex-direction: column; gap: 4px; font-size: 0.88rem; }
 }
+
+/* ---------- liens légaux du pied de page ---------- */
+.site-footer .legal-links { display: inline-flex; flex-wrap: wrap; gap: 4px 14px; letter-spacing: 0.08em; }
+.site-footer .legal-links a,
+.site-footer .legal-links button { font: inherit; font-size: 0.78rem; color: var(--dim); background: none; border: none; padding: 0; cursor: pointer; }
+.site-footer .legal-links a:hover,
+.site-footer .legal-links button:hover { color: var(--cyan); }
+
+/* ---------- consentement aux lecteurs Twitch (voir main.js) ---------- */
+/* Remplaçant de l'iframe tant que le visiteur n'a pas accepté :
+   même format 16/9, dans le cadre "diffusion" qui l'entoure. */
+.consent-ph {
+  aspect-ratio: 16 / 9; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 24px; text-align: center; background-color: var(--surface2);
+}
+.consent-ph-tag { font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--magenta); }
+.consent-ph p { margin: 0; max-width: 420px; font-size: 0.95rem; }
+.consent-ph-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; margin-top: 6px; }
+.consent-ph-actions a { color: var(--muted); font-weight: 700; font-size: 0.9rem; text-decoration: underline; text-underline-offset: 3px; }
+.consent-ph-actions a:hover { color: var(--cyan); }
+@media (max-width: 480px) {
+  .consent-ph { aspect-ratio: auto; min-height: 200px; }
+  .consent-ph p { font-size: 0.88rem; }
+}
+
+/* l'iframe de l'accueil a un display:block en ligne : sans !important, hidden ne la cacherait pas */
+iframe[data-consent-src][hidden] { display: none !important; }
+
+/* Bandeau de choix : Accepter et Refuser ont exactement le même poids. */
+.consent-bar {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 60;
+  width: calc(100% - 32px); max-width: 760px;
+  display: flex; align-items: center; gap: 18px; padding: 18px 22px;
+  background: linear-gradient(180deg, var(--surface), var(--surface2));
+  border: 1px solid var(--line); border-radius: 4px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+.consent-bar::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent);
+  box-shadow: 0 0 10px var(--cyan);
+}
+.consent-bar p { margin: 0; font-size: 0.95rem; line-height: 1.5; }
+.consent-bar strong { display: block; font-family: 'Orbitron', sans-serif; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); margin-bottom: 4px; }
+.consent-bar p a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+.consent-bar-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.consent-bar-actions .btn { padding: 10px 20px; }
+@media (max-width: 600px) {
+  .consent-bar { flex-direction: column; align-items: stretch; bottom: 12px; padding: 16px; }
+  .consent-bar-actions .btn { flex: 1; justify-content: center; }
+}
+body.nav-open .consent-bar { display: none; }
+
+/* ---------- pages légales (mentions, confidentialité, CGU) ---------- */
+.legal-content { max-width: 720px; }
+.legal-content h2 { font-size: 1.25rem; margin-top: 42px; margin-bottom: 14px; }
+.legal-content h2:first-child { margin-top: 0; }
+.legal-content h3.legal-sub { font-size: 0.95rem; margin: 26px 0 8px; color: var(--cyan); }
+.legal-content p, .legal-content li { color: #c3cadb; line-height: 1.7; }
+.legal-content ul { padding-left: 22px; margin-top: 8px; }
+.legal-content li { margin-bottom: 6px; }
+.legal-content a { color: var(--cyan); }
+.legal-content code { font-size: 0.9em; color: var(--white); background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; }

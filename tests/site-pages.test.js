@@ -101,7 +101,8 @@ function writeClipsXSS() {
     check('clips.html: <script> in title did not execute', !clipXss);
     const titleHtml = await page.evaluate(() => document.querySelector('.clip-title').innerHTML);
     check('clips.html: title rendered escaped, text preserved', titleHtml.includes('&lt;script&gt;') && titleHtml.includes('Titre'));
-    const iframeSrc = await page.getAttribute('.clip-card iframe', 'src');
+    // lecteur Twitch soumis au consentement : l'adresse attend dans data-consent-src
+    const iframeSrc = await page.getAttribute('.clip-card iframe', 'data-consent-src');
     check('clips.html: iframe src still points to the real slug', iframeSrc.includes('clip=abc123'));
     await page.close();
 

@@ -1,3 +1,11 @@
 node_modules/
 tests/node_modules/
 tests/*.png
+# captures produites par les tests quand on les lance depuis la racine
+/admin-histo.png
+/admin-sante.png
+/admin-site.png
+/admin-textes.png
+/announce-mobile.png
+/coulisses-extra.png
+/planning-exceptions.png

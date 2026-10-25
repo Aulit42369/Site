@@ -47,6 +47,8 @@ const CORE_PAGES = [
   { file: 'escape-fragments.html', label: 'Escape Fragments', menu: true },
   { file: 'contact.html', label: 'Contact', menu: true, last: true },
   { file: 'mentions-legales.html', label: 'Mentions légales', menu: false, sitemap: false },
+  { file: 'confidentialite.html', label: 'Confidentialité et cookies', menu: false, sitemap: false },
+  { file: 'cgu.html', label: 'Conditions d’utilisation', menu: false, sitemap: false },
   { file: 'page.html', label: 'Page personnalisée', menu: false, generic: true },
   { file: '404.html', label: 'Page introuvable', menu: false, sitemap: false },
 ];
@@ -301,3 +303,75 @@ backToTop.addEventListener('click', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
 });
+
+
+/* ================================================================
+   Consentement aux contenus tiers (lecteurs Twitch du direct et des
+   clips). Twitch dépose ses propres cookies dès que son lecteur se
+   charge : les iframes concernées portent data-consent-src au lieu de
+   src et ne se chargent qu'après « Accepter ». Le site lui-même ne
+   dépose aucun cookie. Choix gardé en localStorage (purement
+   fonctionnel, pas de consentement requis pour ça) et modifiable via
+   le bouton « Cookies » du pied de page. Les pages qui créent leurs
+   iframes après coup (clips.html) appellent applyConsent(élément).
+   ================================================================ */
+const CONSENT_KEY = 'aulit_consent_tiers';
+let consentMem = null; // secours si le stockage est bloqué : choix valable pour cette page
+function consentGet() {
+  try { return localStorage.getItem(CONSENT_KEY) || consentMem; } catch (e) { return consentMem; }
+}
+
+function applyConsent(root) {
+  const ok = consentGet() === 'oui';
+  root.querySelectorAll('iframe[data-consent-src]').forEach((f) => {
+    const old = f.previousElementSibling;
+    if (old && old.classList.contains('consent-ph')) old.remove();
+    if (ok) {
+      f.hidden = false;
+      if (f.getAttribute('src') !== f.dataset.consentSrc) f.src = f.dataset.consentSrc;
+      return;
+    }
+    f.hidden = true;
+    const link = f.dataset.consentLink || 'https://www.twitch.tv/aulit42369';
+    const ph = document.createElement('div');
+    ph.className = 'consent-ph grid-bg';
+    ph.innerHTML = '<div class="consent-ph-tag">Lecteur Twitch en pause</div>' +
+      '<p>Ce lecteur vient de Twitch, qui dépose ses propres cookies. Il ne se charge qu’avec ton accord.</p>' +
+      '<div class="consent-ph-actions"><button type="button" class="btn btn-secondary" data-consent="oui">Afficher le lecteur</button>' +
+      '<a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Regarder sur Twitch</a></div>';
+    f.parentNode.insertBefore(ph, f);
+    if (consentGet() === null) showConsentBar();
+  });
+}
+
+function showConsentBar() {
+  if (document.getElementById('consentBar')) return;
+  const bar = document.createElement('div');
+  bar.id = 'consentBar';
+  bar.className = 'consent-bar';
+  bar.setAttribute('role', 'region');
+  bar.setAttribute('aria-label', 'Choix des cookies');
+  bar.innerHTML = '<p><strong>Cookies de Twitch</strong> Les vidéos du site passent par le lecteur Twitch, qui dépose ses propres cookies. Le site, lui, n’en dépose aucun. ' +
+    '<a href="confidentialite.html#cookies">En savoir plus</a></p>' +
+    '<div class="consent-bar-actions"><button type="button" class="btn btn-secondary" data-consent="non">Refuser</button>' +
+    '<button type="button" class="btn btn-secondary" data-consent="oui">Accepter</button></div>';
+  document.body.appendChild(bar);
+}
+
+document.addEventListener('click', (e) => {
+  const choice = e.target.closest('[data-consent]');
+  if (choice) {
+    const was = consentGet();
+    consentMem = choice.dataset.consent;
+    try { localStorage.setItem(CONSENT_KEY, consentMem); } catch (err) { /* consentMem prend le relais */ }
+    const bar = document.getElementById('consentBar');
+    if (bar) bar.remove();
+    // retrait d'un accord : on recharge pour couper les lecteurs déjà ouverts
+    if (was === 'oui' && choice.dataset.consent === 'non') location.reload();
+    else applyConsent(document);
+    return;
+  }
+  if (e.target.closest('[data-consent-open]')) showConsentBar();
+});
+
+applyConsent(document);

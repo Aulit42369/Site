@@ -14,11 +14,12 @@
 <link rel="canonical" href="https://aulit42369.github.io/Site/contact.html">
 <meta property="og:image" content="https://aulit42369.github.io/Site/og/contact-og.png">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Contacter AULIT42369.">
 
 <link rel="stylesheet" href="fonts.css">
-<link rel="stylesheet" href="style.min.css?v=1de905aa">
+<link rel="stylesheet" href="style.min.css?v=cea20dbe">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,6 +58,8 @@
   .success-box { display: none; }
   .success-box.show { display: block; }
   .hp-field { position: absolute; left: -9999px; top: -9999px; }
+  .form-error { margin: 0; color: var(--magenta); font-weight: 600; }
+  .form-note a { color: var(--cyan); }
 </style>
 </head>
 <body>
@@ -98,22 +101,24 @@
       <form class="contact-form card" id="contactForm" action="https://formspree.io/f/mqeroedk" method="POST">
         <div class="field">
           <label for="name">Nom</label>
-          <input type="text" id="name" name="name" required>
+          <input type="text" id="name" name="name" required minlength="2" maxlength="80" autocomplete="name">
         </div>
         <div class="field">
           <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="email" required maxlength="254" autocomplete="email">
         </div>
         <div class="field">
           <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
+          <textarea id="message" name="message" required minlength="10" maxlength="5000"></textarea>
         </div>
         <div class="hp-field" aria-hidden="true">
           <label for="_gotcha">Ne pas remplir</label>
           <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
         </div>
+        <p class="form-error" id="formError" role="alert" hidden></p>
         <button type="submit" class="btn btn-primary">Envoyer</button>
         <p class="form-note" data-edit="contact.note" data-edit-label="Contact — note sous le formulaire">Réponse par e-mail, généralement sous quelques jours.</p>
+        <p class="form-note" data-edit="contact.privacy" data-edit-label="Contact — mention données personnelles">Ton nom et ton e-mail servent uniquement à te répondre. Détails : <a href="confidentialite.html">confidentialité</a>.</p>
       </form>
 
       <div class="card v success-box" id="successBox" style="margin-top:18px;">
@@ -126,7 +131,7 @@
 
 <footer class="site-footer">
   <div class="container">
-    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:var(--dim);font-size:0.78rem;">Mentions légales</a></div>
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <span class="legal-links"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgu.html">CGU</a><button type="button" data-consent-open>Cookies</button></span></div>
     <div class="socials">
       <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
       <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
@@ -136,7 +141,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=c04ae030"></script>
+<script src="main.min.js?v=6d0602f6"></script>
 
 <script>
   // Envoi sans quitter la page : Formspree répond en JSON si on le lui
@@ -144,8 +149,39 @@
   // formulaire plutôt que de rediriger vers une page à part.
   const form = document.getElementById('contactForm');
   const successBox = document.getElementById('successBox');
+  const formError = document.getElementById('formError');
+  const openedAt = Date.now();
+  const MIN_FILL_MS = 3000; // un humain met plus de 3 s à remplir le formulaire, un robot non
+
+  // Messages d'erreur en français, quel que soit le navigateur
+  const MESSAGES = {
+    name: { valueMissing: 'Indique ton nom ou ton pseudo.', tooShort: 'Ton nom doit faire au moins 2 caractères.' },
+    email: { valueMissing: 'Indique ton adresse e-mail pour que je puisse te répondre.', typeMismatch: 'Cette adresse e-mail ne semble pas valide (ex. : nom@exemple.fr).' },
+    message: { valueMissing: 'Écris ton message.', tooShort: 'Ton message est un peu court (10 caractères minimum).' },
+  };
+  form.querySelectorAll('input:not([name="_gotcha"]), textarea').forEach((el) => {
+    el.addEventListener('invalid', () => {
+      const m = MESSAGES[el.name] || {};
+      const k = Object.keys(m).find((key) => el.validity[key]);
+      el.setCustomValidity(k ? m[k] : '');
+    });
+    el.addEventListener('input', () => el.setCustomValidity(''));
+  });
+
+  function showSuccess() {
+    form.style.display = 'none';
+    successBox.classList.add('show');
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    formError.hidden = true;
+    // Anti-spam : champ piège rempli ou envoi trop rapide = robot. On fait
+    // comme si tout allait bien, sans rien envoyer.
+    if (form.elements._gotcha.value || Date.now() - openedAt < MIN_FILL_MS) {
+      showSuccess();
+      return;
+    }
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Envoi...';
@@ -156,15 +192,15 @@
         headers: { 'Accept': 'application/json' },
       });
       if (res.ok) {
-        form.style.display = 'none';
-        successBox.classList.add('show');
+        showSuccess();
       } else {
         throw new Error('Échec de l\'envoi');
       }
     } catch (err) {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Envoyer';
-      alert("L'envoi a échoué — réessaie, ou passe par le Discord en attendant.");
+      formError.textContent = "L'envoi a échoué — réessaie, ou passe par le Discord en attendant.";
+      formError.hidden = false;
     }
   });
 </script>
