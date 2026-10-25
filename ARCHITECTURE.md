@@ -48,6 +48,7 @@ Documentation technique détaillée : `docs/README.md`.
 - Fichiers locaux en CRLF (Windows) : `sync-nav.js --check` échoue en local mais passe en CI (LF). Ne pas lancer `sync-nav.js` sans `--check` en local.
 - Ne pas lancer les tests depuis la racine du dépôt : ils y déposent des captures (désormais ignorées par `.gitignore`).
 - Nouvelle iframe tierce : toujours `data-consent-src` (+ `applyConsent(élément)` si créée en JS), jamais `src` direct.
+- `coulisses.html` : `features.test.js` attend exactement 11 blocs projet ; un bloc ajouté dans le HTML demande de mettre ce test à jour (les projets ajoutés dans l'admin, `extraProjects`, ne comptent pas).
 - Nouvelle page : `CORE_PAGES` + `TEXT_PAGES` + pied de page avec les 4 liens légaux.
 
 - **Fichier `google9ad7f8bd44912903.html` (25/10)** : validation Google Search Console (propriété + sitemap envoyé). Site : fichier non nécessaire (propriété déjà validée avant), mais même règle pour tout fichier google*.html. Ne jamais le supprimer ni le renommer, sinon la propriété perd sa validation.

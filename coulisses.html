@@ -110,11 +110,12 @@
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p1.eyebrow" data-edit-label="Coulisses · Régie Mobile — sur-titre">// Régie Mobile</div>
           <h2 data-edit="coulisses.p1.title" data-edit-label="Coulisses · Régie Mobile — titre">Piloter le stream depuis le <em class="accent">téléphone</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p1.desc1" data-edit-label="Coulisses · Régie Mobile — paragraphe 1">Gérer le stream sans être devant l'ordinateur : titre, catégorie et tags sauvegardés directement sur Twitch, minuteur de démarrage qui déclenche scène et micro à la fin, pause pub programmable, grille de scènes OBS, suggestions de raid dans la catégorie en cours, modération du chat YouTube en direct, streamers suivis avec leur statut live, et gestion des récompenses de points de chaîne.</p>
-            <p data-edit="coulisses.p1.desc2" data-edit-label="Coulisses · Régie Mobile — paragraphe 2">Un générateur d'image d'annonce reprend l'identité visuelle du site pour prévenir que le stream commence, avec publication directe sur Instagram et Bluesky. Un moniteur de santé (débit, FPS, images perdues, CPU OBS) fait vibrer le téléphone si ça dégrade, et un simulateur teste les alertes sans attendre un vrai événement. En fin de session, le résumé s'exporte en Excel.</p>
+            <p data-edit="coulisses.p1.desc1" data-edit-label="Coulisses · Régie Mobile — paragraphe 1">Gérer le stream sans être devant l'ordinateur : titre, catégorie et tags enregistrés sur Twitch, minuteur de démarrage qui lance scène et micro, pause pub programmable, grille de scènes OBS, modération du chat YouTube en direct, récompenses de points de chaîne. En fin de live, la carte « Raid · La Cabane » liste les membres de La Cabane en direct : même jeu d'abord, puis les plus petites chaînes. Un appui lance le raid, un autre l'annule.</p>
+            <p data-edit="coulisses.p1.desc2" data-edit-label="Coulisses · Régie Mobile — paragraphe 2">Image d'annonce aux couleurs du site, publiée sur Instagram et Bluesky. Moniteur de santé qui fait vibrer le téléphone si le stream se dégrade, simulateur d'alertes, résumé de session en Excel. Les confirmations s'affichent dans la régie, plus dans les fenêtres du navigateur, et l'appli Android ne pèse plus qu'environ 700 Ko.</p>
+            <p data-edit="coulisses.p1.desc3" data-edit-label="Coulisses · Régie Mobile — paragraphe 3">Le vrai défi : la confier à d'autres streamers sans rien leur ouvrir. La régie fabrique elle-même un kit (page /kit) qui ne contient que les réglages de la personne, aucun accès de la régie d'origine. Les mises à jour sont signées : publiées en un clic, elles apparaissent chez les autres dans un bandeau « Mise à jour disponible », s'installent sur un appui, se défont si besoin et ne touchent jamais aux données.</p>
           </div>
-          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p1.status" data-edit-label="Coulisses · Régie Mobile — note">Une version simple à configurer, sans connaissances informatiques, est prévue pour d'autres streamers</span></div>
-          <div class="project-stack" data-edit="coulisses.p1.stack" data-edit-label="Coulisses · Régie Mobile — technologies">Node.js · React · zéro dépendance</div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p1.status" data-edit-label="Coulisses · Régie Mobile — note">Distribuable en kit à d'autres streamers, avec mises à jour automatiques signées</span></div>
+          <div class="project-stack" data-edit="coulisses.p1.stack" data-edit-label="Coulisses · Régie Mobile — technologies">Node.js · React · zéro dépendance · signature Ed25519 · Android</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -124,22 +125,31 @@
                   <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
                 </marker>
               </defs>
-              <line x1="130" y1="130" x2="196" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <line x1="336" y1="116" x2="396" y2="60" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <line x1="336" y1="130" x2="396" y2="129" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <line x1="336" y1="144" x2="396" y2="198" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <rect x="16" y="100" width="114" height="60" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="73" y="134" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Téléphone</text>
+              <line x1="130" y1="122" x2="196" y2="122" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+              <line x1="130" y1="206" x2="214" y2="170" stroke="#00f5ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-rm)"/>
+              <line x1="336" y1="104" x2="396" y2="37" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+              <line x1="336" y1="120" x2="396" y2="95" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+              <line x1="336" y1="140" x2="396" y2="153" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+              <line x1="336" y1="156" x2="396" y2="211" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
+              <rect x="16" y="92" width="114" height="60" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="73" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Téléphone</text>
+              <rect x="16" y="180" width="114" height="52" rx="6" fill="none" stroke="#1a2540" stroke-dasharray="4 3"/>
+              <text x="73" y="202" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Mises à jour</text>
+              <text x="73" y="218" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">signées · GitHub Pages</text>
               <rect x="200" y="94" width="136" height="72" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
               <text x="268" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Serveur</text>
               <text x="268" y="146" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Node.js</text>
-              <rect x="400" y="34" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="452" y="62" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">OBS</text>
-              <rect x="400" y="106" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="452" y="134" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Bluesky</text>
-              <rect x="400" y="178" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="452" y="198" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Chat</text>
-              <text x="452" y="214" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">YouTube</text>
+              <rect x="400" y="14" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="452" y="42" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">OBS</text>
+              <rect x="400" y="72" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="452" y="92" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Instagram</text>
+              <text x="452" y="108" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Bluesky</text>
+              <rect x="400" y="130" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="452" y="150" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Chat</text>
+              <text x="452" y="166" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">YouTube</text>
+              <rect x="400" y="188" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="452" y="208" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">La Cabane</text>
+              <text x="452" y="224" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">raid de fin de live</text>
             </svg>
           </div>
           <div class="project-preview">
@@ -483,9 +493,10 @@
           <h2 data-edit="coulisses.p9.title" data-edit-label="Coulisses · Jeux mobiles — titre">Quatre jeux, jouables <em class="accent">partout</em></h2>
           <div class="project-desc">
             <p data-edit="coulisses.p9.desc1" data-edit-label="Coulisses · Jeux mobiles — paragraphe 1">LUMEN (un puzzle de fusion d'orbes), ÉCHO (un labyrinthe dans le noir), Résonance (un jeu d'ondes) et Fragments (un party game d'évasion sur plusieurs téléphones, tiré d'Escape Fragments). Chacun se joue dans le navigateur et s'installe comme une appli (PWA), avec une version Android native visant le Google Play Store.</p>
-            <p data-edit="coulisses.p9.desc2" data-edit-label="Coulisses · Jeux mobiles — paragraphe 2">Chaque jeu a son propre dépôt, son propre domaine et ses propres textes, en français et en anglais d'abord, d'autres langues ensuite. Ils restent indépendants les uns des autres.</p>
+            <p data-edit="coulisses.p9.desc2" data-edit-label="Coulisses · Jeux mobiles — paragraphe 2">Les quatre partagent un Défi du jour : la même partie pour tout le monde, qui change à minuit heure de Paris, avec une série de jours consécutifs. Le résultat se partage en texte ou en image au format story, et chaque jeu présente les trois autres. Chacun garde son dépôt et son domaine : seul le code du défi est commun, copié à l'identique dans les quatre.</p>
+            <p data-edit="coulisses.p9.desc3" data-edit-label="Coulisses · Jeux mobiles — paragraphe 3">ÉCHO parle 7 langues, Résonance 6, LUMEN et Fragments le français et l'anglais. Chaque jeu a sa page de confidentialité et de conditions d'utilisation.</p>
           </div>
-          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p9.status" data-edit-label="Coulisses · Jeux mobiles — note">Pas encore sur Google Play : en attendant, ils s'installent depuis la page Jeux</span></div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p9.status" data-edit-label="Coulisses · Jeux mobiles — note">Applis Android prêtes pour Google Play, sortie à venir : en attendant, ils s'installent depuis la page Jeux</span></div>
           <p style="margin-top:14px;"><a href="jeux.html" class="btn btn-secondary" style="font-size:0.85rem;padding:9px 18px;" data-edit="coulisses.p9.link" data-edit-label="Coulisses · Jeux mobiles — bouton">Voir les jeux</a></p>
           <div class="project-stack" data-edit="coulisses.p9.stack" data-edit-label="Coulisses · Jeux mobiles — technologies">PWA · Android Studio · GitHub Pages</div>
         </div>
@@ -565,10 +576,11 @@
           <h2 data-edit="coulisses.p5.title" data-edit-label="Coulisses · La Cabane — titre">Le suivi des chaînes de la <em class="accent">communauté</em></h2>
           <div class="project-desc">
             <p data-edit="coulisses.p5.desc1" data-edit-label="Coulisses · La Cabane — paragraphe 1">Le suivi existait d'abord dans un fichier Excel : Power Query pour récupérer followers et données de stream via l'API Twitch, une macro VBA pour les snapshots quotidiens, et des métriques SullyGnome ajoutées à la main — pas de scraping automatique, contraire à leurs conditions d'utilisation.</p>
-            <p data-edit="coulisses.p5.desc2" data-edit-label="Coulisses · La Cabane — paragraphe 2">La Cabane en est la version web, avec deux vues : un annuaire des streamers suivis (statut, rôle, historique de follows daté, liens vers SullyGnome et TwitchTracker) et un pipeline de propositions où chaque chaîne passe par un vote du staff — pour, contre ou neutre — avant d'être acceptée. Les données vivent dans un dépôt privé séparé, seule la page de lecture publique est exposée sur GitHub Pages.</p>
+            <p data-edit="coulisses.p5.desc2" data-edit-label="Coulisses · La Cabane — paragraphe 2">La Cabane en est la version web : un annuaire des streamers suivis (statut, rôle, historique de follows daté) et un pipeline de propositions où chaque chaîne passe par un vote du staff avant d'être acceptée. Les données vivent dans un dépôt privé ; un robot en tire une vitrine publique, sans aucune donnée interne, avec une page par streamer.</p>
+            <p data-edit="coulisses.p5.desc3" data-edit-label="Coulisses · La Cabane — paragraphe 3">Les inscriptions aux événements passent par un relais Cloudflare : l'adresse secrète du salon Discord n'est plus dans la page publique. Un contrôle qualité Lighthouse tourne tout seul à chaque modification du site.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p5.status" data-edit-label="Coulisses · La Cabane — note">Volontairement séparée de la page Streamers de ce site — deux outils distincts, pas de pont entre les deux</span></div>
-          <div class="project-stack" data-edit="coulisses.p5.stack" data-edit-label="Coulisses · La Cabane — technologies">Power Query · VBA · JSON · GitHub Pages</div>
+          <div class="project-stack" data-edit="coulisses.p5.stack" data-edit-label="Coulisses · La Cabane — technologies">Power Query · VBA · JSON · GitHub Actions · GitHub Pages · Cloudflare Workers</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -631,10 +643,11 @@
           <h2 data-edit="coulisses.p6.title" data-edit-label="Coulisses · Bot Discord — titre">Le gardien du serveur <em class="accent">d'entraide</em></h2>
           <div class="project-desc">
             <p data-edit="coulisses.p6.desc1" data-edit-label="Coulisses · Bot Discord — paragraphe 1">Le bot qui fait tourner le serveur d'entraide entre streamers. L'entrée est filtrée : les nouveaux membres acceptent le règlement puis soumettent leur chaîne Twitch ou YouTube pour vérification avant d'obtenir l'accès complet — pas une communauté ouverte à tout le monde.</p>
-            <p data-edit="coulisses.p6.desc2" data-edit-label="Coulisses · Bot Discord — paragraphe 2">Au-delà de l'accueil, il couvre à peu près tout ce qu'un serveur actif demande : modération avec escalade automatique après un nombre d'avertissements, anniversaires, sondages à vote par boutons, salons vocaux temporaires créés à la demande, une zone promo avec délai minimum entre deux posts, un annuaire des membres, et des annonces automatiques (chaînes Twitch suivies qui passent en direct, jeux gratuits du moment, paliers de followers). Tickets privés, suggestions avec vote, concours avec tirage au sort, FAQ et bibliothèque de ressources complètent l'ensemble. Un panneau d'administration web permet de gérer tout ça sans passer par les commandes Discord.</p>
+            <p data-edit="coulisses.p6.desc2" data-edit-label="Coulisses · Bot Discord — paragraphe 2">Au-delà de l'accueil : modération avec escalade automatique après plusieurs avertissements, anniversaires, sondages, salons vocaux temporaires, zone promo avec délai entre deux posts, annuaire des membres, tickets, concours, et annonces automatiques (chaînes suivies en direct, jeux gratuits, paliers de followers). Un panneau d'administration web permet de tout gérer sans passer par les commandes Discord.</p>
+            <p data-edit="coulisses.p6.desc3" data-edit-label="Coulisses · Bot Discord — paragraphe 3">Le bot tourne sur un Raspberry Pi, et l'adresse du tunnel vers son panneau peut changer, ce qui cassait les connexions Discord et Twitch. Un relais Cloudflare à adresse fixe, tenu à jour par le bot, renvoie maintenant toujours vers la bonne. Un tableau de santé privé, sur le téléphone, surveille le Pi, les bots, les sites et les sauvegardes, et prévient dans un salon Discord privé dès que quelque chose s'arrête.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p6.status" data-edit-label="Coulisses · Bot Discord — note">Le même bot tourne aussi sur d'autres serveurs, avec des réglages propres à chacun</span></div>
-          <div class="project-stack" data-edit="coulisses.p6.stack" data-edit-label="Coulisses · Bot Discord — technologies">Discord · commandes slash · panneau d'admin web</div>
+          <div class="project-stack" data-edit="coulisses.p6.stack" data-edit-label="Coulisses · Bot Discord — technologies">Discord · commandes slash · panneau d'admin web · Raspberry Pi · Cloudflare Workers</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -726,7 +739,8 @@
           <h2 data-edit="coulisses.p10.title" data-edit-label="Coulisses · Ce site — titre">Un site qui se modifie <em class="accent">sans code</em></h2>
           <div class="project-desc">
             <p data-edit="coulisses.p10.desc1" data-edit-label="Coulisses · Ce site — paragraphe 1">Ce site est écrit en HTML, CSS et JavaScript simples, hébergé sur GitHub Pages, sans outil de build. Une page d'administration privée permet de tout changer depuis le navigateur : streamers, clips, planning (semaine type et changements ponctuels), À propos et FAQ, textes de chaque page, liens et bandeau d'annonce, nouvelles pages, liste des jeux. Chaque enregistrement devient une version sauvegardée, restaurable en un clic.</p>
-            <p data-edit="coulisses.p10.desc2" data-edit-label="Coulisses · Ce site — paragraphe 2">Des automatisations GitHub font le reste : statut Twitch (direct, abonnés, avatars), jeux récents, minification avec mise à jour du cache, vérification des liens, contrôle de la forme des données, et des tests automatiques dans un vrai navigateur à chaque modification.</p>
+            <p data-edit="coulisses.p10.desc2" data-edit-label="Coulisses · Ce site — paragraphe 2">Des automatisations GitHub font le reste : statut Twitch (direct, abonnés, avatars), jeux récents, minification avec mise à jour du cache, vérification des liens et des données, tests dans un vrai navigateur et contrôle Lighthouse à chaque modification.</p>
+            <p data-edit="coulisses.p10.desc3" data-edit-label="Coulisses · Ce site — paragraphe 3">Côté visiteurs : pages Confidentialité et CGU, lecteurs Twitch chargés seulement après accord (ce sont eux qui déposent des cookies), données structurées pour Google, où les clips sont décrits comme des vidéos, et suivi dans la Search Console. Le site héberge aussi les mises à jour signées de la Régie Mobile.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p10.status" data-edit-label="Coulisses · Ce site — note">Une règle maison : toute nouvelle page doit aussi être gérable depuis l'admin, et c'est vérifié automatiquement</span></div>
           <div class="project-stack" data-edit="coulisses.p10.stack" data-edit-label="Coulisses · Ce site — technologies">HTML · CSS · JavaScript · GitHub Pages · GitHub Actions</div>
