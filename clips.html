@@ -138,12 +138,36 @@ function isRecentClip(dateStr) {
   return diffDays >= 0 && diffDays <= 7;
 }
 
+/* Données structurées « vidéo » pour Google (résultats Vidéos). shortcut: miniature = image de partage de la page,
+   car data/clips.json n'a pas la miniature Twitch ; à remplacer par la vraie si l'admin l'enregistre un jour. */
+function addClipsJsonLd(clips) {
+  const items = clips.map((clip, i) => {
+    const slug = encodeURIComponent(clip.slug);
+    const video = {
+      '@type': 'VideoObject',
+      name: clip.title,
+      description: 'Clip Twitch de la chaîne AULIT42369 : ' + clip.title,
+      thumbnailUrl: 'https://aulit42369.github.io/Site/og/clips-og.png',
+      embedUrl: `https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io`,
+      url: `https://clips.twitch.tv/${slug}`,
+      inLanguage: 'fr'
+    };
+    if (clip.dateAdded) video.uploadDate = clip.dateAdded;
+    return { '@type': 'ListItem', position: i + 1, item: video };
+  });
+  const s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'ItemList', name: 'Clips Twitch AULIT42369', itemListElement: items });
+  document.head.appendChild(s);
+}
+
 loadJson('data/clips.json', [])
   .then(clips => {
     if (clips.length === 0) {
       empty.style.display = 'block';
       return;
     }
+    addClipsJsonLd(clips);
     clips.forEach(clip => {
       const slug = encodeURIComponent(clip.slug);
       const clipUrl = `https://clips.twitch.tv/${slug}`;
