@@ -1,0 +1,29 @@
+# Contrôle qualité Lighthouse après chaque modification faite à la main (les commits des robots sont ignorés).
+# Ne bloque rien : affiche les notes (vitesse, accessibilité, bonnes pratiques, référencement) et un avertissement si une note baisse sous le seuil.
+name: Lighthouse
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "data/**"
+      - "**.md"
+  workflow_dispatch:
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Attendre la mise en ligne GitHub Pages
+        run: sleep 150
+      - name: Mesurer avec Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://aulit42369.github.io/Site/
+            https://aulit42369.github.io/Site/planning.html
+            https://aulit42369.github.io/Site/clips.html
+            https://aulit42369.github.io/Site/streamers.html
+            https://aulit42369.github.io/Site/jeux.html
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
