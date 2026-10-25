@@ -32,7 +32,7 @@
       "@type": "Person",
       "name": "AULIT42369",
       "url": "https://aulit42369.github.io/Site/",
-      "description": "Chaine Twitch multigaming, jeux coop entre potes.",
+      "description": "Streamer Twitch francophone multigaming : jeux coop entre potes.",
       "sameAs": [
         "https://www.twitch.tv/aulit42369",
         "https://discord.com/invite/Amgaz5YNVg",
@@ -152,7 +152,7 @@ window.customPagesPromise.then((d) => {
   const page = pages.find((p) => p.slug === cpSlug);
   const title = document.getElementById('cpTitle');
   if (!page) {
-    document.title = 'AULIT42369 — Page introuvable';
+    document.title = 'Page introuvable | Aulit42369';
     const robots = document.createElement('meta');
     robots.name = 'robots';
     robots.content = 'noindex';
@@ -162,7 +162,7 @@ window.customPagesPromise.then((d) => {
     return;
   }
   title.textContent = page.title;
-  document.title = 'AULIT42369 — ' + page.title;
+  document.title = page.title + ' | Aulit42369';
   const intro = typeof page.intro === 'string' ? page.intro.trim() : '';
   if (intro) {
     const el = document.getElementById('cpIntro');
