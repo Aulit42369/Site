@@ -49,3 +49,5 @@ Documentation technique détaillée : `docs/README.md`.
 - Ne pas lancer les tests depuis la racine du dépôt : ils y déposent des captures (désormais ignorées par `.gitignore`).
 - Nouvelle iframe tierce : toujours `data-consent-src` (+ `applyConsent(élément)` si créée en JS), jamais `src` direct.
 - Nouvelle page : `CORE_PAGES` + `TEXT_PAGES` + pied de page avec les 4 liens légaux.
+
+- **Fichier `google9ad7f8bd44912903.html` (25/10)** : validation Google Search Console (propriété + sitemap envoyé). Site : fichier non nécessaire (propriété déjà validée avant), mais même règle pour tout fichier google*.html. Ne jamais le supprimer ni le renommer, sinon la propriété perd sa validation.
