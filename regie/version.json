@@ -1,9 +1,9 @@
 {
-  "version": "1.0.2",
-  "date": "2026-10-26T16:33:05.558Z",
-  "notes": "mise a jours sur le maintiens des couleurs selectionné dans annonce",
-  "sha256": "5d6ff84d027a8e5be854294850735ceed3ab7676ee4114f12f89bfd8433509e8",
-  "taille": 582588,
-  "url": "https://aulit42369.github.io/Site/regie/regie-maj-1.0.2.zip",
-  "signature": "h2rkEmEyoWzShs49H/eYVDFc0wcMkqY36vrLtLvr8CV8WK3hquX26M5vcxyUGlHXRFLiZ70cM/NyymL+S/yvDw=="
+  "version": "1.0.3",
+  "date": "2026-10-26T16:57:52.068Z",
+  "notes": "L'appli se recharge seule après une mise à jour ; un échec d'enregistrement des couleurs s'affiche",
+  "sha256": "d102fbc5930115f7a65283374d6e691ffc7d4ad5f6aca366deffeadf9fe6c072",
+  "taille": 582987,
+  "url": "https://aulit42369.github.io/Site/regie/regie-maj-1.0.3.zip",
+  "signature": "Ilby0wzDvIbaHjmmgLv7lao+IIlz2we15LsHKKidlMvRxe279Bdjqmh+HcwVZO4jw8gdPz3O3MLlvqGqUIA5Dw=="
 }
