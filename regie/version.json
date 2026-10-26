@@ -1,9 +1,9 @@
 {
-  "version": "1.0.3",
-  "date": "2026-10-26T16:57:52.068Z",
-  "notes": "L'appli se recharge seule après une mise à jour ; un échec d'enregistrement des couleurs s'affiche",
-  "sha256": "d102fbc5930115f7a65283374d6e691ffc7d4ad5f6aca366deffeadf9fe6c072",
-  "taille": 582987,
-  "url": "https://aulit42369.github.io/Site/regie/regie-maj-1.0.3.zip",
-  "signature": "Ilby0wzDvIbaHjmmgLv7lao+IIlz2we15LsHKKidlMvRxe279Bdjqmh+HcwVZO4jw8gdPz3O3MLlvqGqUIA5Dw=="
+  "version": "1.0.4",
+  "date": "2026-10-26T17:22:36.754Z",
+  "notes": "Retrait des enregistrement des stats quand non en live, le comparatif remonter les infos par rapport aux dernieres 24h et pas par rapport au dernier live",
+  "sha256": "5e87d899528b1188a644ff17df1b5b9200ab703da27fd7956d6e0c6f24bddb28",
+  "taille": 583448,
+  "url": "https://aulit42369.github.io/Site/regie/regie-maj-1.0.4.zip",
+  "signature": "OzyNQoH9RG6E9XZe/A+tA7+kWapVD5mg5TxUKy5YdAJNdvk1EM/2zsbnuCqNpJqujLT6pYg3qWj3ymlcPo6zCg=="
 }
