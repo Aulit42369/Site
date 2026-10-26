@@ -149,69 +149,85 @@ const aujourdhui = JOURS[new Date().getDay()];
 const grid = document.getElementById('planningGrid');
 const empty = document.getElementById('emptyState');
 
-loadJson('data/planning.json', [])
-  .then(planning => {
-    if (planning.length === 0) {
-      empty.style.display = 'block';
-      return;
-    }
-    planning.forEach(item => {
-      const isToday = item.day === aujourdhui;
-      const card = document.createElement('div');
-      card.className = 'card planning-card' + (item.on ? '' : ' off');
-      card.style.setProperty('--accent', item.color);
+/* Changements ponctuels (stream en plus, jour de repos exceptionnel…) :
+   data/planning-exceptions.json, géré depuis l'admin (onglet Planning) ou posé
+   par l'Agence Aulit. Seules les dates à venir ou du jour s'affichent — les
+   passées disparaissent toutes seules. Un changement des 7 prochains jours
+   remplace aussi la case de son jour dans la grille (case active + jeu annoncé). */
+function dateLocale(d) {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+const maintenant = new Date();
+const todayStr = dateLocale(maintenant);
+const dans6j = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + 6);
+const limiteStr = dateLocale(dans6j);
 
-      if (item.on) {
-        card.innerHTML = `
-          <div class="planning-card-head">
-            <div class="planning-day">${escapeHtml(item.day)}</div>
-            ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : ''}
-          </div>
-          <div class="planning-game">${escapeHtml(item.game)}</div>
-          <div class="planning-time">${escapeHtml(item.time)} – ${escapeHtml(item.end)} · Heure FR (CET)</div>
-        `;
-      } else {
-        card.innerHTML = `
-          <div class="planning-card-head">
-            <div class="planning-day">${escapeHtml(item.day)}</div>
-          </div>
-          <div class="planning-off-label">— Repos —</div>
-        `;
-      }
-      grid.appendChild(card);
-    });
+Promise.all([
+  loadJson('data/planning.json', []),
+  loadJson('data/planning-exceptions.json', []).catch(() => [])
+]).then(([planning, list]) => {
+  const upcoming = (Array.isArray(list) ? list : [])
+    .filter(e => e && typeof e.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.date >= todayStr)
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  /* première exception de chaque jour de la semaine, dans les 7 prochains jours */
+  const parJour = {};
+  upcoming.filter(e => e.date <= limiteStr).forEach(e => {
+    const jour = JOURS[new Date(e.date + 'T12:00:00').getDay()];
+    if (!parJour[jour]) parJour[jour] = e;
   });
 
-/* Changements ponctuels (stream en plus, jour de repos exceptionnel…) :
-   data/planning-exceptions.json, géré depuis l'admin (onglet Planning).
-   Seules les dates à venir ou du jour s'affichent — les passées
-   disparaissent toutes seules. */
-(function () {
-  const d = new Date();
-  const todayStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  loadJson('data/planning-exceptions.json', [])
-    .then(list => {
-      if (!Array.isArray(list)) return;
-      const upcoming = list
-        .filter(e => e && typeof e.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.date >= todayStr)
-        .sort((a, b) => a.date.localeCompare(b.date));
-      if (upcoming.length === 0) return;
-      const box = document.getElementById('exceptionsList');
-      upcoming.forEach(e => {
-        const raw = new Date(e.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
-        const label = raw.charAt(0).toUpperCase() + raw.slice(1);
-        const note = e.note ? ' — ' + escapeHtml(e.note) : '';
-        const text = e.on
-          ? '<strong>' + escapeHtml(e.game || 'Stream') + '</strong>' + (e.time ? ' · ' + escapeHtml(e.time) + (e.end ? ' – ' + escapeHtml(e.end) : '') : '') + note
-          : '<strong>Pas de stream</strong>' + note;
-        const card = document.createElement('div');
-        card.className = 'exception-card' + (e.on ? '' : ' off');
-        card.innerHTML = '<div class="exception-date">' + escapeHtml(label) + '</div><div class="exception-text">' + text + '</div>';
-        box.appendChild(card);
-      });
-      document.getElementById('exceptions').style.display = '';
-    });
-})();
+  if (planning.length === 0) {
+    empty.style.display = 'block';
+  }
+  planning.forEach(base => {
+    const ex = parJour[base.day];
+    const item = !ex ? base : ex.on
+      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: ex.time || base.time, end: ex.end || base.end })
+      : Object.assign({}, base, { on: false });
+    const isToday = item.day === aujourdhui;
+    const card = document.createElement('div');
+    card.className = 'card planning-card' + (item.on ? '' : ' off');
+    card.style.setProperty('--accent', item.color);
+    const tag = ex ? '<span class="planning-today-badge">Changement</span>' : '';
+
+    if (item.on) {
+      card.innerHTML = `
+        <div class="planning-card-head">
+          <div class="planning-day">${escapeHtml(item.day)}</div>
+          ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : tag}
+        </div>
+        <div class="planning-game">${escapeHtml(item.game)}</div>
+        <div class="planning-time">${escapeHtml(item.time)} – ${escapeHtml(item.end)} · Heure FR (CET)</div>
+      `;
+    } else {
+      card.innerHTML = `
+        <div class="planning-card-head">
+          <div class="planning-day">${escapeHtml(item.day)}</div>
+          ${tag}
+        </div>
+        <div class="planning-off-label">— Repos —</div>
+      `;
+    }
+    grid.appendChild(card);
+  });
+
+  if (upcoming.length === 0) return;
+  const box = document.getElementById('exceptionsList');
+  upcoming.forEach(e => {
+    const raw = new Date(e.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+    const label = raw.charAt(0).toUpperCase() + raw.slice(1);
+    const note = e.note ? ' — ' + escapeHtml(e.note) : '';
+    const text = e.on
+      ? '<strong>' + escapeHtml(e.game || 'Stream') + '</strong>' + (e.time ? ' · ' + escapeHtml(e.time) + (e.end ? ' – ' + escapeHtml(e.end) : '') : '') + note
+      : '<strong>Pas de stream</strong>' + note;
+    const card = document.createElement('div');
+    card.className = 'exception-card' + (e.on ? '' : ' off');
+    card.innerHTML = '<div class="exception-date">' + escapeHtml(label) + '</div><div class="exception-text">' + text + '</div>';
+    box.appendChild(card);
+  });
+  document.getElementById('exceptions').style.display = '';
+});
 </script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
