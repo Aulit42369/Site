@@ -43,6 +43,23 @@ const PAGES = fs.readdirSync(ROOT).filter((f) => f.endsWith('.html') && f !== 'a
     const src = await p.getAttribute('.broadcast-frame iframe', 'src');
     check('accord : lecteur chargé, remplaçant retiré', !!src && src.includes('player.twitch.tv') && (await p.locator('.consent-ph').count()) === 0);
     check('aucune erreur JS (index)', errs.length === 0);
+    // choix daté : redemandé après 6 mois, et un choix sans date (ancien) aussi
+    check('accord daté', !!(await p.evaluate(() => localStorage.getItem('aulit_consent_date'))));
+    await p.evaluate(() => localStorage.setItem('aulit_consent_date', String(Date.now() - 200 * 24 * 3600 * 1000)));
+    await p.reload();
+    await p.waitForTimeout(200);
+    check('choix de plus de 6 mois : bandeau redemandé', await p.locator('#consentBar').isVisible());
+    await p.evaluate(() => localStorage.removeItem('aulit_consent_date'));
+    await p.reload();
+    await p.waitForTimeout(200);
+    check('choix sans date : bandeau redemandé', await p.locator('#consentBar').isVisible());
+    // opposition à GoatCounter (skipgc lu par count.v4.js)
+    await p.goto(BASE + '/confidentialite.html');
+    await p.click('[data-gc-toggle]');
+    check('« Ne pas être compté » écrit skipgc=t', (await p.evaluate(() => localStorage.getItem('skipgc'))) === 't'
+      && (await p.textContent('[data-gc-toggle]')).includes('de nouveau'));
+    await p.click('[data-gc-toggle]');
+    check('« Être compté de nouveau » retire skipgc', (await p.evaluate(() => localStorage.getItem('skipgc'))) === null);
     await p.close();
 
     // ---- 2. Pied de page : liens légaux sur toutes les pages ----

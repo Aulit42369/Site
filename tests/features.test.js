@@ -64,7 +64,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     write('pages.json',{texts:{
       'index.lead':'Nouveau texte avec [Discord](https://discord.com/invite/Amgaz5YNVg) et *accent* et `code`\nligne 2 <img src=x onerror="window.__x=1">',
       'index.joinBtn':'Viens !',
-      'legal.2':'Hébergement modifié',
+      'legal.ed1':'Hébergement modifié',
       'coulisses.p1.title':'Titre *neuf*',
       'clips.lead':'   ',
     },extraProjects:[
@@ -84,7 +84,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     check('blank override ignored', (await p.textContent('[data-edit="clips.lead"]')).includes('sélection'));
     await p.close();
     p = await newPage(); await p.goto(BASE+'/mentions-legales.html'); await p.waitForTimeout(300);
-    check('legal override', (await p.textContent('[data-edit="legal.2"]'))==='Hébergement modifié'); await p.close();
+    check('legal override', (await p.textContent('[data-edit="legal.ed1"]'))==='Hébergement modifié'); await p.close();
     p = await newPage(); await p.goto(BASE+'/coulisses.html'); await p.waitForTimeout(300);
     check('coulisses title override', (await p.innerHTML('[data-edit="coulisses.p1.title"]')).includes('<em class="accent">neuf</em>'));
     check('extra project rendered (1 valid, empty dropped)', await p.locator('.project-text-only').count()===1);

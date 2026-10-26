@@ -21,7 +21,7 @@ Documentation technique détaillée : `docs/README.md`.
 
 ## 3. Persistance
 - Données du site : `data/*.json` (jamais touché à la main ni par les outils hors admin/CI).
-- Navigateur du visiteur (stockage local, aucun cookie) : `aulit_consent_tiers` (choix Twitch), `custom-nav` (menu), `announce-closed` (sessionStorage). Admin : jeton GitHub (sessionStorage par défaut).
+- Navigateur du visiteur (stockage local, aucun cookie) : `aulit_consent_tiers` + `aulit_consent_date` (choix Twitch, redemandé après 6 mois), `skipgc` (opposition à GoatCounter, bouton de la page Confidentialité), `custom-nav` (menu), `announce-closed` (sessionStorage). Admin : jeton GitHub (sessionStorage par défaut).
 
 ## 4. Sécurité
 - Aucun secret dans le dépôt (vérifié le 25/10, historique compris). Secrets Twitch uniquement dans les secrets GitHub Actions.

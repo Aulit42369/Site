@@ -317,8 +317,16 @@ backToTop.addEventListener('click', () => {
    ================================================================ */
 const CONSENT_KEY = 'aulit_consent_tiers';
 let consentMem = null; // secours si le stockage est bloqué : choix valable pour cette page
+const CONSENT_DATE_KEY = 'aulit_consent_date';
+const CONSENT_MAX_AGE = 182 * 24 * 3600 * 1000; // choix redemandé après 6 mois (la CNIL tolère 13 mois maximum)
 function consentGet() {
-  try { return localStorage.getItem(CONSENT_KEY) || consentMem; } catch (e) { return consentMem; }
+  try {
+    const v = localStorage.getItem(CONSENT_KEY);
+    const d = parseInt(localStorage.getItem(CONSENT_DATE_KEY), 10);
+    // choix sans date (enregistré avant le 26/10/2026) ou trop vieux : on redemande
+    if (v && d && Date.now() - d < CONSENT_MAX_AGE) return v;
+    return consentMem;
+  } catch (e) { return consentMem; }
 }
 
 function applyConsent(root) {
@@ -363,7 +371,10 @@ document.addEventListener('click', (e) => {
   if (choice) {
     const was = consentGet();
     consentMem = choice.dataset.consent;
-    try { localStorage.setItem(CONSENT_KEY, consentMem); } catch (err) { /* consentMem prend le relais */ }
+    try {
+      localStorage.setItem(CONSENT_KEY, consentMem);
+      localStorage.setItem(CONSENT_DATE_KEY, String(Date.now()));
+    } catch (err) { /* consentMem prend le relais */ }
     const bar = document.getElementById('consentBar');
     if (bar) bar.remove();
     // retrait d'un accord : on recharge pour couper les lecteurs déjà ouverts
@@ -372,6 +383,29 @@ document.addEventListener('click', (e) => {
     return;
   }
   if (e.target.closest('[data-consent-open]')) showConsentBar();
+  if (e.target.closest('[data-gc-toggle]')) {
+    try {
+      if (localStorage.getItem('skipgc') === 't') localStorage.removeItem('skipgc');
+      else localStorage.setItem('skipgc', 't');
+    } catch (err) { /* stockage bloqué : rien à mémoriser */ }
+    gcRefresh();
+  }
 });
 
 applyConsent(document);
+
+/* Opposition à la mesure d'audience : GoatCounter (count.v4.js) ne compte
+   rien quand localStorage.skipgc === 't'. Bouton data-gc-toggle (page
+   Confidentialité) ; son état s'affiche dans [data-gc-state]. */
+function gcRefresh() {
+  let off = false;
+  try { off = localStorage.getItem('skipgc') === 't'; } catch (e) { /* idem */ }
+  document.querySelectorAll('[data-gc-toggle]').forEach((b) => {
+    b.textContent = off ? 'Être compté de nouveau' : 'Ne pas être compté';
+    b.setAttribute('aria-pressed', String(off));
+  });
+  document.querySelectorAll('[data-gc-state]').forEach((el) => {
+    el.textContent = off ? 'Tes visites ne sont pas comptées sur ce navigateur.' : 'Tes visites sont comptées, de façon anonyme.';
+  });
+}
+gcRefresh();

@@ -104,8 +104,8 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   check('default text prefilled', def.includes('Une chaîne où on teste'));
   const titleDef = await page.locator('[data-tk="coulisses.p1.title"]').inputValue();
   check('accent <em> converted to *…*', titleDef.includes('*téléphone*'));
-  const legalLink = await page.locator('[data-tk="legal.2"]').inputValue();
-  check('links converted to [..](..)', /\[contact\]\(contact\.html\)/.test(legalLink) && /\[Discord de la chaîne\]\(https:\/\/discord\.com\/invite/.test(legalLink));
+  const legalLink = await page.locator('[data-tk="legal.ed3"]').inputValue();
+  check('links converted to [..](..)', /\[formulaire de contact\]\(contact\.html\)/.test(legalLink) && /\[Discord de la chaîne\]\(https:\/\/discord\.com\/invite/.test(legalLink));
   await lead.fill('Texte tout neuf *ici*');
   check('modified class set', await page.locator('.tx-field.modified [data-tk="index.lead"]').count()===1);
   await page.locator('#textesEditor .tx-group summary').nth(1).click();
