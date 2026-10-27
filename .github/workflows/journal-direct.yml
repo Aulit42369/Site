@@ -1,0 +1,46 @@
+name: Journal de direct
+
+on:
+  schedule:
+    # Toutes les 5 min, déphasé (voir twitch-status.yml pour la raison).
+    - cron: '2-57/5 * * * *'
+  workflow_dispatch:
+
+# Un seul relevé à la fois : sinon deux poussées simultanées sur la branche se bousculent.
+concurrency: journal-direct
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 20
+
+      # Le journal vit sur sa propre branche : ni data/, ni historique de main pollué, ni republication du site.
+      - name: Récupérer la branche du journal (créée au premier passage)
+        run: |
+          git fetch origin journal-direct || true
+          if git rev-parse --verify -q origin/journal-direct >/dev/null; then
+            git worktree add ../journal origin/journal-direct
+          else
+            git worktree add --orphan -b journal-direct ../journal
+          fi
+
+      - name: Relevé Twitch
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: node scripts/journal-direct.js ../journal/journal
+
+      - name: Enregistrer si une ligne a été ajoutée
+        working-directory: ../journal
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add journal
+          git diff --staged --quiet || { git commit -m "Relevé de direct"; git push origin HEAD:journal-direct; }

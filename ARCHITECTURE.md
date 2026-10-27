@@ -23,6 +23,8 @@ Documentation technique détaillée : `docs/README.md`.
 - Données du site : `data/*.json` (jamais touché à la main ni par les outils hors admin/CI).
 - Navigateur du visiteur (stockage local, aucun cookie) : `aulit_consent_tiers` + `aulit_consent_date` (choix Twitch, redemandé après 6 mois), `skipgc` (opposition à GoatCounter, bouton de la page Confidentialité), `custom-nav` (menu), `announce-closed` (sessionStorage). Admin : jeton GitHub (sessionStorage par défaut).
 
+- Journal de direct : branche `journal-direct` (fichiers `journal/AAAA-MM.jsonl`, une ligne JSON par relevé de 5 min en live), écrite par `journal-direct.yml`. Public comme le reste du dépôt (données déjà visibles sur Twitch).
+
 ## 4. Sécurité
 - Aucun secret dans le dépôt (vérifié le 25/10, historique compris). Secrets Twitch uniquement dans les secrets GitHub Actions.
 - Formspree (`formspree.io/f/…`) : adresse publique par nature, protégée par le champ piège `_gotcha` + délai minimal de 3 s côté page.
