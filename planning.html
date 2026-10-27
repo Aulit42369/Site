@@ -9,14 +9,14 @@
 
 <!-- Aperçu Discord / réseaux sociaux -->
 <meta property="og:title" content="Planning stream : horaires des lives Twitch | Aulit42369">
-<meta property="og:description" content="Planning stream d'Aulit42369 : jours et horaires des lives Twitch de la semaine, changements à venir et exceptions. Repère le prochain direct multigaming !">
+<meta property="og:description" content="Planning stream d'Aulit42369 : jours et horaires des lives Twitch de la semaine, avec les changements de la semaine. Repère le prochain direct multigaming !">
 <meta property="og:url" content="https://aulit42369.github.io/Site/planning.html">
 <link rel="canonical" href="https://aulit42369.github.io/Site/planning.html">
 <meta property="og:image" content="https://aulit42369.github.io/Site/og/planning-og.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#00f5ff">
-<meta name="description" content="Planning stream d'Aulit42369 : jours et horaires des lives Twitch de la semaine, changements à venir et exceptions. Repère le prochain direct multigaming !">
+<meta name="description" content="Planning stream d'Aulit42369 : jours et horaires des lives Twitch de la semaine, avec les changements de la semaine. Repère le prochain direct multigaming !">
 <link rel="stylesheet" href="fonts.css">
 <script type="application/ld+json">
 {
@@ -57,14 +57,6 @@
   .planning-game { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
   .planning-time { color: var(--muted); font-size: 0.88rem; }
   .planning-off-label { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin: auto 0; text-align: center; }
-  .exceptions { margin-bottom: 28px; }
-  .exceptions-title { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
-  .exceptions-list { display: grid; gap: 10px; }
-  .exception-card { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; padding: 12px 18px; border: 1px solid var(--line); border-left: 3px solid var(--cyan); border-radius: 4px; background: linear-gradient(180deg, var(--surface), var(--surface2)); }
-  .exception-card.off { border-left-color: var(--magenta); }
-  .exception-date { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.85rem; }
-  .exception-text { color: var(--muted); }
-  .exception-text strong { color: var(--white); }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
@@ -96,16 +88,12 @@
     <div class="container">
       <div class="eyebrow" data-edit="planning.eyebrow" data-edit-label="Planning — sur-titre">// Programme de la semaine</div>
       <h1 class="h1-page">Planning <em class="accent">stream</em></h1>
-      <p class="lead" style="margin-top:14px;">Les jours et horaires des lives Twitch de la semaine, avec les changements à venir.</p>
+      <p class="lead" style="margin-top:14px;">Les jours et horaires des lives Twitch de la semaine.</p>
     </div>
   </section>
 
   <section class="tight">
     <div class="container">
-      <div class="exceptions" id="exceptions" style="display:none;">
-        <div class="exceptions-title">Changements à venir</div>
-        <div class="exceptions-list" id="exceptionsList"></div>
-      </div>
       <div class="planning-grid" id="planningGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none;" data-edit="planning.empty" data-edit-label="Planning — message si vide">
         Le planning arrive bientôt.
@@ -151,9 +139,8 @@ const empty = document.getElementById('emptyState');
 
 /* Changements ponctuels (stream en plus, jour de repos exceptionnel…) :
    data/planning-exceptions.json, géré depuis l'admin (onglet Planning) ou posé
-   par l'Agence Aulit. Seules les dates à venir ou du jour s'affichent — les
-   passées disparaissent toutes seules. Un changement des 7 prochains jours
-   remplace aussi la case de son jour dans la grille (case active + jeu annoncé). */
+   par l'Agence Aulit. Un changement des 7 prochains jours remplace la case de son
+   jour dans la grille (case active + jeu annoncé, SANS heure : pas d'ambiguïté). */
 function dateLocale(d) {
   return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
 }
@@ -183,7 +170,7 @@ Promise.all([
   planning.forEach(base => {
     const ex = parJour[base.day];
     const item = !ex ? base : ex.on
-      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: ex.time || base.time, end: ex.end || base.end })
+      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '' })
       : Object.assign({}, base, { on: false });
     const isToday = item.day === aujourdhui;
     const card = document.createElement('div');
@@ -198,7 +185,7 @@ Promise.all([
           ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : tag}
         </div>
         <div class="planning-game">${escapeHtml(item.game)}</div>
-        <div class="planning-time">${escapeHtml(item.time)} – ${escapeHtml(item.end)} · Heure FR (CET)</div>
+        ${item.time ? `<div class="planning-time">${escapeHtml(item.time)} – ${escapeHtml(item.end)} · Heure FR (CET)</div>` : ''}
       `;
     } else {
       card.innerHTML = `
@@ -211,22 +198,6 @@ Promise.all([
     }
     grid.appendChild(card);
   });
-
-  if (upcoming.length === 0) return;
-  const box = document.getElementById('exceptionsList');
-  upcoming.forEach(e => {
-    const raw = new Date(e.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
-    const label = raw.charAt(0).toUpperCase() + raw.slice(1);
-    const note = e.note ? ' — ' + escapeHtml(e.note) : '';
-    const text = e.on
-      ? '<strong>' + escapeHtml(e.game || 'Stream') + '</strong>' + (e.time ? ' · ' + escapeHtml(e.time) + (e.end ? ' – ' + escapeHtml(e.end) : '') : '') + note
-      : '<strong>Pas de stream</strong>' + note;
-    const card = document.createElement('div');
-    card.className = 'exception-card' + (e.on ? '' : ' off');
-    card.innerHTML = '<div class="exception-date">' + escapeHtml(label) + '</div><div class="exception-text">' + text + '</div>';
-    box.appendChild(card);
-  });
-  document.getElementById('exceptions').style.display = '';
 });
 </script>
 

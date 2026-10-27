@@ -106,16 +106,14 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
       {date:'nope',on:true,game:'X'},
     ]);
     p = await newPage(); await p.goto(BASE+'/planning.html'); await p.waitForTimeout(300);
-    check('exceptions visible', await p.isVisible('#exceptions'));
-    check('past + invalid hidden, 2 shown', await p.locator('.exception-card').count()===2);
-    check('sorted by date (on first, off second)', await p.evaluate(()=>{const c=[...document.querySelectorAll('.exception-card')];return !c[0].classList.contains('off')&&c[1].classList.contains('off');}));
-    const exHtml = await p.innerHTML('#exceptionsList');
-    check('exceptions escaped', exHtml.includes('&lt;b&gt;malade') && exHtml.includes('Brotato &lt;i&gt;'));
+    check('plus de section « Changements à venir »', (await p.locator('#exceptions, .exception-card').count())===0 && !(await p.content()).includes('Changements à venir'));
+    const gHtml = await p.innerHTML('#planningGrid');
+    check('jour modifié : jeu échappé, sans heure', gHtml.includes('Brotato &lt;i&gt;') && !gHtml.includes('23:00') && !gHtml.includes('20:00 –'));
     await p.screenshot({path:'planning-exceptions.png',fullPage:false});
     check('no page errors (planning)', p.errs.length===0); await p.close();
     rm('planning-exceptions.json');
     p = await newPage(); await p.goto(BASE+'/planning.html'); await p.waitForTimeout(300);
-    check('no exceptions block when file missing', !(await p.isVisible('#exceptions'))); await p.close();
+    check('pas de section sans fichier', (await p.locator('#exceptions').count())===0); await p.close();
   } finally {
     ['site.json','pages.json','planning-exceptions.json'].forEach(rm);
     await browser.close();
