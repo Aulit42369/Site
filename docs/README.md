@@ -1,5 +1,7 @@
 # Documentation technique
 
+- Documents produit et techniques (28/10) : `PRD.md`, `TRD.md`, `APP_FLOW.md`, `DESIGN_BRIEF.md`, `BACKEND_SCHEMA.md`, `IMPLEMENTATION_PLAN.md`.
+
 - `bridge-live-dispatch.js` — module à brancher sur ton bridge pour que le bandeau « En direct » réagisse en ~1 minute au lieu de 10 (voir l'en-tête du fichier pour l'installation). Ce dossier n'est pas utilisé par le site : il n'y a rien à faire tant que tu ne l'intègres pas.
 
 ## Garde-fous automatiques (GitHub Actions)
