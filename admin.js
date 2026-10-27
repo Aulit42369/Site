@@ -527,6 +527,7 @@ function renderPlanning() {
         <div class="field"><label>Début</label><input type="time" value="${escapeHtml(d.time || '')}" data-i="${i}" data-field="time"></div>
         <div class="field"><label>Fin</label><input type="time" value="${escapeHtml(d.end || '')}" data-i="${i}" data-field="end"></div>
         <div class="field"><label>Jeu</label><input type="text" value="${escapeHtml(d.game || '')}" data-i="${i}" data-field="game"></div>
+        <div class="field"><label>Mention (ex : une semaine sur deux)</label><input type="text" value="${escapeHtml(d.note || '')}" data-i="${i}" data-field="note"></div>
         <div class="field"><label>Couleur</label><select data-i="${i}" data-field="color">${options}</select></div>
       </div>`;
     container.appendChild(row);

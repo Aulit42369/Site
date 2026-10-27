@@ -43,7 +43,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=8374de00">
+<link rel="stylesheet" href="style.min.css?v=cea20dbe">
 <style>
   .planning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
   .planning-card { display: flex; flex-direction: column; min-height: 150px; }
@@ -124,7 +124,7 @@
     </div>
   </div>
 </footer>
-<script src="main.min.js?v=02f191a8"></script>
+<script src="main.min.js?v=f435c545"></script>
 
 <script>
 /* ================================================================
@@ -171,7 +171,7 @@ Promise.all([
   planning.forEach(base => {
     const ex = parJour[base.day];
     const item = !ex ? base : ex.on
-      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '' })
+      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '', note: '' })
       : Object.assign({}, base, { on: false });
     const isToday = item.day === aujourdhui;
     const card = document.createElement('div');
@@ -186,7 +186,8 @@ Promise.all([
           ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : tag}
         </div>
         <div class="planning-game">${escapeHtml(item.game)}</div>
-        ${item.time ? `<div class="planning-time">${escapeHtml(item.time)} – ${escapeHtml(item.end)} · Heure FR (CET)</div>` : ''}
+        ${item.time ? `<div class="planning-time">${item.end ? escapeHtml(item.time) + ' – ' + escapeHtml(item.end) : 'À partir de ' + escapeHtml(item.time.replace(':', 'h'))} · Heure FR</div>` : ''}
+        ${item.note ? `<div class="planning-time">${escapeHtml(item.note)}</div>` : ''}
       `;
     } else {
       card.innerHTML = `
