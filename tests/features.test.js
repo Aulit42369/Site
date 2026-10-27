@@ -114,6 +114,14 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     rm('planning-exceptions.json');
     p = await newPage(); await p.goto(BASE+'/planning.html'); await p.waitForTimeout(300);
     check('pas de section sans fichier', (await p.locator('#exceptions').count())===0); await p.close();
+
+    // ===== streamers : lien javascript: neutralisé =====
+    write('streamers.json',[{name:'Eve <i>',description:'d',url:'javascript:alert(1)',avatar:'javascript:alert(2)'},{name:'Ok',description:'d',url:'https://www.twitch.tv/ok'}]);
+    p = await newPage(); await p.goto(BASE+'/streamers.html'); await p.waitForTimeout(300);
+    const hrefs = await p.locator('#streamersGrid a.btn').evaluateAll(l=>l.map(a=>a.getAttribute('href')));
+    check('streamers : url non http(s) remplacée, url https gardée', hrefs[0]==='#' && hrefs[1]==='https://www.twitch.tv/ok');
+    check('streamers : nom échappé', (await p.innerHTML('#streamersGrid .streamer-name')).includes('Eve &lt;i&gt;'));
+    await p.close(); rm('streamers.json');
   } finally {
     ['site.json','pages.json','planning-exceptions.json'].forEach(rm);
     await browser.close();

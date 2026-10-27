@@ -223,7 +223,8 @@ function closeStreamerForm() {
 function renderStreamerPreview() {
   const name = document.getElementById('sfName').value.trim() || 'Nom du streamer';
   const desc = document.getElementById('sfDesc').value.trim() || 'Description à venir.';
-  const url = document.getElementById('sfUrl').value.trim() || '#';
+  const rawUrl = document.getElementById('sfUrl').value.trim();
+  const url = /^https?:\/\//i.test(rawUrl) ? rawUrl : '#';
   const avatar = document.getElementById('sfAvatar').value.trim();
   const initial = name.trim().charAt(0).toUpperCase() || '?';
   const card = document.getElementById('sfPreviewCard');
@@ -233,11 +234,11 @@ function renderStreamerPreview() {
     <p class="streamer-desc">${escapeHtml(desc)}</p>
     <a href="${escapeHtml(url)}" target="_blank" rel="noopener" class="btn btn-secondary">Voir la chaîne</a>
   `;
-  if (avatar) {
+  if (/^https?:\/\//i.test(avatar)) {
     const avatarEl = document.getElementById('sfPreviewAvatar');
     const img = new Image();
     img.onload = () => {
-      avatarEl.style.backgroundImage = `url('${avatar}')`;
+      avatarEl.style.backgroundImage = `url("${encodeURI(avatar).replace(/["')]/g, encodeURIComponent)}")`;
       avatarEl.style.backgroundSize = 'cover';
       avatarEl.style.backgroundPosition = 'center';
       avatarEl.textContent = '';
@@ -523,9 +524,9 @@ function renderPlanning() {
       <div class="planning-day-name">${escapeHtml(d.day)}</div>
       <label class="planning-on"><input type="checkbox" ${d.on ? 'checked' : ''} data-i="${i}" data-field="on"> Stream ce jour</label>
       <div class="planning-day-fields">
-        <div class="field"><label>Début</label><input type="time" value="${d.time || ''}" data-i="${i}" data-field="time"></div>
-        <div class="field"><label>Fin</label><input type="time" value="${d.end || ''}" data-i="${i}" data-field="end"></div>
-        <div class="field"><label>Jeu</label><input type="text" value="${d.game || ''}" data-i="${i}" data-field="game"></div>
+        <div class="field"><label>Début</label><input type="time" value="${escapeHtml(d.time || '')}" data-i="${i}" data-field="time"></div>
+        <div class="field"><label>Fin</label><input type="time" value="${escapeHtml(d.end || '')}" data-i="${i}" data-field="end"></div>
+        <div class="field"><label>Jeu</label><input type="text" value="${escapeHtml(d.game || '')}" data-i="${i}" data-field="game"></div>
         <div class="field"><label>Couleur</label><select data-i="${i}" data-field="color">${options}</select></div>
       </div>`;
     container.appendChild(row);
@@ -1252,7 +1253,7 @@ async function loadSante() {
         const r = latest[n];
         const level = r.status !== 'completed' ? 'ok' : r.conclusion === 'success' ? 'ok' : r.conclusion === 'skipped' || r.conclusion === 'cancelled' ? 'warn' : 'err';
         const state = r.status !== 'completed' ? 'en cours' : ({ success: 'réussie', failure: 'échouée', cancelled: 'annulée', skipped: 'ignorée', timed_out: 'expirée' }[r.conclusion] || r.conclusion);
-        rows.push({ level, title: 'Automatisation : ' + n, detail: 'Dernière exécution ' + state + ', ' + agoText(Date.now() - new Date(r.updated_at).getTime()) + (level === 'err' ? ' — <a href="' + escapeHtml(r.html_url) + '" target="_blank" rel="noopener">voir le détail sur GitHub</a>' : '') + '.' });
+        rows.push({ level, title: 'Automatisation : ' + n, detail: 'Dernière exécution ' + escapeHtml(state) + ', ' + agoText(Date.now() - new Date(r.updated_at).getTime()) + (level === 'err' ? ' — <a href="' + escapeHtml(r.html_url) + '" target="_blank" rel="noopener">voir le détail sur GitHub</a>' : '') + '.' });
       });
     } else {
       rows.push({ level: 'warn', title: 'Automatisations GitHub', detail: 'Lecture impossible (' + res.status + ') : le jeton doit avoir la permission « Actions : Read » pour afficher leur état.' });
@@ -1309,8 +1310,8 @@ async function loadHistory() {
       return `<div class="hist-row">
         <div class="hist-meta"><div class="hist-date">${escapeHtml(when)}${i === 0 ? ' · version actuelle' : ''}</div><div class="hist-msg">${escapeHtml((c.commit.message || '').split('\n')[0])}</div></div>
         <div class="ap-btns" style="flex-direction:row;">
-          <button type="button" data-hview="${c.sha}">Voir</button>
-          ${i === 0 ? '' : `<button type="button" data-hrestore="${c.sha}" data-when="${escapeHtml(when)}">Restaurer</button>`}
+          <button type="button" data-hview="${escapeHtml(c.sha)}">Voir</button>
+          ${i === 0 ? '' : `<button type="button" data-hrestore="${escapeHtml(c.sha)}" data-when="${escapeHtml(when)}">Restaurer</button>`}
         </div>
         <pre class="hist-pre" style="display:none;"></pre>
       </div>`;
