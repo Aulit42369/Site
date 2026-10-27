@@ -975,7 +975,7 @@ const TEXT_PAGES = [
   ['index.html', 'Accueil'], ['planning.html', 'Planning'], ['clips.html', 'Clips'], ['streamers.html', 'Streamers'],
   ['apropos.html', 'À propos'], ['coulisses.html', 'Coulisses'], ['contact.html', 'Contact'], ['mentions-legales.html', 'Mentions légales'],
   ['confidentialite.html', 'Confidentialité et cookies'], ['cgu.html', 'Conditions d’utilisation (CGU)'],
-  ['escape-fragments.html', 'Escape Fragments (classement)'], ['jeux.html', 'Jeux (page et installation)'],
+  ['escape-fragments.html', 'Escape Fragments (classement)'], ['jeux.html', 'Jeux (page et installation)'], ['partenaires.html', 'Partenaires (kit média)'],
 ];
 function normalizePages(d) {
   const out = { texts: {}, extraProjects: [] };

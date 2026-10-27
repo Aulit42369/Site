@@ -45,6 +45,7 @@ const CORE_PAGES = [
   { file: 'coulisses.html', label: 'Coulisses', menu: true },
   { file: 'apropos.html', label: 'À propos', menu: true },
   { file: 'escape-fragments.html', label: 'Escape Fragments', menu: true },
+  { file: 'partenaires.html', label: 'Partenaires', menu: true },
   { file: 'contact.html', label: 'Contact', menu: true, last: true },
   { file: 'mentions-legales.html', label: 'Mentions légales', menu: false, sitemap: false },
   { file: 'confidentialite.html', label: 'Confidentialité et cookies', menu: false, sitemap: false },

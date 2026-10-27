@@ -6,7 +6,7 @@ Documentation technique détaillée : `docs/README.md`.
 ## 1. Modules
 | Fichier | Rôle |
 |---|---|
-| `*.html` (15 pages) | Une page = un fichier. Pages légales : `mentions-legales.html`, `confidentialite.html`, `cgu.html` (noindex, hors sitemap). `page.html` = gabarit des pages créées dans l'admin. `404.html` = page d'erreur (`<base href="/Site/">`). |
+| `*.html` (16 pages) | Une page = un fichier. Pages légales : `mentions-legales.html`, `confidentialite.html`, `cgu.html` (noindex, hors sitemap). `page.html` = gabarit des pages créées dans l'admin. `404.html` = page d'erreur (`<base href="/Site/">`). |
 | `main.js` → `main.min.js` | Script partagé : menu, bandeau direct, textes éditables, annonce, **consentement aux lecteurs Twitch**, retour en haut. |
 | `style.css` → `style.min.css` | Feuille partagée (tokens couleur, pied de page, pages légales, bandeau de consentement). |
 | `admin.html` / `admin.js` | Administration (jeton GitHub, écrit dans `data/`). noindex + `Disallow` robots. |

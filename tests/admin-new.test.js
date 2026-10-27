@@ -97,7 +97,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   // ---- Textes ----
   await page.click('[data-tab="textes"]'); await page.waitForTimeout(800);
   const groups = await page.locator('#textesEditor .tx-group').count();
-  check('12 page groups loaded (dont confidentialité et CGU)', groups===12);
+  check('13 page groups loaded (dont confidentialité, CGU et partenaires)', groups===13);
   await page.locator('#textesEditor .tx-group summary').first().click(); await page.locator('#textesEditor .tx-group summary').nth(7).click();
   const lead = page.locator('[data-tk="index.lead"]');
   const def = await lead.inputValue();

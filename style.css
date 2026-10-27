@@ -77,10 +77,13 @@ img { max-width: 100%; display: block; }
   border: 1px solid transparent; white-space: nowrap;
   transition: color .15s ease, border-color .15s ease;
 }
-/* écrans moyens : le menu a 9 entrées, on resserre pour tenir sur une ligne */
-@media (min-width: 1001px) and (max-width: 1240px) {
+/* écrans moyens : le menu a 10 entrées, on resserre pour tenir sur une ligne */
+@media (min-width: 1001px) and (max-width: 1460px) {
   .nav { gap: 2px; }
   .nav a { padding: 9px 9px; font-size: 0.88rem; letter-spacing: 0.02em; }
+}
+@media (min-width: 1001px) and (max-width: 1100px) {
+  .nav a { padding: 9px 6px; font-size: 0.82rem; letter-spacing: 0; }
 }
 .nav a:hover { color: var(--white); }
 .nav a.active { color: var(--cyan); border-color: var(--cyan); text-shadow: var(--glow-c); }
