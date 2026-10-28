@@ -50,8 +50,21 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   check('admin loaded without error banner', !(await page.isVisible('#statusMsg.err')));
   check('10 tabs', await page.locator('.admin-tabs [data-tab]').count()===10);
 
-  // ---- Exceptions ----
+  // ---- Planning : une semaine sur 2 ----
   await page.click('[data-tab="planning"]');
+  const bi = page.locator('#planningList [data-field="biweekly"]').first();
+  check('anchor disabled until biweekly checked', await page.locator('#planningList [data-field="anchor"]').first().isDisabled());
+  await bi.check();
+  check('mention auto-filled when checked', (await page.inputValue('#planningList [data-field="note"]'))==='Une semaine sur 2');
+  await page.click('#savePlanningBtn'); await page.waitForTimeout(300);
+  check('save refused without date', !puts.find(x=>x.p==='data/planning.json'));
+  await page.fill('#planningList [data-field="anchor"]', '2026-11-07');
+  await page.dispatchEvent('#planningList [data-field="anchor"]', 'change');
+  await page.click('#savePlanningBtn'); await page.waitForTimeout(300);
+  const pw=puts.find(x=>x.p==='data/planning.json');
+  check('biweekly + anchor saved', pw && pw.obj[0].biweekly===true && pw.obj[0].anchor==='2026-11-07' && pw.obj[0].note==='Une semaine sur 2');
+
+  // ---- Exceptions ----
   await page.click('#addExceptionBtn');
   const row = page.locator('#exceptionsEditor .ex-row').first();
   await row.locator('[data-f="date"]').fill(iso(3));

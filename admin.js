@@ -528,6 +528,9 @@ function renderPlanning() {
         <div class="field"><label>Fin</label><input type="time" value="${escapeHtml(d.end || '')}" data-i="${i}" data-field="end"></div>
         <div class="field"><label>Jeu</label><input type="text" value="${escapeHtml(d.game || '')}" data-i="${i}" data-field="game"></div>
         <div class="field"><label>Mention (ex : une semaine sur deux)</label><input type="text" value="${escapeHtml(d.note || '')}" data-i="${i}" data-field="note"></div>
+        <div class="field"><label class="planning-on"><input type="checkbox" ${d.biweekly ? 'checked' : ''} data-i="${i}" data-field="biweekly"> Une semaine sur 2</label>
+          <input type="date" value="${escapeHtml(d.anchor || '')}" data-i="${i}" data-field="anchor" aria-label="Date d'un jour où tu streames (le bot en déduit les semaines)" ${d.biweekly ? '' : 'disabled'}>
+          <small class="admin-note">Date d'un jour où tu streames (ex : le 1er samedi de 7D2D).</small></div>
         <div class="field"><label>Couleur</label><select data-i="${i}" data-field="color">${options}</select></div>
       </div>`;
     container.appendChild(row);
@@ -536,12 +539,31 @@ function renderPlanning() {
     el.addEventListener('change', () => {
       const i = Number(el.dataset.i);
       const field = el.dataset.field;
-      planningState.data[i][field] = field === 'on' ? el.checked : el.value;
+      const entry = planningState.data[i];
+      if (field === 'on' || field === 'biweekly') entry[field] = el.checked;
+      else entry[field] = el.value;
+      if (field === 'biweekly') {
+        // La date n'a de sens que si la case est cochée ; la mention publique suit la case tant qu'elle est vide ou automatique.
+        const dateInput = container.querySelector(`[data-i="${i}"][data-field="anchor"]`);
+        const noteInput = container.querySelector(`[data-i="${i}"][data-field="note"]`);
+        dateInput.disabled = !el.checked;
+        if (el.checked && !entry.note) entry.note = noteInput.value = 'Une semaine sur 2';
+        if (!el.checked) {
+          delete entry.anchor;
+          dateInput.value = '';
+          if (entry.note === 'Une semaine sur 2') entry.note = noteInput.value = '';
+        }
+      }
     });
   });
 }
 
 async function savePlanning() {
+  const sansDate = planningState.data.find((d) => d.biweekly && !/^\d{4}-\d{2}-\d{2}$/.test(d.anchor || ''));
+  if (sansDate) {
+    showStatus(`${sansDate.day} : « Une semaine sur 2 » demande la date d'un jour où tu streames.`, 'err');
+    return;
+  }
   showStatus('Enregistrement...', 'pending');
   try {
     const result = await writeJsonFile('data/planning.json', planningState.data, planningState.sha, 'Mise à jour planning');
