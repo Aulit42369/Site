@@ -44,11 +44,12 @@
     "on": true,
     "time": "21:00",
     "end": "00:00",
-    "game": "7D2D",
+    "game": "",
     "color": "#ff2d78",
     "note": "Une semaine sur 2",
     "biweekly": true,
-    "anchor": "2026-10-24"
+    "anchor": "2026-10-24",
+    "altGame": "7D2D"
   },
   {
     "day": "Dimanche",
