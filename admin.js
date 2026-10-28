@@ -507,6 +507,24 @@ const PLANNING_COLORS = [
   { value: '#4a5568', label: 'Gris (repos)' },
 ];
 
+/* Aperçu « Une semaine sur 2 » : ce qui s'affichera les 4 prochains jours concernés. Même règle que planning.html
+   (jeuDeLaSemaine) : semaines paires depuis la date de départ = jeu « une semaine sur 2 », les autres = « Jeu » ; vide = repos. */
+const JOURS_SEMAINE = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+function apercuAlternance(d, auj = new Date()) {
+  if (!d.biweekly) return '';
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d.anchor || '')) return 'Choisis la date de départ pour voir les prochaines semaines.';
+  const depart = new Date(d.anchor + 'T12:00:00');
+  if (JOURS_SEMAINE[depart.getDay()] !== d.day) return `⚠ Le ${depart.toLocaleDateString('fr-FR')} n'est pas un ${d.day.toLowerCase()}.`;
+  const idx = JOURS_SEMAINE.indexOf(d.day);
+  const premier = new Date(auj.getFullYear(), auj.getMonth(), auj.getDate() + ((idx - auj.getDay() + 7) % 7), 12);
+  const dates = [0, 1, 2, 3].map((k) => new Date(premier.getFullYear(), premier.getMonth(), premier.getDate() + 7 * k, 12));
+  return 'Le site affichera : ' + dates.map((j) => {
+    const paire = Math.floor(Math.round((j - depart) / 86400000) / 7) % 2 === 0;
+    const jeu = (paire ? d.altGame : d.game) || 'repos';
+    return `${j.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' })} → ${jeu}`;
+  }).map(escapeHtml).join(' · ');
+}
+
 function renderPlanning() {
   const container = document.getElementById('planningList');
   if (planningState.data.length === 0) {
@@ -533,13 +551,14 @@ function renderPlanning() {
       <div class="planning-alt${d.biweekly ? ' actif' : ''}">
         <label class="planning-on"><input type="checkbox" ${d.biweekly ? 'checked' : ''} data-i="${i}" data-field="biweekly"> Une semaine sur 2 : deux jeux en alternance</label>
         <div class="planning-alt-cols">
-          <div class="field"><label>Semaine A : le jeu ci-dessus</label>
-            <input type="date" value="${escapeHtml(d.anchor || '')}" data-i="${i}" data-field="anchor" aria-label="Date d'un jour de semaine A (le bot en déduit les semaines)" ${d.biweekly ? '' : 'disabled'}>
-            <small class="admin-note">Date d'un ${escapeHtml(d.day.toLowerCase())} où tu streames ce jeu (ex : le 1er samedi de 7D2D).</small></div>
-          <div class="field"><label>Semaine B : l'autre jeu</label>
-            <input type="text" value="${escapeHtml(d.altGame || '')}" data-i="${i}" data-field="altGame" placeholder="vide = repos l'autre semaine" ${d.biweekly ? '' : 'disabled'}>
-            <small class="admin-note">Les semaines suivantes alternent toutes seules.</small></div>
+          <div class="field"><label>Jeu une semaine sur 2</label>
+            <input type="text" value="${escapeHtml(d.altGame || '')}" data-i="${i}" data-field="altGame" placeholder="ex : 7D2D" ${d.biweekly ? '' : 'disabled'}>
+            <small class="admin-note">Les autres semaines : le jeu de la case « Jeu » au-dessus (vide = repos).</small></div>
+          <div class="field"><label>Date de départ de ce jeu</label>
+            <input type="date" value="${escapeHtml(d.anchor || '')}" data-i="${i}" data-field="anchor" aria-label="Date d'un ${escapeHtml(d.day.toLowerCase())} où tu joues au jeu une semaine sur 2" ${d.biweekly ? '' : 'disabled'}>
+            <small class="admin-note">Un ${escapeHtml(d.day.toLowerCase())} où tu joues à ce jeu ; la suite alterne toute seule.</small></div>
         </div>
+        <p class="planning-apercu" data-apercu="${i}">${apercuAlternance(d)}</p>
       </div>`;
     container.appendChild(row);
   });
@@ -550,6 +569,8 @@ function renderPlanning() {
       const entry = planningState.data[i];
       if (field === 'on' || field === 'biweekly') entry[field] = el.checked;
       else entry[field] = el.value;
+      const apercu = container.querySelector(`[data-apercu="${i}"]`);
+      if (apercu) setTimeout(() => { apercu.textContent = apercuAlternance(entry); }); // après le traitement de « biweekly »
       if (field === 'biweekly') {
         // La date n'a de sens que si la case est cochée ; la mention publique suit la case tant qu'elle est vide ou automatique.
         const dateInput = container.querySelector(`[data-i="${i}"][data-field="anchor"]`);
@@ -572,7 +593,7 @@ function renderPlanning() {
 async function savePlanning() {
   const sansDate = planningState.data.find((d) => d.biweekly && !/^\d{4}-\d{2}-\d{2}$/.test(d.anchor || ''));
   if (sansDate) {
-    showStatus(`${sansDate.day} : « Une semaine sur 2 » demande la date d'un jour où tu streames.`, 'err');
+    showStatus(`${sansDate.day} : « Une semaine sur 2 » demande la date de départ (un ${sansDate.day.toLowerCase()} où tu joues au jeu une semaine sur 2).`, 'err');
     return;
   }
   showStatus('Enregistrement...', 'pending');

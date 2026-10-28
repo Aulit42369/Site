@@ -168,17 +168,17 @@ Promise.all([
     empty.style.display = 'block';
   }
   /* « Une semaine sur 2 » : la carte ne montre QUE le jeu de la prochaine occurrence du jour
-     (semaines paires depuis la date de référence = jeu principal ; les autres = « autre jeu »,
-     ou repos s'il n'y en a pas). Le jeu principal n'apparaît donc jamais la semaine de l'autre. */
+     (semaines paires depuis la date de départ = jeu de l'encadré « une semaine sur 2 » ; les autres = jeu du dessus,
+     ou repos s'il est vide). Un jeu n'apparaît donc jamais la semaine de l'autre. */
   function jeuDeLaSemaine(base) {
     if (!base.biweekly || !/^\d{4}-\d{2}-\d{2}$/.test(base.anchor || '')) return base;
     const idx = JOURS.indexOf(base.day);
     const prochain = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + ((idx - maintenant.getDay() + 7) % 7), 12);
     const jours = Math.round((prochain - new Date(base.anchor + 'T12:00:00')) / 86400000);
-    if (Math.floor(jours / 7) % 2 === 0) return Object.assign({}, base, { note: 'Une semaine sur 2' });
-    return base.altGame
-      ? Object.assign({}, base, { game: base.altGame, note: 'Une semaine sur 2' })
-      : Object.assign({}, base, { on: false });
+    // même règle que l'aperçu de l'admin (admin.js, apercuAlternance) : la date de départ est une semaine du jeu
+    // « une semaine sur 2 » (altGame, demande d'Olivier du 28/10) ; les autres semaines = jeu du dessus ; vide = repos
+    const jeu = Math.floor(jours / 7) % 2 === 0 ? base.altGame : base.game;
+    return jeu ? Object.assign({}, base, { game: jeu, note: 'Une semaine sur 2' }) : Object.assign({}, base, { on: false });
   }
 
   planning.map(jeuDeLaSemaine).forEach(base => {
