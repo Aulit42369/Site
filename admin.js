@@ -994,6 +994,7 @@ function normalizePages(d) {
 }
 let pagesState = { data: normalizePages(null), sha: null };
 let textesModel = null;
+let textesComplet = false; // toutes les pages relues : un texte stocké sans emplacement est un ancien texte, supprimé
 
 /* HTML d'une page → texte à balisage simple (l'inverse de renderRichText de main.js) */
 function domToMarkup(node) {
@@ -1020,9 +1021,11 @@ async function loadTextes() {
   try {
     const t = Date.now();
     const groups = [];
+    let lues = 0;
     for (const [file, title] of TEXT_PAGES) {
       const res = await fetch(file + '?t=' + t, { cache: 'no-store' });
       if (!res.ok) continue;
+      lues++;
       const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
       const fields = [...doc.querySelectorAll('[data-edit]')].map((el) => {
         const key = el.getAttribute('data-edit');
@@ -1035,6 +1038,7 @@ async function loadTextes() {
       if (fields.length) groups.push({ file, title, fields });
     }
     textesModel = groups;
+    textesComplet = lues === TEXT_PAGES.length;
     renderTextes();
   } catch (e) {
     box.innerHTML = '<div class="ap-empty">Impossible de charger les pages : ' + escapeHtml(e.message) + '</div>';
@@ -1159,7 +1163,7 @@ async function saveTextes() {
       if (f.value.trim() && f.value !== f.def) texts[f.key] = f.value;
     }));
     // garde les modifications de pages qu'on n'a pas pu relire
-    Object.keys(pagesState.data.texts).forEach((k) => { if (!known.has(k)) texts[k] = pagesState.data.texts[k]; });
+    if (!textesComplet) Object.keys(pagesState.data.texts).forEach((k) => { if (!known.has(k)) texts[k] = pagesState.data.texts[k]; });
   } else {
     Object.assign(texts, pagesState.data.texts);
   }
@@ -1174,7 +1178,7 @@ async function saveTextes() {
   const extraChanged = JSON.stringify(extraProjects) !== JSON.stringify(pagesState.data.extraProjects.map((p) => ({ eyebrow: p.eyebrow.trim(), title: p.title.trim(), stack: p.stack.trim(), paragraphs: p.ptext.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean) })).filter((p) => p.title));
   if (!changed.length && !reset.length && !extraChanged) return showStatus('Aucune modification à enregistrer.', 'pending');
   const labelOf = (k) => { const f = textField(k); return f ? f.label : k; };
-  const summary = [].concat(changed.slice(0, 8).map((k) => '• modifié : ' + labelOf(k)), reset.slice(0, 4).map((k) => '• rétabli : ' + labelOf(k)), extraChanged ? ['• projets supplémentaires Coulisses'] : []);
+  const summary = [].concat(changed.slice(0, 8).map((k) => '• modifié : ' + labelOf(k)), reset.slice(0, 4).map((k) => (textField(k) ? '• rétabli : ' : '• ancien texte supprimé : ') + labelOf(k)), extraChanged ? ['• projets supplémentaires Coulisses'] : []);
   if (changed.length > 8 || reset.length > 4) summary.push('• … et d\'autres');
   if (!confirm('Enregistrer ' + (changed.length + reset.length + (extraChanged ? 1 : 0)) + ' changement(s) ?\n\n' + summary.join('\n'))) return;
   showStatus('Enregistrement...', 'pending');

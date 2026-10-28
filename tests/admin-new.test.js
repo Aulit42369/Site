@@ -14,6 +14,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   let n=0; const files={}; const commits={}; const puts=[]; let dispatched=0;
   const put=(p,obj,msg,date)=>{ n++; const sha='sha'+n; files[p]={content:JSON.stringify(obj,null,2),sha}; (commits[p]=commits[p]||[]).unshift({sha,commit:{message:msg,author:{date:date||new Date().toISOString()}},content:JSON.stringify(obj,null,2)}); return sha; };
   put('data/streamers.json',[],'init'); put('data/clips.json',[],'init'); put('data/planning.json',[{day:'Lundi',on:true,time:'21:00',end:'00:00',game:'X',color:'#00f5ff'}],'init');
+  put('data/pages.json',{texts:{'legal.ancienne-cle':'Ancien texte des mentions'},extraProjects:[]},'init');
   put('data/site.json',{socials:[{label:'Discord',url:'https://discord.com/invite/OLD'}],announcement:{enabled:true,text:'Ancien',tone:'info',from:'',until:''}},'v1','2026-09-01T10:00:00Z');
   const CORS={'access-control-allow-origin':'*','access-control-allow-headers':'*','access-control-allow-methods':'*'};
   await page.route('https://api.github.com/**', async route=>{ try {
@@ -120,6 +121,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   w=puts.find(x=>x.p==='data/pages.json');
   check('only changed text saved', w && Object.keys(w.obj.texts).length===1 && w.obj.texts['index.lead']==='Texte tout neuf *ici*');
   check('emptied field -> not saved (default)', w && !('planning.eyebrow' in w.obj.texts));
+  check('old text with no place on any page -> removed', w && !('legal.ancienne-cle' in w.obj.texts));
   check('extra project saved w/ paragraphs split', w && w.obj.extraProjects.length===1 && w.obj.extraProjects[0].paragraphs.length===2 && w.obj.extraProjects[0].title==='Mon *outil*');
   // reset
   await page.locator('[data-reset="index.lead"]').click();
