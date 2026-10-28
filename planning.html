@@ -167,22 +167,24 @@ Promise.all([
   if (planning.length === 0) {
     empty.style.display = 'block';
   }
-  /* « Une semaine sur 2 » avec un autre jeu : la carte montre le jeu de la prochaine occurrence du jour
-     (semaines paires depuis la date de référence = jeu principal, les autres = « autre jeu »). */
+  /* « Une semaine sur 2 » : la carte ne montre QUE le jeu de la prochaine occurrence du jour
+     (semaines paires depuis la date de référence = jeu principal ; les autres = « autre jeu »,
+     ou repos s'il n'y en a pas). Le jeu principal n'apparaît donc jamais la semaine de l'autre. */
   function jeuDeLaSemaine(base) {
-    if (!base.biweekly || !base.altGame || !/^\d{4}-\d{2}-\d{2}$/.test(base.anchor || '')) return base;
+    if (!base.biweekly || !/^\d{4}-\d{2}-\d{2}$/.test(base.anchor || '')) return base;
     const idx = JOURS.indexOf(base.day);
     const prochain = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + ((idx - maintenant.getDay() + 7) % 7), 12);
     const jours = Math.round((prochain - new Date(base.anchor + 'T12:00:00')) / 86400000);
-    const principal = Math.floor(jours / 7) % 2 === 0;
-    const autre = principal ? base.altGame : base.game;
-    return Object.assign({}, base, { game: principal ? base.game : base.altGame, note: 'Une semaine sur 2', autre: autre });
+    if (Math.floor(jours / 7) % 2 === 0) return Object.assign({}, base, { note: 'Une semaine sur 2' });
+    return base.altGame
+      ? Object.assign({}, base, { game: base.altGame, note: 'Une semaine sur 2' })
+      : Object.assign({}, base, { on: false });
   }
 
   planning.map(jeuDeLaSemaine).forEach(base => {
     const ex = parJour[base.day];
     const item = !ex ? base : ex.on
-      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '', note: '', autre: '' })
+      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '', note: '' })
       : Object.assign({}, base, { on: false });
     const isToday = item.day === aujourdhui;
     const card = document.createElement('div');
@@ -199,7 +201,6 @@ Promise.all([
         <div class="planning-game">${escapeHtml(item.game)}</div>
         ${item.time ? `<div class="planning-time">${item.end ? escapeHtml(item.time) + ' – ' + escapeHtml(item.end) : 'À partir de ' + escapeHtml(item.time.replace(':', 'h'))} · Heure FR</div>` : ''}
         ${item.note ? `<div class="planning-alt-note">${escapeHtml(item.note)}</div>` : ''}
-        ${item.autre ? `<div class="planning-time">Sinon : ${escapeHtml(item.autre)}</div>` : ''}
       `;
     } else {
       card.innerHTML = `
