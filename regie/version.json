@@ -1,9 +1,9 @@
 {
-  "version": "1.0.5",
-  "date": "2026-10-26T17:43:42.897Z",
-  "notes": "L'appli se recharge seule après une mise à jour ; un échec d'enregistrement des couleurs s'affiche ; le journal n'enregistre les événements que pendant un live ; VS DERNIER STREAM affiche sa période",
-  "sha256": "d58af2a51384ae376ea46b9bb3b264ca37c3af382f8087da72a0aac1f8577354",
-  "taille": 583446,
-  "url": "https://aulit42369.github.io/Site/regie/regie-maj-1.0.5.zip",
-  "signature": "IVPw88wXP6oDw4O/IHGqSBmeGSWDzNQV5RbnRBve6r1s8cFx3GqaE8G7aaU9rba6jdC6Wgv+PhMOzUeMwJlhCw=="
+  "version": "1.0.6",
+  "date": "2026-10-28T00:00:24.050Z",
+  "notes": "maj",
+  "sha256": "2c8713450bf1db639b8670b42c2d641088e139b8d7dcc42609732b54df6f117a",
+  "taille": 590669,
+  "url": "https://aulit42369.github.io/Site/regie/regie-maj-1.0.6.zip",
+  "signature": "sBJQmntvq6yeFRgPK8e4TBosGOw6LhOicNb0vLeTDMqzdY0bthiwUvrMM/ne9KgVtcIfzhH1oeyuvqLwL+WfDw=="
 }
