@@ -41,11 +41,12 @@
   },
   {
     "day": "Samedi",
-    "on": false,
+    "on": true,
     "time": "21:00",
     "end": "00:00",
-    "game": "Non Déterminé",
-    "color": "#ff2d78"
+    "game": "7D2D",
+    "color": "#ff2d78",
+    "note": "Une semaine sur 2"
   },
   {
     "day": "Dimanche",
