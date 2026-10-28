@@ -1,4 +1,6 @@
 {
+  "schemaVersion": 1,
+  "escapeServerUrl": "",
   "socials": [
     {
       "label": "Discord",
@@ -11,10 +13,6 @@
     {
       "label": "Instagram",
       "url": "https://www.instagram.com/aulit42369/?hl=fr"
-    },
-    {
-      "label": "TikTok",
-      "url": "https://www.tiktok.com/@aulit42369_"
     }
   ],
   "announcement": {
