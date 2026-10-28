@@ -63,6 +63,12 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   await page.click('#savePlanningBtn'); await page.waitForTimeout(300);
   const pw=puts.find(x=>x.p==='data/planning.json');
   check('biweekly + anchor saved', pw && pw.obj[0].biweekly===true && pw.obj[0].anchor==='2026-11-07' && pw.obj[0].note==='Une semaine sur 2');
+  check('altGame enabled with biweekly', !(await page.locator('#planningList [data-field="altGame"]').first().isDisabled()));
+  await page.fill('#planningList [data-field="altGame"]', 'Valheim');
+  await page.dispatchEvent('#planningList [data-field="altGame"]', 'change');
+  await page.click('#savePlanningBtn'); await page.waitForTimeout(300);
+  const pw2=puts.filter(x=>x.p==='data/planning.json').pop();
+  check('altGame saved', pw2 && pw2.obj[0].altGame==='Valheim');
 
   // ---- Exceptions ----
   await page.click('#addExceptionBtn');

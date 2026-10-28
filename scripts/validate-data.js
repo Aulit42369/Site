@@ -44,6 +44,7 @@ const SCHEMAS = {
     (d || []).forEach((p, i) => {
       check(isObj(p) && isStr(p.day) && typeof p.on === 'boolean', f, `#${i + 1} : "day"/"on" invalides`);
       if (isObj(p) && p.biweekly === true) check(date(p.anchor), f, `#${i + 1} : "anchor" (AAAA-MM-JJ) requis avec "biweekly"`);
+      if (isObj(p) && p.altGame !== undefined) check(isStr(p.altGame) && p.biweekly === true, f, `#${i + 1} : "altGame" est un texte et demande "biweekly"`);
       if (isObj(p)) ['time', 'end'].forEach((k) => check(p[k] === undefined || /^\d{2}:\d{2}$/.test(p[k]), f, `#${i + 1} : "${k}" doit être HH:MM`));
     });
   } },

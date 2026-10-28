@@ -530,7 +530,9 @@ function renderPlanning() {
         <div class="field"><label>Mention (ex : une semaine sur deux)</label><input type="text" value="${escapeHtml(d.note || '')}" data-i="${i}" data-field="note"></div>
         <div class="field"><label class="planning-on"><input type="checkbox" ${d.biweekly ? 'checked' : ''} data-i="${i}" data-field="biweekly"> Une semaine sur 2</label>
           <input type="date" value="${escapeHtml(d.anchor || '')}" data-i="${i}" data-field="anchor" aria-label="Date d'un jour où tu streames (le bot en déduit les semaines)" ${d.biweekly ? '' : 'disabled'}>
-          <small class="admin-note">Date d'un jour où tu streames (ex : le 1er samedi de 7D2D).</small></div>
+          <small class="admin-note">Date d'un jour où tu streames le jeu ci-dessus (ex : le 1er samedi de 7D2D).</small>
+          <label>Jeu l'autre semaine</label>
+          <input type="text" value="${escapeHtml(d.altGame || '')}" data-i="${i}" data-field="altGame" placeholder="vide = repos l'autre semaine" ${d.biweekly ? '' : 'disabled'}></div>
         <div class="field"><label>Couleur</label><select data-i="${i}" data-field="color">${options}</select></div>
       </div>`;
     container.appendChild(row);
@@ -546,11 +548,13 @@ function renderPlanning() {
         // La date n'a de sens que si la case est cochée ; la mention publique suit la case tant qu'elle est vide ou automatique.
         const dateInput = container.querySelector(`[data-i="${i}"][data-field="anchor"]`);
         const noteInput = container.querySelector(`[data-i="${i}"][data-field="note"]`);
-        dateInput.disabled = !el.checked;
+        const altInput = container.querySelector(`[data-i="${i}"][data-field="altGame"]`);
+        dateInput.disabled = altInput.disabled = !el.checked;
         if (el.checked && !entry.note) entry.note = noteInput.value = 'Une semaine sur 2';
         if (!el.checked) {
           delete entry.anchor;
-          dateInput.value = '';
+          delete entry.altGame;
+          dateInput.value = altInput.value = '';
           if (entry.note === 'Une semaine sur 2') entry.note = noteInput.value = '';
         }
       }
