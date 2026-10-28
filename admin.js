@@ -833,7 +833,6 @@ const DEFAULT_SITE = {
     { label: 'Discord', url: 'https://discord.com/invite/Amgaz5YNVg' },
     { label: 'YouTube', url: 'https://www.youtube.com/@Aulit42369' },
     { label: 'Instagram', url: 'https://www.instagram.com/aulit42369/?hl=fr' },
-    { label: 'TikTok', url: 'https://www.tiktok.com/@aulit42369_' },
   ],
   announcement: { enabled: false, text: '', linkLabel: '', linkUrl: '', tone: 'info', from: '', until: '' },
   escapeServerUrl: '',

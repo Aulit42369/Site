@@ -29,7 +29,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     // static fallback without site.json
     rm('site.json');
     p = await newPage(); await p.goto(BASE+'/index.html'); await p.waitForTimeout(300);
-    check('fallback: original 4 footer links', await p.locator('.site-footer .socials a').count()===4);
+    check('fallback: original 3 footer links', await p.locator('.site-footer .socials a').count()===3);
     await p.close();
 
     // ===== announcement =====
