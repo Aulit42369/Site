@@ -79,6 +79,14 @@
   .planning-day-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
   .planning-day-fields .field { margin-bottom: 0; }
   .planning-day-fields .field label { font-size: 0.68rem; margin-bottom: 4px; }
+  .planning-alt { margin-top: 14px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 4px; }
+  .planning-alt.actif { border-style: solid; border-color: var(--cyan); }
+  .planning-alt .planning-on { margin-bottom: 0; color: var(--white); font-weight: 700; }
+  .planning-alt-cols { display: none; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 12px; }
+  .planning-alt.actif .planning-alt-cols { display: grid; }
+  .planning-alt-cols .field { margin-bottom: 0; }
+  .planning-alt-cols .field label { font-size: 0.68rem; margin-bottom: 4px; }
+  .planning-alt-cols .admin-note { display: block; margin-top: 4px; }
   .planning-day-fields select { width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; }
 
   /* ── Aperçu avant publication : copie fidèle des styles de

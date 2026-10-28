@@ -56,6 +56,7 @@
   .planning-game { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
   .planning-time { color: var(--muted); font-size: 0.88rem; }
   .planning-off-label { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin: auto 0; text-align: center; }
+  .planning-alt-note { align-self: flex-start; margin-top: 10px; padding: 3px 8px; border: 1px solid var(--accent, var(--cyan)); border-radius: 2px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
 </style>
 </head>
@@ -175,13 +176,13 @@ Promise.all([
     const jours = Math.round((prochain - new Date(base.anchor + 'T12:00:00')) / 86400000);
     const principal = Math.floor(jours / 7) % 2 === 0;
     const autre = principal ? base.altGame : base.game;
-    return Object.assign({}, base, { game: principal ? base.game : base.altGame, note: 'Une semaine sur 2 · sinon ' + autre });
+    return Object.assign({}, base, { game: principal ? base.game : base.altGame, note: 'Une semaine sur 2', autre: autre });
   }
 
   planning.map(jeuDeLaSemaine).forEach(base => {
     const ex = parJour[base.day];
     const item = !ex ? base : ex.on
-      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '', note: '' })
+      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '', note: '', autre: '' })
       : Object.assign({}, base, { on: false });
     const isToday = item.day === aujourdhui;
     const card = document.createElement('div');
@@ -197,7 +198,8 @@ Promise.all([
         </div>
         <div class="planning-game">${escapeHtml(item.game)}</div>
         ${item.time ? `<div class="planning-time">${item.end ? escapeHtml(item.time) + ' – ' + escapeHtml(item.end) : 'À partir de ' + escapeHtml(item.time.replace(':', 'h'))} · Heure FR</div>` : ''}
-        ${item.note ? `<div class="planning-time">${escapeHtml(item.note)}</div>` : ''}
+        ${item.note ? `<div class="planning-alt-note">${escapeHtml(item.note)}</div>` : ''}
+        ${item.autre ? `<div class="planning-time">Sinon : ${escapeHtml(item.autre)}</div>` : ''}
       `;
     } else {
       card.innerHTML = `

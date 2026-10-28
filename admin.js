@@ -528,12 +528,18 @@ function renderPlanning() {
         <div class="field"><label>Fin</label><input type="time" value="${escapeHtml(d.end || '')}" data-i="${i}" data-field="end"></div>
         <div class="field"><label>Jeu</label><input type="text" value="${escapeHtml(d.game || '')}" data-i="${i}" data-field="game"></div>
         <div class="field"><label>Mention (ex : une semaine sur deux)</label><input type="text" value="${escapeHtml(d.note || '')}" data-i="${i}" data-field="note"></div>
-        <div class="field"><label class="planning-on"><input type="checkbox" ${d.biweekly ? 'checked' : ''} data-i="${i}" data-field="biweekly"> Une semaine sur 2</label>
-          <input type="date" value="${escapeHtml(d.anchor || '')}" data-i="${i}" data-field="anchor" aria-label="Date d'un jour où tu streames (le bot en déduit les semaines)" ${d.biweekly ? '' : 'disabled'}>
-          <small class="admin-note">Date d'un jour où tu streames le jeu ci-dessus (ex : le 1er samedi de 7D2D).</small>
-          <label>Jeu l'autre semaine</label>
-          <input type="text" value="${escapeHtml(d.altGame || '')}" data-i="${i}" data-field="altGame" placeholder="vide = repos l'autre semaine" ${d.biweekly ? '' : 'disabled'}></div>
         <div class="field"><label>Couleur</label><select data-i="${i}" data-field="color">${options}</select></div>
+      </div>
+      <div class="planning-alt${d.biweekly ? ' actif' : ''}">
+        <label class="planning-on"><input type="checkbox" ${d.biweekly ? 'checked' : ''} data-i="${i}" data-field="biweekly"> Une semaine sur 2 : deux jeux en alternance</label>
+        <div class="planning-alt-cols">
+          <div class="field"><label>Semaine A : le jeu ci-dessus</label>
+            <input type="date" value="${escapeHtml(d.anchor || '')}" data-i="${i}" data-field="anchor" aria-label="Date d'un jour de semaine A (le bot en déduit les semaines)" ${d.biweekly ? '' : 'disabled'}>
+            <small class="admin-note">Date d'un ${escapeHtml(d.day.toLowerCase())} où tu streames ce jeu (ex : le 1er samedi de 7D2D).</small></div>
+          <div class="field"><label>Semaine B : l'autre jeu</label>
+            <input type="text" value="${escapeHtml(d.altGame || '')}" data-i="${i}" data-field="altGame" placeholder="vide = repos l'autre semaine" ${d.biweekly ? '' : 'disabled'}>
+            <small class="admin-note">Les semaines suivantes alternent toutes seules.</small></div>
+        </div>
       </div>`;
     container.appendChild(row);
   });
@@ -550,6 +556,7 @@ function renderPlanning() {
         const noteInput = container.querySelector(`[data-i="${i}"][data-field="note"]`);
         const altInput = container.querySelector(`[data-i="${i}"][data-field="altGame"]`);
         dateInput.disabled = altInput.disabled = !el.checked;
+        el.closest('.planning-alt').classList.toggle('actif', el.checked);
         if (el.checked && !entry.note) entry.note = noteInput.value = 'Une semaine sur 2';
         if (!el.checked) {
           delete entry.anchor;
