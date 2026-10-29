@@ -27,6 +27,7 @@ jobs:
           node --check main.js
           node --check admin.js
           node --check sw-admin.js
+          for f in admin/*.js js/*.js; do node --check "$f"; done
 
       - name: Données valides (data/*.json)
         run: node scripts/validate-data.js

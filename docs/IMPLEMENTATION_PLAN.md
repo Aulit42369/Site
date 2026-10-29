@@ -25,4 +25,4 @@ Mis à jour le 28/10/2026 à partir de `A_FAIRE.md`.
 - Supprimer les messages du formulaire 12 mois après la réponse.
 
 ## 4. Règles de livraison
-Nouvelle page ou changement de structure → aussi `admin.html` / `admin.js` (`TEXT_PAGES`). Tests verts → commit + `git pull --rebase` + `git push` → la CI régénère `.min`, `?v=` et sitemap → vérifier en ligne.
+Nouvelle page ou changement de structure → aussi `admin.html` / `admin/*.js` (`TEXT_PAGES` dans `admin/textes.js`). Tests verts → commit + `git pull --rebase` + `git push` → la CI régénère `.min`, `?v=` et sitemap → vérifier en ligne.

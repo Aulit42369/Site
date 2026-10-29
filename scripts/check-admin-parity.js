@@ -21,7 +21,9 @@ const { ROOT, loadCorePages } = require('./registry');
 const AUTOMATED = ['twitch-status', 'broken-links', 'recent-games'];
 const errors = [];
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
-const admin = read('admin.js');
+// l'admin est découpé : admin.js + admin/*.js ; les scripts des pages sont dans js/*.js
+const jsIn = (dir) => (fs.existsSync(path.join(ROOT, dir)) ? fs.readdirSync(path.join(ROOT, dir)).filter((x) => x.endsWith('.js')).map((x) => dir + '/' + x) : []);
+const admin = ['admin.js', ...jsIn('admin')].map(read).join('\n');
 
 const textPages = new Set([...admin.matchAll(/\['([a-z0-9-]+\.html)',\s*'[^']*'\]/g)].map((m) => m[1]));
 for (const p of loadCorePages()) {
@@ -38,7 +40,7 @@ for (const p of loadCorePages()) {
 for (const f of textPages) if (!fs.existsSync(path.join(ROOT, f))) errors.push(`TEXT_PAGES référence ${f} qui n'existe pas`);
 
 const used = new Set();
-for (const f of fs.readdirSync(ROOT).filter((x) => x.endsWith('.html') || x === 'main.js')) {
+for (const f of [...fs.readdirSync(ROOT).filter((x) => x.endsWith('.html') || x === 'main.js'), ...jsIn('js')]) {
   for (const m of read(f).matchAll(/data\/([a-z0-9-]+)\.json/g)) used.add(m[1]);
 }
 for (const name of used) {
@@ -51,12 +53,12 @@ for (const name of used) {
   if (!hist.includes(`'${name}'`)) errors.push(`data/${name}.json n'est pas dans HIST_FILES (onglet Historique)`);
 }
 
-// la liste de jeux par défaut de jeux.html et celle de l'admin doivent rester identiques
+// la liste de jeux par défaut de js/jeux.js et celle de l'admin doivent rester identiques
 {
   const grab = (src) => { const m = src.match(/const DEFAULT_GAMES = (\[[\s\S]*?\n\]);/); return m ? JSON.stringify(new Function('return ' + m[1])()) : null; };
-  const a = grab(read('jeux.html')), b = grab(admin);
-  if (!a || !b) errors.push('DEFAULT_GAMES introuvable dans jeux.html ou admin.js');
-  else if (a !== b) errors.push('DEFAULT_GAMES de jeux.html et de admin.js ont divergé (garde-les identiques)');
+  const a = grab(read('js/jeux.js')), b = grab(admin);
+  if (!a || !b) errors.push('DEFAULT_GAMES introuvable dans js/jeux.js ou admin/jeux.js');
+  else if (a !== b) errors.push('DEFAULT_GAMES de js/jeux.js et de admin/jeux.js ont divergé (garde-les identiques)');
 }
 
 if (errors.length) {

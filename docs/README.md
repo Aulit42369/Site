@@ -11,13 +11,13 @@
 | Qualité | à chaque push touchant pages / data / scripts | valide `data/*.json`, vérifie la parité site ↔ admin, la cohérence des menus et les liens |
 | Tests (navigateur) | à chaque push touchant pages / JS / tests | lance `tests/run-all.js` (admin + pages publiques) sur une copie temporaire |
 | Plan du site | quand `data/custom-pages.json` change | régénère `sitemap.xml` |
-| Minification | quand `style.css`, `main.js` ou `admin.js` change | régénère les `.min` et les `?v=` |
+| Minification | quand `style.css`, `main.js`, `admin.js`, `admin/` ou `js/` change | régénère les `.min` et les `?v=` |
 
 ## Ajouter une page au site
 
 1. Ajoute-la dans `CORE_PAGES` (`main.js`), crée le fichier `.html` avec des `data-edit` sur ses textes.
 2. `node scripts/sync-nav.js` (menus) puis `node scripts/generate-sitemap.js`.
-3. Ajoute-la dans `TEXT_PAGES` (`admin.js`) — sinon `scripts/check-admin-parity.js` échoue (c'est voulu).
+3. Ajoute-la dans `TEXT_PAGES` (`admin/textes.js`) — sinon `scripts/check-admin-parity.js` échoue (c'est voulu).
 
 Une page créée depuis l'admin (onglet « Pages ») n'a rien de tout ça à faire.
 
@@ -29,7 +29,7 @@ cd tests && npm install && npx playwright install chromium && node run-all.js
 
 ## Sécurité de l'admin (23/10)
 
-- **Jeton GitHub** (`admin.js`, `getToken` / `setToken`) : gardé par défaut en `sessionStorage` (oublié à la fermeture de l'onglet, invisible des autres onglets du site). Case « Se souvenir de moi sur cet appareil » → `localStorage` + drapeau `aulit_admin_token_remember`. Un ancien jeton laissé en `localStorage` sans ce drapeau est déplacé en `sessionStorage` au chargement.
+- **Jeton GitHub** (`admin/commun.js`, `getToken` / `setToken` / `expireRememberedToken`) : gardé par défaut en `sessionStorage` (oublié à la fermeture de l'onglet, invisible des autres onglets du site). Case « Se souvenir de moi sur cet appareil » → `localStorage` + drapeau `aulit_admin_token_remember`, **7 jours maximum** (effacé à l'ouverture de l'admin au-delà). Un ancien jeton laissé en `localStorage` sans ce drapeau est déplacé en `sessionStorage` au chargement.
 - **Piège** : l'origine `aulit42369.github.io` est partagée par toutes les pages publiques (et tous les dépôts Pages du compte). Tout script qu'elles chargent peut lire le `localStorage` — et le `sessionStorage` de l'onglet admin, car l'aperçu de l'onglet Textes ouvre une page publique en iframe de même origine.
 - **GoatCounter** : chargé en version figée `count.v4.js` avec `integrity` (SRI) + `crossorigin="anonymous"` sur les 12 pages publiques. Si GoatCounter sort une nouvelle version, ne PAS remettre `count.js` : recalculer le hash (`curl -s https://gc.zgo.at/count.vX.js | openssl dgst -sha384 -binary | openssl base64 -A`) et le mettre partout. Vérifié par `tests/admin-token.test.js`.
 - **Brouillons et annonces programmées ne sont pas secrets** (piège) : le site est statique et le dépôt public. Une page décochée « Publiée » reste entière dans `data/custom-pages.json`, une annonce désactivée ou programmée reste dans `data/site.json` (et tout reste dans l'historique git). Le filtre `published !== false` / `announcementActive` (`main.js`) ne fait que masquer l'affichage. L'admin le dit désormais (texte de l'onglet Pages, case « Publiée », confirmation d'enregistrement, état du bandeau). Vérifié par `tests/admin-features.test.js`. Pour un vrai brouillon privé, il faudrait le garder hors du dépôt (voir la question ouverte du 23/10).

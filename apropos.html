@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; frame-src https:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:">
 <title>À propos de la chaîne Twitch multigaming | Aulit42369</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -189,75 +190,12 @@
 
 <script src="main.min.js?v=02f191a8"></script>
 
-<script>
-/* Textes éditables depuis admin.html (onglet "À propos") : data/apropos.json.
-   Le HTML ci-dessus sert de contenu de secours tant que le fichier
-   n'existe pas ou est invalide. */
-loadJson('data/apropos.json', null)
-  .then(d => {
-    if (!d || typeof d !== 'object' || Array.isArray(d)) return;
-    const $ = id => document.getElementById(id);
-    const isStr = v => typeof v === 'string';
-    const c = d.chaine, t = d.twitch;
-    if (c && isStr(c.title)) $('aboutTitle').textContent = c.title;
-    if (c && Array.isArray(c.paragraphs)) {
-      $('aboutParagraphs').innerHTML = c.paragraphs.filter(isStr).filter(p => p.trim())
-        .map((p, i) => `<p${i ? ' style="margin-top:14px;"' : ''}>${renderRichText(p)}</p>`).join('');
-    }
-    if (t && isStr(t.title)) $('twitchTitle').textContent = t.title;
-    if (t && isStr(t.intro)) {
-      $('twitchIntro').textContent = t.intro;
-      $('twitchIntro').style.display = t.intro.trim() ? '' : 'none';
-    }
-    if (t && Array.isArray(t.commands)) {
-      $('twitchCommands').innerHTML = t.commands.filter(x => x && isStr(x.cmd) && x.cmd.trim())
-        .map(x => `<li><code>${escapeHtml(x.cmd)}</code>${isStr(x.desc) && x.desc.trim() ? ' — ' + renderRichText(x.desc) : ''}</li>`).join('');
-    }
-    if (Array.isArray(d.faq)) {
-      const items = d.faq.filter(f => f && isStr(f.q) && f.q.trim());
-      $('faqList').innerHTML = items.map(f =>
-        `<details class="faq-item"><summary>${escapeHtml(f.q)}</summary><p>${renderRichText(isStr(f.a) ? f.a : '')}</p></details>`).join('');
-      $('faqSection').style.display = items.length ? '' : 'none';
-    }
-  });
-</script>
+<script src="js/apropos.js"></script>
 
-<script>
-/* "Récemment sur la chaîne" — lit data/recent-games.json, tenu à
-   jour par la même GitHub Action que le reste (rien à gérer à la
-   main). Reste simplement caché si le fichier n'existe pas encore
-   ou est vide. */
-loadJson('data/recent-games.json', [])
-  .then(games => {
-    if (!Array.isArray(games) || games.length === 0) return;
-    const list = document.getElementById('recentGamesList');
-    /* un jeu n'apparaît qu'une fois (le plus récent d'abord), même si
-       le fichier contient des doublons */
-    const seen = new Set();
-    games.filter(g => {
-      const k = g && typeof g.game === 'string' ? g.game.trim().toLowerCase() : '';
-      if (!k || seen.has(k)) return false;
-      seen.add(k);
-      return true;
-    }).forEach(g => {
-      const tag = document.createElement('span');
-      tag.className = 'game-tag';
-      if (g.art) {
-        const art = document.createElement('img');
-        art.className = 'game-tag-art';
-        art.alt = '';
-        art.src = g.art;
-        tag.appendChild(art);
-      }
-      tag.appendChild(document.createTextNode(g.game));
-      list.appendChild(tag);
-    });
-    document.getElementById('recentGames').style.display = 'block';
-  });
-</script>
+<script src="js/apropos-recents.js"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
-        async src="//gc.zgo.at/count.v4.js" crossorigin="anonymous"
+        async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>
 </body>
 </html>

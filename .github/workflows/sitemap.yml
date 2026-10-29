@@ -1,12 +1,14 @@
 name: Plan du site (sitemap.xml)
 
 # Régénère sitemap.xml quand une page est ajoutée ou retirée depuis l'admin
-# (onglet « Pages »), pour que Google la découvre.
+# (onglet « Pages ») ou qu'une page HTML change (lastmod), pour que Google la découvre.
 on:
   push:
     branches: [main]
     paths:
       - 'data/custom-pages.json'
+      - '*.html'
+      - 'scripts/generate-sitemap.js'
   workflow_dispatch:
 
 jobs:
@@ -16,6 +18,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # historique complet : lastmod = date du dernier commit de chaque page
 
       - uses: actions/setup-node@v5
         with:

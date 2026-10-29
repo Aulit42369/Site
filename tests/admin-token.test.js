@@ -60,6 +60,23 @@ check('GoatCounter figé (count.v4.js) avec integrity sur chaque page', gc.every
   st = await store();
   check('ancien jeton : déplacé en sessionStorage, retiré du localStorage', st.s === 'fake' && st.l === null);
 
+  // « se souvenir » limité à 7 jours
+  const remembered = (days) => page.evaluate((d) => {
+    sessionStorage.clear();
+    localStorage.setItem('aulit_admin_token', 'fake');
+    localStorage.setItem('aulit_admin_token_remember', '1');
+    localStorage.setItem('aulit_admin_token_at', String(Date.now() - d * 86400000));
+  }, days);
+  await remembered(6);
+  await page.reload(); await page.waitForSelector('#adminPanel', { state: 'visible' });
+  st = await store();
+  check('« se souvenir » depuis 6 jours : toujours connecté', st.l === 'fake');
+  await remembered(8);
+  await page.reload(); await page.waitForSelector('#authGate', { state: 'visible' });
+  st = await store();
+  check('« se souvenir » depuis 8 jours : jeton effacé, reconnexion demandée', st.l === null && st.r === null && st.s === null && !(await page.isVisible('#adminPanel')));
+  check('texte de l\'option : 7 jours', /7 jours/.test(await page.textContent('label:has(#rememberToken)')));
+
   check('aucune erreur JS', errs.length === 0);
   if (errs.length) console.log(errs);
   await browser.close();

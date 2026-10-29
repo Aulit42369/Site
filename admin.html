@@ -177,13 +177,13 @@
       <label for="tokenInput">Jeton d'accès GitHub (fine-grained, limité à ce dépôt)</label>
       <input type="password" id="tokenInput" placeholder="github_pat_...">
     </div>
-    <label class="admin-note" style="display:flex;gap:8px;align-items:center;margin-bottom:12px;"><input type="checkbox" id="rememberToken"> Se souvenir de moi sur cet appareil (sinon le jeton est oublié à la fermeture de l'onglet)</label>
+    <label class="admin-note" style="display:flex;gap:8px;align-items:center;margin-bottom:12px;"><input type="checkbox" id="rememberToken"> Se souvenir de moi 7 jours sur cet appareil (sinon le jeton est oublié à la fermeture de l'onglet)</label>
     <button class="btn btn-primary" id="connectBtn">Se connecter</button>
     <p class="admin-note" style="margin-top:20px;">
       Pas encore de jeton ? Sur GitHub : <strong>Settings</strong> (ton compte, pas le repo) → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Fine-grained tokens</strong> → <strong>Generate new token</strong>.
       Repository access : <strong>Only select repositories</strong> → choisis <code>Site</code>. Permissions → <strong>Contents</strong> → <strong>Read and write</strong>. Rien d'autre à cocher.
     </p>
-    <p class="admin-note warn">Le jeton reste uniquement dans ce navigateur : dans cet onglet seulement par défaut, ou durablement (localStorage) si tu coches « Se souvenir de moi » — à éviter sur un ordinateur partagé. Ne le colle nulle part ailleurs. Tu peux le révoquer à tout moment depuis GitHub.</p>
+    <p class="admin-note warn">Le jeton reste uniquement dans ce navigateur : dans cet onglet seulement par défaut, ou 7 jours (localStorage, puis effacé automatiquement) si tu coches « Se souvenir de moi » — à éviter sur un ordinateur partagé. Ne le colle nulle part ailleurs. Tu peux le révoquer à tout moment depuis GitHub.</p>
   </div>
 
   <div id="adminPanel" style="display:none;">
@@ -319,6 +319,18 @@
   </div>
 </div>
 
-<script src="admin.js?v=f23ee477"></script>
+<!-- Ordre important : commun d'abord, admin.js (démarrage) en dernier -->
+<script src="admin/commun.js"></script>
+<script src="admin/streamers.js"></script>
+<script src="admin/clips.js"></script>
+<script src="admin/planning.js"></script>
+<script src="admin/apropos.js"></script>
+<script src="admin/site.js"></script>
+<script src="admin/textes.js"></script>
+<script src="admin/sante.js"></script>
+<script src="admin/historique.js"></script>
+<script src="admin/pages.js"></script>
+<script src="admin/jeux.js"></script>
+<script src="admin.js?v=ce973f12"></script>
 </body>
 </html>

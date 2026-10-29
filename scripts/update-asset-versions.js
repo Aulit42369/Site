@@ -12,8 +12,9 @@
    visiteurs récupèrent automatiquement la dernière version — plus
    besoin d'y penser ni de changer un numéro à la main.
 
+   Versionne aussi admin/*.js et js/*.js (un hash par fichier).
    Lancé par .github/workflows/asset-versioning.yml à chaque push sur
-   main qui touche style.css, main.js ou admin.js.
+   main qui touche style.css, main.js, admin.js, admin/ ou js/.
    ================================================================ */
 const fs = require('fs');
 const path = require('path');
@@ -64,7 +65,12 @@ async function main() {
     const after = before
       .replace(/(href=["'])style(?:\.min)?\.css(?:\?v=[^"']*)?(["'])/g, `$1style.min.css?v=${cssHash}$2`)
       .replace(/(src=["'])main(?:\.min)?\.js(?:\?v=[^"']*)?(["'])/g, `$1main.min.js?v=${jsHash}$2`)
-      .replace(/(src=["'])admin\.js(?:\?v=[^"']*)?(["'])/g, `$1admin.js?v=${adminHash}$2`);
+      .replace(/(src=["'])admin\.js(?:\?v=[^"']*)?(["'])/g, `$1admin.js?v=${adminHash}$2`)
+      // modules de l'admin (admin/*.js) et scripts des pages (js/*.js) : chacun son hash
+      .replace(/(src=["'])((?:admin|js)\/[a-z0-9-]+\.js)(?:\?v=[^"']*)?(["'])/g, (m, a, f, b) => {
+        const fp = path.join(ROOT, f);
+        return fs.existsSync(fp) ? `${a}${f}?v=${shortHash(fs.readFileSync(fp, 'utf-8'))}${b}` : m;
+      });
 
     if (after !== before) {
       fs.writeFileSync(filePath, after);

@@ -26,6 +26,6 @@ Menu (généré depuis `CORE_PAGES`, personnalisable dans l'admin) → bandeau �
 Première rencontre d'un lecteur Twitch → bandeau Accepter / Refuser → accord : les `iframe` reçoivent leur `src` ; refus : remplaçant + lien. Choix gardé 6 mois, modifiable via « Cookies ».
 
 ## D. Administration (`admin.html`, noindex)
-1. Écran d'accès : saisie du jeton GitHub (case « Se souvenir de moi sur cet appareil »).
+1. Écran d'accès : saisie du jeton GitHub (case « Se souvenir de moi 7 jours sur cet appareil »).
 2. Onglets : **Streamers**, **Clips**, **Planning** (semaine type + changements ponctuels), **À propos**, **Textes des pages** (aperçu de la page en cadre), **Pages** (pages personnalisées, case « Publiée »), **Jeux**, **Liens & annonce** (réseaux, Discord, annonce, serveur Escape), **Santé du site** (statut Twitch, liens cassés, jeux récents, automatisations), **Historique** (commits).
 3. Enregistrer → écriture du fichier `data/*.json` par l'API GitHub → la CI valide les données → GitHub Pages republie (1 à 2 min).

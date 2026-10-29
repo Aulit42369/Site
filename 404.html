@@ -5,6 +5,7 @@
 <!-- GitHub Pages sert cette page à n'importe quelle profondeur (/Site/a/b/…) : les liens relatifs repartent de la racine du site. -->
 <base href="/Site/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; frame-src https:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:">
 <title>Page introuvable — AULIT42369</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -91,7 +92,7 @@
 <script src="main.min.js?v=02f191a8"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
-        async src="//gc.zgo.at/count.v4.js" crossorigin="anonymous"
+        async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; frame-src https:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:">
 <title>Outils de stream sur mesure et overlays OBS | Aulit42369</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -790,34 +791,10 @@
 
 <script src="main.min.js?v=02f191a8"></script>
 
-<script>
-/* Projets supplémentaires (texte seul) ajoutés depuis l'admin, onglet
-   « Textes des pages » : data/pages.json → extraProjects. Ils
-   s'affichent à la suite des projets ci-dessus. */
-window.pagesDataPromise.then(d => {
-  const list = d && Array.isArray(d.extraProjects) ? d.extraProjects : [];
-  const wrap = document.querySelector('main section.tight .container');
-  const colors = ['--cyan', '--magenta', '--violet'];
-  let n = 0;
-  list.forEach(p => {
-    if (!p || typeof p.title !== 'string' || !p.title.trim()) return;
-    const paragraphs = (Array.isArray(p.paragraphs) ? p.paragraphs : []).filter(x => typeof x === 'string' && x.trim());
-    const block = document.createElement('div');
-    block.className = 'project-block project-text-only';
-    block.innerHTML = '<div>' +
-      (p.eyebrow ? '<div class="project-eyebrow" style="color:var(' + colors[n % 3] + ');">// ' + escapeHtml(p.eyebrow) + '</div>' : '') +
-      '<h2>' + renderRichText(p.title) + '</h2>' +
-      '<div class="project-desc">' + paragraphs.map(x => '<p>' + renderRichText(x) + '</p>').join('') + '</div>' +
-      (p.stack ? '<div class="project-stack">' + escapeHtml(p.stack) + '</div>' : '') +
-      '</div>';
-    wrap.appendChild(block);
-    n++;
-  });
-});
-</script>
+<script src="js/coulisses.js"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
-        async src="//gc.zgo.at/count.v4.js" crossorigin="anonymous"
+        async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>
 </body>
 </html>
