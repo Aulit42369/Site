@@ -54,7 +54,7 @@ img { max-width: 100%; display: block; }
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 74px; }
 .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.15rem; letter-spacing: 0.04em; display: flex; align-items: center; gap: 10px; }
 .logo .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); box-shadow: var(--glow-c); }
 .header-left { display: flex; align-items: center; gap: 14px; }
@@ -73,17 +73,14 @@ img { max-width: 100%; display: block; }
 .nav a {
   font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem;
   letter-spacing: 0.03em; text-transform: uppercase;
-  padding: 9px 16px; border-radius: 3px; color: var(--muted);
+  padding: 9px 12px; border-radius: 3px; color: var(--muted);
   border: 1px solid transparent; white-space: nowrap;
   transition: color .15s ease, border-color .15s ease;
 }
-/* écrans moyens : le menu a 10 entrées, on resserre pour tenir sur une ligne */
-@media (min-width: 1001px) and (max-width: 1460px) {
+/* écrans moyens : on resserre les 8 entrées pour tenir sur une ligne sans toucher le logo */
+@media (min-width: 1001px) and (max-width: 1240px) {
   .nav { gap: 2px; }
   .nav a { padding: 9px 9px; font-size: 0.88rem; letter-spacing: 0.02em; }
-}
-@media (min-width: 1001px) and (max-width: 1100px) {
-  .nav a { padding: 9px 6px; font-size: 0.82rem; letter-spacing: 0; }
 }
 .nav a:hover { color: var(--white); }
 .nav a.active { color: var(--cyan); border-color: var(--cyan); text-shadow: var(--glow-c); }
@@ -118,12 +115,12 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------- typo générique ---------- */
-.eyebrow { font-size: 0.82rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--cyan); text-shadow: var(--glow-c); margin-bottom: 14px; }
+.eyebrow { font-size: 0.82rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cyan); text-shadow: var(--glow-c); margin-bottom: 14px; }
 h1, h2, h3 { font-family: 'Orbitron', sans-serif; font-weight: 900; line-height: 1.12; margin: 0; }
 h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
 h1.h1-page { font-size: clamp(2rem, 4.5vw, 3rem); }
 h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; letter-spacing: 0.02em; }
-h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+h3, h2.as-h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
 em.accent { color: var(--cyan); font-style: normal; text-shadow: var(--glow-c); }
 p { color: #c3cadb; }
 p.lead { font-size: 1.15rem; color: var(--muted); max-width: 640px; }
@@ -131,6 +128,22 @@ p.lead { font-size: 1.15rem; color: var(--muted); max-width: 640px; }
 /* ---------- sections ---------- */
 section { padding: 84px 0; }
 section.tight { padding: 56px 0; }
+/* bande d'intro en tête de page : compacte, quadrillage fondu vers le fond au lieu d'un bord net,
+   et pas de double marge avec la section qui suit (29/10 : 140 px de vide, la moitié d'un écran mobile) */
+main > section.grid-bg:first-child {
+  padding: 60px 0 40px;
+  background-image:
+    linear-gradient(180deg, transparent 55%, var(--bg)),
+    linear-gradient(rgba(0, 245, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.05) 1px, transparent 1px);
+  background-size: auto, 46px 46px, 46px 46px;
+}
+main > section.grid-bg:first-child + section.tight { padding-top: 16px; }
+h1 + p.lead, .eyebrow + h1 + p.lead { margin-top: 14px; }
+@media (max-width: 700px) {
+  main > section.grid-bg:first-child { padding: 36px 0 24px; }
+  section.tight { padding: 40px 0; }
+}
 
 /* ---------- cartes / blocs signature ---------- */
 .card {
@@ -199,6 +212,9 @@ section.tight { padding: 56px 0; }
 .site-footer .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 .site-footer .brand { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.25em; color: var(--dim); }
 .site-footer .socials { display: flex; gap: 14px; }
+.site-footer .footer-nav { display: flex; gap: 18px; }
+.site-footer .footer-nav a { font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); }
+.site-footer .footer-nav a:hover { color: var(--cyan); }
 .site-footer .socials a { font-size: 0.85rem; color: var(--muted); font-weight: 700; }
 .site-footer .socials a:hover { color: var(--cyan); }
 

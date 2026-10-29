@@ -45,8 +45,9 @@ const CORE_PAGES = [
   { file: 'coulisses.html', label: 'Coulisses', menu: true },
   { file: 'apropos.html', label: 'À propos', menu: true },
   { file: 'escape-fragments.html', label: 'Escape Fragments', menu: true },
-  { file: 'partenaires.html', label: 'Partenaires', menu: true },
-  { file: 'contact.html', label: 'Contact', menu: true, last: true },
+  // 29/10 : hors du menu (il débordait à 10 entrées), liens dans le pied de page de chaque page
+  { file: 'partenaires.html', label: 'Partenaires', menu: false },
+  { file: 'contact.html', label: 'Contact', menu: false },
   { file: 'mentions-legales.html', label: 'Mentions légales', menu: false, sitemap: false },
   { file: 'confidentialite.html', label: 'Confidentialité et cookies', menu: false, sitemap: false },
   { file: 'cgu.html', label: 'Conditions d’utilisation', menu: false, sitemap: false },

@@ -54,6 +54,7 @@ Documentation technique détaillée : `docs/README.md`.
 - Ne pas lancer les tests depuis la racine du dépôt : ils y déposent des captures (désormais ignorées par `.gitignore`).
 - Nouvelle iframe tierce : toujours `data-consent-src` (+ `applyConsent(élément)` si créée en JS), jamais `src` direct.
 - `coulisses.html` : `features.test.js` attend exactement 11 blocs projet ; un bloc ajouté dans le HTML demande de mettre ce test à jour (les projets ajoutés dans l'admin, `extraProjects`, ne comptent pas).
+- Menu : 8 entrées au maximum (29/10 : à 10, il débordait sur les grands écrans). Une page secondaire va en `menu: false` + lien dans `.footer-nav` du pied de page (toutes les pages).
 - Nouvelle page : `CORE_PAGES` + `TEXT_PAGES` + pied de page avec les 4 liens légaux + la balise CSP (copier celle d'`index.html`) + son script dans `js/<page>.js` (jamais inline).
 - Admin : nouvelle fonction appelée **au chargement** (hors clic) depuis un autre fichier = ce fichier doit être chargé avant dans `admin.html`. `check-admin-parity.js` lit `admin.js` + `admin/*.js` et compare `DEFAULT_GAMES` de `js/jeux.js` et `admin/jeux.js`.
 

@@ -20,4 +20,23 @@ window.pagesDataPromise.then(d => {
     wrap.appendChild(block);
     n++;
   });
+  buildToc(wrap);
 });
+
+/* Sommaire : un lien par projet (y compris ceux de l'admin), d'après son sur-titre « // Nom ». */
+function buildToc(wrap) {
+  const blocks = [...wrap.querySelectorAll(':scope > .project-block')];
+  const links = blocks.map((block, i) => {
+    const label = (block.querySelector('.project-eyebrow') || block.querySelector('h2') || {}).textContent || '';
+    const name = label.replace(/^\s*\/\/\s*/, '').trim();
+    if (!name) return '';
+    if (!block.id) block.id = 'projet-' + (i + 1);
+    return '<a href="#' + block.id + '">' + escapeHtml(name) + '</a>';
+  }).filter(Boolean);
+  if (links.length < 2) return;
+  const toc = document.createElement('nav');
+  toc.className = 'coulisses-toc';
+  toc.setAttribute('aria-label', 'Projets de la page');
+  toc.innerHTML = links.join('');
+  wrap.insertBefore(toc, wrap.firstChild);
+}
