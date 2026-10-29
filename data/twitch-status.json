@@ -1,9 +1,4 @@
 {
-  "galyssiane": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
-    "live": true,
-    "game": "All Rats on Deck"
-  },
   "calo_vt": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
     "live": false
@@ -32,5 +27,10 @@
     "live": true,
     "game": "All Rats on Deck"
   },
-  "_updated_at": "2026-10-29T22:00:56.513Z"
+  "galyssiane": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
+    "live": true,
+    "game": "All Rats on Deck"
+  },
+  "_updated_at": "2026-10-29T22:10:26.288Z"
 }
