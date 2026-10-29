@@ -45,6 +45,18 @@
 </script>
 <link rel="stylesheet" href="style.min.css?v=f38153b7">
 <style>
+  /* chiffres sous l'introduction : une ligne sobre, pas des cartes */
+  .coulisses-stats { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; }
+  .coulisses-stats li { display: flex; flex-direction: column; gap: 2px; padding: 0 28px; border-left: 1px solid var(--line); }
+  .coulisses-stats li:first-child { padding-left: 0; border-left: none; }
+  .coulisses-stats strong { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--cyan); font-variant-numeric: tabular-nums; }
+  .coulisses-stats span { font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 700px) {
+    .coulisses-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 0; }
+    .coulisses-stats li { padding: 0 0 0 14px; }
+    .coulisses-stats li:nth-child(odd) { padding-left: 0; border-left: none; }
+    .coulisses-stats strong { font-size: 1.25rem; }
+  }
   /* sommaire des projets (construit par js/coulisses.js), reste visible sous le menu */
   .coulisses-toc { position: sticky; top: 75px; z-index: 5; display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 0; margin-bottom: 40px; background: var(--bg); border-bottom: 1px solid var(--line); }
   @media (max-width: 700px) {
@@ -107,6 +119,12 @@
       <div class="eyebrow" data-edit="coulisses.eyebrow" data-edit-label="Coulisses — sur-titre">// Coulisses techniques</div>
       <h1 class="h1-page">Outils de stream <em class="accent">sur mesure</em></h1>
       <p class="lead" data-edit="coulisses.lead" data-edit-label="Coulisses — introduction">Les outils qui tournent derrière le stream, construits sur-mesure plutôt qu'avec des solutions toutes faites — développés ici avec Claude. Comment ils sont pensés, et ce qu'il a fallu résoudre pour que ça marche.</p>
+      <ul class="coulisses-stats" aria-label="En chiffres">
+        <li><strong data-edit="coulisses.stat1.n" data-edit-label="Coulisses · chiffre 1">14</strong><span data-edit="coulisses.stat1.l" data-edit-label="Coulisses · chiffre 1, légende">outils sur mesure</span></li>
+        <li><strong data-edit="coulisses.stat2.n" data-edit-label="Coulisses · chiffre 2">15</strong><span data-edit="coulisses.stat2.l" data-edit-label="Coulisses · chiffre 2, légende">agents IA à l’agence</span></li>
+        <li><strong data-edit="coulisses.stat3.n" data-edit-label="Coulisses · chiffre 3">2 000+</strong><span data-edit="coulisses.stat3.l" data-edit-label="Coulisses · chiffre 3, légende">tests automatiques</span></li>
+        <li><strong data-edit="coulisses.stat4.n" data-edit-label="Coulisses · chiffre 4">24 h/24</strong><span data-edit="coulisses.stat4.l" data-edit-label="Coulisses · chiffre 4, légende">sur un Raspberry Pi</span></li>
+      </ul>
     </div>
   </section>
 
@@ -186,6 +204,56 @@
               <text x="306" y="179" text-anchor="middle" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="11" font-weight="700">Stream en cours</text>
               <rect x="374" y="158" width="86" height="34" rx="5" fill="none" stroke="#1a2540"/>
               <text x="417" y="179" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="11" font-weight="600">Fin</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
+          <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p11.eyebrow" data-edit-label="Coulisses · Agence Aulit — sur-titre">// Agence Aulit</div>
+          <h2 data-edit="coulisses.p11.title" data-edit-label="Coulisses · Agence Aulit — titre">Une agence IA dans un <em class="accent">bureau pixel art</em></h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.p11.desc1" data-edit-label="Coulisses · Agence Aulit — paragraphe 1">Un bureau en pixel art aux couleurs de la chaîne, où quinze personnages ont chacun leur métier : Max accueille les demandes et les répartit, Léa et Hugo développent, Nora prépare les streams, Sami et Jade s’occupent des réseaux et des visuels, Lina et Yanis montent les clips. Chacun est un agent IA qui travaille en arrière-plan.</p>
+            <p data-edit="coulisses.p11.desc2" data-edit-label="Coulisses · Agence Aulit — paragraphe 2">Rien ne sort sans contrôle : tout outil ou site livré passe d’abord par Zoé, l’experte en cybersécurité, et toute publication attend une validation avant de partir par la Régie Mobile. Pendant un live, aucun chantier ne démarre, pour ne jamais gêner le stream.</p>
+            <p data-edit="coulisses.p11.desc3" data-edit-label="Coulisses · Agence Aulit — paragraphe 3">Après chaque live, l’agence repère les moments forts (pics du chat, du son), découpe des extraits verticaux et propose les meilleurs, publiés ensuite sous-titrés. Chaque lundi, elle relit ce qui a coincé dans la semaine et propose ses propres améliorations.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p11.status" data-edit-label="Coulisses · Agence Aulit — note">Chaque mission a son rapport : ce qui a été fait, le contrôle de Zoé, et un bouton pour revenir à la version d’avant</span></div>
+          <div class="project-stack" data-edit="coulisses.p11.stack" data-edit-label="Coulisses · Agence Aulit — technologies">Node.js · agents Claude Code · Régie Mobile · pixel art</div>
+        </div>
+        <div class="project-visuals">
+          <div class="project-diagram">
+            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#9b5cff"/>
+                </marker>
+              </defs>
+              <line x1="118" y1="130" x2="150" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
+              <line x1="262" y1="112" x2="292" y2="52" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
+              <line x1="262" y1="130" x2="292" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
+              <line x1="262" y1="148" x2="292" y2="208" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
+              <line x1="418" y1="52" x2="440" y2="112" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
+              <line x1="418" y1="130" x2="440" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
+              <line x1="418" y1="208" x2="440" y2="148" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
+              <rect x="8" y="104" width="110" height="52" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="63" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Olivier</text>
+              <text x="63" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">une demande</text>
+              <rect x="152" y="96" width="110" height="68" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
+              <text x="207" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Max</text>
+              <text x="207" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">chef d’agence</text>
+              <rect x="294" y="28" width="124" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="356" y="50" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Dev</text>
+              <text x="356" y="66" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Léa · Hugo</text>
+              <rect x="294" y="106" width="124" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="356" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Stream · réseaux</text>
+              <text x="356" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Nora · Sami · Jade</text>
+              <rect x="294" y="184" width="124" height="48" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="356" y="206" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Clips</text>
+              <text x="356" y="222" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Lina · Yanis</text>
+              <rect x="442" y="96" width="72" height="68" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
+              <text x="478" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Zoé</text>
+              <text x="478" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">contrôle</text>
             </svg>
           </div>
         </div>
@@ -311,7 +379,7 @@
           <h2 data-edit="coulisses.p8.title" data-edit-label="Coulisses · Overlays &amp; scripts OBS — titre">Des scènes faites main, qui changent avec les <em class="accent">saisons</em></h2>
           <div class="project-desc">
             <p data-edit="coulisses.p8.desc1" data-edit-label="Coulisses · Overlays &amp; scripts OBS — paragraphe 1">Toutes les scènes du stream sont des pages web écrites maison et chargées dans OBS : une version de base et des versions festives ou saisonnières, avec les alertes et les labels intégrés directement dans l'overlay pour que tout reste uniforme. Le thème change à la main, par période, plutôt qu'à une date automatique.</p>
-            <p data-edit="coulisses.p8.desc2" data-edit-label="Coulisses · Overlays &amp; scripts OBS — paragraphe 2">Des scripts Lua pilotent OBS : un script de démarrage, un rafraîchissement des sources navigateur avec une case à cocher par source, et la coupure automatique de l'écran de fin de raid. Les mêmes éléments, anonymisés et documentés pas à pas, forment un kit réutilisable par quelqu'un qui débute.</p>
+            <p data-edit="coulisses.p8.desc2" data-edit-label="Coulisses · Overlays &amp; scripts OBS — paragraphe 2">Des scripts Lua pilotent OBS : un script de démarrage, un rafraîchissement des sources navigateur avec une case à cocher par source, la coupure automatique de l'écran de fin de raid, et l'affichage du morceau Spotify en cours d'écoute. Les mêmes éléments, anonymisés et documentés pas à pas, forment un kit réutilisable par quelqu'un qui débute.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p8.status" data-edit-label="Coulisses · Overlays &amp; scripts OBS — note">Un « super dossier » de 11 dossiers numérotés rassemble tout l'environnement : site, widgets, overlays, ponts d'alertes et de labels, Régie Mobile, scripts Lua et panneaux</span></div>
           <div class="project-stack" data-edit="coulisses.p8.stack" data-edit-label="Coulisses · Overlays &amp; scripts OBS — technologies">HTML · CSS · JavaScript · OBS Lua</div>
@@ -497,6 +565,49 @@
 
       <div class="project-block">
         <div>
+          <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.p13.eyebrow" data-edit-label="Coulisses · Quiz du chat — sur-titre">// Quiz du chat</div>
+          <h2 data-edit="coulisses.p13.title" data-edit-label="Coulisses · Quiz du chat — titre">Un quiz <em class="accent">culture gaming</em> dans le chat</h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.p13.desc1" data-edit-label="Coulisses · Quiz du chat — paragraphe 1">Un modérateur tape !quiz et le bot pose une question dans le chat : le premier qui trouve la bonne réponse marque des points, deux s’il répond vite. 177 questions sur 14 thèmes, de Mario à Valorant en passant par Minecraft, les jeux indés et le rétro.</p>
+            <p data-edit="coulisses.p13.desc2" data-edit-label="Coulisses · Quiz du chat — paragraphe 2">Les réponses sont tolérantes (accents, majuscules, ponctuation, et une faute admise sur les mots longs), parce qu’on tape vite dans un chat. Les scores se cumulent d’un stream à l’autre sur une saison, avec !score et !classement, et chacun peut effacer le sien.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p13.status" data-edit-label="Coulisses · Quiz du chat — note">Le panneau « Quiz » sous le stream se régénère tout seul quand des questions sont ajoutées</span></div>
+          <div class="project-stack" data-edit="coulisses.p13.stack" data-edit-label="Coulisses · Quiz du chat — technologies">Node.js sans dépendance · chat Twitch · compte bot dédié</div>
+        </div>
+        <div class="project-visuals">
+          <div class="project-diagram">
+            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-qz" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#ff2d78"/>
+                </marker>
+              </defs>
+              <line x1="150" y1="130" x2="198" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-qz)"/>
+              <line x1="322" y1="112" x2="372" y2="56" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-qz)"/>
+              <line x1="322" y1="130" x2="372" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-qz)"/>
+              <line x1="322" y1="148" x2="372" y2="204" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-qz)"/>
+              <rect x="8" y="98" width="142" height="64" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Chat Twitch</text>
+              <text x="79" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">!quiz · réponses</text>
+              <rect x="200" y="92" width="122" height="76" rx="6" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
+              <text x="261" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bot quiz</text>
+              <text x="261" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">30 s par question</text>
+              <rect x="374" y="30" width="138" height="52" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="443" y="54" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Question</text>
+              <text x="443" y="70" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">177 · 14 thèmes</text>
+              <rect x="374" y="104" width="138" height="52" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="443" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Points</text>
+              <text x="443" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">2 si rapide, sinon 1</text>
+              <rect x="374" y="178" width="138" height="52" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="443" y="202" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Classement</text>
+              <text x="443" y="218" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">par saison</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
           <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p9.eyebrow" data-edit-label="Coulisses · Jeux mobiles — sur-titre">// Jeux mobiles</div>
           <h2 data-edit="coulisses.p9.title" data-edit-label="Coulisses · Jeux mobiles — titre">Quatre jeux, jouables <em class="accent">partout</em></h2>
           <div class="project-desc">
@@ -652,7 +763,7 @@
           <div class="project-desc">
             <p data-edit="coulisses.p6.desc1" data-edit-label="Coulisses · Bot Discord — paragraphe 1">Le bot qui fait tourner le serveur d'entraide entre streamers. L'entrée est filtrée : les nouveaux membres acceptent le règlement puis soumettent leur chaîne Twitch ou YouTube pour vérification avant d'obtenir l'accès complet — pas une communauté ouverte à tout le monde.</p>
             <p data-edit="coulisses.p6.desc2" data-edit-label="Coulisses · Bot Discord — paragraphe 2">Au-delà de l'accueil : modération avec escalade automatique après plusieurs avertissements, anniversaires, sondages, salons vocaux temporaires, zone promo avec délai entre deux posts, annuaire des membres, tickets, concours, et annonces automatiques (chaînes suivies en direct, jeux gratuits, paliers de followers). Un panneau d'administration web permet de tout gérer sans passer par les commandes Discord.</p>
-            <p data-edit="coulisses.p6.desc3" data-edit-label="Coulisses · Bot Discord — paragraphe 3">Le bot tourne sur un Raspberry Pi, et l'adresse du tunnel vers son panneau peut changer, ce qui cassait les connexions Discord et Twitch. Un relais Cloudflare à adresse fixe, tenu à jour par le bot, renvoie maintenant toujours vers la bonne. Un tableau de santé privé, sur le téléphone, surveille le Pi, les bots, les sites et les sauvegardes, et prévient dans un salon Discord privé dès que quelque chose s'arrête.</p>
+            <p data-edit="coulisses.p6.desc3" data-edit-label="Coulisses · Bot Discord — paragraphe 3">Le bot tourne sur un Raspberry Pi, et l'adresse du tunnel vers son panneau peut changer, ce qui cassait les connexions Discord et Twitch. Un relais Cloudflare à adresse fixe, tenu à jour par le bot, renvoie maintenant toujours vers la bonne. Le tout est surveillé par le tableau de santé présenté plus bas.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p6.status" data-edit-label="Coulisses · Bot Discord — note">Le même bot tourne aussi sur d'autres serveurs, avec des réglages propres à chacun</span></div>
           <div class="project-stack" data-edit="coulisses.p6.stack" data-edit-label="Coulisses · Bot Discord — technologies">Discord · commandes slash · panneau d'admin web · Raspberry Pi · Cloudflare Workers</div>
@@ -698,6 +809,53 @@
               <rect x="20" y="134" width="440" height="26" rx="6" fill="#080c18"/>
               <rect x="20" y="134" width="3" height="26" fill="#00f5ff"/>
               <text x="38" y="151" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12">✓ Chaîne ajoutée aux annonces de live</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
+          <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p12.eyebrow" data-edit-label="Coulisses · Santé des services — sur-titre">// Santé des services</div>
+          <h2 data-edit="coulisses.p12.title" data-edit-label="Coulisses · Santé des services — titre">Savoir en un coup d’œil si <em class="accent">tout tourne</em></h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.p12.desc1" data-edit-label="Coulisses · Santé des services — paragraphe 1">Une sonde installée sur le Raspberry Pi vérifie toutes les 5 minutes les bots, le tunnel du panneau, les sites, les extensions Twitch, les sauvegardes et le robot de La Cabane. Les sites hébergés gratuitement ne sont interrogés que toutes les 3 heures, pour ne pas épuiser leur quota.</p>
+            <p data-edit="coulisses.p12.desc2" data-edit-label="Coulisses · Santé des services — paragraphe 2">Le résultat s’affiche sur un tableau privé, ouvert depuis le téléphone et protégé par un code envoyé par e-mail. Si un bot s’arrête, qu’un site tombe, qu’une sauvegarde prend du retard ou que le Pi ne donne plus de nouvelles, une alerte part dans un salon Discord privé.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p12.status" data-edit-label="Coulisses · Santé des services — note">Les tests simulent tous les services : aucun vrai bot ni site n’est touché pendant les essais</span></div>
+          <div class="project-stack" data-edit="coulisses.p12.stack" data-edit-label="Coulisses · Santé des services — technologies">Node.js sans dépendance · cron · Cloudflare Workers · Discord</div>
+        </div>
+        <div class="project-visuals">
+          <div class="project-diagram">
+            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
+                </marker>
+              </defs>
+              <line x1="150" y1="130" x2="198" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
+              <line x1="322" y1="112" x2="372" y2="62" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
+              <line x1="322" y1="148" x2="372" y2="198" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
+              <rect x="8" y="34" width="142" height="44" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="54" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bots du Pi</text>
+              <text x="79" y="70" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">BOT Aulit · Lugh</text>
+              <rect x="8" y="108" width="142" height="44" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Sites</text>
+              <text x="79" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">QG Lugh · extensions</text>
+              <rect x="8" y="182" width="142" height="44" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="202" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Sauvegardes</text>
+              <text x="79" y="218" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">robot La Cabane</text>
+              <line x1="150" y1="56" x2="198" y2="112" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
+              <line x1="150" y1="204" x2="198" y2="148" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
+              <rect x="200" y="92" width="122" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+              <text x="261" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Sonde</text>
+              <text x="261" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Pi · toutes les 5 min</text>
+              <rect x="374" y="34" width="138" height="56" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="443" y="60" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Tableau privé</text>
+              <text x="443" y="76" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">sur le téléphone</text>
+              <rect x="374" y="170" width="138" height="56" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="443" y="196" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Salon #santé</text>
+              <text x="443" y="212" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">alerte Discord</text>
             </svg>
           </div>
         </div>
