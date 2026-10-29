@@ -30,4 +30,4 @@ Aulit42369, streamer Twitch francophone multigaming, a besoin d'un site vitrine 
 - `robots.txt` lu par les moteurs : impossible sans dépôt racine `aulit42369.github.io` (non créé ; `noindex` des pages fait foi).
 
 ## 5. Indicateurs
-GoatCounter (visites), Lighthouse (workflow), bilans mensuels du journal de direct (heures de live, spectateurs moyens, pic, catégories : chiffres du kit média encore « À venir »). Objectifs chiffrés : à confirmer par Olivier.
+GoatCounter (visites), Lighthouse (workflow), bilans mensuels du journal de direct (heures de live, spectateurs moyens, pic, catégories : chiffres du kit média encore « À venir »). Objectifs à 6 mois (fin avril 2027), cibles modestes : garder au moins 5 sessions de live bilantées dans le journal de direct par mois ; remplacer les 3 chiffres « À venir » du kit média par les vrais bilans ; atteindre 300 visites GoatCounter par mois ; Lighthouse ≥ 90 en accessibilité et en bonnes pratiques sur toutes les pages. Appui : petite chaîne francophone, outils de mesure déjà en place sur le site. (proposé par Claude le 29/10/2026, à corriger si besoin)

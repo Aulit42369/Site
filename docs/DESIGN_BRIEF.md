@@ -1,6 +1,6 @@
 # Site Aulit42369 — brief de design (identité réelle)
 
-Relevé le 28/10/2026 dans `style.css` (`:root`, « tokens de la charte graphique ») et `fonts.css`. Charte source : `F:\Stream\files\pour publication` (à confirmer par Olivier pour la version de référence).
+Relevé le 28/10/2026 dans `style.css` (`:root`, « tokens de la charte graphique ») et `fonts.css`. Charte source : `F:\Stream\files\pour publication` : version de référence = fichier `aulit42369_charte_graphique.html` daté du 30/07/2026 (proposé par Claude le 29/10/2026, à corriger si besoin).
 
 ## 1. Ambiance
 Cyber / néon sur fond quasi noir bleuté, fond quadrillé discret, halos lumineux cyan et violet. Ton direct, joueur et tutoyant : « Viens rigoler en direct ! », jeux coop entre potes.
