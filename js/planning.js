@@ -53,6 +53,13 @@ Promise.all([
     return jeu ? Object.assign({}, base, { game: jeu, note: 'Une semaine sur 2' }) : Object.assign({}, base, { on: false });
   }
 
+  /* 30/10 (Olivier : « je n'ai pas de semaine type, n'affiche rien ») : plus de badge « Changement » ;
+     la date du jour (sa prochaine occurrence, dans les 7 jours) sous son nom, dans la couleur de la case s'il est actif. */
+  function dateDuJour(day) {
+    const d = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + ((JOURS.indexOf(day) - maintenant.getDay() + 7) % 7));
+    return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+  }
+
   planning.map(jeuDeLaSemaine).forEach(base => {
     const ex = parJour[base.day];
     const item = !ex ? base : ex.on
@@ -62,13 +69,13 @@ Promise.all([
     const card = document.createElement('div');
     card.className = 'card planning-card' + (item.on ? '' : ' off');
     card.style.setProperty('--accent', item.color);
-    const tag = ex ? '<span class="planning-today-badge">Changement</span>' : '';
+    const date = `<div class="planning-date">${escapeHtml(dateDuJour(item.day))}</div>`;
 
     if (item.on) {
       card.innerHTML = `
         <div class="planning-card-head">
-          <div class="planning-day">${escapeHtml(item.day)}</div>
-          ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : tag}
+          <div><div class="planning-day">${escapeHtml(item.day)}</div>${date}</div>
+          ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : ''}
         </div>
         <div class="planning-game">${escapeHtml(item.game)}</div>
         ${item.time ? `<div class="planning-time">${item.end ? escapeHtml(item.time) + ' – ' + escapeHtml(item.end) : 'À partir de ' + escapeHtml(item.time.replace(':', 'h'))} · Heure FR</div>` : ''}
@@ -77,8 +84,7 @@ Promise.all([
     } else {
       card.innerHTML = `
         <div class="planning-card-head">
-          <div class="planning-day">${escapeHtml(item.day)}</div>
-          ${tag}
+          <div><div class="planning-day">${escapeHtml(item.day)}</div>${date}</div>
         </div>
         <div class="planning-off-label">— Repos —</div>
       `;

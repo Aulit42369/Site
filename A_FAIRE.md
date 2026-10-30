@@ -33,3 +33,5 @@
 - Pages légales en `noindex` et hors sitemap, comme les mentions légales existantes.
 - Pas de bandeau sur les pages sans lecteur Twitch : seul le lecteur dépose des cookies ; le choix reste modifiable partout via « Cookies » dans le pied de page.
 - Analytics : GoatCounter déjà en place (sans cookie) → aucun nouvel outil.
+
+- 30/10 : `planning.html` — badge « Changement » retiré (Olivier n'a pas vraiment de semaine type) ; la date de chaque jour (prochaine occurrence) s'affiche sous son nom, dans la couleur de la case quand le jour est actif, grisée au repos.
