@@ -14,5 +14,13 @@
     "time": "14:00",
     "end": "16:00",
     "note": "7 Days to Die"
+  },
+  {
+    "date": "2026-11-05",
+    "on": true,
+    "game": "Just Chatting",
+    "time": "",
+    "end": "",
+    "note": "Soirée démos : Expand TD, Ashen Swarm, Scape, 999 Seconds! Survivors"
   }
 ]
