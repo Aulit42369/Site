@@ -1,8 +1,4 @@
 {
-  "meyuuart": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
-    "live": false
-  },
   "aulit42369": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
     "live": false,
@@ -31,5 +27,10 @@
     "live": true,
     "game": "Special Events"
   },
-  "_updated_at": "2026-10-31T18:10:26.350Z"
+  "meyuuart": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
+    "live": true,
+    "game": "Music"
+  },
+  "_updated_at": "2026-10-31T18:20:26.760Z"
 }
