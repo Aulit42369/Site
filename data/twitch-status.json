@@ -1,4 +1,9 @@
 {
+  "galyssiane": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
+    "live": true,
+    "game": "R.E.P.O."
+  },
   "calo_vt": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
     "live": true,
@@ -26,10 +31,5 @@
     "live": true,
     "game": "Just Chatting"
   },
-  "galyssiane": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
-    "live": true,
-    "game": "R.E.P.O."
-  },
-  "_updated_at": "2026-10-31T21:00:55.210Z"
+  "_updated_at": "2026-10-31T21:10:25.645Z"
 }
