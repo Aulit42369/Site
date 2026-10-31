@@ -18,8 +18,7 @@
   },
   "aly0806": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
-    "live": true,
-    "game": "Just Chatting"
+    "live": false
   },
   "galyssiane": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
@@ -30,5 +29,5 @@
     "live": true,
     "game": "Special Events"
   },
-  "_updated_at": "2026-10-31T23:42:35.744Z"
+  "_updated_at": "2026-10-31T23:50:24.808Z"
 }
