@@ -1,4 +1,9 @@
 {
+  "calo_vt": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
+    "live": true,
+    "game": "Special Events"
+  },
   "meyuuart": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
     "live": false
@@ -26,10 +31,5 @@
     "live": true,
     "game": "R.E.P.O."
   },
-  "calo_vt": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
-    "live": true,
-    "game": "Special Events"
-  },
-  "_updated_at": "2026-10-31T20:50:27.805Z"
+  "_updated_at": "2026-10-31T21:00:55.210Z"
 }
