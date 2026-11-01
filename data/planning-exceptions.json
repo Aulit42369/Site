@@ -17,11 +17,11 @@
   },
   {
     "date": "2026-11-01",
-    "on": true,
-    "game": "Deep Rock Galactic",
+    "on": false,
+    "game": "",
     "time": "",
     "end": "",
-    "note": "Deep Rock Galactic"
+    "note": ""
   },
   {
     "date": "2026-11-02",
