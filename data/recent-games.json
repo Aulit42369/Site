@@ -1,5 +1,10 @@
 [
   {
+    "game": "Cinderia",
+    "date": "2026-11-03",
+    "art": "https://static-cdn.jtvnw.net/ttv-boxart/755513762_IGDB-144x192.jpg"
+  },
+  {
     "game": "Killing Floor III",
     "date": "2026-11-03",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/1730526563_IGDB-144x192.jpg"
@@ -33,10 +38,5 @@
     "game": "R.E.P.O.",
     "date": "2026-10-15",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/1294658629_IGDB-144x192.jpg"
-  },
-  {
-    "game": "SO CLOSE",
-    "date": "2026-10-15",
-    "art": "https://static-cdn.jtvnw.net/ttv-boxart/1428349521_IGDB-144x192.jpg"
   }
 ]
