@@ -1,5 +1,10 @@
 [
   {
+    "game": "Cinderia",
+    "date": "2026-11-04",
+    "art": "https://static-cdn.jtvnw.net/ttv-boxart/755513762_IGDB-144x192.jpg"
+  },
+  {
     "game": "Brotato",
     "date": "2026-11-04",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/743214338_IGDB-144x192.jpg"
@@ -8,11 +13,6 @@
     "game": "Deep Rock Galactic",
     "date": "2026-11-04",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/494839_IGDB-144x192.jpg"
-  },
-  {
-    "game": "Cinderia",
-    "date": "2026-11-03",
-    "art": "https://static-cdn.jtvnw.net/ttv-boxart/755513762_IGDB-144x192.jpg"
   },
   {
     "game": "Killing Floor III",
