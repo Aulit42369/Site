@@ -1,5 +1,10 @@
 [
   {
+    "game": "Deep Rock Galactic",
+    "date": "2026-11-04",
+    "art": "https://static-cdn.jtvnw.net/ttv-boxart/494839_IGDB-144x192.jpg"
+  },
+  {
     "game": "Cinderia",
     "date": "2026-11-03",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/755513762_IGDB-144x192.jpg"
@@ -33,10 +38,5 @@
     "game": "Folded Fables: Tidy Up The Dragon Hoard",
     "date": "2026-10-20",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/21467144_IGDB-144x192.jpg"
-  },
-  {
-    "game": "R.E.P.O.",
-    "date": "2026-10-15",
-    "art": "https://static-cdn.jtvnw.net/ttv-boxart/1294658629_IGDB-144x192.jpg"
   }
 ]
