@@ -343,12 +343,13 @@ function applyConsent(root) {
     }
     f.hidden = true;
     const link = f.dataset.consentLink || 'https://www.twitch.tv/aulit42369';
+    const nom = f.dataset.consentName === 'YouTube' ? 'YouTube' : 'Twitch';
     const ph = document.createElement('div');
     ph.className = 'consent-ph grid-bg';
-    ph.innerHTML = '<div class="consent-ph-tag">Lecteur Twitch en pause</div>' +
-      '<p>Ce lecteur vient de Twitch, qui dépose ses propres cookies. Il ne se charge qu’avec ton accord.</p>' +
+    ph.innerHTML = '<div class="consent-ph-tag">Lecteur ' + nom + ' en pause</div>' +
+      '<p>Ce lecteur vient de ' + nom + ', qui dépose ses propres cookies. Il ne se charge qu’avec ton accord.</p>' +
       '<div class="consent-ph-actions"><button type="button" class="btn btn-secondary" data-consent="oui">Afficher le lecteur</button>' +
-      '<a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Regarder sur Twitch</a></div>';
+      '<a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Regarder sur ' + nom + '</a></div>';
     f.parentNode.insertBefore(ph, f);
     if (consentGet() === null) showConsentBar();
   });
@@ -361,7 +362,7 @@ function showConsentBar() {
   bar.className = 'consent-bar';
   bar.setAttribute('role', 'region');
   bar.setAttribute('aria-label', 'Choix des cookies');
-  bar.innerHTML = '<p><strong>Cookies de Twitch</strong> Les vidéos du site passent par le lecteur Twitch, qui dépose ses propres cookies. Le site, lui, n’en dépose aucun. ' +
+  bar.innerHTML = '<p><strong>Cookies des lecteurs vidéo</strong> Les vidéos du site passent par les lecteurs de Twitch et de YouTube, qui déposent leurs propres cookies. Le site, lui, n’en dépose aucun. ' +
     '<a href="confidentialite.html#cookies">En savoir plus</a></p>' +
     '<div class="consent-bar-actions"><button type="button" class="btn btn-secondary" data-consent="non">Refuser</button>' +
     '<button type="button" class="btn btn-secondary" data-consent="oui">Accepter</button></div>';

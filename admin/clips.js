@@ -18,7 +18,7 @@ function renderClips() {
       </div>
       <div class="entry-body">
         <div class="entry-title">${escapeHtml(c.title)}</div>
-        <div class="entry-sub">${escapeHtml(c.slug)}</div>
+        <div class="entry-sub">${escapeHtml(c.slug || ('YouTube : ' + c.youtube))}</div>
       </div>
       <div class="entry-actions">
         <button data-edit="${i}">Modifier</button>
@@ -60,7 +60,7 @@ let editingClipIndex = null;
 function openClipForm(index) {
   editingClipIndex = index;
   const c = index === null ? { slug: '', title: '' } : clipsState.data[index];
-  document.getElementById('cfSlug').value = c.slug || '';
+  document.getElementById('cfSlug').value = c.slug || c.youtube || '';
   document.getElementById('cfTitle').value = c.title || '';
   document.getElementById('clipForm').style.display = 'block';
   document.getElementById('cfPreviewBox').style.display = 'none';
@@ -134,7 +134,9 @@ async function saveClip() {
      du clip au lieu de la rajeunir. */
   const entry = editingClipIndex === null
     ? { slug, title, dateAdded: new Date().toISOString().slice(0, 10) }
-    : { ...clipsState.data[editingClipIndex], slug, title };
+    : clipsState.data[editingClipIndex].youtube
+      ? { ...clipsState.data[editingClipIndex], youtube: slug, title } // vidéo YouTube envoyée par l'agence : l'identifiant reste YouTube
+      : { ...clipsState.data[editingClipIndex], slug, title };
   const next = editingClipIndex === null
     ? [entry, ...clipsState.data]
     : clipsState.data.map((c, i) => (i === editingClipIndex ? entry : c));

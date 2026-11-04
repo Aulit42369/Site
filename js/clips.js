@@ -20,7 +20,7 @@ function isRecentClip(dateStr) {
 /* Données structurées « vidéo » pour Google (résultats Vidéos). shortcut: miniature = image de partage de la page,
    car data/clips.json n'a pas la miniature Twitch ; à remplacer par la vraie si l'admin l'enregistre un jour. */
 function addClipsJsonLd(clips) {
-  const items = clips.map((clip, i) => {
+  const items = clips.filter(clip => clip.slug).map((clip, i) => {
     const slug = encodeURIComponent(clip.slug);
     const video = {
       '@type': 'VideoObject',
@@ -48,18 +48,22 @@ loadJson('data/clips.json', [])
     }
     addClipsJsonLd(clips);
     clips.forEach(clip => {
-      const slug = encodeURIComponent(clip.slug);
-      const clipUrl = `https://clips.twitch.tv/${slug}`;
+      // 04/11 : un extrait du chasseur de l'agence est publié en Short YouTube (clip.youtube = identifiant de la vidéo)
+      const yt = clip.youtube && /^[\w-]{11}$/.test(clip.youtube) ? clip.youtube : '';
+      if (!yt && !clip.slug) return;
+      const slug = encodeURIComponent(clip.slug || '');
+      const clipUrl = yt ? `https://www.youtube.com/shorts/${yt}` : `https://clips.twitch.tv/${slug}`;
+      const lecteur = yt ? `https://www.youtube-nocookie.com/embed/${yt}` : `https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io`;
       const badge = isRecentClip(clip.dateAdded) ? ' <span class="badge-new">Nouveau</span>' : '';
       const card = document.createElement('div');
-      card.className = 'broadcast-frame clip-card';
+      card.className = 'broadcast-frame clip-card' + (yt ? ' vertical' : '');
       card.innerHTML = `
-        <iframe data-consent-src="https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io" data-consent-link="${clipUrl}" title="Clip Twitch : ${escapeHtml(clip.title)}" allowfullscreen loading="lazy"></iframe>
+        <iframe data-consent-src="${lecteur}" data-consent-link="${clipUrl}"${yt ? ' data-consent-name="YouTube"' : ''} title="${yt ? 'Vidéo YouTube' : 'Clip Twitch'} : ${escapeHtml(clip.title)}" allowfullscreen loading="lazy"></iframe>
         <div class="clip-footer">
           <div class="clip-title">${escapeHtml(clip.title)}${badge}</div>
           <button type="button" class="share-btn" aria-label="Partager ce clip">Partager</button>
         </div>
-        <div class="clip-slug" tabindex="0" role="button" aria-label="Copier le slug du clip">${escapeHtml(clip.slug)}</div>
+        ${yt ? '' : `<div class="clip-slug" tabindex="0" role="button" aria-label="Copier le slug du clip">${escapeHtml(clip.slug)}</div>`}
       `;
       grid.appendChild(card);
       applyConsent(card); // lecteur Twitch chargé seulement après accord (main.js)
@@ -83,6 +87,7 @@ loadJson('data/clips.json', [])
          retrouver sans repasser par l'admin) — clic pour copier,
          complètement à part du bouton "Partager" ci-dessus. */
       const slugEl = card.querySelector('.clip-slug');
+      if (!slugEl) return;
       const copySlug = () => {
         if (!navigator.clipboard) return;
         navigator.clipboard.writeText(clip.slug).then(() => {

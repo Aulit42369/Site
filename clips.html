@@ -48,6 +48,7 @@
   .clips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   @media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
   .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+  .clip-card.vertical iframe { aspect-ratio: 9/16; max-height: 78vh; width: auto; max-width: 100%; margin: 0 auto; }
   .clip-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; }
   .clip-title { font-weight: 700; font-size: 1rem; }
   .share-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
