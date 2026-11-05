@@ -1,5 +1,7 @@
 # Architecture — Site AULIT42369
 
+> **Hébergement (05/11/2026)** : Source du code : serveur `ssh://ubuntu@148.113.156.76/srv/git/Site.git` (remote `origin` ; chaque `git push` part aussi en copie sur GitHub tant qu'il existe). Le serveur construit et publie tout seul (`site-construire` : minification + `?v=`, plan du site, statut Twitch toutes les 10 min, journal de direct) : les workflows GitHub qui écrivaient sont désactivés. Ne plus compter sur GitHub Actions.
+
 Site statique GitHub Pages : https://aulit42369.github.io/Site/ (site de **projet**, sous `/Site/`).
 Documentation technique détaillée : `docs/README.md`.
 
