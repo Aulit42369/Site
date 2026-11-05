@@ -27,7 +27,7 @@ function addClipsJsonLd(clips) {
       name: clip.title,
       description: 'Clip Twitch de la chaîne AULIT42369 : ' + clip.title,
       thumbnailUrl: 'https://aulit42369.github.io/Site/og/clips-og.png',
-      embedUrl: `https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io`,
+      embedUrl: `https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io&parent=aulit42369.fr`,
       url: `https://clips.twitch.tv/${slug}`,
       inLanguage: 'fr'
     };
@@ -53,7 +53,7 @@ loadJson('data/clips.json', [])
       if (!yt && !clip.slug) return;
       const slug = encodeURIComponent(clip.slug || '');
       const clipUrl = yt ? `https://www.youtube.com/shorts/${yt}` : `https://clips.twitch.tv/${slug}`;
-      const lecteur = yt ? `https://www.youtube-nocookie.com/embed/${yt}` : `https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io`;
+      const lecteur = yt ? `https://www.youtube-nocookie.com/embed/${yt}` : `https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io&parent=aulit42369.fr`;
       const badge = isRecentClip(clip.dateAdded) ? ' <span class="badge-new">Nouveau</span>' : '';
       const card = document.createElement('div');
       card.className = 'broadcast-frame clip-card' + (yt ? ' vertical' : '');
