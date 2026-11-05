@@ -120,7 +120,7 @@
       <h1 class="h1-page">Outils de stream <em class="accent">sur mesure</em></h1>
       <p class="lead" data-edit="coulisses.lead" data-edit-label="Coulisses — introduction">Les outils qui tournent derrière le stream, construits sur-mesure plutôt qu'avec des solutions toutes faites — développés ici avec Claude. Comment ils sont pensés, et ce qu'il a fallu résoudre pour que ça marche.</p>
       <ul class="coulisses-stats" aria-label="En chiffres">
-        <li><strong data-edit="coulisses.stat1.n" data-edit-label="Coulisses · chiffre 1">14</strong><span data-edit="coulisses.stat1.l" data-edit-label="Coulisses · chiffre 1, légende">outils sur mesure</span></li>
+        <li><strong data-edit="coulisses.stat1.n" data-edit-label="Coulisses · chiffre 1">15</strong><span data-edit="coulisses.stat1.l" data-edit-label="Coulisses · chiffre 1, légende">outils sur mesure</span></li>
         <li><strong data-edit="coulisses.stat2.n" data-edit-label="Coulisses · chiffre 2">15</strong><span data-edit="coulisses.stat2.l" data-edit-label="Coulisses · chiffre 2, légende">agents IA à l’agence</span></li>
         <li><strong data-edit="coulisses.stat3.n" data-edit-label="Coulisses · chiffre 3">2 000+</strong><span data-edit="coulisses.stat3.l" data-edit-label="Coulisses · chiffre 3, légende">tests automatiques</span></li>
         <li><strong data-edit="coulisses.stat4.n" data-edit-label="Coulisses · chiffre 4">24 h/24</strong><span data-edit="coulisses.stat4.l" data-edit-label="Coulisses · chiffre 4, légende">sur un Raspberry Pi</span></li>
@@ -934,6 +934,50 @@
               <rect x="200" y="216" width="132" height="36" rx="6" fill="none" stroke="#1a2540"/>
               <text x="266" y="232" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Actions</text>
               <text x="266" y="248" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Twitch · tests</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <div>
+          <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p14.eyebrow" data-edit-label="Coulisses · AulitBot — sur-titre">// AulitBot</div>
+          <h2 data-edit="coulisses.p14.title" data-edit-label="Coulisses · AulitBot — titre">Un bot de tchat Twitch <em class="accent">codé maison</em></h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.p14.desc1" data-edit-label="Coulisses · AulitBot — paragraphe 1">Pour remplacer un bot payant : commandes personnalisées, messages de bienvenue, annonces, alertes (follow, abonnement, cadeau, bits, raid, début et fin de live), niveaux et expérience, monnaie virtuelle, et une protection du tchat (anti-bots de vues, filtres, gestion des liens) — chaque fonction activable séparément. Le bot écrit <em>au nom de la chaîne</em>, donc les emotes s'affichent.</p>
+            <p data-edit="coulisses.p14.desc2" data-edit-label="Coulisses · AulitBot — paragraphe 2">Multi-chaînes : chaque streamer connecte sa chaîne par Twitch (sans mot de passe à retaper), avec ses propres réglages, ses overlays OBS (train de la hype, streamathon), sa page de classement et sa liste de commandes. Les anciennes statistiques peuvent être importées depuis l'ancien bot. Aucun des outils n'est « scrapable » : pages publiques derrière un jeton et limites de débit.</p>
+            <p data-edit="coulisses.p14.desc3" data-edit-label="Coulisses · AulitBot — paragraphe 3">Tourne sur le serveur OVH (Node.js sans dépendance), pas sur un service tiers. Une page d'aide explique tous les codes à écrire dans les commandes et alertes.</p>
+          </div>
+          <p style="margin:14px 0 0"><a href="https://aulitbot.aulit42369.fr/aide" target="_blank" rel="noopener" style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.03em">📖 Aide &amp; variables du bot</a><span style="color:var(--muted)"> · </span><a href="https://aulitbot.aulit42369.fr" target="_blank" rel="noopener" style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.03em">Connecter sa chaîne</a></p>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p14.status" data-edit-label="Coulisses · AulitBot — note">En service sur la chaîne, ouvert à d'autres streamers</span></div>
+          <div class="project-stack" data-edit="coulisses.p14.stack" data-edit-label="Coulisses · AulitBot — technologies">Node.js · zéro dépendance · Twitch EventSub · multi-chaînes · serveur OVH</div>
+        </div>
+        <div class="project-visuals">
+          <div class="project-diagram">
+            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-bot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
+                </marker>
+              </defs>
+              <line x1="150" y1="130" x2="198" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-bot)"/>
+              <line x1="336" y1="110" x2="396" y2="52" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-bot)"/>
+              <line x1="336" y1="130" x2="396" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-start="url(#arrow-bot)" marker-end="url(#arrow-bot)"/>
+              <line x1="336" y1="150" x2="396" y2="208" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-bot)"/>
+              <rect x="8" y="98" width="142" height="64" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="79" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Streamers</text>
+              <text x="79" y="143" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">connexion Twitch</text>
+              <rect x="200" y="96" width="136" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
+              <text x="268" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">AulitBot</text>
+              <text x="268" y="146" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Node · serveur OVH</text>
+              <rect x="398" y="30" width="114" height="44" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="455" y="57" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Tchat Twitch</text>
+              <rect x="398" y="108" width="114" height="44" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="455" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">EventSub</text>
+              <text x="455" y="143" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">follow · sub · raid</text>
+              <rect x="398" y="186" width="114" height="44" rx="6" fill="none" stroke="#1a2540"/>
+              <text x="455" y="206" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Overlays OBS</text>
+              <text x="455" y="221" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">hype · streamathon</text>
             </svg>
           </div>
         </div>
