@@ -1,9 +1,9 @@
 {
-  "version": "1.0.6",
-  "date": "2026-10-28T00:00:24.050Z",
-  "notes": "maj",
-  "sha256": "2c8713450bf1db639b8670b42c2d641088e139b8d7dcc42609732b54df6f117a",
-  "taille": 590669,
-  "url": "https://aulit42369.github.io/Site/regie/regie-maj-1.0.6.zip",
-  "signature": "sBJQmntvq6yeFRgPK8e4TBosGOw6LhOicNb0vLeTDMqzdY0bthiwUvrMM/ne9KgVtcIfzhH1oeyuvqLwL+WfDw=="
+  "version": "1.0.7",
+  "date": "2026-11-05T14:59:06.640Z",
+  "notes": "changement de site d'hebergement",
+  "sha256": "17c1e61ccd933a6cbc5665abb78f52078914587ce7dc8a9227a3b36de041022e",
+  "taille": 606746,
+  "url": "https://aulit42369.fr/Site/regie/regie-maj-1.0.7.zip",
+  "signature": "uV8i/GnAIN5a89PDUvqqB2E29w6h8f0QltxmD31gSvjSgdUar0DzK0eC5tR6yJ+fYnYrjFLypqzDuSWje63HAQ=="
 }
