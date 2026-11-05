@@ -1,4 +1,4 @@
-/* Stockage du jeton (sessionStorage par défaut, localStorage si « Se souvenir de moi »)
+/* Connexion de l'admin par mot de passe (serveur aulit42369.fr)
    et GoatCounter figé + SRI sur toutes les pages publiques. */
 const fs = require('fs');
 const path = require('path');
@@ -24,58 +24,25 @@ check('GoatCounter figé (count.v4.js) avec integrity sur chaque page', gc.every
   const page = await ctx.newPage();
   const errs = []; page.on('pageerror', (e) => errs.push(e.message));
   page.on('dialog', (d) => d.accept());
-  await installFakeGithub(page);
-  const store = () => page.evaluate(() => ({
-    s: sessionStorage.getItem('aulit_admin_token'),
-    l: localStorage.getItem('aulit_admin_token'),
-    r: localStorage.getItem('aulit_admin_token_remember'),
-  }));
-  const connect = async (remember) => {
-    await page.fill('#tokenInput', 'fake');
-    if (remember) await page.check('#rememberToken'); else await page.uncheck('#rememberToken');
-    await page.click('#connectBtn');
-    await page.waitForSelector('#adminPanel', { state: 'visible' });
-  };
-
+  // 05/11/2026 : connexion par mot de passe (serveur), plus de jeton GitHub dans le navigateur
+  const gh = await installFakeGithub(page, {}, { connecte: false });
+  await page.addInitScript(() => { if (!sessionStorage.getItem('deja')) { sessionStorage.setItem('deja', '1'); localStorage.setItem('aulit_admin_token', 'ancien'); } });
   await page.goto(BASE + '/admin.html');
-  await connect(false);
-  let st = await store();
-  check('sans « se souvenir » : jeton en sessionStorage, rien en localStorage', st.s === 'fake' && st.l === null && st.r === null);
-
+  await page.waitForSelector('#authGate', { state: 'visible' });
+  check('sans session : écran de connexion par mot de passe', await page.isVisible('#passwordInput') && !(await page.isVisible('#adminPanel')));
+  check('ancien jeton GitHub effacé du navigateur', (await page.evaluate(() => localStorage.getItem('aulit_admin_token'))) === null);
+  await page.fill('#passwordInput', 'faux'); await page.click('#connectBtn');
+  await page.waitForFunction(() => document.getElementById('loginError').textContent.length > 0);
+  check("mauvais mot de passe : message, toujours à l'écran de connexion", /incorrect/.test(await page.textContent('#loginError')) && !(await page.isVisible('#adminPanel')));
+  await page.fill('#passwordInput', gh.MOT_DE_PASSE); await page.press('#passwordInput', 'Enter');
+  await page.waitForSelector('#adminPanel', { state: 'visible' });
+  check('bon mot de passe (touche Entrée) : admin ouverte, champ vidé', (await page.inputValue('#passwordInput')) === '');
+  await page.reload(); await page.waitForSelector('#adminPanel', { state: 'visible' });
+  check('session gardée au rechargement', true);
   await page.click('#logoutBtn');
-  st = await store();
-  check('déconnexion : jeton effacé partout', st.s === null && st.l === null);
-
-  await connect(true);
-  st = await store();
-  check('avec « se souvenir » : jeton en localStorage', st.l === 'fake' && st.r === '1' && st.s === null);
-  await page.reload(); await page.waitForSelector('#adminPanel', { state: 'visible' });
-  st = await store();
-  check('« se souvenir » : reste connecté et le jeton reste en localStorage', st.l === 'fake');
-  await page.click('#logoutBtn');
-
-  // ancien jeton laissé en localStorage par l'ancienne version (sans drapeau)
-  await page.evaluate(() => localStorage.setItem('aulit_admin_token', 'fake'));
-  await page.reload(); await page.waitForSelector('#adminPanel', { state: 'visible' });
-  st = await store();
-  check('ancien jeton : déplacé en sessionStorage, retiré du localStorage', st.s === 'fake' && st.l === null);
-
-  // « se souvenir » limité à 7 jours
-  const remembered = (days) => page.evaluate((d) => {
-    sessionStorage.clear();
-    localStorage.setItem('aulit_admin_token', 'fake');
-    localStorage.setItem('aulit_admin_token_remember', '1');
-    localStorage.setItem('aulit_admin_token_at', String(Date.now() - d * 86400000));
-  }, days);
-  await remembered(6);
-  await page.reload(); await page.waitForSelector('#adminPanel', { state: 'visible' });
-  st = await store();
-  check('« se souvenir » depuis 6 jours : toujours connecté', st.l === 'fake');
-  await remembered(8);
+  await page.waitForSelector('#authGate', { state: 'visible' });
   await page.reload(); await page.waitForSelector('#authGate', { state: 'visible' });
-  st = await store();
-  check('« se souvenir » depuis 8 jours : jeton effacé, reconnexion demandée', st.l === null && st.r === null && st.s === null && !(await page.isVisible('#adminPanel')));
-  check('texte de l\'option : 7 jours', /7 jours/.test(await page.textContent('label:has(#rememberToken)')));
+  check('déconnexion : il faut retaper le mot de passe', !(await page.isVisible('#adminPanel')));
 
   check('aucune erreur JS', errs.length === 0);
   if (errs.length) console.log(errs);

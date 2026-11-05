@@ -170,20 +170,16 @@
 
 <div class="admin-wrap">
   <h1>Administration</h1>
-  <p class="admin-note">Ajoute, modifie, réordonne ou supprime des streamers et des clips sans toucher au code. Chaque action crée un commit directement sur GitHub.</p>
+  <p class="admin-note">Ajoute, modifie, réordonne ou supprime des streamers et des clips sans toucher au code. Chaque enregistrement est gardé dans l'historique (onglet Historique).</p>
 
   <div id="authGate">
     <div class="field">
-      <label for="tokenInput">Jeton d'accès GitHub (fine-grained, limité à ce dépôt)</label>
-      <input type="password" id="tokenInput" placeholder="github_pat_...">
+      <label for="passwordInput">Mot de passe de l'administration</label>
+      <input type="password" id="passwordInput" autocomplete="current-password" maxlength="1024">
     </div>
-    <label class="admin-note" style="display:flex;gap:8px;align-items:center;margin-bottom:12px;"><input type="checkbox" id="rememberToken"> Se souvenir de moi 7 jours sur cet appareil (sinon le jeton est oublié à la fermeture de l'onglet)</label>
     <button class="btn btn-primary" id="connectBtn">Se connecter</button>
-    <p class="admin-note" style="margin-top:20px;">
-      Pas encore de jeton ? Sur GitHub : <strong>Settings</strong> (ton compte, pas le repo) → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Fine-grained tokens</strong> → <strong>Generate new token</strong>.
-      Repository access : <strong>Only select repositories</strong> → choisis <code>Site</code>. Permissions → <strong>Contents</strong> → <strong>Read and write</strong>. Rien d'autre à cocher.
-    </p>
-    <p class="admin-note warn">Le jeton reste uniquement dans ce navigateur : dans cet onglet seulement par défaut, ou 7 jours (localStorage, puis effacé automatiquement) si tu coches « Se souvenir de moi » — à éviter sur un ordinateur partagé. Ne le colle nulle part ailleurs. Tu peux le révoquer à tout moment depuis GitHub.</p>
+    <p id="loginError" class="admin-note warn" role="alert" style="margin-top:12px;"></p>
+    <p class="admin-note">La connexion dure 30 jours sur cet appareil. Le mot de passe est vérifié par ton serveur (aulit42369.fr) ; 5 essais ratés bloquent 15 minutes.</p>
   </div>
 
   <div id="adminPanel" style="display:none;">
@@ -202,8 +198,6 @@
       <button class="logout" id="backupBtn" title="Télécharger une sauvegarde JSON de tes streamers, clips et planning">Sauvegarder</button>
       <button class="logout" id="logoutBtn">Se déconnecter</button>
     </div>
-
-    <div id="tokenNote" class="admin-note warn" style="display:none;margin-top:0;"></div>
     <div id="streamersPanel" class="admin-panel">
       <div id="brokenLinksWarning" class="admin-note warn" style="display:none;margin-top:0;"></div>
       <div id="streamersList"></div>

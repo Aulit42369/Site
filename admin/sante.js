@@ -49,7 +49,7 @@ async function loadSante() {
     }
   }
 
-  // Workflows GitHub Actions + dernier déploiement Pages (nécessitent un jeton avec accès Actions / Pages en lecture)
+  // Automatisations encore sur GitHub (lecture publique, sans jeton) — passeront sur le serveur
   try {
     const res = await ghApi('/actions/runs?per_page=40');
     if (res.ok) {
@@ -65,7 +65,7 @@ async function loadSante() {
         rows.push({ level, title: 'Automatisation : ' + n, detail: 'Dernière exécution ' + escapeHtml(state) + ', ' + agoText(Date.now() - new Date(r.updated_at).getTime()) + (level === 'err' ? ' — <a href="' + escapeHtml(r.html_url) + '" target="_blank" rel="noopener">voir le détail sur GitHub</a>' : '') + '.' });
       });
     } else {
-      rows.push({ level: 'warn', title: 'Automatisations GitHub', detail: 'Lecture impossible (' + res.status + ') : le jeton doit avoir la permission « Actions : Read » pour afficher leur état.' });
+      rows.push({ level: 'warn', title: 'Automatisations GitHub', detail: 'Lecture impossible (' + res.status + ').' });
     }
   } catch (e) {
     rows.push({ level: 'warn', title: 'Automatisations GitHub', detail: 'Lecture impossible (' + escapeHtml(e.message) + ').' });
@@ -83,14 +83,6 @@ async function loadSante() {
     <div class="health-row"><span class="health-dot ${r.level}"></span><div><div class="health-title">${escapeHtml(r.title)}</div><div class="health-detail">${r.detail}</div></div></div>`).join('')}</div>`;
 }
 document.getElementById('santeRefreshBtn').addEventListener('click', loadSante);
-document.getElementById('twitchRunBtn').addEventListener('click', async () => {
-  showStatus('Demande envoyée à GitHub...', 'pending');
-  try {
-    const res = await ghApi('/actions/workflows/twitch-status.yml/dispatches', { method: 'POST', body: JSON.stringify({ ref: 'main' }) });
-    if (res.status === 204) showStatus('Mise à jour Twitch lancée — compte environ une minute, puis clique sur « Actualiser ».', 'ok');
-    else if (res.status === 403 || res.status === 404) showStatus('Refusé par GitHub : le jeton doit avoir la permission « Actions : Read and write ».', 'err');
-    else showStatus('Échec du lancement (' + res.status + ').', 'err');
-  } catch (e) {
-    showStatus('Échec : ' + e.message, 'err');
-  }
+document.getElementById('twitchRunBtn').addEventListener('click', () => {
+  showStatus('Le statut Twitch se met à jour tout seul toutes les 10 minutes (plus de lancement à la main depuis le passage au mot de passe).', 'ok');
 });

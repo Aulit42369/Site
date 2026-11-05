@@ -14,7 +14,6 @@ const check = (l, c) => { console.log((c ? 'PASS' : 'FAIL') + ' — ' + l); c ? 
   page.on('dialog', (d) => { dialogs.push(d.message()); accept ? d.accept() : d.dismiss(); });
   const gh = await installFakeGithub(page);
   await page.route('https://jeu.example.test/**', (r) => r.fulfill({ status: 200, headers: { 'access-control-allow-origin': '*' }, body: '{"ok":true}' }));
-  await page.addInitScript(() => { try { localStorage.setItem('aulit_admin_token', 'fake'); } catch (e) { /* iframe opaque */ } });
   await page.goto(BASE + '/admin.html');
   await page.waitForFunction(() => !document.getElementById('statusMsg').classList.contains('show'), null, { timeout: 10000 });
   check('chargement sans erreur', !(await page.isVisible('#statusMsg.err')));
@@ -114,10 +113,6 @@ const check = (l, c) => { console.log((c ? 'PASS' : 'FAIL') + ' — ' + l); c ? 
   check('récapitulatif des textes avant enregistrement', dialogs.some((m) => m.includes('modifié')) && !gh.puts.some((x) => x.p === 'data/pages.json'));
   accept = true;
 
-  // ---- Jeton ancien ----
-  await page.evaluate(() => localStorage.setItem('aulit_admin_token_at', String(Date.now() - 70 * 86400000)));
-  await page.reload(); await page.waitForTimeout(1200);
-  check('rappel de renouvellement du jeton', await page.isVisible('#tokenNote'));
 
   check('aucune erreur JS', errs.length === 0);
   if (errs.length) console.log(errs);

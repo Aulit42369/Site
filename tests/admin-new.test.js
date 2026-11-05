@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const { BASE, launchOpts } = require('./lib');
 let pass=0, fail=0;
 const check=(l,c)=>{console.log((c?'PASS':'FAIL')+' — '+l); c?pass++:fail++;};
-const b64=s=>Buffer.from(s,'utf8').toString('base64');
+const { installFakeGithub } = require('./fakegh');
 const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 
 (async()=>{
@@ -10,42 +10,16 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   const ctx = await browser.newContext({viewport:{width:1100,height:900},serviceWorkers:'block'}); const page = await ctx.newPage();
   const errs=[]; page.on('pageerror',e=>errs.push(e.message));
   page.on('dialog',d=>d.accept()); 
-  // ---- fake GitHub ----
-  let n=0; const files={}; const commits={}; const puts=[]; let dispatched=0;
-  const put=(p,obj,msg,date)=>{ n++; const sha='sha'+n; files[p]={content:JSON.stringify(obj,null,2),sha}; (commits[p]=commits[p]||[]).unshift({sha,commit:{message:msg,author:{date:date||new Date().toISOString()}},content:JSON.stringify(obj,null,2)}); return sha; };
-  put('data/streamers.json',[],'init'); put('data/clips.json',[],'init'); put('data/planning.json',[{day:'Lundi',on:true,time:'21:00',end:'00:00',game:'X',color:'#00f5ff'}],'init');
-  put('data/pages.json',{texts:{'legal.ancienne-cle':'Ancien texte des mentions'},extraProjects:[]},'init');
+  // ---- faux serveur de l'admin (tests/fakegh.js) ----
+  const gh = await installFakeGithub(page, {
+    'data/clips.json': [],
+    'data/pages.json': {texts:{'legal.ancienne-cle':'Ancien texte des mentions'},extraProjects:[]},
+  }, { runs: [
+    {name:'Mise à jour statut Twitch',status:'completed',conclusion:'success',updated_at:new Date(Date.now()-5*60000).toISOString(),html_url:'https://github.com/x'},
+    {name:'Vérification des liens',status:'completed',conclusion:'failure',updated_at:new Date(Date.now()-3600000).toISOString(),html_url:'https://github.com/fail'},
+  ] });
+  const { files, puts, put } = gh;
   put('data/site.json',{socials:[{label:'Discord',url:'https://discord.com/invite/OLD'}],announcement:{enabled:true,text:'Ancien',tone:'info',from:'',until:''}},'v1','2026-09-01T10:00:00Z');
-  const CORS={'access-control-allow-origin':'*','access-control-allow-headers':'*','access-control-allow-methods':'*'};
-  await page.route('https://api.github.com/**', async route=>{ try {
-    const req=route.request(); const url=new URL(req.url());
-    const rel=url.pathname.replace('/repos/aulit42369/Site','');
-    if(req.method()==='OPTIONS') return route.fulfill({status:204,headers:CORS});
-    const json=(o,s=200)=>route.fulfill({status:s,headers:{...CORS,'content-type':'application/json'},body:JSON.stringify(o)});
-    if(rel.startsWith('/contents/')){
-      const p=decodeURIComponent(rel.slice('/contents/'.length));
-      if(req.method()==='PUT'){
-        const body=JSON.parse(req.postData()); const cur=files[p];
-        if(cur && body.sha!==cur.sha) return json({message:'sha mismatch'},409);
-        const obj=JSON.parse(Buffer.from(body.content,'base64').toString('utf8'));
-        const sha=put(p,obj,body.message); puts.push({p,obj,message:body.message});
-        return json({content:{sha}});
-      }
-      const ref=url.searchParams.get('ref');
-      if(ref){ const c=(commits[p]||[]).find(c=>c.sha===ref); if(!c) return json({},404); return json({content:b64(c.content),sha:ref}); }
-      if(!files[p]) return json({message:'Not Found'},404);
-      return json({content:b64(files[p].content),sha:files[p].sha});
-    }
-    if(rel==='/commits'){ const p=url.searchParams.get('path'); return json((commits[p]||[]).map(c=>({sha:c.sha,commit:c.commit}))); }
-    if(rel==='/actions/runs') return json({workflow_runs:[
-      {name:'Mise à jour statut Twitch',status:'completed',conclusion:'success',updated_at:new Date(Date.now()-5*60000).toISOString(),html_url:'https://github.com/x'},
-      {name:'Vérification des liens',status:'completed',conclusion:'failure',updated_at:new Date(Date.now()-3600000).toISOString(),html_url:'https://github.com/fail'},
-    ]});
-    if(rel==='/pages/builds/latest') return json({status:'built',updated_at:new Date(Date.now()-120000).toISOString()});
-    if(rel==='/actions/workflows/twitch-status.yml/dispatches'){ dispatched++; return route.fulfill({status:204,headers:CORS}); }
-    return json({},404);
-  } catch(e){ console.log('ROUTE ERR',e.message); route.abort(); } });
-  await page.addInitScript(()=>localStorage.setItem('aulit_admin_token','fake'));
   await page.goto(BASE+'/admin.html'); await page.waitForFunction(()=>!document.getElementById('statusMsg').classList.contains('show'),null,{timeout:10000});
   check('admin loaded without error banner', !(await page.isVisible('#statusMsg.err')));
   check('10 tabs', await page.locator('.admin-tabs [data-tab]').count()===10);
@@ -182,7 +156,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   check('health rows rendered', rows>=5);
   check('workflow failure flagged', await page.locator('.health-dot.err').count()>=1 && (await page.innerHTML('#santeBox')).includes('github.com/fail'));
   await page.click('#twitchRunBtn'); await page.waitForTimeout(300);
-  check('dispatch sent', dispatched===1 && (await page.textContent('#statusMsg')).includes('lancée'));
+  check('bouton Twitch : explique la mise à jour automatique', (await page.textContent('#statusMsg')).includes('tout seul'));
   await page.screenshot({path:'admin-sante.png',fullPage:true});
 
   // ---- Historique ----

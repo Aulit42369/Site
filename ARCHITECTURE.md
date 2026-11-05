@@ -10,7 +10,7 @@ Documentation technique détaillée : `docs/README.md`.
 | `main.js` → `main.min.js` | Script partagé : menu, bandeau direct, textes éditables, annonce, **consentement aux lecteurs Twitch**, retour en haut. |
 | `style.css` → `style.min.css` | Feuille partagée (tokens couleur, pied de page, pages légales, bandeau de consentement). |
 | `js/<page>.js` | Script propre à une page (anciens scripts inline, sortis le 29/10 pour la CSP). Chargé juste après `main.min.js`. |
-| `admin.html` / `admin.js` + `admin/*.js` | Administration (jeton GitHub, écrit dans `data/`). noindex + `Disallow` robots. Découpée le 29/10 : `admin/commun.js` (jeton, API GitHub, statut, état, `Collection`) puis un fichier par onglet (`streamers`, `clips`, `planning`, `apropos`, `site`, `textes`, `sante`, `historique`, `pages`, `jeux`), et `admin.js` en **dernier** (Ctrl+S, sauvegarde, onglets, connexion, `init()`). Scripts classiques : les fonctions/constantes de haut niveau sont partagées ; l'ordre des `<script>` dans `admin.html` compte. |
+| `admin.html` / `admin.js` + `admin/*.js` | Administration : depuis le 05/11/2026, mot de passe vérifié par le serveur (service `site-admin`, dépôt `serveur-aulit/site-admin`, API `/Site/admin-api/`) ; les 9 fichiers qu'elle modifie (streamers, clips, planning, planning-exceptions, apropos, pages, custom-pages, games, site) vivent dans `/srv/site-data` sur le serveur (dépôt git local = historique), Caddy les sert à `/Site/data/`. Le workflow `donnees-serveur.yml` en recopie une version ici tous les quarts d'heure : ne jamais les modifier dans ce dépôt. noindex + `Disallow` robots. Découpée le 29/10 : `admin/commun.js` (jeton, API GitHub, statut, état, `Collection`) puis un fichier par onglet (`streamers`, `clips`, `planning`, `apropos`, `site`, `textes`, `sante`, `historique`, `pages`, `jeux`), et `admin.js` en **dernier** (Ctrl+S, sauvegarde, onglets, connexion, `init()`). Scripts classiques : les fonctions/constantes de haut niveau sont partagées ; l'ordre des `<script>` dans `admin.html` compte. |
 | `scripts/` | Vérifications CI (données, parité admin, menus, liens), sitemap, minification. |
 | `tests/` | Tests Playwright (`node tests/run-all.js`) sur une copie temporaire. |
 
@@ -23,7 +23,7 @@ Documentation technique détaillée : `docs/README.md`.
 
 ## 3. Persistance
 - Données du site : `data/*.json` (jamais touché à la main ni par les outils hors admin/CI).
-- Navigateur du visiteur (stockage local, aucun cookie) : `aulit_consent_tiers` + `aulit_consent_date` (choix Twitch, redemandé après 6 mois), `skipgc` (opposition à GoatCounter, bouton de la page Confidentialité), `custom-nav` (menu), `announce-closed` (sessionStorage). Admin : jeton GitHub (sessionStorage par défaut ; « Se souvenir de moi » = localStorage **7 jours max**, effacé à l'ouverture de l'admin si `aulit_admin_token_at` est dépassé ou absent).
+- Navigateur du visiteur (stockage local, aucun cookie) : `aulit_consent_tiers` + `aulit_consent_date` (choix Twitch, redemandé après 6 mois), `skipgc` (opposition à GoatCounter, bouton de la page Confidentialité), `custom-nav` (menu), `announce-closed` (sessionStorage). Admin : aucun stockage côté navigateur (session = cookie HttpOnly `__Host-site-admin` posé par le serveur, 30 jours).
 
 - Journal de direct : branche `journal-direct` (fichiers `journal/AAAA-MM.jsonl`, une ligne JSON par relevé de 5 min en live), écrite par `journal-direct.yml`. Public comme le reste du dépôt (données déjà visibles sur Twitch).
 

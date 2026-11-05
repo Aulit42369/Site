@@ -1,12 +1,7 @@
-/* admin/commun.js — Socle commun : jeton, API GitHub, statut, état partagé, petits outils, classe Collection. Chargé par admin.html avant admin.js (voir l'ordre là-bas). */
-/* ================================================================
-   Admin AULIT42369 — lit/écrit data/streamers.json et data/clips.json
-   directement sur GitHub via l'API Contents, avec un jeton personnel
-   gardé dans ce navigateur uniquement. Change ici si le dépôt bouge.
-   ================================================================ */
+/* admin/commun.js — Socle commun : connexion, API du serveur, statut, état partagé, petits outils, classe Collection. Chargé par admin.html avant admin.js (voir l'ordre là-bas). */
+/* Admin AULIT42369 : lit/écrit data/*.json sur le serveur aulit42369.fr (service site-admin), plus sur GitHub depuis le 05/11/2026. */
 const OWNER = 'aulit42369';
 const REPO = 'Site';
-const TOKEN_KEY = 'aulit_admin_token';
 
 /* Échappe le texte réinjecté en HTML ci-dessous (liste + aperçus) —
    cette page ne charge pas main.js (voir plus haut), copie locale de
@@ -31,39 +26,20 @@ const authGate = document.getElementById('authGate');
 const adminPanel = document.getElementById('adminPanel');
 const statusMsg = document.getElementById('statusMsg');
 
-/* Jeton : par défaut en sessionStorage (oublié à la fermeture de l'onglet,
-   invisible des autres onglets du site). localStorage seulement si
-   « Se souvenir de moi » est coché : l'origine aulit42369.github.io est
-   partagée avec les pages publiques et leurs scripts. */
-const TOKEN_AT_KEY = 'aulit_admin_token_at';
-const TOKEN_REMEMBER_KEY = 'aulit_admin_token_remember';
-function getToken() {
-  const s = sessionStorage.getItem(TOKEN_KEY);
-  if (s) return s;
-  const l = localStorage.getItem(TOKEN_KEY);
-  // ancien jeton gardé sans « se souvenir » : on le déplace dans l'onglet
-  if (l && localStorage.getItem(TOKEN_REMEMBER_KEY) !== '1') {
-    sessionStorage.setItem(TOKEN_KEY, l);
-    localStorage.removeItem(TOKEN_KEY);
-  }
-  return l;
+/* Connexion (05/11/2026) : mot de passe d'Olivier, vérifié par le serveur (service site-admin, /Site/admin-api/).
+   Session dans un cookie HttpOnly posé par le serveur : rien n'est gardé dans le navigateur par ce script. */
+const API_ADMIN = '/Site/admin-api/';
+async function apiAdmin(route, options = {}) {
+  const res = await fetch(API_ADMIN + route, {
+    ...options,
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json', 'X-Admin': '1', ...(options.headers || {}) },
+  });
+  if (res.status === 401 && route !== 'connexion') throw new Error('Session expirée : reconnecte-toi.');
+  return res;
 }
-function setToken(t, remember) {
-  clearToken();
-  if (remember) { localStorage.setItem(TOKEN_KEY, t); localStorage.setItem(TOKEN_REMEMBER_KEY, '1'); }
-  else sessionStorage.setItem(TOKEN_KEY, t);
-  localStorage.setItem(TOKEN_AT_KEY, String(Date.now()));
-}
-/* « Se souvenir de moi » limité à 7 jours : appelé à l'ouverture de l'admin. */
-const REMEMBER_MAX_MS = 7 * 86400000;
-function expireRememberedToken() {
-  if (localStorage.getItem(TOKEN_REMEMBER_KEY) !== '1') return;
-  const at = Number(localStorage.getItem(TOKEN_AT_KEY) || 0);
-  if (!(Date.now() - at < REMEMBER_MAX_MS)) clearToken(); // date absente ou dépassée = expiré
-}
-function clearToken() {
-  sessionStorage.removeItem(TOKEN_KEY);
-  [TOKEN_KEY, TOKEN_AT_KEY, TOKEN_REMEMBER_KEY].forEach((k) => localStorage.removeItem(k));
+async function sessionActive() {
+  try { return (await (await apiAdmin('session')).json()).connecte === true; } catch { return false; }
 }
 
 function showStatus(text, kind) {
@@ -88,61 +64,38 @@ function showStatus(text, kind) {
 }
 function hideStatus() { statusMsg.className = ''; }
 
-function utf8ToB64(str) { return btoa(unescape(encodeURIComponent(str))); }
-function b64ToUtf8(str) { return decodeURIComponent(escape(atob(str))); }
 
 /* ── Modifications non enregistrées ── */
 const dirty = new Set();
 function markClean(path) { dirty.delete(String(path).replace(/^data\//, '').replace(/\.json$/, '')); }
 function markDirty(key) { dirty.add(key); }
 
-async function githubRequest(path, options = {}, repo = REPO) {
-  const res = await fetch(`https://api.github.com/repos/${OWNER}/${repo}/contents/${path}`, {
-    ...options,
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-      Accept: 'application/vnd.github+json',
-      ...(options.headers || {}),
-    },
-  });
-  if (res.status === 401) throw new Error('Jeton invalide ou expiré.');
-  if (res.status === 403) throw new Error('Accès refusé — vérifie que le jeton a accès au dépôt "' + repo + '" (Contents: Read and write).');
-  return res;
-}
-
-async function readJsonFile(path, repo = REPO) {
-  const res = await githubRequest(path, {}, repo);
-  if (res.status === 404) return { data: [], sha: null };
+const nomFichier = (path) => String(path).replace(/^data\//, '').replace(/\.json$/, '');
+async function readJsonFile(path) {
+  const res = await apiAdmin('fichier/' + nomFichier(path));
   if (!res.ok) throw new Error('Lecture échouée (' + res.status + ')');
   const body = await res.json();
-  return { data: JSON.parse(b64ToUtf8(body.content)), sha: body.sha };
+  return body.data === null ? { data: [], sha: null } : { data: body.data, sha: body.sha };
 }
 
 /* Version du format des fichiers objets (voir scripts/validate-data.js).
    Les tableaux (streamers, clips, planning) gardent leur forme. */
 const SCHEMA_VERSION = 1;
-async function writeJsonFile(path, data, sha, message, repo = REPO) {
+async function writeJsonFile(path, data, sha, message) {
   if (data && typeof data === 'object' && !Array.isArray(data)) data = { schemaVersion: SCHEMA_VERSION, ...data };
-  const res = await githubRequest(path, {
-    method: 'PUT',
-    body: JSON.stringify({
-      message,
-      content: utf8ToB64(JSON.stringify(data, null, 2)),
-      ...(sha ? { sha } : {}),
-    }),
-  }, repo);
+  const res = await apiAdmin('fichier/' + nomFichier(path), { method: 'PUT', body: JSON.stringify({ data, sha, message }) });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    if (res.status === 409 || (res.status === 422 && /sha/i.test(body.message || ''))) {
-      const err = new Error('CONFLIT : ce contenu a été modifié ailleurs (autre appareil, restauration, automatisation) depuis ton chargement. Rien n\'a été écrasé. Recharge la dernière version (tes saisies non enregistrées seront perdues : copie-les avant si besoin).');
+    if (res.status === 409) {
+      const err = new Error('CONFLIT : ce contenu a été modifié ailleurs (autre appareil, restauration, agence) depuis ton chargement. Rien n\'a été écrasé. Recharge la dernière version (tes saisies non enregistrées seront perdues : copie-les avant si besoin).');
       err.conflict = true;
       throw err;
     }
-    throw new Error(body.message || 'Écriture échouée (' + res.status + ')');
+    throw new Error(body.erreur || 'Écriture échouée (' + res.status + ')');
   }
   const out = await res.json();
   markClean(path);
-  return out;
+  return { content: { sha: out.sha } }; // même forme qu'avant (result.content.sha)
 }
 
 /* ── état en mémoire ── */
@@ -154,15 +107,9 @@ let planningState = { data: [], sha: null };
    Nouveaux onglets : changements ponctuels du planning, textes des
    pages, liens & annonce, santé du site, historique.
    ================================================================ */
-async function ghApi(path, options = {}) {
-  return fetch(`https://api.github.com/repos/${OWNER}/${REPO}${path}`, {
-    ...options,
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-      Accept: 'application/vnd.github+json',
-      ...(options.headers || {}),
-    },
-  });
+/* Lecture publique de l'API GitHub (onglet Santé), sans jeton, tant que les automatismes y tournent encore. */
+async function ghApi(path) {
+  return fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + path, { headers: { Accept: 'application/vnd.github+json' } });
 }
 const strOr = (v, f = '') => (typeof v === 'string' ? v : f);
 function todayStr() {

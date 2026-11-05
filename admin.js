@@ -30,18 +30,6 @@ document.addEventListener('keydown', (e) => {
   const pick = tab.dataset.tab === 'planning' && dirty.has('planning-exceptions') && !dirty.has('planning') ? ids[1] : ids[0];
   document.getElementById(pick).click();
 });
-function showTokenNote() {
-  const at = Number(localStorage.getItem(TOKEN_AT_KEY) || 0);
-  const box = document.getElementById('tokenNote');
-  if (!at) { localStorage.setItem(TOKEN_AT_KEY, String(Date.now())); return; }
-  const days = Math.floor((Date.now() - at) / 86400000);
-  if (days >= 60) {
-    box.style.display = 'block';
-    box.textContent = 'Ton jeton GitHub est enregistré dans ce navigateur depuis ' + days + ' jours. Par sécurité, pense à le renouveler (GitHub → Settings → Developer settings → Fine-grained tokens → Regenerate), puis déconnecte-toi et reconnecte-toi avec le nouveau.';
-  } else {
-    box.style.display = 'none';
-  }
-}
 
 /* ── Sauvegarde ── */
 function downloadBackup() {
@@ -165,31 +153,41 @@ async function loadAllContent() {
 }
 
 async function init() {
-  expireRememberedToken();
-  const token = getToken();
-  if (!token) return;
+  // l'admin ne marche que sur le serveur (API /Site/admin-api/) : la copie GitHub Pages y renvoie
+  if (location.hostname.endsWith('github.io')) { location.replace('https://aulit42369.fr/Site/admin.html'); return; }
+  // anciens jetons GitHub laissés dans ce navigateur : effacés (05/11/2026, connexion par mot de passe)
+  ['aulit_admin_token', 'aulit_admin_token_at', 'aulit_admin_token_remember'].forEach((k) => { localStorage.removeItem(k); sessionStorage.removeItem(k); });
+  if (!(await sessionActive())) return;
   authGate.style.display = 'none';
   adminPanel.style.display = 'block';
   showStatus('Chargement...', 'pending');
   const errors = await loadAllContent();
   dirty.clear();
-  showTokenNote();
   if (errors.length) showStatus(errors.join(' — '), 'err');
   else hideStatus();
 }
 
-document.getElementById('connectBtn').addEventListener('click', () => {
-  const value = document.getElementById('tokenInput').value.trim();
-  if (!value) return;
-  setToken(value, document.getElementById('rememberToken').checked);
-  init();
-});
+async function seConnecter() {
+  const champ = document.getElementById('passwordInput');
+  const erreur = document.getElementById('loginError');
+  if (!champ.value) return;
+  erreur.textContent = '';
+  try {
+    const res = await apiAdmin('connexion', { method: 'POST', body: JSON.stringify({ motDePasse: champ.value }) });
+    if (!res.ok) { erreur.textContent = (await res.json().catch(() => ({}))).erreur || 'Connexion refusée (' + res.status + ').'; return; }
+    champ.value = '';
+    init();
+  } catch (e) {
+    erreur.textContent = 'Serveur injoignable : ' + e.message;
+  }
+}
+document.getElementById('connectBtn').addEventListener('click', seConnecter);
+document.getElementById('passwordInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') seConnecter(); });
 
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  clearToken();
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await apiAdmin('deconnexion', { method: 'POST' }).catch(() => {});
   adminPanel.style.display = 'none';
   authGate.style.display = 'block';
-  document.getElementById('tokenInput').value = '';
 });
 
 init();

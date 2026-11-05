@@ -11,9 +11,9 @@ async function loadHistory() {
   const box = document.getElementById('histList');
   box.innerHTML = '<div class="ap-empty">Chargement…</div>';
   try {
-    const res = await ghApi('/commits?path=' + encodeURIComponent('data/' + file + '.json') + '&per_page=20');
+    const res = await apiAdmin('historique/' + file);
     if (!res.ok) throw new Error('Lecture impossible (' + res.status + ')');
-    const commits = await res.json();
+    const commits = (await res.json()).map((c) => ({ sha: c.id, commit: { author: { date: c.date }, message: c.message } })); // même forme que l'ancienne liste GitHub
     if (!Array.isArray(commits) || commits.length === 0) {
       box.innerHTML = '<div class="ap-empty">Aucune version enregistrée pour ce contenu (rien n\'a encore été sauvegardé depuis l\'admin).</div>';
       return;
@@ -34,10 +34,9 @@ async function loadHistory() {
   }
 }
 async function readJsonAt(file, sha) {
-  const res = await githubRequest('data/' + file + '.json?ref=' + sha);
+  const res = await apiAdmin('version/' + file + '/' + sha);
   if (!res.ok) throw new Error('Lecture de cette version impossible (' + res.status + ')');
-  const body = await res.json();
-  return JSON.parse(b64ToUtf8(body.content));
+  return res.json();
 }
 document.getElementById('histFile').addEventListener('change', loadHistory);
 document.getElementById('histList').addEventListener('click', async (e) => {

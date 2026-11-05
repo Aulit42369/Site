@@ -1,0 +1,39 @@
+# Depuis le 05/11/2026, les données que l'admin modifie vivent sur le serveur aulit42369.fr (service site-admin).
+# Tant que ce dépôt existe, il en garde une copie à jour (copie de secours de GitHub Pages, clone du PC) : rien d'autre ne
+# doit écrire ces 9 fichiers ici. Données publiques (servies par le site), aucun secret.
+name: Copie des données du serveur
+
+on:
+  schedule:
+    - cron: '2,17,32,47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: donnees-serveur
+  cancel-in-progress: false
+
+jobs:
+  copier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Télécharger les données du serveur
+        run: |
+          for f in streamers clips planning planning-exceptions apropos pages custom-pages games site; do
+            curl -fsS -m 20 "https://aulit42369.fr/Site/data/$f.json?copie=$(date +%s)" -o "/tmp/$f.json"
+            node -e "JSON.parse(require('fs').readFileSync('/tmp/$f.json','utf8'))" # jamais un fichier cassé
+            cp "/tmp/$f.json" "data/$f.json"
+          done
+      - name: Enregistrer s'il y a du nouveau
+        run: |
+          git config user.name "Copie du serveur"
+          git config user.email "admin@aulit42369.fr"
+          git add data/
+          git diff --cached --quiet && { echo "Rien de nouveau."; exit 0; }
+          git commit -m "Données du site : copie du serveur aulit42369.fr"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done
+          exit 1
