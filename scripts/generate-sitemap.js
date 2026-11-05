@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const { ROOT, loadCorePages, loadCustomPages } = require('./registry');
 
-const BASE = 'https://aulit42369.github.io/Site/';
+const BASE = 'https://aulit42369.fr/Site/';
 const META = {
   'index.html': ['weekly', '1.0'], 'planning.html': ['weekly', '0.8'], 'clips.html': ['weekly', '0.7'],
   'streamers.html': ['weekly', '0.6'], 'coulisses.html': ['monthly', '0.6'], 'apropos.html': ['monthly', '0.5'],

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://aulit42369.github.io/Site/sitemap.xml
+Sitemap: https://aulit42369.fr/Site/sitemap.xml

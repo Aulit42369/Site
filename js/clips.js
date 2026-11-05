@@ -26,7 +26,7 @@ function addClipsJsonLd(clips) {
       '@type': 'VideoObject',
       name: clip.title,
       description: 'Clip Twitch de la chaîne AULIT42369 : ' + clip.title,
-      thumbnailUrl: 'https://aulit42369.github.io/Site/og/clips-og.png',
+      thumbnailUrl: 'https://aulit42369.fr/Site/og/clips-og.png',
       embedUrl: `https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io&parent=aulit42369.fr`,
       url: `https://clips.twitch.tv/${slug}`,
       inLanguage: 'fr'
