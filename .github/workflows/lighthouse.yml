@@ -13,17 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Attendre la mise en ligne GitHub Pages
+      - name: Attendre la mise en ligne (serveur aulit42369.fr)
         run: sleep 150
       - name: Mesurer avec Lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
-            https://aulit42369.github.io/Site/
-            https://aulit42369.github.io/Site/planning.html
-            https://aulit42369.github.io/Site/clips.html
-            https://aulit42369.github.io/Site/streamers.html
-            https://aulit42369.github.io/Site/jeux.html
+            https://aulit42369.fr/Site/
+            https://aulit42369.fr/Site/planning.html
+            https://aulit42369.fr/Site/clips.html
+            https://aulit42369.fr/Site/streamers.html
+            https://aulit42369.fr/Site/jeux.html
           configPath: ./lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true
