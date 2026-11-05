@@ -1,0 +1,31 @@
+# Surveillance de l'extérieur du serveur OVH aulit42369.fr (05/11/2026). La sonde de santé tourne sur le serveur lui-même :
+# s'il tombe en entier, elle se tait. Ce contrôle tourne chez GitHub ; un échec = e-mail de GitHub à Olivier (« Run failed »).
+# Dans ce dépôt parce qu'il est public (minutes gratuites) et actif (GitHub coupe les plannings des dépôts inactifs 60 jours).
+# Limite connue : le planning de GitHub peut prendre du retard aux heures chargées.
+name: Surveillance du serveur
+
+on:
+  schedule:
+    - cron: '7,17,27,37,47,57 * * * *' # toutes les 10 min, déphasé des horaires ronds (comme twitch-status)
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  controle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: La page de santé, le bot et le Site répondent
+        run: |
+          ko=0
+          for u in https://sante.aulit42369.fr/connexion https://bot.aulit42369.fr/ https://aulit42369.fr/Site/; do
+            ok=0; code=000
+            for i in 1 2 3; do # 3 essais à 30 s d'écart : un redémarrage de service n'est pas une panne
+              code=$(curl -s -o /dev/null -m 20 -w '%{http_code}' "$u" || true)
+              if [ "$code" -ge 200 ] && [ "$code" -lt 400 ]; then ok=1; break; fi
+              sleep 30
+            done
+            if [ $ok = 1 ]; then echo "OK     $u"; else echo "::error::PANNE $u (code $code)"; ko=1; fi
+          done
+          exit $ko
