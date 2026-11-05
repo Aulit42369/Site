@@ -16,9 +16,17 @@
     "note": "7 Days to Die"
   },
   {
+    "date": "2026-10-30",
+    "on": true,
+    "game": "VALORANT",
+    "time": "21:00",
+    "end": "00:00",
+    "note": "Ranked"
+  },
+  {
     "date": "2026-11-01",
-    "on": false,
-    "game": "",
+    "on": true,
+    "game": "Deep Rock",
     "time": "",
     "end": "",
     "note": ""

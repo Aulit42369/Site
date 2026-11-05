@@ -1,0 +1,142 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@10.9.9
+2 info using node@v22.23.4
+3 silly config load:file:/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/srv/site-build/.npmrc
+5 silly config load:file:/usr/etc/npmrc
+6 verbose title npm install terser clean-css
+7 verbose argv "install" "--loglevel" "warn" "--no-save" "--no-audit" "--no-fund" "terser" "clean-css"
+8 verbose logfile logs-max:10 dir:/srv/site-build/.npm/_logs/2026-11-05T12_31_42_566Z-
+9 verbose logfile /srv/site-build/.npm/_logs/2026-11-05T12_31_42_566Z-debug-0.log
+10 silly logfile done cleaning log files
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 silly idealTree buildDeps
+13 silly fetch manifest terser@*
+14 silly packumentCache full:https://registry.npmjs.org/terser cache-miss
+15 http fetch GET 200 https://registry.npmjs.org/npm 107ms
+16 http fetch GET 200 https://registry.npmjs.org/terser 114ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/terser set size:undefined disposed:false
+18 silly fetch manifest clean-css@*
+19 silly packumentCache full:https://registry.npmjs.org/clean-css cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/clean-css 39ms (cache miss)
+21 silly packumentCache full:https://registry.npmjs.org/clean-css set size:undefined disposed:false
+22 silly placeDep ROOT clean-css@5.3.3 OK for:  want: *
+23 silly placeDep ROOT terser@5.51.2 OK for:  want: *
+24 silly fetch manifest source-map@~0.6.0
+25 silly packumentCache full:https://registry.npmjs.org/source-map cache-miss
+26 silly fetch manifest acorn@^8.15.0
+27 silly packumentCache full:https://registry.npmjs.org/acorn cache-miss
+28 silly fetch manifest commander@^2.20.0
+29 silly packumentCache full:https://registry.npmjs.org/commander cache-miss
+30 http fetch GET 200 https://registry.npmjs.org/source-map 26ms (cache miss)
+31 silly packumentCache full:https://registry.npmjs.org/source-map set size:undefined disposed:false
+32 silly fetch manifest source-map-support@~0.5.20
+33 silly packumentCache full:https://registry.npmjs.org/source-map-support cache-miss
+34 http fetch GET 200 https://registry.npmjs.org/acorn 49ms (cache miss)
+35 silly packumentCache full:https://registry.npmjs.org/acorn set size:undefined disposed:false
+36 silly fetch manifest @jridgewell/source-map@^0.3.3
+37 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fsource-map cache-miss
+38 http fetch GET 200 https://registry.npmjs.org/commander 66ms (cache miss)
+39 silly packumentCache full:https://registry.npmjs.org/commander set size:undefined disposed:false
+40 http fetch GET 200 https://registry.npmjs.org/@jridgewell%2fsource-map 42ms (cache miss)
+41 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fsource-map set size:undefined disposed:false
+42 http fetch GET 200 https://registry.npmjs.org/source-map-support 90ms (cache miss)
+43 silly packumentCache full:https://registry.npmjs.org/source-map-support set size:undefined disposed:false
+44 silly placeDep ROOT source-map@0.6.1 OK for: clean-css@5.3.3 want: ~0.6.0
+45 silly placeDep ROOT @jridgewell/source-map@0.3.11 OK for: terser@5.51.2 want: ^0.3.3
+46 silly placeDep ROOT acorn@8.19.0 OK for: terser@5.51.2 want: ^8.15.0
+47 silly placeDep ROOT commander@2.20.3 OK for: terser@5.51.2 want: ^2.20.0
+48 silly placeDep ROOT source-map-support@0.5.21 OK for: terser@5.51.2 want: ~0.5.20
+49 silly fetch manifest @jridgewell/gen-mapping@^0.3.5
+50 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fgen-mapping cache-miss
+51 silly fetch manifest @jridgewell/trace-mapping@^0.3.25
+52 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2ftrace-mapping cache-miss
+53 silly fetch manifest buffer-from@^1.0.0
+54 silly packumentCache full:https://registry.npmjs.org/buffer-from cache-miss
+55 http fetch GET 200 https://registry.npmjs.org/buffer-from 26ms (cache miss)
+56 silly packumentCache full:https://registry.npmjs.org/buffer-from set size:undefined disposed:false
+57 http fetch GET 200 https://registry.npmjs.org/@jridgewell%2ftrace-mapping 45ms (cache miss)
+58 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2ftrace-mapping set size:undefined disposed:false
+59 http fetch GET 200 https://registry.npmjs.org/@jridgewell%2fgen-mapping 53ms (cache miss)
+60 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fgen-mapping set size:undefined disposed:false
+61 silly placeDep ROOT @jridgewell/gen-mapping@0.3.13 OK for: @jridgewell/source-map@0.3.11 want: ^0.3.5
+62 silly placeDep ROOT @jridgewell/trace-mapping@0.3.31 OK for: @jridgewell/source-map@0.3.11 want: ^0.3.25
+63 silly fetch manifest @jridgewell/trace-mapping@^0.3.24
+64 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2ftrace-mapping cache-miss
+65 silly fetch manifest @jridgewell/sourcemap-codec@^1.5.0
+66 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fsourcemap-codec cache-miss
+67 silly fetch manifest @jridgewell/resolve-uri@^3.1.0
+68 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fresolve-uri cache-miss
+69 http cache https://registry.npmjs.org/@jridgewell%2ftrace-mapping 10ms (cache hit)
+70 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2ftrace-mapping set size:170909 disposed:false
+71 silly fetch manifest @jridgewell/sourcemap-codec@^1.4.14
+72 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fsourcemap-codec cache-miss
+73 http fetch GET 200 https://registry.npmjs.org/@jridgewell%2fsourcemap-codec 30ms (cache miss)
+74 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fsourcemap-codec set size:undefined disposed:false
+75 http fetch GET 200 https://registry.npmjs.org/@jridgewell%2fresolve-uri 35ms (cache miss)
+76 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fresolve-uri set size:undefined disposed:false
+77 http fetch GET 200 https://registry.npmjs.org/@jridgewell%2fsourcemap-codec 45ms (cache miss)
+78 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fsourcemap-codec set size:undefined disposed:false
+79 silly placeDep ROOT @jridgewell/sourcemap-codec@1.6.0 OK for: @jridgewell/gen-mapping@0.3.13 want: ^1.5.0
+80 silly placeDep ROOT @jridgewell/resolve-uri@3.1.2 OK for: @jridgewell/trace-mapping@0.3.31 want: ^3.1.0
+81 silly placeDep ROOT buffer-from@1.1.2 OK for: source-map-support@0.5.21 want: ^1.0.0
+82 silly reify moves {}
+83 http cache buffer-from@https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz 0ms (cache hit)
+84 http cache @jridgewell/resolve-uri@https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.2.tgz 0ms (cache hit)
+85 http cache @jridgewell/sourcemap-codec@https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.6.0.tgz 0ms (cache hit)
+86 http cache @jridgewell/trace-mapping@https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz 0ms (cache hit)
+87 http cache @jridgewell/gen-mapping@https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.13.tgz 0ms (cache hit)
+88 http cache commander@https://registry.npmjs.org/commander/-/commander-2.20.3.tgz 0ms (cache hit)
+89 http cache acorn@https://registry.npmjs.org/acorn/-/acorn-8.19.0.tgz 0ms (cache hit)
+90 http cache @jridgewell/source-map@https://registry.npmjs.org/@jridgewell/source-map/-/source-map-0.3.11.tgz 0ms (cache hit)
+91 http cache source-map-support@https://registry.npmjs.org/source-map-support/-/source-map-support-0.5.21.tgz 0ms (cache hit)
+92 http cache source-map@https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz 0ms (cache hit)
+93 http cache terser@https://registry.npmjs.org/terser/-/terser-5.51.2.tgz 0ms (cache hit)
+94 http cache clean-css@https://registry.npmjs.org/clean-css/-/clean-css-5.3.3.tgz 0ms (cache hit)
+95 silly tarball no local data for buffer-from@https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz. Extracting by manifest.
+96 silly tarball no local data for @jridgewell/resolve-uri@https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.2.tgz. Extracting by manifest.
+97 silly tarball no local data for @jridgewell/sourcemap-codec@https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.6.0.tgz. Extracting by manifest.
+98 silly tarball no local data for @jridgewell/trace-mapping@https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz. Extracting by manifest.
+99 silly tarball no local data for @jridgewell/gen-mapping@https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.13.tgz. Extracting by manifest.
+100 silly tarball no local data for commander@https://registry.npmjs.org/commander/-/commander-2.20.3.tgz. Extracting by manifest.
+101 silly tarball no local data for acorn@https://registry.npmjs.org/acorn/-/acorn-8.19.0.tgz. Extracting by manifest.
+102 silly tarball no local data for @jridgewell/source-map@https://registry.npmjs.org/@jridgewell/source-map/-/source-map-0.3.11.tgz. Extracting by manifest.
+103 silly tarball no local data for source-map-support@https://registry.npmjs.org/source-map-support/-/source-map-support-0.5.21.tgz. Extracting by manifest.
+104 silly tarball no local data for source-map@https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz. Extracting by manifest.
+105 silly tarball no local data for terser@https://registry.npmjs.org/terser/-/terser-5.51.2.tgz. Extracting by manifest.
+106 silly tarball no local data for clean-css@https://registry.npmjs.org/clean-css/-/clean-css-5.3.3.tgz. Extracting by manifest.
+107 http fetch GET 200 https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz 144ms (cache miss)
+108 http fetch GET 200 https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.2.tgz 150ms (cache miss)
+109 http fetch GET 200 https://registry.npmjs.org/commander/-/commander-2.20.3.tgz 177ms (cache miss)
+110 http fetch GET 200 https://registry.npmjs.org/@jridgewell/source-map/-/source-map-0.3.11.tgz 179ms (cache miss)
+111 http fetch GET 200 https://registry.npmjs.org/source-map-support/-/source-map-support-0.5.21.tgz 185ms (cache miss)
+112 http fetch GET 200 https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.6.0.tgz 233ms (cache miss)
+113 http fetch GET 200 https://registry.npmjs.org/acorn/-/acorn-8.19.0.tgz 237ms (cache miss)
+114 http fetch GET 200 https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.3.13.tgz 240ms (cache miss)
+115 http fetch GET 200 https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz 262ms (cache miss)
+116 http fetch GET 200 https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz 277ms (cache miss)
+117 http fetch GET 200 https://registry.npmjs.org/terser/-/terser-5.51.2.tgz 309ms (cache miss)
+118 http fetch GET 200 https://registry.npmjs.org/clean-css/-/clean-css-5.3.3.tgz 359ms (cache miss)
+119 silly ADD node_modules/buffer-from
+120 silly ADD node_modules/@jridgewell/resolve-uri
+121 silly ADD node_modules/@jridgewell/sourcemap-codec
+122 silly ADD node_modules/@jridgewell/trace-mapping
+123 silly ADD node_modules/@jridgewell/gen-mapping
+124 silly ADD node_modules/source-map-support
+125 silly ADD node_modules/commander
+126 silly ADD node_modules/acorn
+127 silly ADD node_modules/@jridgewell/source-map
+128 silly ADD node_modules/source-map
+129 silly ADD node_modules/terser
+130 silly ADD node_modules/clean-css
+131 verbose cwd /srv/site-build
+132 verbose os Linux 6.8.0-136-generic
+133 verbose node v22.23.4
+134 verbose npm  v10.9.9
+135 notice
+135 notice New major version of npm available! 10.9.9 -> 12.2.2
+135 notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+135 notice To update run: npm install -g npm@12.2.2
+135 notice  { force: true, [Symbol(proc-log.meta)]: true }
+136 verbose exit 0
+137 info ok
