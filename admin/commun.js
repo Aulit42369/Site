@@ -33,6 +33,7 @@ async function apiAdmin(route, options = {}) {
   const res = await fetch(API_ADMIN + route, {
     ...options,
     credentials: 'same-origin',
+    cache: 'no-store', // jamais une réponse gardée par le navigateur (05/11 : « pas connecté » gardé 10 min)
     headers: { 'Content-Type': 'application/json', 'X-Admin': '1', ...(options.headers || {}) },
   });
   if (res.status === 401 && route !== 'connexion') throw new Error('Session expirée : reconnecte-toi.');
