@@ -123,7 +123,7 @@
         <li><strong data-edit="coulisses.stat1.n" data-edit-label="Coulisses · chiffre 1">15</strong><span data-edit="coulisses.stat1.l" data-edit-label="Coulisses · chiffre 1, légende">outils sur mesure</span></li>
         <li><strong data-edit="coulisses.stat2.n" data-edit-label="Coulisses · chiffre 2">15</strong><span data-edit="coulisses.stat2.l" data-edit-label="Coulisses · chiffre 2, légende">agents IA à l’agence</span></li>
         <li><strong data-edit="coulisses.stat3.n" data-edit-label="Coulisses · chiffre 3">2 000+</strong><span data-edit="coulisses.stat3.l" data-edit-label="Coulisses · chiffre 3, légende">tests automatiques</span></li>
-        <li><strong data-edit="coulisses.stat4.n" data-edit-label="Coulisses · chiffre 4">24 h/24</strong><span data-edit="coulisses.stat4.l" data-edit-label="Coulisses · chiffre 4, légende">sur un Raspberry Pi</span></li>
+        <li><strong data-edit="coulisses.stat4.n" data-edit-label="Coulisses · chiffre 4">24 h/24</strong><span data-edit="coulisses.stat4.l" data-edit-label="Coulisses · chiffre 4, légende">sur un serveur dédié</span></li>
       </ul>
     </div>
   </section>
@@ -763,10 +763,10 @@
           <div class="project-desc">
             <p data-edit="coulisses.p6.desc1" data-edit-label="Coulisses · Bot Discord — paragraphe 1">Le bot qui fait tourner le serveur d'entraide entre streamers. L'entrée est filtrée : les nouveaux membres acceptent le règlement puis soumettent leur chaîne Twitch ou YouTube pour vérification avant d'obtenir l'accès complet — pas une communauté ouverte à tout le monde.</p>
             <p data-edit="coulisses.p6.desc2" data-edit-label="Coulisses · Bot Discord — paragraphe 2">Au-delà de l'accueil : modération avec escalade automatique après plusieurs avertissements, anniversaires, sondages, salons vocaux temporaires, zone promo avec délai entre deux posts, annuaire des membres, tickets, concours, et annonces automatiques (chaînes suivies en direct, jeux gratuits, paliers de followers). Un panneau d'administration web permet de tout gérer sans passer par les commandes Discord.</p>
-            <p data-edit="coulisses.p6.desc3" data-edit-label="Coulisses · Bot Discord — paragraphe 3">Le bot tourne sur un Raspberry Pi, et l'adresse du tunnel vers son panneau peut changer, ce qui cassait les connexions Discord et Twitch. Un relais Cloudflare à adresse fixe, tenu à jour par le bot, renvoie maintenant toujours vers la bonne. Le tout est surveillé par le tableau de santé présenté plus bas.</p>
+            <p data-edit="coulisses.p6.desc3" data-edit-label="Coulisses · Bot Discord — paragraphe 3">Le bot tourne désormais sur un serveur dédié, avec une adresse fixe et un certificat propre pour son panneau d'administration — fini le tunnel dont l'adresse changeait et cassait les connexions Discord et Twitch. Le tout est surveillé par le tableau de santé présenté plus bas.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p6.status" data-edit-label="Coulisses · Bot Discord — note">Le même bot tourne aussi sur d'autres serveurs, avec des réglages propres à chacun</span></div>
-          <div class="project-stack" data-edit="coulisses.p6.stack" data-edit-label="Coulisses · Bot Discord — technologies">Discord · commandes slash · panneau d'admin web · Raspberry Pi · Cloudflare Workers</div>
+          <div class="project-stack" data-edit="coulisses.p6.stack" data-edit-label="Coulisses · Bot Discord — technologies">Discord · commandes slash · panneau d'admin web · serveur dédié · Caddy</div>
         </div>
         <div class="project-visuals">
           <div class="project-diagram">
@@ -819,7 +819,7 @@
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p12.eyebrow" data-edit-label="Coulisses · Santé des services — sur-titre">// Santé des services</div>
           <h2 data-edit="coulisses.p12.title" data-edit-label="Coulisses · Santé des services — titre">Savoir en un coup d’œil si <em class="accent">tout tourne</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p12.desc1" data-edit-label="Coulisses · Santé des services — paragraphe 1">Une sonde installée sur le Raspberry Pi vérifie toutes les 5 minutes les bots, le tunnel du panneau, les sites, les extensions Twitch, les sauvegardes et le robot de La Cabane. Les sites hébergés gratuitement ne sont interrogés que toutes les 3 heures, pour ne pas épuiser leur quota.</p>
+            <p data-edit="coulisses.p12.desc1" data-edit-label="Coulisses · Santé des services — paragraphe 1">Une sonde installée sur le Raspberry Pi vérifie toutes les 5 minutes les bots, les sites, les extensions Twitch, les sauvegardes et le robot de La Cabane. Les sites hébergés gratuitement ne sont interrogés que toutes les 3 heures, pour ne pas épuiser leur quota.</p>
             <p data-edit="coulisses.p12.desc2" data-edit-label="Coulisses · Santé des services — paragraphe 2">Le résultat s’affiche sur un tableau privé, ouvert depuis le téléphone et protégé par un code envoyé par e-mail. Si un bot s’arrête, qu’un site tombe, qu’une sauvegarde prend du retard ou que le Pi ne donne plus de nouvelles, une alerte part dans un salon Discord privé.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p12.status" data-edit-label="Coulisses · Santé des services — note">Les tests simulent tous les services : aucun vrai bot ni site n’est touché pendant les essais</span></div>
@@ -837,7 +837,7 @@
               <line x1="322" y1="112" x2="372" y2="62" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
               <line x1="322" y1="148" x2="372" y2="198" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
               <rect x="8" y="34" width="142" height="44" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="54" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bots du Pi</text>
+              <text x="79" y="54" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bots (serveur)</text>
               <text x="79" y="70" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">BOT Aulit · Lugh</text>
               <rect x="8" y="108" width="142" height="44" rx="6" fill="none" stroke="#1a2540"/>
               <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Sites</text>
