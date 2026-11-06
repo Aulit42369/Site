@@ -1,9 +1,9 @@
 {
-  "version": "1.0.7",
-  "date": "2026-11-05T14:59:06.640Z",
-  "notes": "changement de site d'hebergement",
-  "sha256": "17c1e61ccd933a6cbc5665abb78f52078914587ce7dc8a9227a3b36de041022e",
-  "taille": 606746,
-  "url": "https://aulit42369.fr/Site/regie/regie-maj-1.0.7.zip",
-  "signature": "uV8i/GnAIN5a89PDUvqqB2E29w6h8f0QltxmD31gSvjSgdUar0DzK0eC5tR6yJ+fYnYrjFLypqzDuSWje63HAQ=="
+  "version": "1.0.8",
+  "date": "2026-11-06T11:08:06.806Z",
+  "notes": "optimisation du code",
+  "sha256": "998ae5514025962d8e44ad6b9b9631a153155b5d40ce6e002e429d40247838c3",
+  "taille": 607587,
+  "url": "https://aulit42369.fr/Site/regie/regie-maj-1.0.8.zip",
+  "signature": "XSDcv+bC2m1Gvsu3fhzGVSaKgij8TMm4HyPjZ1RXcSbo2BtCxJ4i//3pAC2Lk0iBoCGrC1/C1rog03MaMHKwDg=="
 }
