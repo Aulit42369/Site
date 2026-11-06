@@ -54,19 +54,21 @@
 @keyframes swscroll{to{transform:translateX(-50%)}}
 
 /* hero */
-.sw-hero{position:relative;display:grid;grid-template-columns:1.3fr .82fr;gap:26px;align-items:center;padding-block:44px 176px;overflow:hidden}
-.sw-sun{position:absolute;z-index:0;bottom:94px;left:50%;transform:translateX(-50%);width:110px;height:110px;border-radius:50%;pointer-events:none;
+.sw-hero{position:relative;display:grid;grid-template-columns:1.3fr .82fr;gap:26px;align-items:center;padding-block:40px 150px}
+.sw-herobody,.sw-hero .sw-live{position:relative;z-index:1}
+/* Horizon synthwave : conteneur qui clippe soleil + grille ; le hero lui-même ne clippe PAS (sinon le halo du titre est coupé) */
+.sw-horizon{position:absolute;left:0;right:0;bottom:0;height:190px;z-index:0;overflow:hidden;pointer-events:none}
+.sw-sun{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);width:124px;height:124px;border-radius:50%;
   background:linear-gradient(180deg,var(--ssun2),var(--ssun1) 42%,var(--smag) 80%);
-  -webkit-mask:linear-gradient(#000 60%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);
-  mask:linear-gradient(#000 60%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);
-  -webkit-mask-composite:source-in;mask-composite:intersect;opacity:.9;filter:drop-shadow(0 0 40px rgba(255,77,109,.4))}
-.sw-grid{position:absolute;z-index:0;left:-10%;right:-10%;bottom:0;height:86px;pointer-events:none;opacity:.55;
+  -webkit-mask:linear-gradient(#000 62%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);
+  mask:linear-gradient(#000 62%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);
+  -webkit-mask-composite:source-in;mask-composite:intersect;opacity:.92;filter:drop-shadow(0 0 44px rgba(255,77,109,.45))}
+.sw-grid{position:absolute;left:-12%;right:-12%;bottom:0;height:90px;opacity:.6;
   background:linear-gradient(90deg,transparent,var(--svio),transparent) 0 0/100% 1px no-repeat,
     repeating-linear-gradient(90deg,transparent 0 39px,rgba(162,75,255,.5) 39px 40px),
     repeating-linear-gradient(0deg,transparent 0 24px,rgba(46,230,224,.35) 24px 25px);
   transform:perspective(320px) rotateX(70deg);transform-origin:bottom;
   -webkit-mask:linear-gradient(0deg,#000,transparent);mask:linear-gradient(0deg,#000,transparent)}
-.sw-hero>*{position:relative;z-index:1}
 .sw-livebug{display:inline-flex;align-items:center;gap:9px;font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;
   font-size:14px;letter-spacing:.06em;color:#190613;background:linear-gradient(180deg,#ff6ab4,var(--smag));padding:6px 16px 6px 13px;margin-bottom:16px;
   clip-path:polygon(0 0,100% 0,calc(100% - 11px) 100%,0 100%);box-shadow:inset 0 2px 1px rgba(255,255,255,.5)}
@@ -110,9 +112,8 @@
 .sw-sech{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
 .sw-sech h2{font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;font-size:clamp(25px,4.4vw,36px);letter-spacing:.02em}
 .sw-sech .n{font-family:var(--fm);color:var(--scyan);font-size:13px}
-.sw-feats{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
-.sw-feat{padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.sw-feat.big{grid-row:span 2;justify-content:flex-end}
+.sw-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sw-feat{padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0;min-height:150px;justify-content:flex-end}
 .sw-feat h3{font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;font-size:22px;letter-spacing:.02em}
 .sw-feat p{color:var(--smut);margin:0;font-size:14.5px}
 .sw-feat .tag{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--scyan)}
@@ -197,9 +198,8 @@
 
     <!-- HERO -->
     <section class="sw-hero">
-      <span class="sw-sun" aria-hidden="true"></span>
-      <span class="sw-grid" aria-hidden="true"></span>
-      <div>
+      <div class="sw-horizon" aria-hidden="true"><span class="sw-sun"></span><span class="sw-grid"></span></div>
+      <div class="sw-herobody">
         <span class="sw-livebug off" id="liveBanner"><span class="b"></span><span class="label">Hors ligne</span></span>
         <h1 class="sw-title">AULIT42369</h1>
         <p class="sw-sub"><span class="sw-eyebrow" style="margin-right:10px" data-edit="index.eyebrow" data-edit-label="Accueil — sur-titre"><span class="s">✦</span> Multigaming</span> Streamer Twitch <span class="m">francophone</span></p>
@@ -225,7 +225,7 @@
     <div class="sw-score">
       <div class="sw-panel cell"><div class="k">Abonnés Twitch</div><div class="v"><span id="followerStat"><span id="followerCount">—</span></span></div></div>
       <div class="sw-panel cell"><div class="k">Style</div><div class="v">Multigaming</div></div>
-      <div class="sw-panel cell"><div class="k">Lives</div><div class="v">Mer · Sam · Dim</div></div>
+      <div class="sw-panel cell"><div class="k">Prochain live</div><a class="v" href="planning.html" id="nextLive">Voir →</a></div>
       <div class="sw-panel cell"><div class="k">Discord</div><a class="v" href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Rejoindre →</a></div>
     </div>
 
@@ -235,7 +235,7 @@
     <section class="sw-sec">
       <div class="sw-sech"><span class="n">[ explorer ]</span><h2>La chaîne</h2></div>
       <div class="sw-feats">
-        <a class="sw-panel sw-feat big sw-bracket" href="clips.html">
+        <a class="sw-panel sw-feat sw-bracket" href="clips.html">
           <span class="tag">// Derniers moments</span><h3>Clips marquants</h3>
           <p data-edit="index.card2" data-edit-label="Accueil — carte Clips (sous-titre)">Les derniers moments marquants, montés et rangés par jeu.</p>
           <span class="arrow">voir les clips →</span>
