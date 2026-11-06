@@ -1,4 +1,13 @@
 {
+  "aulit42369": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
+    "live": false,
+    "followers": 193
+  },
+  "hagosan": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
+    "live": false
+  },
   "eiwen_": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
     "live": false
@@ -6,7 +15,7 @@
   "aly0806": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
     "live": true,
-    "game": "Disney Dreamlight Valley"
+    "game": "AION 2"
   },
   "galyssiane": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
@@ -21,14 +30,5 @@
     "live": true,
     "game": "Art"
   },
-  "aulit42369": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": false,
-    "followers": 193
-  },
-  "hagosan": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
-    "live": false
-  },
-  "_updated_at": "2026-11-06T15:44:03.434Z"
+  "_updated_at": "2026-11-06T15:54:03.373Z"
 }
