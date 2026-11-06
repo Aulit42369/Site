@@ -21,6 +21,26 @@
 <meta name="description" content="Aulit42369, streamer Twitch francophone multigaming : jeux coop entre potes, planning des lives, meilleurs clips et Discord. Viens rigoler en direct !">
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="style.min.css?v=f38153b7">
+<style>
+/* Habillage synthwave de l'accueil (scopé .home-hero, aucune incidence sur les autres pages) */
+.home-hero{position:relative;overflow:hidden}
+.home-hero>.container{position:relative;z-index:1}
+.sw-grid{position:absolute;left:-10%;right:-10%;bottom:0;height:116px;z-index:0;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(90deg,transparent 0 44px,rgba(155,92,255,.55) 44px 45px),repeating-linear-gradient(0deg,transparent 0 26px,rgba(0,245,255,.35) 26px 27px);
+  transform:perspective(340px) rotateX(70deg);transform-origin:bottom;
+  -webkit-mask:linear-gradient(0deg,#000,transparent);mask:linear-gradient(0deg,#000,transparent)}
+.sw-sun{position:absolute;left:50%;transform:translateX(-50%);bottom:92px;width:116px;height:116px;border-radius:50%;z-index:0;pointer-events:none;opacity:.92;
+  background:linear-gradient(180deg,#ffb648,#ff4d6d 46%,var(--magenta) 82%);
+  -webkit-mask:linear-gradient(#000 60%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);
+  -webkit-mask-composite:source-in;
+  mask:linear-gradient(#000 60%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);mask-composite:intersect;
+  filter:drop-shadow(0 0 32px rgba(255,77,109,.4))}
+.sw-wordmark{background:linear-gradient(177deg,#fff 3%,#d6fbff 26%,var(--cyan) 46%,#c9b3ff 55%,var(--magenta) 76%,#ffe9f4 98%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 20px rgba(155,92,255,.4))}
+.sw-wordmark em.accent{color:transparent;-webkit-text-fill-color:transparent;text-shadow:none}
+@media(max-width:900px){.sw-sun{bottom:66px;width:92px;height:92px}.sw-grid{height:88px}}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,11 +93,12 @@
 <main>
 
   <!-- HERO : le direct comme cœur de la page -->
-  <section class="grid-bg">
+  <section class="grid-bg home-hero">
+    <span class="sw-grid" aria-hidden="true"></span>
     <div class="container hero-grid" style="padding-top:0;">
       <div>
         <div class="eyebrow" data-edit="index.eyebrow" data-edit-label="Accueil — sur-titre">// Multigaming · Jeu coop · Entre potes</div>
-        <h1>AULIT<em class="accent">42369</em> <span style="display:block;margin-top:14px;font-size:clamp(.95rem,2.4vw,1.2rem);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);">Streamer Twitch francophone</span></h1>
+        <h1><span class="sw-wordmark">AULIT<em class="accent">42369</em></span> <span style="display:block;margin-top:14px;font-size:clamp(.95rem,2.4vw,1.2rem);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);">Streamer Twitch francophone</span></h1>
         <p class="lead" style="margin-top:18px;" data-edit="index.lead" data-edit-label="Accueil — phrase d’accroche">
           Une chaîne où on teste, on rage, on rigole et on troll les copains —
           au feeling, sans planning de jeu figé.
