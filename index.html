@@ -17,39 +17,132 @@
 <meta property="og:image" content="https://aulit42369.fr/Site/og-image.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#00f5ff">
+<meta name="theme-color" content="#0a0912">
 <meta name="description" content="Aulit42369, streamer Twitch francophone multigaming : jeux coop entre potes, planning des lives, meilleurs clips et Discord. Viens rigoler en direct !">
 <link rel="stylesheet" href="fonts.css?v=2026110601">
 <link rel="stylesheet" href="style.min.css?v=f38153c1">
 <style>
-/* Habillage synthwave de l'accueil (scopé .home-hero, aucune incidence sur les autres pages) */
-.home-hero{position:relative;overflow:hidden}
-.home-hero>.container{position:relative;z-index:1}
-.sw-grid{position:absolute;left:-10%;right:-10%;bottom:0;height:116px;z-index:0;pointer-events:none;opacity:.5;
-  background:repeating-linear-gradient(90deg,transparent 0 44px,rgba(155,92,255,.55) 44px 45px),repeating-linear-gradient(0deg,transparent 0 26px,rgba(0,245,255,.35) 26px 27px);
-  transform:perspective(340px) rotateX(70deg);transform-origin:bottom;
-  -webkit-mask:linear-gradient(0deg,#000,transparent);mask:linear-gradient(0deg,#000,transparent)}
-.sw-sun{position:absolute;left:50%;transform:translateX(-50%);bottom:92px;width:116px;height:116px;border-radius:50%;z-index:0;pointer-events:none;opacity:.92;
-  background:linear-gradient(180deg,#ffb648,#ff4d6d 46%,var(--magenta) 82%);
+/* ===== Accueil « Synthwave Broadcast » — mise en page de la maquette, posée par-dessus la charte.
+   Scopé .sw-home : n'affecte que l'accueil. Polices : fonts.css (Saira Condensed / IBM Plex Sans / IBM Plex Mono). ===== */
+.sw-home{--sb:#0a0912;--ssurf:#120f20;--ssurf2:#191431;--sline:#2d2456;--sfg:#ede9fb;--smut:#9a90c4;
+  --scyan:#2ee6e0;--smag:#ff3d9a;--svio:#a24bff;--ssun1:#ff4d6d;--ssun2:#ffb648;
+  --fd:'Saira Condensed',system-ui,sans-serif;--fb:'IBM Plex Sans',system-ui,sans-serif;--fm:'IBM Plex Mono',ui-monospace,monospace;
+  color:var(--sfg);font-family:var(--fb);line-height:1.6}
+.sw-home .wrap{max-width:1080px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.sw-home h1,.sw-home h2,.sw-home h3{font-family:var(--fd);margin:0;line-height:1;text-wrap:balance}
+.sw-home a{color:inherit;text-decoration:none}
+.sw-eyebrow{font-family:var(--fm);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--scyan);display:inline-flex;gap:.55em;align-items:center}
+.sw-eyebrow .s{color:var(--smag)}
+
+.sw-panel{position:relative;background:linear-gradient(180deg,var(--ssurf),var(--ssurf2));border:1px solid var(--sline);
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.sw-panel.lit{border-color:color-mix(in srgb,var(--svio) 55%,var(--sline));box-shadow:0 0 36px -16px var(--svio)}
+.sw-bracket::before,.sw-bracket::after{content:"";position:absolute;width:12px;height:12px;border:2px solid var(--scyan)}
+.sw-bracket::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.sw-bracket::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+/* ticker */
+@keyframes swpulse{50%{opacity:.35}}
+.sw-ticker{position:relative;overflow:hidden;background:#0c0a18;border-top:1px solid var(--sline);border-bottom:1px solid var(--sline);white-space:nowrap}
+.sw-ticker .onair{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;align-items:center;gap:7px;padding:0 14px 0 16px;
+  background:linear-gradient(180deg,#ff6ab4,var(--smag));color:#190613;font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;font-size:13px;letter-spacing:.05em;
+  clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%);box-shadow:inset 0 2px 1px rgba(255,255,255,.5)}
+.sw-ticker .onair .b{width:8px;height:8px;border-radius:50%;background:#190613;animation:swpulse 1.2s steps(1,end) infinite}
+.sw-track{display:inline-flex;padding-block:8px;padding-left:150px;animation:swscroll 26s linear infinite;font-family:var(--fm);font-size:12.5px;letter-spacing:.04em;color:#c3b9ec}
+.sw-track span{padding:0 18px;position:relative}
+.sw-track span::after{content:"✦";position:absolute;right:-5px;color:var(--scyan);font-size:9px;top:3px}
+@keyframes swscroll{to{transform:translateX(-50%)}}
+
+/* hero */
+.sw-hero{position:relative;display:grid;grid-template-columns:1.3fr .82fr;gap:26px;align-items:center;padding-block:44px 176px;overflow:hidden}
+.sw-sun{position:absolute;z-index:0;bottom:94px;left:50%;transform:translateX(-50%);width:110px;height:110px;border-radius:50%;pointer-events:none;
+  background:linear-gradient(180deg,var(--ssun2),var(--ssun1) 42%,var(--smag) 80%);
   -webkit-mask:linear-gradient(#000 60%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);
-  -webkit-mask-composite:source-in;
-  mask:linear-gradient(#000 60%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);mask-composite:intersect;
-  filter:drop-shadow(0 0 32px rgba(255,77,109,.4))}
-.sw-wordmark{background:linear-gradient(177deg,#fff 3%,#d6fbff 26%,var(--cyan) 46%,#c9b3ff 55%,var(--magenta) 76%,#ffe9f4 98%);
+  mask:linear-gradient(#000 60%,transparent),repeating-linear-gradient(0deg,#000 0 6px,transparent 6px 11px);
+  -webkit-mask-composite:source-in;mask-composite:intersect;opacity:.9;filter:drop-shadow(0 0 40px rgba(255,77,109,.4))}
+.sw-grid{position:absolute;z-index:0;left:-10%;right:-10%;bottom:0;height:86px;pointer-events:none;opacity:.55;
+  background:linear-gradient(90deg,transparent,var(--svio),transparent) 0 0/100% 1px no-repeat,
+    repeating-linear-gradient(90deg,transparent 0 39px,rgba(162,75,255,.5) 39px 40px),
+    repeating-linear-gradient(0deg,transparent 0 24px,rgba(46,230,224,.35) 24px 25px);
+  transform:perspective(320px) rotateX(70deg);transform-origin:bottom;
+  -webkit-mask:linear-gradient(0deg,#000,transparent);mask:linear-gradient(0deg,#000,transparent)}
+.sw-hero>*{position:relative;z-index:1}
+.sw-livebug{display:inline-flex;align-items:center;gap:9px;font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;
+  font-size:14px;letter-spacing:.06em;color:#190613;background:linear-gradient(180deg,#ff6ab4,var(--smag));padding:6px 16px 6px 13px;margin-bottom:16px;
+  clip-path:polygon(0 0,100% 0,calc(100% - 11px) 100%,0 100%);box-shadow:inset 0 2px 1px rgba(255,255,255,.5)}
+.sw-livebug .b{width:9px;height:9px;border-radius:50%;background:#190613;animation:swpulse 1.1s steps(1,end) infinite}
+.sw-livebug.off{background:var(--sline);color:var(--smut);box-shadow:none}.sw-livebug.off .b{background:var(--smut);animation:none}
+.sw-title{font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;font-size:clamp(52px,12vw,122px);line-height:.84;letter-spacing:.004em;
+  background:linear-gradient(177deg,#ffffff 2%,#d6fbff 26%,var(--scyan) 46%,#c9b3ff 54%,var(--smag) 74%,#ffe9f4 98%);
   -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 20px rgba(155,92,255,.4))}
-.sw-wordmark em.accent{color:transparent;-webkit-text-fill-color:transparent;text-shadow:none}
-@media(max-width:900px){.sw-sun{bottom:66px;width:92px;height:92px}.sw-grid{height:88px}}
+  filter:drop-shadow(0 0 26px rgba(162,75,255,.45)) drop-shadow(2px 3px 0 rgba(255,61,154,.35))}
+.sw-sub{font-family:var(--fd);font-weight:600;text-transform:uppercase;letter-spacing:.17em;font-size:clamp(15px,2.2vw,21px);margin:14px 0 0;color:#d8cff0}
+.sw-sub .m{color:var(--smag)}
+.sw-lede{color:var(--smut);max-width:46ch;margin:14px 0 0;font-size:16px}
+.sw-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.sw-btn{font-family:var(--fd);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:15px;padding:13px 22px;border:1px solid var(--sline);background:transparent;color:var(--sfg);cursor:pointer;display:inline-block;
+  clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));transition:.14s}
+.sw-btn.primary{background:linear-gradient(180deg,#8ffff9,var(--scyan) 55%,#12c4be);color:#04121a;border-color:var(--scyan);box-shadow:inset 0 2px 2px rgba(255,255,255,.55),0 10px 24px -12px var(--scyan)}
+.sw-btn.primary:hover{transform:translateY(-1px)}
+.sw-btn.ghost:hover{border-color:var(--smag);color:var(--smag)}
+
+/* moniteur Twitch */
+.sw-live{padding:0;overflow:hidden}
+.sw-live .head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:linear-gradient(180deg,#1a1436,#120f20);border-bottom:1px solid var(--sline)}
+.sw-live .cam{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--scyan)}
+.sw-pill{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--smag);color:var(--smag)}
+.sw-live .frame{aspect-ratio:16/9}
+.sw-live .frame iframe{display:block;width:100%;height:100%;border:0}
+
+/* scoreboard */
+.sw-score{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.sw-score .cell{flex:1;min-width:140px;background:linear-gradient(180deg,#140f28,#0d0a1b);border:1px solid var(--sline);padding:12px 18px;position:relative;
+  clip-path:polygon(0 0,100% 0,100% 100%,14px 100%)}
+.sw-score .cell::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--scyan),var(--svio))}
+.sw-score .cell:nth-child(even)::before{background:linear-gradient(90deg,var(--svio),var(--smag))}
+.sw-score .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--smut)}
+.sw-score .v{font-family:var(--fd);font-weight:800;font-style:italic;font-size:28px;line-height:1;margin-top:3px}
+.sw-score a.v:hover{color:var(--scyan)}
+
+.sw-rule{height:3px;margin:34px 0 0;background:linear-gradient(90deg,var(--scyan),var(--svio),var(--smag));transform:skewX(-20deg);opacity:.7;border-radius:2px}
+
+.sw-sec{padding-block:26px}
+.sw-sech{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.sw-sech h2{font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;font-size:clamp(25px,4.4vw,36px);letter-spacing:.02em}
+.sw-sech .n{font-family:var(--fm);color:var(--scyan);font-size:13px}
+.sw-feats{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
+.sw-feat{padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.sw-feat.big{grid-row:span 2;justify-content:flex-end}
+.sw-feat h3{font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;font-size:22px;letter-spacing:.02em}
+.sw-feat p{color:var(--smut);margin:0;font-size:14.5px}
+.sw-feat .tag{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--scyan)}
+.sw-feat.big .tag{color:var(--smag)}
+.sw-feat .arrow{font-family:var(--fm);color:var(--smut)}
+.sw-feat:hover{border-color:color-mix(in srgb,var(--svio) 55%,var(--sline))}
+.sw-fam{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.sw-cardsite{padding:14px;min-width:0}
+.sw-cardsite .bar{height:5px;width:46px;margin-bottom:12px;transform:skewX(-18deg);border-radius:2px}
+.sw-cardsite h4{font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;margin:0 0 3px;font-size:17px}
+.sw-cardsite p{font-family:var(--fm);font-size:11px;color:var(--smut);margin:0;letter-spacing:.04em;text-transform:uppercase}
+
+/* bloc Discord */
+.sw-join{margin-top:26px;text-align:center;padding:40px 24px}
+.sw-join h2{font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;font-size:clamp(24px,4.4vw,34px)}
+.sw-join h2 .m{color:var(--smag)}
+.sw-join p{color:var(--smut);max-width:520px;margin:12px auto 22px}
+
+@media(max-width:820px){
+  .sw-hero{grid-template-columns:1fr;gap:16px;padding-block:28px 150px}
+  .sw-sun{width:92px;height:92px;bottom:88px}
+  .sw-feats{grid-template-columns:1fr}.sw-feat.big{grid-row:auto}
+}
+@media(prefers-reduced-motion:reduce){.sw-home *{animation:none!important;transition:none!important}.sw-track{padding-left:16px}}
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "WebSite",
-      "name": "AULIT42369",
-      "url": "https://aulit42369.fr/Site/"
-    },
+    { "@type": "WebSite", "name": "AULIT42369", "url": "https://aulit42369.fr/Site/" },
     {
       "@type": "Person",
       "name": "AULIT42369",
@@ -72,7 +165,6 @@
   <div class="container">
     <div class="header-left">
       <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
-      <a href="index.html" class="live-banner" id="liveBanner"><span class="dot"></span><span class="label">En direct</span></a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -90,77 +182,90 @@
   </div>
 </header>
 
-<main>
+<div class="sw-home">
 
-  <!-- HERO : le direct comme cœur de la page -->
-  <section class="grid-bg home-hero">
-    <span class="sw-grid" aria-hidden="true"></span>
-    <div class="container hero-grid" style="padding-top:0;">
+  <!-- TICKER broadcast -->
+  <div class="sw-ticker">
+    <span class="onair"><span class="b"></span>À l'antenne</span>
+    <div class="sw-track">
+      <span>Multigaming · jeu coop · entre potes</span><span>!discord pour rejoindre la commu</span><span>Lives : Mer · Sam · Dim</span><span>On teste, on rage, on rigole, on troll les copains</span><span>Planning à jour sur la page Planning</span>
+      <span>Multigaming · jeu coop · entre potes</span><span>!discord pour rejoindre la commu</span><span>Lives : Mer · Sam · Dim</span><span>On teste, on rage, on rigole, on troll les copains</span><span>Planning à jour sur la page Planning</span>
+    </div>
+  </div>
+
+  <main class="wrap">
+
+    <!-- HERO -->
+    <section class="sw-hero">
+      <span class="sw-sun" aria-hidden="true"></span>
+      <span class="sw-grid" aria-hidden="true"></span>
       <div>
-        <div class="eyebrow" data-edit="index.eyebrow" data-edit-label="Accueil — sur-titre">// Multigaming · Jeu coop · Entre potes</div>
-        <h1><span class="sw-wordmark">AULIT<em class="accent">42369</em></span> <span style="display:block;margin-top:14px;font-size:clamp(.95rem,2.4vw,1.2rem);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);">Streamer Twitch francophone</span></h1>
-        <p class="lead" style="margin-top:18px;" data-edit="index.lead" data-edit-label="Accueil — phrase d’accroche">
-          Une chaîne où on teste, on rage, on rigole et on troll les copains —
-          au feeling, sans planning de jeu figé.
-        </p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;">
-          <a href="https://www.twitch.tv/aulit42369" class="btn btn-primary" target="_blank" rel="noopener" data-edit="index.btnTwitch" data-edit-label="Accueil — bouton Twitch">Suivre sur Twitch</a>
-          <a href="planning.html" class="btn btn-secondary" data-edit="index.btnPlanning" data-edit-label="Accueil — bouton planning">Voir le planning</a>
+        <span class="sw-livebug off" id="liveBanner"><span class="b"></span><span class="label">Hors ligne</span></span>
+        <h1 class="sw-title">AULIT42369</h1>
+        <p class="sw-sub"><span class="sw-eyebrow" style="margin-right:10px" data-edit="index.eyebrow" data-edit-label="Accueil — sur-titre"><span class="s">✦</span> Multigaming</span> Streamer Twitch <span class="m">francophone</span></p>
+        <p class="sw-lede" data-edit="index.lead" data-edit-label="Accueil — phrase d’accroche">Une chaîne où on teste, on rage, on rigole et on troll les copains — au feeling, sans planning de jeu figé.</p>
+        <div class="sw-cta">
+          <a class="sw-btn primary" href="https://www.twitch.tv/aulit42369" target="_blank" rel="noopener" data-edit="index.btnTwitch" data-edit-label="Accueil — bouton Twitch">✦ Suivre sur Twitch</a>
+          <a class="sw-btn ghost" href="planning.html" data-edit="index.btnPlanning" data-edit-label="Accueil — bouton planning">Voir le planning</a>
         </div>
-        <p id="followerStat" style="display:none;margin-top:22px;font-family:'Rajdhani',sans-serif;color:var(--muted);font-size:1.05rem;">
-          <strong id="followerCount" style="color:var(--cyan);font-size:1.3rem;font-family:'Orbitron',sans-serif;"></strong>
-          abonnés sur Twitch
-        </p>
       </div>
 
-      <div class="broadcast-frame">
-        <!-- Le lecteur Twitch officiel gère lui-même l'affichage en direct/hors
-             ligne — rien à maintenir à la main ici. -->
-        <iframe
-          data-consent-src="https://player.twitch.tv/?channel=aulit42369&parent=aulit42369.github.io&parent=aulit42369.fr&muted=true"
-          title="Lecteur Twitch — chaîne AULIT42369"
-          height="330" width="100%" allowfullscreen
-          style="display:block;aspect-ratio:16/9;height:auto;border:none;">
-        </iframe>
+      <div class="sw-panel lit sw-live sw-bracket">
+        <div class="head"><span class="cam">▸ CAM 1 · Chaîne</span><span class="sw-pill">Lecteur Twitch</span></div>
+        <div class="frame broadcast-frame">
+          <iframe
+            data-consent-src="https://player.twitch.tv/?channel=aulit42369&parent=aulit42369.github.io&parent=aulit42369.fr&muted=true"
+            title="Lecteur Twitch — chaîne AULIT42369"
+            height="330" width="100%" allowfullscreen style="display:block;aspect-ratio:16/9;height:auto;border:none;"></iframe>
+        </div>
       </div>
+    </section>
+
+    <!-- SCOREBOARD -->
+    <div class="sw-score">
+      <div class="sw-panel cell"><div class="k">Abonnés Twitch</div><div class="v"><span id="followerStat"><span id="followerCount">—</span></span></div></div>
+      <div class="sw-panel cell"><div class="k">Style</div><div class="v">Multigaming</div></div>
+      <div class="sw-panel cell"><div class="k">Lives</div><div class="v">Mer · Sam · Dim</div></div>
+      <div class="sw-panel cell"><div class="k">Discord</div><a class="v" href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Rejoindre →</a></div>
     </div>
-  </section>
 
-  <!-- ACCÈS RAPIDES -->
-  <section class="tight">
-    <div class="container">
-      <div class="link-grid">
-        <a href="planning.html" class="link-card">
-          <div class="ic">P</div>
-          <div><div class="label">Planning</div><div class="sub" data-edit="index.card1" data-edit-label="Accueil — carte Planning (sous-titre)">Les jours et horaires de la semaine</div></div>
+    <div class="sw-rule"></div>
+
+    <!-- LA CHAÎNE -->
+    <section class="sw-sec">
+      <div class="sw-sech"><span class="n">[ explorer ]</span><h2>La chaîne</h2></div>
+      <div class="sw-feats">
+        <a class="sw-panel sw-feat big sw-bracket" href="clips.html">
+          <span class="tag">// Derniers moments</span><h3>Clips marquants</h3>
+          <p data-edit="index.card2" data-edit-label="Accueil — carte Clips (sous-titre)">Les derniers moments marquants, montés et rangés par jeu.</p>
+          <span class="arrow">voir les clips →</span>
         </a>
-        <a href="clips.html" class="link-card">
-          <div class="ic">C</div>
-          <div><div class="label">Clips</div><div class="sub" data-edit="index.card2" data-edit-label="Accueil — carte Clips (sous-titre)">Les derniers moments marquants</div></div>
-        </a>
-        <a href="apropos.html" class="link-card">
-          <div class="ic">A</div>
-          <div><div class="label">À propos</div><div class="sub" data-edit="index.card3" data-edit-label="Accueil — carte À propos (sous-titre)">La chaîne, les règles, la communauté</div></div>
-        </a>
+        <a class="sw-panel sw-feat" href="planning.html"><span class="tag">// Planning</span><h3>Les horaires</h3><p data-edit="index.card1" data-edit-label="Accueil — carte Planning (sous-titre)">Les jours et horaires de la semaine.</p><span class="arrow">→</span></a>
+        <a class="sw-panel sw-feat" href="apropos.html"><span class="tag">// Communauté</span><h3>À propos</h3><p data-edit="index.card3" data-edit-label="Accueil — carte À propos (sous-titre)">La chaîne, les règles, la communauté.</p><span class="arrow">→</span></a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- REJOINDRE -->
-  <section class="tight">
-    <div class="container">
-      <div class="card" style="text-align:center;padding:44px 30px;">
-        <h2 data-edit="index.joinTitle" data-edit-label="Accueil — bloc Discord, titre">Rejoindre la <em class="accent">communauté</em></h2>
-        <p style="max-width:520px;margin:14px auto 26px;" data-edit="index.joinText" data-edit-label="Accueil — bloc Discord, texte">
-          Le Discord, c'est là que ça se passe entre deux streams — annonces,
-          organisation des sessions coop, et une bonne dose de bêtises.
-        </p>
-        <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" class="btn btn-primary" data-edit="index.joinBtn" data-edit-label="Accueil — bloc Discord, bouton">Rejoindre le Discord</a>
+    <!-- LA FAMILLE -->
+    <section class="sw-sec">
+      <div class="sw-sech"><span class="n">[ la famille ]</span><h2>Le reste de l'univers</h2></div>
+      <div class="sw-fam">
+        <a class="sw-panel sw-cardsite sw-bracket" href="jeux.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4>Les jeux</h4><p>Nos jeux mobiles</p></a>
+        <a class="sw-panel sw-cardsite" href="streamers.html"><div class="bar" style="background:linear-gradient(90deg,var(--svio),var(--smag))"></div><h4>Streamers</h4><p>La communauté</p></a>
+        <a class="sw-panel sw-cardsite" href="coulisses.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4>Coulisses</h4><p>L'infra du stream</p></a>
+        <a class="sw-panel sw-cardsite" href="escape-fragments.html"><div class="bar" style="background:linear-gradient(90deg,var(--svio),var(--smag))"></div><h4>Escape</h4><p>Escape Fragments</p></a>
+        <a class="sw-panel sw-cardsite" href="partenaires.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4>Partenaires</h4><p>Collaborations</p></a>
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <!-- DISCORD -->
+    <section class="sw-panel sw-join sw-bracket">
+      <h2 data-edit="index.joinTitle" data-edit-label="Accueil — bloc Discord, titre">Rejoindre la <span class="m">communauté</span></h2>
+      <p data-edit="index.joinText" data-edit-label="Accueil — bloc Discord, texte">Le Discord, c'est là que ça se passe entre deux streams — annonces, organisation des sessions coop, et une bonne dose de bêtises.</p>
+      <a class="sw-btn primary" href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" data-edit="index.joinBtn" data-edit-label="Accueil — bloc Discord, bouton">Rejoindre le Discord</a>
+    </section>
+
+  </main>
+</div>
 
 <footer class="site-footer">
   <div class="container">
@@ -175,7 +280,6 @@
 </footer>
 
 <script src="main.min.js?v=3be30363"></script>
-
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>
