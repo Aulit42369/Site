@@ -1,8 +1,39 @@
-/* Polices hébergées sur le site (Orbitron + Rajdhani, licence SIL OFL — voir fonts/LICENSE-*.txt).
-   Remplace Google Fonts : plus aucune requête vers un tiers à l'affichage d'une page. */
-@font-face { font-family: 'Orbitron'; font-style: normal; font-display: swap; font-weight: 700; src: url('fonts/orbitron-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Orbitron'; font-style: normal; font-display: swap; font-weight: 900; src: url('fonts/orbitron-latin-900-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Rajdhani'; font-style: normal; font-display: swap; font-weight: 400; src: url('fonts/rajdhani-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Rajdhani'; font-style: normal; font-display: swap; font-weight: 500; src: url('fonts/rajdhani-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Rajdhani'; font-style: normal; font-display: swap; font-weight: 600; src: url('fonts/rajdhani-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Rajdhani'; font-style: normal; font-display: swap; font-weight: 700; src: url('fonts/rajdhani-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* ================================================================
+   Polices auto-hébergées (licence SIL OFL — voir fonts/LICENSE-*.txt).
+   Aucune requête vers un tiers à l'affichage.
+
+   Identité Aulit42369 :
+     • Saira Condensed  — titres, nav, chiffres (display condensé)
+     • IBM Plex Sans    — texte courant
+     • IBM Plex Mono    — étiquettes / HUD / données
+
+   Les anciens noms 'Orbitron' et 'Rajdhani', utilisés un peu partout dans
+   les pages, sont ré-aliasés vers les nouvelles polices : toutes les pages
+   basculent d'un coup, sans toucher à leur HTML.
+   ================================================================ */
+
+/* ---------- Saira Condensed (display) ---------- */
+@font-face { font-family: 'Saira Condensed'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/saira-condensed-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Saira Condensed'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/saira-condensed-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Saira Condensed'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/saira-condensed-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Saira Condensed'; font-style: normal; font-weight: 800; font-display: swap; src: url('fonts/saira-condensed-latin-800-normal.woff2') format('woff2'); }
+
+/* ---------- IBM Plex Sans (texte) ---------- */
+@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2'); }
+
+/* ---------- IBM Plex Mono (HUD / étiquettes) ---------- */
+@font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2'); }
+
+/* ---------- Alias : 'Orbitron' -> Saira Condensed (tous les titres/logo/étiquettes existants) ---------- */
+@font-face { font-family: 'Orbitron'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/saira-condensed-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Orbitron'; font-style: normal; font-weight: 900; font-display: swap; src: url('fonts/saira-condensed-latin-800-normal.woff2') format('woff2'); }
+
+/* ---------- Alias : 'Rajdhani' -> IBM Plex Sans (texte, nav, boutons existants) ---------- */
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2'); }
