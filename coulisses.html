@@ -814,13 +814,26 @@
         </div>
       </div>
 
+      <div class="project-block project-text-only">
+        <div>
+          <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p15.eyebrow" data-edit-label="Coulisses · Serveur dédié — sur-titre">// Serveur dédié</div>
+          <h2 data-edit="coulisses.p15.title" data-edit-label="Coulisses · Serveur dédié — titre">Tout rapatrié sur <em class="accent">un seul serveur</em></h2>
+          <div class="project-desc">
+            <p data-edit="coulisses.p15.desc1" data-edit-label="Coulisses · Serveur dédié — paragraphe 1">Depuis novembre 2026, un serveur dédié réunit tout ce qui tournait avant sur des services gratuits ou sur un Raspberry Pi à la maison : les bots de tchat et de Discord, l'espace esport Lugh, la bibliothèque Étagère, les jeux mobiles et la copie du site. Un seul endroit, un seul domaine, des certificats HTTPS automatiques.</p>
+            <p data-edit="coulisses.p15.desc2" data-edit-label="Coulisses · Serveur dédié — paragraphe 2">Chaque service est isolé, démarre tout seul au redémarrage et se déploie en une commande qui remet l'ancienne version si la nouvelle ne repart pas. Jamais deux déménagements le même soir, jamais un soir de live. Le Raspberry Pi, lui, a pu être éteint.</p>
+          </div>
+          <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p15.status" data-edit-label="Coulisses · Serveur dédié — note">Migration faite service par service, chacun vérifié en ligne avant de passer au suivant</span></div>
+          <div class="project-stack" data-edit="coulisses.p15.stack" data-edit-label="Coulisses · Serveur dédié — technologies">VPS · Caddy · Let's Encrypt · systemd · déploiement par git</div>
+        </div>
+      </div>
+
       <div class="project-block">
         <div>
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p12.eyebrow" data-edit-label="Coulisses · Santé des services — sur-titre">// Santé des services</div>
           <h2 data-edit="coulisses.p12.title" data-edit-label="Coulisses · Santé des services — titre">Savoir en un coup d’œil si <em class="accent">tout tourne</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p12.desc1" data-edit-label="Coulisses · Santé des services — paragraphe 1">Une sonde installée sur le Raspberry Pi vérifie toutes les 5 minutes les bots, les sites, les extensions Twitch, les sauvegardes et le robot de La Cabane. Les sites hébergés gratuitement ne sont interrogés que toutes les 3 heures, pour ne pas épuiser leur quota.</p>
-            <p data-edit="coulisses.p12.desc2" data-edit-label="Coulisses · Santé des services — paragraphe 2">Le résultat s’affiche sur un tableau privé, ouvert depuis le téléphone et protégé par un code envoyé par e-mail. Si un bot s’arrête, qu’un site tombe, qu’une sauvegarde prend du retard ou que le Pi ne donne plus de nouvelles, une alerte part dans un salon Discord privé.</p>
+            <p data-edit="coulisses.p12.desc1" data-edit-label="Coulisses · Santé des services — paragraphe 1">Une sonde tourne sur le serveur et vérifie toutes les 5 minutes les bots, les sites, les extensions Twitch, les sauvegardes et le robot de La Cabane. Les sites hébergés gratuitement ne sont interrogés que toutes les 3 heures, pour ne pas épuiser leur quota.</p>
+            <p data-edit="coulisses.p12.desc2" data-edit-label="Coulisses · Santé des services — paragraphe 2">Le résultat s’affiche sur un tableau privé, ouvert depuis le téléphone et protégé par un code envoyé par e-mail. Si un bot s’arrête, qu’un site tombe, qu’une sauvegarde prend du retard ou que le serveur ne donne plus de nouvelles, une alerte part dans un salon Discord privé.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p12.status" data-edit-label="Coulisses · Santé des services — note">Les tests simulent tous les services : aucun vrai bot ni site n’est touché pendant les essais</span></div>
           <div class="project-stack" data-edit="coulisses.p12.stack" data-edit-label="Coulisses · Santé des services — technologies">Node.js sans dépendance · cron · Cloudflare Workers · Discord</div>
@@ -849,7 +862,7 @@
               <line x1="150" y1="204" x2="198" y2="148" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
               <rect x="200" y="92" width="122" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
               <text x="261" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Sonde</text>
-              <text x="261" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Pi · toutes les 5 min</text>
+              <text x="261" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">serveur · toutes les 5 min</text>
               <rect x="374" y="34" width="138" height="56" rx="6" fill="none" stroke="#1a2540"/>
               <text x="443" y="60" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Tableau privé</text>
               <text x="443" y="76" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">sur le téléphone</text>
