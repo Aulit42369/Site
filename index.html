@@ -69,6 +69,14 @@
     repeating-linear-gradient(0deg,transparent 0 24px,rgba(46,230,224,.35) 24px 25px);
   transform:perspective(320px) rotateX(70deg);transform-origin:bottom;
   -webkit-mask:linear-gradient(0deg,#000,transparent);mask:linear-gradient(0deg,#000,transparent)}
+/* soleil synthwave animé (validé 07/11) : grille qui défile, soleil qui respire, léger balayage — coupé si animations réduites */
+@keyframes swsun-respire{0%,100%{filter:drop-shadow(0 0 40px rgba(255,77,109,.42))}50%{filter:drop-shadow(0 0 70px rgba(255,77,109,.72))}}
+@keyframes swgrille-defile{from{background-position:0 0,0 0,0 0}to{background-position:0 0,0 0,0 25px}}
+@keyframes swscan{from{transform:translateX(-30%)}to{transform:translateX(130%)}}
+.sw-sun{animation:swsun-respire 4s ease-in-out infinite}
+.sw-grid{animation:swgrille-defile 1.8s linear infinite}
+.sw-horizon::after{content:"";position:absolute;bottom:60px;left:0;width:60%;height:120px;pointer-events:none;
+  background:radial-gradient(60% 80% at 50% 100%,rgba(46,230,224,.14),transparent 70%);animation:swscan 6s linear infinite}
 .sw-livebug{display:inline-flex;align-items:center;gap:9px;font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;
   font-size:14px;letter-spacing:.06em;color:#190613;background:linear-gradient(180deg,#ff6ab4,var(--smag));padding:6px 16px 6px 13px;margin-bottom:16px;
   clip-path:polygon(0 0,100% 0,calc(100% - 11px) 100%,0 100%);box-shadow:inset 0 2px 1px rgba(255,255,255,.5)}
@@ -138,7 +146,7 @@
   .sw-sun{width:92px;height:92px;bottom:88px}
   .sw-feats{grid-template-columns:1fr}.sw-feat.big{grid-row:auto}
 }
-@media(prefers-reduced-motion:reduce){.sw-home *{animation:none!important;transition:none!important}.sw-track{padding-left:16px}}
+@media(prefers-reduced-motion:reduce){.sw-home *,.sw-horizon::after{animation:none!important;transition:none!important}.sw-horizon::after{display:none}.sw-track{padding-left:16px}}
 </style>
 <script type="application/ld+json">
 {
