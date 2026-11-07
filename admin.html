@@ -194,6 +194,7 @@
       <button data-tab="site">Liens &amp; annonce</button>
       <button data-tab="sante">Santé du site</button>
       <button data-tab="historique">Historique</button>
+      <button data-tab="aide">✨ Aide</button>
       <div class="spacer"></div>
       <button class="logout" id="backupBtn" title="Télécharger une sauvegarde JSON de tes streamers, clips et planning">Sauvegarder</button>
       <button class="logout" id="logoutBtn">Se déconnecter</button>
@@ -309,6 +310,42 @@
       <div id="histList"></div>
     </div>
 
+    <div id="aidePanel" class="admin-panel" style="display:none;">
+      <p class="admin-note">Où modifier chaque contenu du site, et comment. Tout se modifie ici, puis se publie avec le bouton <strong>Enregistrer</strong> de l'onglet (ou <strong>Ctrl + S</strong>). Chaque enregistrement est sauvegardé : l'onglet <strong>Historique</strong> permet de revenir en arrière.</p>
+
+      <h2 style="margin:18px 0 6px;">Les onglets, en bref</h2>
+      <ul style="line-height:1.9;padding-left:20px;">
+        <li><strong>Streamers</strong> — les fiches de la communauté (page Streamers).</li>
+        <li><strong>Clips</strong> — les clips marquants (page Clips). Le <em>premier</em> de la liste s'affiche aussi sur l'accueil (carte « Clips marquants »).</li>
+        <li><strong>Planning</strong> — les jours et horaires des lives (+ exceptions). Sert aussi à l'accueil pour « Prochain live ».</li>
+        <li><strong>À propos</strong> — la page À propos (présentation, matériel, FAQ).</li>
+        <li><strong>Textes des pages</strong> — tous les petits textes (sur-titres, accroches, boutons, cartes). <em>C'est ici que se modifient les nouveautés de l'accueil (voir plus bas).</em></li>
+        <li><strong>Pages</strong> — les pages personnalisées.</li>
+        <li><strong>Jeux</strong> — les jeux mobiles (page Jeux).</li>
+        <li><strong>Liens &amp; annonce</strong> — réseaux sociaux, lien Discord (valable partout), bandeau d'annonce.</li>
+        <li><strong>Santé du site</strong> — état des automatisations (Twitch, données).</li>
+        <li><strong>Historique</strong> — restaurer une version précédente de n'importe quel contenu.</li>
+      </ul>
+
+      <h2 style="margin:22px 0 6px;">✨ Nouveautés de l'accueil (nouveau design)</h2>
+      <ul style="line-height:1.9;padding-left:20px;">
+        <li><strong>Le bandeau défilant (en haut, « À l'antenne »)</strong> — onglet <strong>Textes des pages</strong>, champ <em>« Accueil — bandeau défilant »</em>. Sépare chaque message par une barre verticale <code>|</code>. Exemple : <code>Multigaming | !discord | Lives : Mer · Sam · Dim</code>.</li>
+        <li><strong>Le tableau de bord (Statut / Abonnés / Jeu en cours / Prochain live)</strong> — <em>automatique, rien à saisir</em> : « Statut » et « Jeu en cours » viennent de Twitch quand tu es en direct ; « Abonnés » est le nombre réel ; « Prochain live » est calculé depuis le <strong>Planning</strong> (le prochain jour coché « on »).</li>
+        <li><strong>La carte « Clips marquants »</strong> — affiche le titre du <em>premier</em> clip de l'onglet <strong>Clips</strong>. Pour changer : mets le clip voulu en premier.</li>
+        <li><strong>Les cartes « famille » (Les jeux, Streamers, Coulisses, Escape, Partenaires)</strong> — onglet <strong>Textes des pages</strong>, champs <em>« Famille — carte 1 à 5 »</em> (titre et sous-titre).</li>
+        <li><strong>Les textes de l'accueil (sur-titre, accroche, boutons, cartes « La chaîne », bloc Discord)</strong> — onglet <strong>Textes des pages</strong>, champs commençant par <em>« Accueil — … »</em>.</li>
+      </ul>
+
+      <h2 style="margin:22px 0 6px;">Comment modifier un texte</h2>
+      <ol style="line-height:1.9;padding-left:20px;">
+        <li>Va dans l'onglet <strong>Textes des pages</strong>.</li>
+        <li>Trouve le champ (ils sont nommés « Accueil — … », « Famille — … », etc.), modifie le texte.</li>
+        <li>Clique <strong>Enregistrer</strong> (ou <strong>Ctrl + S</strong>). La modification est en ligne en quelques minutes.</li>
+      </ol>
+
+      <p class="admin-note" style="margin-top:18px;">Un doute ? L'onglet <strong>Historique</strong> te permet toujours de revenir à une version précédente. Rien n'est jamais perdu.</p>
+    </div>
+
     <div id="statusMsg"></div>
   </div>
 </div>
@@ -325,6 +362,6 @@
 <script src="admin/historique.js?v=b6c40adf"></script>
 <script src="admin/pages.js?v=6aa49366"></script>
 <script src="admin/jeux.js?v=cfdde52b"></script>
-<script src="admin.js?v=e002c1bb"></script>
+<script src="admin.js?v=61fed53c"></script>
 </body>
 </html>

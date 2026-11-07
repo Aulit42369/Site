@@ -189,10 +189,8 @@
   <!-- TICKER broadcast -->
   <div class="sw-ticker">
     <span class="onair"><span class="b"></span>À l'antenne</span>
-    <div class="sw-track">
-      <span>Multigaming · jeu coop · entre potes</span><span>!discord pour rejoindre la commu</span><span>Lives : Mer · Sam · Dim</span><span>On teste, on rage, on rigole, on troll les copains</span><span>Planning à jour sur la page Planning</span>
-      <span>Multigaming · jeu coop · entre potes</span><span>!discord pour rejoindre la commu</span><span>Lives : Mer · Sam · Dim</span><span>On teste, on rage, on rigole, on troll les copains</span><span>Planning à jour sur la page Planning</span>
-    </div>
+    <div class="sw-track" id="tickerTrack"><span>Multigaming · jeu coop · entre potes</span><span>!discord pour rejoindre la commu</span><span>Lives : Mer · Sam · Dim</span><span>On teste, on rage, on rigole, on troll les copains</span><span>Planning à jour sur la page Planning</span></div>
+    <span id="tickerSource" data-edit="index.ticker" data-edit-label="Accueil — bandeau défilant (messages séparés par | )" hidden>Multigaming · jeu coop · entre potes | !discord pour rejoindre la commu | Lives : Mer · Sam · Dim | On teste, on rage, on rigole, on troll les copains | Planning à jour sur la page Planning</span>
   </div>
 
   <main class="wrap">
@@ -237,7 +235,7 @@
       <div class="sw-sech"><span class="n">[ explorer ]</span><h2>La chaîne</h2></div>
       <div class="sw-feats">
         <a class="sw-panel sw-feat sw-bracket" href="clips.html">
-          <span class="tag">// Derniers moments</span><h3>Clips marquants</h3>
+          <span class="tag">// Dernier clip</span><h3 id="latestClip">Clips marquants</h3>
           <p data-edit="index.card2" data-edit-label="Accueil — carte Clips (sous-titre)">Les derniers moments marquants, montés et rangés par jeu.</p>
           <span class="arrow">voir les clips →</span>
         </a>
@@ -250,11 +248,11 @@
     <section class="sw-sec">
       <div class="sw-sech"><span class="n">[ la famille ]</span><h2>Le reste de l'univers</h2></div>
       <div class="sw-fam">
-        <a class="sw-panel sw-cardsite sw-bracket" href="jeux.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4>Les jeux</h4><p>Nos jeux mobiles</p></a>
-        <a class="sw-panel sw-cardsite" href="streamers.html"><div class="bar" style="background:linear-gradient(90deg,var(--svio),var(--smag))"></div><h4>Streamers</h4><p>La communauté</p></a>
-        <a class="sw-panel sw-cardsite" href="coulisses.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4>Coulisses</h4><p>L'infra du stream</p></a>
-        <a class="sw-panel sw-cardsite" href="escape-fragments.html"><div class="bar" style="background:linear-gradient(90deg,var(--svio),var(--smag))"></div><h4>Escape</h4><p>Escape Fragments</p></a>
-        <a class="sw-panel sw-cardsite" href="partenaires.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4>Partenaires</h4><p>Collaborations</p></a>
+        <a class="sw-panel sw-cardsite sw-bracket" href="jeux.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4 data-edit="index.fam1t" data-edit-label="Famille — carte 1, titre">Les jeux</h4><p data-edit="index.fam1s" data-edit-label="Famille — carte 1, sous-titre">Nos jeux mobiles</p></a>
+        <a class="sw-panel sw-cardsite" href="streamers.html"><div class="bar" style="background:linear-gradient(90deg,var(--svio),var(--smag))"></div><h4 data-edit="index.fam2t" data-edit-label="Famille — carte 2, titre">Streamers</h4><p data-edit="index.fam2s" data-edit-label="Famille — carte 2, sous-titre">La communauté</p></a>
+        <a class="sw-panel sw-cardsite" href="coulisses.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4 data-edit="index.fam3t" data-edit-label="Famille — carte 3, titre">Coulisses</h4><p data-edit="index.fam3s" data-edit-label="Famille — carte 3, sous-titre">L'infra du stream</p></a>
+        <a class="sw-panel sw-cardsite" href="escape-fragments.html"><div class="bar" style="background:linear-gradient(90deg,var(--svio),var(--smag))"></div><h4 data-edit="index.fam4t" data-edit-label="Famille — carte 4, titre">Escape</h4><p data-edit="index.fam4s" data-edit-label="Famille — carte 4, sous-titre">Escape Fragments</p></a>
+        <a class="sw-panel sw-cardsite" href="partenaires.html"><div class="bar" style="background:linear-gradient(90deg,var(--scyan),var(--svio))"></div><h4 data-edit="index.fam5t" data-edit-label="Famille — carte 5, titre">Partenaires</h4><p data-edit="index.fam5s" data-edit-label="Famille — carte 5, sous-titre">Collaborations</p></a>
       </div>
     </section>
 
@@ -280,7 +278,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=cf8b8273"></script>
+<script src="main.min.js?v=d5ee243f"></script>
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>

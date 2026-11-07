@@ -195,6 +195,36 @@ if (nextLiveEl) {
     .catch(() => {});
 }
 
+/* Accueil — carte « Clips marquants » : affiche le titre du dernier clip (data/clips.json). */
+const latestClipEl = document.getElementById('latestClip');
+if (latestClipEl) {
+  loadJson('data/clips.json', null)
+    .then(c => {
+      const arr = Array.isArray(c) ? c : (c && c.clips) || [];
+      if (arr[0] && arr[0].title) latestClipEl.textContent = arr[0].title;
+    })
+    .catch(() => {});
+}
+
+/* Accueil — bandeau défilant : construit depuis le texte éditable #tickerSource
+   (messages séparés par « | »), dupliqué pour un défilement sans couture.
+   Pour modifier les messages : admin, le champ « Accueil — bandeau défilant ». */
+const tickerTrack = document.getElementById('tickerTrack');
+const tickerSource = document.getElementById('tickerSource');
+if (tickerTrack && tickerSource) {
+  const msgs = tickerSource.textContent.split('|').map(s => s.trim()).filter(Boolean);
+  if (msgs.length) {
+    tickerTrack.textContent = '';
+    for (let rep = 0; rep < 2; rep++) {
+      for (const m of msgs) {
+        const s = document.createElement('span');
+        s.textContent = m;
+        tickerTrack.appendChild(s);
+      }
+    }
+  }
+}
+
 /* ================================================================
    Réglages du site gérés depuis l'admin (onglet « Liens & annonce »)
    data/site.json : { socials: [{label, url}], announcement: {...} }
