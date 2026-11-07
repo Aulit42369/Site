@@ -1,13 +1,4 @@
 {
-  "calo_vt": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
-    "live": true,
-    "game": "Among Us"
-  },
-  "meyuuart": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
-    "live": false
-  },
   "aulit42369": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
     "live": true,
@@ -33,5 +24,14 @@
     "live": true,
     "game": "7 Days to Die"
   },
-  "_updated_at": "2026-11-07T20:04:03.468Z"
+  "calo_vt": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
+    "live": true,
+    "game": "Among Us"
+  },
+  "meyuuart": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
+    "live": false
+  },
+  "_updated_at": "2026-11-07T20:14:03.345Z"
 }
