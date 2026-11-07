@@ -159,6 +159,38 @@ if (liveBanner || followerCount) {
         followerCount.textContent = chaine.followers.toLocaleString('fr-FR');
         if (followerStat) followerStat.style.display = '';
       }
+      // Scoreboard de l'accueil (Statut / Jeu en cours) — mêmes données que le bandeau direct.
+      const enDirect = chaine.live && isStatusFresh(data);
+      const sStatut = document.getElementById('sStatut');
+      const sJeu = document.getElementById('sJeu');
+      if (sStatut) sStatut.textContent = enDirect ? '● En direct' : '○ Hors ligne';
+      if (sJeu) sJeu.textContent = (enDirect && chaine.game) ? chaine.game : '—';
+    })
+    .catch(() => {});
+}
+
+/* Scoreboard de l'accueil — « Prochain live » : le prochain jour marqué « on »
+   dans le planning (data/planning.json), formaté « Mer 21:00 ». */
+const nextLiveEl = document.getElementById('nextLive');
+if (nextLiveEl) {
+  loadJson('data/planning.json', null)
+    .then(pl => {
+      if (!Array.isArray(pl)) { nextLiveEl.textContent = 'À venir'; return; }
+      const JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+      const ABBR = { Dimanche: 'Dim', Lundi: 'Lun', Mardi: 'Mar', Mercredi: 'Mer', Jeudi: 'Jeu', Vendredi: 'Ven', Samedi: 'Sam' };
+      const now = new Date();
+      for (let i = 0; i < 8; i++) {
+        const idx = (now.getDay() + i) % 7;
+        const e = pl.find(x => x.day === JOURS[idx] && x.on);
+        if (!e) continue;
+        if (i === 0 && e.time) {
+          const p = e.time.split(':');
+          if (now.getHours() * 60 + now.getMinutes() > (+p[0]) * 60 + (+p[1]) + 90) continue;
+        }
+        nextLiveEl.textContent = (ABBR[JOURS[idx]] || JOURS[idx]) + (e.time ? ' ' + e.time : '');
+        return;
+      }
+      nextLiveEl.textContent = 'À venir';
     })
     .catch(() => {});
 }

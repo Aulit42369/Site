@@ -371,3 +371,11 @@ body.nav-open .consent-bar { display: none; }
 .legal-content li { margin-bottom: 6px; }
 .legal-content a { color: var(--cyan); }
 .legal-content code { font-size: 0.9em; color: var(--white); background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; }
+
+/* ===== Habillage broadcast partage — coherence avec la page accueil (07/11/2026) ===== */
+.card{border-radius:0;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.card::before{left:16px;right:16px;background:linear-gradient(90deg,var(--cyan),var(--accent,var(--magenta)))}
+.link-card{border-radius:0}
+.btn{border-radius:0;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-primary{box-shadow:inset 0 2px 2px rgba(255,255,255,.4),0 10px 24px -12px var(--cyan)}
+h1,h2{font-style:italic;text-transform:uppercase;letter-spacing:.012em}
