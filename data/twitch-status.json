@@ -1,9 +1,4 @@
 {
-  "calo_vt": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
-    "live": true,
-    "game": "World of Warcraft"
-  },
   "meyuuart": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a52798d1-1bd4-41b0-b109-b4756b348bfd-profile_image-300x300.png",
     "live": true,
@@ -31,5 +26,10 @@
     "live": true,
     "game": "Just Chatting"
   },
-  "_updated_at": "2026-11-10T16:34:03.305Z"
+  "calo_vt": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
+    "live": true,
+    "game": "World of Warcraft"
+  },
+  "_updated_at": "2026-11-10T16:44:03.300Z"
 }
