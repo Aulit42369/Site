@@ -1,4 +1,9 @@
 {
+  "aulit42369": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
+    "live": false,
+    "followers": 194
+  },
   "hagosan": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
     "live": false
@@ -25,10 +30,5 @@
     "live": true,
     "game": "Art"
   },
-  "aulit42369": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": false,
-    "followers": 194
-  },
-  "_updated_at": "2026-11-10T15:34:03.254Z"
+  "_updated_at": "2026-11-10T15:44:03.239Z"
 }
