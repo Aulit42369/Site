@@ -43,7 +43,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=5f6718fd">
+<link rel="stylesheet" href="style.min.css?v=51099fa0">
 <style>
   .planning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
   .planning-card { display: flex; flex-direction: column; min-height: 150px; }
@@ -61,6 +61,22 @@
   .planning-off-label { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin: auto 0; text-align: center; }
   .planning-alt-note { align-self: flex-start; margin-top: 10px; padding: 3px 8px; border: 1px solid var(--accent, var(--cyan)); border-radius: 2px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+  /* S6 : lévitation au survol · S7 : mosaïque diagonale · S8 : squelette · S9 : anneau de « Aujourd'hui » (js/planning.js) */
+  .planning-card { transition: transform .2s var(--out); }
+  .planning-card:hover { transform: translateY(-3px); }
+  .planning-card.enter { animation: planCard .2s var(--out) backwards; animation-delay: var(--d, 0s); }
+  @keyframes planCard { from { opacity: 0; transform: scale(.85); } }
+  .planning-card.sk { gap: 12px; }
+  .sk-bar { height: 14px; background: rgba(154,144,196,.14); border-radius: 2px; position: relative; overflow: hidden; }
+  .sk-bar.w1 { width: 46%; height: 18px; } .sk-bar.w2 { width: 78%; } .sk-bar.w3 { width: 54%; }
+  .sk-bar::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 80px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent); transform: translateX(-120px) skewX(-20deg);
+    animation: skWave 1.6s linear infinite; animation-delay: var(--d, 0s); }
+  @keyframes skWave { to { transform: translateX(300px) skewX(-20deg); } }
+  .planning-today-badge { position: relative; }
+  .planning-today-badge::after { content: ''; position: absolute; inset: -3px; border: 1px solid var(--accent, var(--cyan)); opacity: 0; animation: badgeBreath 2.4s ease-in-out infinite; }
+  @keyframes badgeBreath { 0%, 100% { opacity: 0; transform: scale(1); } 50% { opacity: .85; transform: scale(1.12); } }
+  @media (prefers-reduced-motion: reduce) { .planning-card:hover { transform: none; } .planning-card.enter { animation: none; } .sk-bar::after, .planning-today-badge::after { display: none; } }
 </style>
 </head>
 <body>
@@ -125,9 +141,9 @@
     </div>
   </div>
 </footer>
-<script src="main.min.js?v=d5ee243f"></script>
+<script src="main.min.js?v=d2743c84"></script>
 
-<script src="js/planning.js?v=675cb489"></script>
+<script src="js/planning.js?v=f37caad4"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"

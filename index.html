@@ -20,7 +20,7 @@
 <meta name="theme-color" content="#0a0912">
 <meta name="description" content="Aulit42369, streamer Twitch francophone multigaming : jeux coop entre potes, planning des lives, meilleurs clips et Discord. Viens rigoler en direct !">
 <link rel="stylesheet" href="fonts.css?v=2026110601">
-<link rel="stylesheet" href="style.min.css?v=5f6718fd">
+<link rel="stylesheet" href="style.min.css?v=51099fa0">
 <style>
 /* ===== Accueil « Synthwave Broadcast » — mise en page de la maquette, posée par-dessus la charte.
    Scopé .sw-home : n'affecte que l'accueil. Polices : fonts.css (Saira Condensed / IBM Plex Sans / IBM Plex Mono). ===== */
@@ -100,9 +100,11 @@
 .sw-lede{color:var(--smut);max-width:46ch;margin:14px 0 0;font-size:16px}
 .sw-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
 .sw-btn{font-family:var(--fd);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:15px;padding:13px 22px;border:1px solid var(--sline);background:transparent;color:var(--sfg);cursor:pointer;display:inline-block;
-  clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));transition:.14s}
+  clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));transition:transform .25s var(--spring),border-color .14s,color .14s,background-color .14s}
 .sw-btn.primary{background:linear-gradient(180deg,#8ffff9,var(--scyan) 55%,#12c4be);color:#04121a;border-color:var(--scyan);box-shadow:inset 0 2px 2px rgba(255,255,255,.55),0 10px 24px -12px var(--scyan)}
 .sw-btn.primary:hover{transform:translateY(-1px)}
+.sw-btn:active,.sw-btn.primary:active{transform:scale(1.06,.92);transition-duration:.08s,.14s,.14s,.14s}
+.sw-btn.primary{position:relative;overflow:hidden} /* S5 : l'onde de tap reste dans le bouton */
 .sw-btn.ghost:hover{border-color:var(--smag);color:var(--smag)}
 
 /* moniteur Twitch */
@@ -124,6 +126,9 @@
 .sw-score a.v:hover{color:var(--scyan)}
 
 .sw-rule{height:3px;margin:34px 0 0;background:linear-gradient(90deg,var(--scyan),var(--svio),var(--smag));transform:skewX(-20deg);opacity:.7;border-radius:2px}
+/* S13 : le filet se trace de gauche à droite */
+.sw-rule.rv{transform:skewX(-20deg) scaleX(0);transform-origin:left}
+.sw-rule.rv.in{opacity:.7;transform:skewX(-20deg) scaleX(1);transition:transform .5s var(--out),opacity .3s linear}
 
 .sw-sec{padding-block:26px}
 .sw-sech{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
@@ -137,9 +142,19 @@
 .sw-feat.big .tag{color:var(--smag)}
 .sw-feat .arrow{font-family:var(--fm);color:var(--smut)}
 .sw-feat:hover{border-color:color-mix(in srgb,var(--svio) 55%,var(--sline))}
+/* S6 : panneaux cliquables, lévitation + flèche + crochets d'angle */
+.sw-feat,.sw-cardsite{transition:transform .2s var(--out),border-color .15s}
+.sw-feat:hover,.sw-cardsite:hover,.sw-feat:focus-visible,.sw-cardsite:focus-visible{transform:translateY(-3px)}
+.sw-feat .arrow{display:inline-block;transition:transform .2s var(--out)}
+.sw-feat:hover .arrow{transform:translateX(6px)}
+.sw-bracket::before,.sw-bracket::after{transition:transform .2s var(--out)}
+.sw-bracket::before{transform-origin:top left}
+.sw-bracket::after{transform-origin:bottom right}
+.sw-feat.sw-bracket:hover::before,.sw-feat.sw-bracket:hover::after,.sw-cardsite.sw-bracket:hover::before,.sw-cardsite.sw-bracket:hover::after{transform:scale(1.5)}
 .sw-fam{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
 .sw-cardsite{padding:14px;min-width:0}
-.sw-cardsite .bar{height:5px;width:46px;margin-bottom:12px;transform:skewX(-18deg);border-radius:2px}
+.sw-cardsite .bar{height:5px;width:46px;margin-bottom:12px;transform:skewX(-18deg);border-radius:2px;transform-origin:left;transition:transform .2s var(--out)}
+.sw-cardsite:hover .bar,.sw-cardsite:focus-visible .bar{transform:skewX(-18deg) scaleX(1.6)} /* S15 */
 .sw-cardsite h4{font-family:var(--fd);font-weight:800;font-style:italic;text-transform:uppercase;margin:0 0 3px;font-size:17px}
 .sw-cardsite p{font-family:var(--fm);font-size:11px;color:var(--smut);margin:0;letter-spacing:.04em;text-transform:uppercase}
 
@@ -154,7 +169,7 @@
   .sw-sun{width:92px;height:92px;bottom:88px}
   .sw-feats{grid-template-columns:1fr}.sw-feat.big{grid-row:auto}
 }
-@media(prefers-reduced-motion:reduce){.sw-home *{animation:none!important;transition:none!important}.sw-track{padding-left:16px}}
+@media(prefers-reduced-motion:reduce){.sw-home *{animation:none!important;transition:none!important}.sw-feat:hover,.sw-cardsite:hover,.sw-btn:active,.sw-btn.primary:active{transform:none}.sw-rule.rv,.sw-rule.rv.in{transform:skewX(-20deg)}.sw-cardsite:hover .bar{transform:skewX(-18deg)}.sw-feat:hover .arrow{transform:none}.sw-bracket::before,.sw-bracket::after{transform:none!important}.sw-track{padding-left:16px}}
 </style>
 <script type="application/ld+json">
 {
@@ -294,7 +309,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=d5ee243f"></script>
+<script src="main.min.js?v=d2743c84"></script>
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>

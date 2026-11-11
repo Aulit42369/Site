@@ -5,6 +5,7 @@
    ================================================================ */
 
 :root {
+  --out: cubic-bezier(.33,1,.68,1); --in: cubic-bezier(.32,0,.67,0); --spring: cubic-bezier(.34,1.56,.64,1); /* courbes des micro-interactions */
   /* Palette « Synthwave Broadcast » (maquette validée) : violet-noir, cyan teal, magenta, violet franc. */
   --bg: #0a0912;
   --surface: #120f20;
@@ -50,6 +51,7 @@ img { max-width: 100%; display: block; }
 
 /* ---------- en-tête / nav, partagé sur toutes les pages ---------- */
 .site-header {
+  transition: transform .25s var(--out); /* S3 : l'en-tête se range au défilement (main.js pose .is-hidden) */
   position: sticky; top: 0; z-index: 50;
   background: rgba(7, 10, 16, 0.88);
   backdrop-filter: blur(10px);
@@ -84,6 +86,12 @@ img { max-width: 100%; display: block; }
   .nav a { padding: 9px 9px; font-size: 0.88rem; letter-spacing: 0.02em; }
 }
 .nav a:hover { color: var(--white); }
+.site-header.is-hidden { transform: translateY(-100%); transition-timing-function: var(--in); }
+/* S1 : lien à encre, trait cyan→magenta qui entre par la gauche et sort par la droite */
+.nav a { position: relative; }
+.nav a:not(.active)::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta)); transform: scaleX(0); transform-origin: right; transition: transform .22s var(--out); }
+.nav a:not(.active):hover::after, .nav a:not(.active):focus-visible::after { transform: scaleX(1); transform-origin: left; }
 .nav a.active { color: var(--cyan); border-color: var(--cyan); text-shadow: var(--glow-c); }
 .nav-toggle { display: none; }
 
@@ -98,9 +106,14 @@ img { max-width: 100%; display: block; }
      enfants en position fixed, donc "bottom:0" ne se mesure plus par
      rapport à l'écran mais par rapport au header (~74px) — le menu ne
      s'étirait pas et son fond n'était pas couvrant. Indépendant de ça. */
-  .nav { display: none; position: fixed; top: 74px; left: 0; right: 0; height: calc(100vh - 74px); overflow-y: auto; z-index: 999; background: #070a10; flex-direction: column; padding: 24px; gap: 10px; }
-  .nav.open { display: flex; }
-  .nav a { width: 100%; text-align: center; padding: 14px; font-size: 1.1rem; }
+  /* S2 : rideau (0,3 s) + liens en cascade ; visibility (et non display:none) = fermé hors parcours clavier */
+  .nav { display: flex; visibility: hidden; clip-path: inset(0 0 100% 0); transition: clip-path .12s var(--in), visibility 0s .12s;
+    position: fixed; top: 74px; left: 0; right: 0; height: calc(100vh - 74px); overflow-y: auto; z-index: 999; background: #070a10; flex-direction: column; padding: 24px; gap: 10px; }
+  .nav.open { visibility: visible; clip-path: inset(0 0 0 0); transition: clip-path .3s var(--out), visibility 0s; }
+  .nav a { width: 100%; text-align: center; padding: 14px; font-size: 1.1rem; opacity: 0; transform: translateY(8px); transition: opacity .12s linear, transform .12s var(--in), color .15s ease, border-color .15s ease; }
+  .nav.open a { opacity: 1; transform: none; transition: opacity .18s linear calc(.1s + var(--i, 0) * .03s), transform .18s var(--out) calc(.1s + var(--i, 0) * .03s), color .15s ease, border-color .15s ease; }
+  .nav a:nth-child(1) { --i: 0 } .nav a:nth-child(2) { --i: 1 } .nav a:nth-child(3) { --i: 2 } .nav a:nth-child(4) { --i: 3 }
+  .nav a:nth-child(5) { --i: 4 } .nav a:nth-child(6) { --i: 5 } .nav a:nth-child(7) { --i: 6 } .nav a:nth-child(8) { --i: 7 }
   .nav-toggle {
     /* 44x44 = zone tactile minimale recommandée (WCAG / iOS / Android) ;
        les barres restent fines et centrées via align-items + largeur fixe,
@@ -108,7 +121,10 @@ img { max-width: 100%; display: block; }
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
     width: 44px; height: 44px; background: none; border: none; cursor: pointer;
   }
-  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: transform .25s var(--out), opacity .15s linear; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { transform: scaleX(0); opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
 
 @media (max-width: 420px) {
@@ -191,7 +207,17 @@ h1 + p.lead, .eyebrow + h1 + p.lead { margin-top: 14px; }
   display: inline-flex; align-items: center; gap: 8px;
   font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem;
   padding: 13px 26px; border-radius: 4px; cursor: pointer; border: 1px solid transparent;
+  transition: transform .25s var(--spring); /* S4 : gélatine */
 }
+.btn:active, .sw-btn:active { transform: scale(1.06, .92); transition-duration: .08s; }
+/* S5 : onde de tap (main.js) */
+.ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,.42); pointer-events: none; transform: scale(0);
+  animation: rippleT .4s var(--out) forwards, rippleO .4s linear forwards; }
+@keyframes rippleT { to { transform: scale(1); } }
+@keyframes rippleO { from { opacity: 1; } to { opacity: 0; } }
+/* S13 : apparition au défilement (la classe .rv est posée par main.js, donc rien n'est caché sans JavaScript) */
+.rv { opacity: 0; transform: translateY(12px); }
+.rv.in { opacity: 1; transform: none; transition: opacity .3s linear, transform .3s var(--out); }
 .btn-primary { background: var(--cyan); color: var(--bg); }
 .btn-secondary { background: transparent; color: var(--cyan); border-color: var(--cyan); }
 
@@ -241,13 +267,15 @@ h1 + p.lead, .eyebrow + h1 + p.lead { margin-top: 14px; }
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(10px);
-  transition: opacity .2s ease, transform .2s ease, border-color .15s ease;
+  transform: translateY(60px); /* S10 : sort du bas */
+  transition: opacity .25s var(--out), transform .25s var(--out), border-color .15s ease;
   z-index: 40;
 }
 #backToTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
 #backToTop:hover { border-color: var(--cyan); box-shadow: var(--glow-c); }
-#backToTop svg { width: 18px; height: 18px; }
+#backToTop svg { width: 18px; height: 18px; transition: transform .2s var(--out); }
+#backToTop:hover svg { transform: translateY(-3px); }
+#backToTop.show:active { transform: scale(.92); transition-duration: .08s; }
 @media (max-width: 480px) {
   #backToTop { right: 14px; bottom: 14px; width: 40px; height: 40px; }
 }
@@ -262,6 +290,10 @@ body.nav-open iframe { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  /* micro-interactions : plus de déplacement ni d'échelle, fondus seuls */
+  .rv { transform: none; }
+  .btn:active, .sw-btn:active, #backToTop, .site-header.is-hidden { transform: none; }
+  .ripple { display: none; }
 }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -286,7 +318,8 @@ body.nav-open iframe { visibility: hidden; }
 }
 .skip-link:focus { top: 12px; }
 
-:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; animation: focusPose .15s var(--out); } /* S11 : l'anneau se pose */
+@keyframes focusPose { from { outline-offset: 6px; } to { outline-offset: 2px; } }
 
 /* ---------- bandeau d'annonce (géré depuis l'admin, voir main.js) ---------- */
 .announce {
@@ -344,7 +377,9 @@ iframe[data-consent-src][hidden] { display: none !important; }
   background: linear-gradient(180deg, var(--surface), var(--surface2));
   border: 1px solid var(--line); border-radius: 4px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  animation: consentIn .3s var(--out) backwards; /* S14 : entre du bas */
 }
+@keyframes consentIn { from { opacity: 0; transform: translateX(-50%) translateY(24px); } }
 .consent-bar::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
   background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent);

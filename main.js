@@ -134,6 +134,22 @@ function isStatusFresh(data) {
 const liveBanner = document.getElementById('liveBanner');
 const followerStat = document.getElementById('followerStat');
 const followerCount = document.getElementById('followerCount');
+/* S12 : le nombre d'abonnés défile de 0 à sa valeur (0,5 s) quand le tableau de score est visible. */
+let compteurFin = null;
+function lancerCompteur(vu) {
+  if (compteurFin === null || !followerCount) return;
+  const bloc = followerCount.closest('.sw-score');
+  if (!vu && bloc && bloc.classList.contains('rv') && !bloc.classList.contains('in')) return; // attend d'être visible
+  const fin = compteurFin;
+  compteurFin = null;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const t0 = performance.now();
+  (function pas(t) {
+    const k = Math.min(1, (t - t0) / 500);
+    followerCount.textContent = Math.round(fin * (1 - Math.pow(1 - k, 3))).toLocaleString('fr-FR');
+    if (k < 1) requestAnimationFrame(pas);
+  })(t0);
+}
 if (liveBanner || followerCount) {
   loadJson('data/twitch-status.json', null)
     .then(data => {
@@ -157,6 +173,8 @@ if (liveBanner || followerCount) {
       }
       if (followerCount && typeof chaine.followers === 'number') {
         followerCount.textContent = chaine.followers.toLocaleString('fr-FR');
+        compteurFin = chaine.followers;
+        lancerCompteur(false);
         if (followerStat) followerStat.style.display = '';
       }
       // Scoreboard de l'accueil (Statut / Jeu en cours) — mêmes données que le bandeau direct.
@@ -359,9 +377,56 @@ backToTop.setAttribute('aria-label', 'Retourner en haut de la page');
 backToTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>';
 document.body.appendChild(backToTop);
 
+/* S3 : l'en-tête se range quand on descend (> 40 px), revient dès qu'on remonte de 8 px ; jamais en mouvement réduit,
+   menu mobile ouvert, ni quand le focus clavier est dedans. */
+const siteHeader = document.querySelector('.site-header');
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lastY = window.scrollY, acc = 0;
 window.addEventListener('scroll', () => {
-  backToTop.classList.toggle('show', window.scrollY > 500);
+  const y = window.scrollY, d = y - lastY;
+  lastY = y;
+  backToTop.classList.toggle('show', y > 500);
+  if (!siteHeader) return;
+  if (prefersReduced || document.body.classList.contains('nav-open') || siteHeader.contains(document.activeElement)) {
+    siteHeader.classList.remove('is-hidden');
+    return;
+  }
+  acc = (d > 0) === (acc > 0) ? acc + d : d;
+  if (acc > 6 && y > 40) siteHeader.classList.add('is-hidden');
+  else if (acc < -8 || y < 40) siteHeader.classList.remove('is-hidden');
 }, { passive: true });
+if (siteHeader) siteHeader.addEventListener('focusin', () => siteHeader.classList.remove('is-hidden'));
+
+/* S5 : onde de tap sur les boutons principaux (Suivre sur Twitch, Rejoindre le Discord) */
+document.addEventListener('pointerdown', (e) => {
+  const b = e.target.closest('.sw-btn.primary');
+  if (!b || prefersReduced) return;
+  const r = b.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  const rad = Math.max(Math.hypot(x, y), Math.hypot(r.width - x, y), Math.hypot(x, r.height - y), Math.hypot(r.width - x, r.height - y));
+  const s = document.createElement('span');
+  s.className = 'ripple';
+  s.style.cssText = 'left:' + (x - rad) + 'px;top:' + (y - rad) + 'px;width:' + rad * 2 + 'px;height:' + rad * 2 + 'px';
+  b.appendChild(s);
+  setTimeout(() => s.remove(), 450);
+});
+
+/* S13 : sections de l'accueil qui apparaissent au défilement (fondu + montée de 12 px). Les blocs déjà visibles au
+   chargement restent tels quels (pas de clignotement) ; sans IntersectionObserver ou sans JavaScript, tout reste visible. */
+if ('IntersectionObserver' in window && !prefersReduced) {
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+      if (e.target.contains(followerCount)) lancerCompteur(true);
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.sw-home .sw-score, .sw-home .sw-rule, .sw-home .sw-sec, .sw-home .sw-join').forEach((el) => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+    el.classList.add('rv');
+    io.observe(el);
+  });
+}
 
 backToTop.addEventListener('click', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

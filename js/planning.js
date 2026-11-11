@@ -21,10 +21,22 @@ const todayStr = dateLocale(maintenant);
 const dans6j = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + 6);
 const limiteStr = dateLocale(dans6j);
 
+/* S8 : squelette en vagues (7 cases grises) pendant le chargement ; remplacé par les vraies cartes */
+const mouvementReduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+for (let i = 0; i < 7; i++) {
+  const sk = document.createElement('div');
+  sk.className = 'card planning-card sk';
+  sk.setAttribute('aria-hidden', 'true');
+  sk.innerHTML = '<div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div>';
+  sk.querySelectorAll('.sk-bar').forEach(b => b.style.setProperty('--d', (i * 0.12) + 's'));
+  grid.appendChild(sk);
+}
+
 Promise.all([
   loadJson('data/planning.json', []),
   loadJson('data/planning-exceptions.json', []).catch(() => [])
 ]).then(([planning, list]) => {
+  grid.textContent = '';
   const upcoming = (Array.isArray(list) ? list : [])
     .filter(e => e && typeof e.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.date >= todayStr)
     .sort((a, b) => a.date.localeCompare(b.date));
@@ -60,6 +72,7 @@ Promise.all([
     return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
   }
 
+  const cartes = [];
   planning.map(jeuDeLaSemaine).forEach(base => {
     const ex = parJour[base.day];
     const item = !ex ? base : ex.on
@@ -90,5 +103,13 @@ Promise.all([
       `;
     }
     grid.appendChild(card);
+    cartes.push(card);
   });
+
+  /* S7 : mosaïque diagonale, retard de 30 ms × (colonne + ligne) mesurés sur la grille réelle */
+  if (!mouvementReduit) {
+    const xs = [], ys = [];
+    cartes.forEach(c => { if (!xs.includes(c.offsetLeft)) xs.push(c.offsetLeft); if (!ys.includes(c.offsetTop)) ys.push(c.offsetTop); });
+    cartes.forEach(c => { c.style.setProperty('--d', (0.03 * (xs.indexOf(c.offsetLeft) + ys.indexOf(c.offsetTop))) + 's'); c.classList.add('enter'); });
+  }
 });
