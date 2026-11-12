@@ -14,7 +14,8 @@
   },
   "galyssiane": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
-    "live": false
+    "live": true,
+    "game": "Space Savory"
   },
   "calo_vt": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
@@ -31,5 +32,5 @@
     "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/698700926_IGDB-144x192.jpg",
     "followers": 194
   },
-  "_updated_at": "2026-11-12T12:14:03.357Z"
+  "_updated_at": "2026-11-12T12:24:03.321Z"
 }
