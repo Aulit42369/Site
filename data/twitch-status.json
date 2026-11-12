@@ -1,9 +1,4 @@
 {
-  "eiwen_": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
-    "live": true,
-    "game": "The Sims 4"
-  },
   "aly0806": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
     "live": false
@@ -23,7 +18,9 @@
   },
   "aulit42369": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": false,
+    "live": true,
+    "game": "Project P.I.T.T.",
+    "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/698700926_IGDB-144x192.jpg",
     "followers": 194
   },
   "hagosan": {
@@ -31,5 +28,10 @@
     "live": true,
     "game": "Dressmaker (2026)"
   },
-  "_updated_at": "2026-11-12T11:14:00.852Z"
+  "eiwen_": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
+    "live": true,
+    "game": "The Sims 4"
+  },
+  "_updated_at": "2026-11-12T11:24:03.309Z"
 }

@@ -1,5 +1,10 @@
 [
   {
+    "game": "Project P.I.T.T.",
+    "date": "2026-11-12",
+    "art": "https://static-cdn.jtvnw.net/ttv-boxart/698700926_IGDB-144x192.jpg"
+  },
+  {
     "game": "Brotato",
     "date": "2026-11-09",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/743214338_IGDB-144x192.jpg"
@@ -33,10 +38,5 @@
     "game": "Deep Rock Galactic",
     "date": "2026-11-04",
     "art": "https://static-cdn.jtvnw.net/ttv-boxart/494839_IGDB-144x192.jpg"
-  },
-  {
-    "game": "Killing Floor III",
-    "date": "2026-11-03",
-    "art": "https://static-cdn.jtvnw.net/ttv-boxart/1730526563_IGDB-144x192.jpg"
   }
 ]
