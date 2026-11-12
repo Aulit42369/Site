@@ -418,3 +418,8 @@ h1,h2{font-style:italic;text-transform:uppercase;letter-spacing:.012em}
 /* Coulisses : vitrine compacte du Pack Aulit (pack.aulit42369.fr/integre.html) */
 .pack-vitrine { width: 100%; aspect-ratio: 4 / 3; border: 1px solid var(--line, #1a2540); border-radius: 8px; background: transparent; display: block; }
 .pack-vitrine-lien { margin: .6rem 0 0; font-size: .95rem; }
+
+/* Jeux : Défi du jour (S17), même numéro que dans les jeux */
+.jx-defi { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .6rem; margin: .2rem 0 .8rem; padding: .45rem .8rem; border: 1px solid var(--magenta, #ff2bd6); border-radius: 6px; color: var(--white); font-weight: 700; text-decoration: none; }
+.jx-defi:hover, .jx-defi:focus-visible { box-shadow: 0 0 16px -4px var(--magenta, #ff2bd6); }
+.jx-defi-note { font-weight: 400; font-size: .85em; color: var(--muted, #8892a8); }

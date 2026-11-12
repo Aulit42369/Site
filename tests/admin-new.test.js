@@ -22,7 +22,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
   put('data/site.json',{socials:[{label:'Discord',url:'https://discord.com/invite/OLD'}],announcement:{enabled:true,text:'Ancien',tone:'info',from:'',until:''}},'v1','2026-09-01T10:00:00Z');
   await page.goto(BASE+'/admin.html'); await page.waitForFunction(()=>!document.getElementById('statusMsg').classList.contains('show'),null,{timeout:10000});
   check('admin loaded without error banner', !(await page.isVisible('#statusMsg.err')));
-  check('10 tabs', await page.locator('.admin-tabs [data-tab]').count()===10);
+  check('11 tabs', await page.locator('.admin-tabs [data-tab]').count()===11);
 
   // ---- Planning : une semaine sur 2 ----
   await page.click('[data-tab="planning"]');

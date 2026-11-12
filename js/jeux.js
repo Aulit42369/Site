@@ -13,6 +13,13 @@ const DEFAULT_GAMES = [
 
 const jxOkUrl = (u) => typeof u === 'string' && /^https:\/\/[^\s]+$/i.test(u.trim());
 
+// Défi du jour : même numéro que dans les 4 jeux (defi.js : #1 le 01/10/2026, date de Paris)
+const JX_DEFI = ['echo', 'lumen', 'resonance', 'fragments'];
+function jxDefiDuJour() {
+  const [y, m, d] = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(new Date()).split('-').map(Number);
+  return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(2026, 9, 1)) / 864e5) + 1;
+}
+
 function jxCard(g) {
   const accent = ['violet', 'magenta', 'gold'].includes(g.accent) ? g.accent : 'cyan';
   const orbKind = ['echo', 'resonance', 'fragments'].includes(g.id) ? g.id : '';
@@ -24,13 +31,16 @@ function jxCard(g) {
   else if (play) actions = '<a class="btn btn-primary" href="' + escapeHtml(g.url.trim()) + '" target="_blank" rel="noopener">Jouer maintenant</a>';
   else actions = '<span class="jx-soon">Lien bientôt disponible</span>';
   if (store) actions += '<a class="btn btn-secondary" href="' + escapeHtml(g.playUrl.trim()) + '" target="_blank" rel="noopener">Google Play</a>';
+  const n = jxDefiDuJour();
+  const defi = play && g.status !== 'bientot' && JX_DEFI.includes(g.id) && n > 0
+    ? '<a class="jx-defi" href="' + escapeHtml(g.url.trim()) + '" target="_blank" rel="noopener"><span aria-hidden="true">🎯</span> Défi du jour #' + n + ' <span class="jx-defi-note">le même pour tout le monde, nouveau chaque jour</span></a>' : '';
   const chips = tags.map((t) => '<span class="jx-chip">' + escapeHtml(t) + '</span>').join('') +
     '<span class="jx-chip pwa">Jouable en ligne · installable</span>' +
     (store ? '<span class="jx-chip pwa">Sur Google Play</span>' : '<span class="jx-chip">Google Play : bientôt</span>');
   return '<article class="card jx-card ' + accent + '"><div class="jx-top"><div class="jx-orb ' + orbKind + '" aria-hidden="true"></div><div><h2 class="jx-name">' + escapeHtml(g.name) + '</h2>' +
     (g.tagline ? '<p class="jx-tag">' + escapeHtml(g.tagline) + '</p>' : '') + '</div></div>' +
     '<p class="jx-desc">' + renderRichText(String(g.description || '')) + '</p>' +
-    '<div class="jx-chips">' + chips + '</div><div class="jx-actions">' + actions + '</div></article>';
+    defi + '<div class="jx-chips">' + chips + '</div><div class="jx-actions">' + actions + '</div></article>';
 }
 
 loadJson('data/games.json', null).then((d) => {
