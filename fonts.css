@@ -37,3 +37,10 @@
 @font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2'); }
+
+/* ---------- Polices de secours aux mêmes dimensions (13/11) ----------
+   Le temps que les polices arrivent, le navigateur affiche une police du système : sans réglage, Arial est 54 % plus
+   large que Saira Condensed et tout l'accueil se décale au remplacement (CLS 0,11). Mesuré dans Chrome. */
+@font-face { font-family: 'Saira secours'; src: local('Arial Bold'), local('Arial-BoldMT'), local('Arial'); font-weight: 800; size-adjust: 64.9%; ascent-override: 175%; descent-override: 68%; line-gap-override: 0%; }
+@font-face { font-family: 'Plex Sans secours'; src: local('Arial'), local('ArialMT'); size-adjust: 100.2%; ascent-override: 103%; descent-override: 28%; line-gap-override: 0%; }
+@font-face { font-family: 'Plex Mono secours'; src: local('Courier New'), local('CourierNewPSMT'); size-adjust: 100%; ascent-override: 103%; descent-override: 28%; line-gap-override: 0%; }
