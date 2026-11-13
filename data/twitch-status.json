@@ -1,4 +1,8 @@
 {
+  "hagosan": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
+    "live": false
+  },
   "eiwen_": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
     "live": true,
@@ -26,9 +30,5 @@
     "live": false,
     "followers": 195
   },
-  "hagosan": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
-    "live": false
-  },
-  "_updated_at": "2026-11-13T18:24:01.689Z"
+  "_updated_at": "2026-11-13T18:34:01.755Z"
 }
