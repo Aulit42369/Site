@@ -2,8 +2,10 @@
   "chaine": {
     "title": "La chaîne",
     "paragraphs": [
-      "Bienvenue dans mon univers : ici on fait du multigaming, du jeu coop, on rage, on rigole et on troll les copains. Installe-toi et viens dire des bêtises avec nous.",
-      "Pas de planning de jeu figé pour le moment — le choix se fait à l'ambiance du soir, entre amis."
+      "Salut, moi c’est Olivier, alias Aulit. Ici c’est une chaîne francophone multigaming : du Valorant, du coop entre potes, des pépites indé… et le programme se décide à l’ambiance du soir.",
+      "On rage, on rigole, on se troll un peu, mais personne ne reste dans son coin : ici on joue ensemble plutôt que de juste regarder.",
+      "À côté du jeu, je bricole tout moi-même : les overlays et les alertes, la régie qui pilote le live depuis le téléphone, ce site, le bot du tchat, des extensions Twitch (cartes à collectionner, escape game pour le chat) et même quatre [jeux mobiles](jeux.html). J’ai aussi monté un pack d’overlays accessible aux autres streamers, le [Pack Aulit](https://pack.aulit42369.fr). Tout est raconté dans les [coulisses](coulisses.html).",
+      "Installe-toi, dis bonjour dans le tchat ou sur le [Discord](https://discord.com/invite/Amgaz5YNVg) : la place est chaude."
     ]
   },
   "twitch": {
@@ -43,11 +45,11 @@
     },
     {
       "q": "Peut-on proposer un jeu à faire en live ?",
-      "a": "Passe par le Discord pour proposer une idée : selon l'ambiance et le planning, ça peut atterrir au programme d'un prochain stream."
+      "a": "Oui ! Propose ton idée sur le [Discord](https://discord.com/invite/Amgaz5YNVg) ou dans le tchat pendant un live : si elle plaît, elle peut atterrir au programme d’un prochain stream."
     },
     {
       "q": "Quel matériel utilises-tu pour streamer ?",
-      "a": "Le setup est amené à évoluer — rien d'exceptionnel, l'essentiel reste surtout de passer un bon moment ensemble."
+      "a": "Un PC avec un processeur Intel Core i9-13900K, une carte graphique Intel Arc A770, 32 Go de mémoire et quatre écrans ; une webcam Logitech C920 et un micro tout simple acheté chez Action. Les overlays, les alertes et la régie sur téléphone sont faits maison. Le setup est amené à évoluer — l’essentiel reste surtout de passer un bon moment ensemble."
     }
   ]
 }
