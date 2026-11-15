@@ -5,9 +5,7 @@
   },
   "aulit42369": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": true,
-    "game": "Dice Hoarder",
-    "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/26103869_IGDB-144x192.jpg",
+    "live": false,
     "followers": 196
   },
   "hagosan": {
@@ -30,5 +28,5 @@
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f8cd62f6-4e9c-473b-a05c-fcd9d51114dd-profile_image-300x300.png",
     "live": false
   },
-  "_updated_at": "2026-11-15T19:04:18.595Z"
+  "_updated_at": "2026-11-15T19:14:07.578Z"
 }
