@@ -18,7 +18,7 @@ function renderClips() {
       </div>
       <div class="entry-body">
         <div class="entry-title">${escapeHtml(c.title)}</div>
-        <div class="entry-sub">${escapeHtml(c.slug || ('YouTube : ' + c.youtube))}</div>
+        <div class="entry-sub">${escapeHtml(c.slug || ('YouTube : ' + c.youtube))}${c.game ? ' · ' + escapeHtml(c.game) : ''}</div>
       </div>
       <div class="entry-actions">
         <button data-edit="${i}">Modifier</button>
@@ -62,6 +62,10 @@ function openClipForm(index) {
   const c = index === null ? { slug: '', title: '' } : clipsState.data[index];
   document.getElementById('cfSlug').value = c.slug || c.youtube || '';
   document.getElementById('cfTitle').value = c.title || '';
+  document.getElementById('cfGame').value = c.game || '';
+  // suggestions : les jeux déjà saisis (même orthographe = même pastille sur la page Clips)
+  const jeux = [...new Set(clipsState.data.map((x) => x.game).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
+  document.getElementById('cfGameList').innerHTML = jeux.map((j) => `<option value="${escapeHtml(j)}"></option>`).join('');
   document.getElementById('clipForm').style.display = 'block';
   document.getElementById('cfPreviewBox').style.display = 'none';
 }
@@ -125,6 +129,7 @@ document.getElementById('cfSlug').addEventListener('input', (e) => {
 async function saveClip() {
   const slug = document.getElementById('cfSlug').value.trim();
   const title = document.getElementById('cfTitle').value.trim();
+  const game = document.getElementById('cfGame').value.trim().slice(0, 60);
   if (!slug || !title) {
     showStatus('Slug et titre sont obligatoires.', 'err');
     return;
@@ -132,11 +137,12 @@ async function saveClip() {
   /* Un nouveau clip est daté du jour (pour le badge "Nouveau" sur
      clips.html, 7 jours) ; une modification garde la date d'origine
      du clip au lieu de la rajeunir. */
-  const entry = editingClipIndex === null
+  let entry = editingClipIndex === null
     ? { slug, title, dateAdded: new Date().toISOString().slice(0, 10) }
     : clipsState.data[editingClipIndex].youtube
       ? { ...clipsState.data[editingClipIndex], youtube: slug, title } // vidéo YouTube envoyée par l'agence : l'identifiant reste YouTube
       : { ...clipsState.data[editingClipIndex], slug, title };
+  if (game) entry = { ...entry, game }; else { entry = { ...entry }; delete entry.game; }
   const next = editingClipIndex === null
     ? [entry, ...clipsState.data]
     : clipsState.data.map((c, i) => (i === editingClipIndex ? entry : c));

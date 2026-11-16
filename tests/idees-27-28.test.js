@@ -90,3 +90,29 @@ test('accueil hors ligne et Coulisses en textes courts', async () => {
     assert.strictEqual(await p.locator('.cr-barre').count(), 1);
   } finally { await browser.close(); }
 });
+
+test('clips : le champ « jeu » de l\'admin passe avant le titre', () => {
+  assert.ok(correspond('Combat contre le Baron Delamore dans Cinderia', '', 'Cinderia', 'Cinderia'));
+  assert.ok(!correspond('R.E.P.O.  -   Poules!!!', '', 'R.E.P.O.', 'Autre jeu'));
+  assert.ok(correspond('Combat contre le Baron', 'cinderia', '', 'Cinderia')); // la recherche trouve aussi le jeu
+});
+
+test('page Clips : pastille du champ « jeu » pour un Short sans tiret', async () => {
+  const f = path.join(ROOT, 'data/clips.json');
+  const avant = fs.existsSync(f) ? fs.readFileSync(f) : null;
+  fs.writeFileSync(f, JSON.stringify([
+    { youtube: 'vrwc65V23sI', title: 'Combat contre le Baron', game: 'Cinderia', dateAdded: '2026-11-07' },
+    { slug: 'AwkwardSalamanderSwiftRage', title: 'R.E.P.O. - Poules', dateAdded: '2026-11-01' }]));
+  const browser = await chromium.launch(launchOpts);
+  try {
+    const p = await browser.newPage();
+    await p.goto(BASE + '/clips.html');
+    await p.waitForSelector('.cr-jeux button[data-jeu="Cinderia"]');
+    await p.click('.cr-jeux button[data-jeu="Cinderia"]');
+    assert.strictEqual(await p.locator('.clip-card:not([hidden])').count(), 1);
+    assert.strictEqual(await p.locator('.cr-jeux button[data-jeu="R.E.P.O."]').count(), 1);
+  } finally {
+    await browser.close();
+    if (avant) fs.writeFileSync(f, avant); else fs.unlinkSync(f);
+  }
+});

@@ -57,6 +57,7 @@ loadJson('data/clips.json', [])
       const badge = isRecentClip(clip.dateAdded) ? ' <span class="badge-new">Nouveau</span>' : '';
       const card = document.createElement('div');
       card.className = 'broadcast-frame clip-card' + (yt ? ' vertical' : '');
+      if (typeof clip.game === 'string' && clip.game.trim()) card.dataset.jeu = clip.game.trim(); // pastille de la page (js/clips-recherche.js)
       card.innerHTML = `
         <iframe data-consent-src="${lecteur}" data-consent-link="${clipUrl}"${yt ? ' data-consent-name="YouTube"' : ''} title="${yt ? 'Vidéo YouTube' : 'Clip Twitch'} : ${escapeHtml(clip.title)}" allowfullscreen loading="lazy"></iframe>
         <div class="clip-footer">

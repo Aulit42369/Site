@@ -37,6 +37,7 @@ const SCHEMAS = {
       const yt = isObj(c) && isStr(c.youtube) && /^[\w-]{11}$/.test(c.youtube);
       check(isObj(c) && (yt || (isStr(c.slug) && /^[A-Za-z0-9_-]+$/.test(c.slug))), f, `#${i + 1} : "slug" ou "youtube" invalide`);
       check(isObj(c) && isStr(c.title) && c.title.trim(), f, `#${i + 1} : "title" manquant`);
+      if (isObj(c) && c.game !== undefined) check(isStr(c.game) && c.game.length <= 60, f, `#${i + 1} : "game" doit être un texte court`);
       if (isObj(c) && c.dateAdded !== undefined) check(date(c.dateAdded), f, `#${i + 1} : "dateAdded" doit être AAAA-MM-JJ`);
       if (isObj(c)) { const id = c.slug || 'yt:' + c.youtube; check(!seen.has(id), f, `clip en double : ${id}`); seen.add(id); }
     });

@@ -1,15 +1,15 @@
 /* Idée 28 (validée le 16/11/2026) · Clips : recherche par titre, pastilles par jeu, clip au hasard. Tout se passe dans le
    navigateur, sur les cartes que js/clips.js a déjà construites (le consentement des lecteurs reste le sien). */
 (function () {
-  // shortcut: le jeu est déduit du titre (« R.E.P.O.   -   Poules!!! ») ; clips.json n'a pas de champ jeu. À remplacer
-  // par un champ « jeu » saisi dans l'admin le jour où on publie.
+  // Jeu d'un clip : le champ « Jeu » de l'admin (clips.json → data-jeu de la carte), sinon le texte avant « - » du titre.
   function jeuDuTitre(titre) {
     const m = /^(.+?)\s+-\s+/.exec(String(titre || ''));
     return m ? m[1].trim() : '';
   }
   const norm = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-  function correspond(titre, recherche, jeu) {
-    return (!jeu || jeuDuTitre(titre) === jeu) && norm(titre).includes(norm(recherche).trim());
+  function correspond(titre, recherche, jeu, jeuCarte) {
+    const j = jeuCarte || jeuDuTitre(titre);
+    return (!jeu || j === jeu) && (norm(titre) + ' ' + norm(j)).includes(norm(recherche).trim());
   }
 
   if (typeof module !== 'undefined') module.exports = { jeuDuTitre, correspond };
@@ -37,16 +37,17 @@
 
   const cartes = () => [...grid.querySelectorAll('.clip-card')];
   const titre = (c) => (c.querySelector('.clip-title')?.firstChild?.textContent || '').trim();
+  const jeuDe = (c) => c.dataset.jeu || jeuDuTitre(titre(c));
 
   function appliquer() {
     let n = 0;
-    cartes().forEach((c) => { const ok = correspond(titre(c), champ.value, jeu); c.hidden = !ok; if (ok) n++; });
+    cartes().forEach((c) => { const ok = correspond(titre(c), champ.value, jeu, c.dataset.jeu); c.hidden = !ok; if (ok) n++; });
     const total = cartes().length;
     compte.textContent = n === total ? total + ' clips' : n + ' clip' + (n > 1 ? 's' : '') + ' sur ' + total;
     vide.hidden = n !== 0;
   }
   function pastilles() {
-    const liste = [...new Set(cartes().map((c) => jeuDuTitre(titre(c))).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
+    const liste = [...new Set(cartes().map(jeuDe).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
     jeux.innerHTML = ['', ...liste].map((j) => `<button type="button" aria-pressed="${j === jeu}" data-jeu="${j.replace(/"/g, '&quot;')}">${j ? j.replace(/</g, '&lt;') : 'Tous'}</button>`).join('');
   }
   jeux.addEventListener('click', (e) => {
