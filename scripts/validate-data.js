@@ -33,10 +33,12 @@ const SCHEMAS = {
     check(Array.isArray(d), f, 'doit être un tableau');
     const seen = new Set();
     (d || []).forEach((c, i) => {
-      check(isObj(c) && isStr(c.slug) && /^[A-Za-z0-9_-]+$/.test(c.slug), f, `#${i + 1} : "slug" invalide`);
+      // clip Twitch (slug) ou Short YouTube (youtube = identifiant de 11 caractères, depuis le 04/11)
+      const yt = isObj(c) && isStr(c.youtube) && /^[\w-]{11}$/.test(c.youtube);
+      check(isObj(c) && (yt || (isStr(c.slug) && /^[A-Za-z0-9_-]+$/.test(c.slug))), f, `#${i + 1} : "slug" ou "youtube" invalide`);
       check(isObj(c) && isStr(c.title) && c.title.trim(), f, `#${i + 1} : "title" manquant`);
       if (isObj(c) && c.dateAdded !== undefined) check(date(c.dateAdded), f, `#${i + 1} : "dateAdded" doit être AAAA-MM-JJ`);
-      if (isObj(c)) { check(!seen.has(c.slug), f, `slug en double : ${c.slug}`); seen.add(c.slug); }
+      if (isObj(c)) { const id = c.slug || 'yt:' + c.youtube; check(!seen.has(id), f, `clip en double : ${id}`); seen.add(id); }
     });
   } },
   'planning.json': { required: true, fn(d, f) {

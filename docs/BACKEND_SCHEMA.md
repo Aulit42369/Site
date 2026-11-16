@@ -29,7 +29,7 @@ Validation : `scripts/validate-data.js` (workflow Qualité) refuse tout fichier 
 ## 3. Fichiers `data/` écrits par les automatismes
 | Fichier | Écrit par | Champs |
 |---|---|---|
-| `twitch-status.json` | `update-twitch-status.js` (toutes les 10 min) | `{<login>: {avatar, live, game?}}` ; pour `aulit42369` en plus `gameArt`, `followers` ; `_updated_at` (ISO) |
+| `twitch-status.json` | `update-twitch-status.js` (toutes les 10 min) | `{<login>: {avatar, live, game?}}` ; pour `aulit42369` en plus `gameArt`, `followers`, et en live `title`, `startedAt` (ISO, depuis le 16/11 : accueil vivant) ; `_updated_at` (ISO) |
 | `recent-games.json` | idem | 8 derniers jeux `[{game, date}]`, sans doublon |
 | `broken-links.json` | idem | pseudos de `streamers.json` introuvables sur Twitch |
 

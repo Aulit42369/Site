@@ -50,7 +50,7 @@ function writeClipsXSS() {
       await page.click('#navToggle');
       await page.waitForTimeout(150);
       const rect = await page.evaluate(() => document.getElementById('nav').getBoundingClientRect());
-      check(`${pageName}: nav overlay fills viewport height (726px)`, Math.abs(rect.height - 726) < 2);
+      check(`${pageName}: menu mobile visible en entier (panneau flottant, style 12)`, rect.top >= 0 && rect.bottom <= 800 && rect.height > 300);
       const toggleBox = await page.locator('#navToggle').boundingBox();
       check(`${pageName}: nav-toggle >=44x44`, toggleBox.width >= 44 && toggleBox.height >= 44);
       await page.close();
@@ -169,9 +169,9 @@ function writeClipsXSS() {
     await page.goto(`${BASE}/coulisses.html`);
     const svgHtml = await page.content();
     check('coulisses.html: no more #4a5568 left', !svgHtml.includes('4a5568'));
-    check('coulisses.html: new fill color present', svgHtml.includes('#75849e'));
-    check('coulisses.html: YouTube chat mod text still present', svgHtml.includes('modération du chat YouTube'));
-    check('coulisses.html: admin panel text still present', svgHtml.includes("panneau d'administration web"));
+    // Piste D + textes courts (16/11) : les anciens schémas SVG et paragraphes longs sont remplacés
+    check('coulisses.html: texte court de la Régie présent', svgHtml.includes('raid de fin de live'));
+    check('coulisses.html: texte court de « Ce site » présent', svgHtml.includes("page d'administration privée"));
     await page.close();
 
   } finally {

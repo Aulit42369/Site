@@ -57,7 +57,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     const noOverflow = await p.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth);
     check('mobile: no horizontal overflow with announce', noOverflow);
     await p.click('#navToggle'); const navBox = await p.evaluate(()=>{const r=document.getElementById('nav').getBoundingClientRect();return [r.top,r.bottom,innerHeight];});
-    check('mobile: nav overlay still full height under header with announce', navBox[1]>=navBox[2]-1);
+    check('mobile: menu visible en entier avec annonce (style 12)', navBox[0]>=0 && navBox[1]<=navBox[2] && navBox[1]-navBox[0]>300);
     await p.screenshot({path:'announce-mobile.png'}); await p.close(); rm('site.json');
 
     // ===== pages.json overrides =====
@@ -87,7 +87,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     check('legal override', (await p.textContent('[data-edit="legal.ed1"]'))==='Hébergement modifié'); await p.close();
     p = await newPage(); await p.goto(BASE+'/coulisses.html'); await p.waitForTimeout(300);
     check('coulisses title override', (await p.innerHTML('[data-edit="coulisses.p1.title"]')).includes('<em class="accent">neuf</em>'));
-    check('extra project rendered (1 valid, empty dropped)', await p.locator('.project-text-only').count()===2); // + le bloc texte seul « Serveur dédié » de la page
+    check('extra project rendered (1 valid, empty dropped)', await p.locator('.project-text-only').count()===1); // « Serveur dédié » a son visuel depuis la piste D (16/11)
     check('extra project content escaped', (await p.locator('.project-text-only').last().innerHTML()).includes('&lt;b&gt;2&lt;/b&gt;') && (await p.locator('.project-text-only h2').last().innerHTML()).includes('<em class="accent">outil</em>'));
     check('extra project after the others', await p.evaluate(()=>{const b=[...document.querySelectorAll('.project-block')];return b[b.length-1].classList.contains('project-text-only')&&b.length===18;}));
     await p.screenshot({path:'coulisses-extra.png',clip:{x:0,y:0,width:1280,height:700}});
@@ -95,7 +95,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     rm('pages.json'); rm('site.json');
     // pages without data keep default
     p = await newPage(); await p.goto(BASE+'/coulisses.html'); await p.waitForTimeout(300);
-    check('coulisses without pages.json: 17 blocks, no extras', await p.locator('.project-block').count()===17 && await p.locator('.project-text-only').count()===1);
+    check('coulisses without pages.json: 17 blocks, no extras', await p.locator('.project-block').count()===17 && await p.locator('.project-text-only').count()===0);
     check('coulisses : sommaire avec un lien par bloc', await p.locator('.coulisses-toc a').count()===17);
     check('no page errors (coulisses default)', p.errs.length===0); await p.close();
 

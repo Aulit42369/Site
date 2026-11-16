@@ -91,6 +91,10 @@ respecté (ticker/animations coupés), alt sur les images, structure de titres,
 ## 7. État d'avancement
 
 - **Site** : polices basculées + accueil habillé (titre chromé + grille). ✅ en ligne.
+- **Site, 16/11/2026 : style 12 « Actuel + Verre »** (choix d'Olivier sur maquettes, `F:\Stream\Maquettes\site-styles\`) :
+  même identité (Orbitron/Rajdhani, cyan/violet/magenta, soleil), mais plaques de **verre dépoli** (`--verre`, `--flou`)
+  sur un fond de taches synthwave floutées, coins arrondis, néon réduit à un filet. Flou allégé sur téléphone.
+  Coulisses en « piste D » (pastilles + écran dessiné + « Comment ça marche » + chiffres). Bloc en fin de `style.css`.
 - À faire : La Cabane, Étagère, pages AulitBot, Lugh, CRA (version sobre),
   puis caler le soleil des vitrines et, en option, unifier via vrais jetons
   `--f-display/--f-body/--f-mono` + nav/boutons condensés partout.

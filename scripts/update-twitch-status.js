@@ -104,7 +104,7 @@ async function fetchTwitchData(usernames, token) {
      live (déjà fourni par /streams, aucun appel en plus). L'id sert
      ensuite à retrouver la jaquette du jeu, pour ta seule chaîne. */
   const liveInfo = new Map(
-    streamsData.data.map((s) => [s.user_login.toLowerCase(), { game: s.game_name, gameId: s.game_id }])
+    streamsData.data.map((s) => [s.user_login.toLowerCase(), { game: s.game_name, gameId: s.game_id, title: s.title, startedAt: s.started_at }])
   );
 
   const result = {};
@@ -117,6 +117,11 @@ async function fetchTwitchData(usernames, token) {
       live: isLive,
     };
     if (isLive && info.game) result[login].game = info.game;
+    // Titre et heure de début : seulement pour ta chaîne (accueil vivant, js/accueil-vivant.js)
+    if (isLive && login === OWN_CHANNEL) {
+      if (info.title) result[login].title = info.title;
+      if (info.startedAt) result[login].startedAt = info.startedAt;
+    }
   }
 
   /* Jaquette du jeu en cours : uniquement pour ta chaîne (comme pour

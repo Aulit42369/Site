@@ -43,7 +43,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=85298072">
+<link rel="stylesheet" href="style.min.css?v=c51fd889">
 <style>
   /* chiffres sous l'introduction : une ligne sobre, pas des cartes */
   .coulisses-stats { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; }
@@ -136,76 +136,15 @@
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p1.eyebrow" data-edit-label="Coulisses · Régie Mobile — sur-titre">// Régie Mobile</div>
           <h2 data-edit="coulisses.p1.title" data-edit-label="Coulisses · Régie Mobile — titre">Piloter le stream depuis le <em class="accent">téléphone</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p1.desc1" data-edit-label="Coulisses · Régie Mobile — paragraphe 1">Gérer le stream sans être devant l'ordinateur : titre, catégorie et tags enregistrés sur Twitch, minuteur de démarrage qui lance scène et micro, pause pub programmable, grille de scènes OBS, modération du chat YouTube en direct, récompenses de points de chaîne. En fin de live, la carte « Raid · La Cabane » liste les membres de La Cabane en direct : même jeu d'abord, puis les plus petites chaînes. Un appui lance le raid, un autre l'annule.</p>
-            <p data-edit="coulisses.p1.desc2" data-edit-label="Coulisses · Régie Mobile — paragraphe 2">Image d'annonce aux couleurs du site, publiée sur Instagram et Bluesky. Moniteur de santé qui fait vibrer le téléphone si le stream se dégrade, simulateur d'alertes, résumé de session en Excel. Les confirmations s'affichent dans la régie, plus dans les fenêtres du navigateur, et l'appli Android ne pèse plus qu'environ 700 Ko.</p>
-            <p data-edit="coulisses.p1.desc3" data-edit-label="Coulisses · Régie Mobile — paragraphe 3">Le vrai défi : la confier à d'autres streamers sans rien leur ouvrir. La régie fabrique elle-même un kit (page /kit) qui ne contient que les réglages de la personne, aucun accès de la régie d'origine. Les mises à jour sont signées : publiées en un clic, elles apparaissent chez les autres dans un bandeau « Mise à jour disponible », s'installent sur un appui, se défont si besoin et ne touchent jamais aux données.</p>
+            <p data-edit="coulisses.p1.court" data-edit-label="Coulisses · Régie Mobile — texte">Titre, catégorie, scènes OBS, pause pub et raid de fin de live, tout se pilote depuis le téléphone. Elle se donne en kit à d'autres streamers, avec des mises à jour signées qui ne touchent jamais à leurs données.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p1.status" data-edit-label="Coulisses · Régie Mobile — note">Distribuable en kit à d'autres streamers, avec mises à jour automatiques signées</span></div>
           <div class="project-stack" data-edit="coulisses.p1.stack" data-edit-label="Coulisses · Régie Mobile — technologies">Node.js · React · zéro dépendance · signature Ed25519 · Android</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-rm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
-                </marker>
-              </defs>
-              <line x1="130" y1="122" x2="196" y2="122" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <line x1="130" y1="206" x2="214" y2="170" stroke="#00f5ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-rm)"/>
-              <line x1="336" y1="104" x2="396" y2="37" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <line x1="336" y1="120" x2="396" y2="95" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <line x1="336" y1="140" x2="396" y2="153" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <line x1="336" y1="156" x2="396" y2="211" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-rm)"/>
-              <rect x="16" y="92" width="114" height="60" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="73" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Téléphone</text>
-              <rect x="16" y="180" width="114" height="52" rx="6" fill="none" stroke="#1a2540" stroke-dasharray="4 3"/>
-              <text x="73" y="202" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Mises à jour</text>
-              <text x="73" y="218" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">signées · GitHub Pages</text>
-              <rect x="200" y="94" width="136" height="72" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="268" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Serveur</text>
-              <text x="268" y="146" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Node.js</text>
-              <rect x="400" y="14" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="452" y="42" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">OBS</text>
-              <rect x="400" y="72" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="452" y="92" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Instagram</text>
-              <text x="452" y="108" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Bluesky</text>
-              <rect x="400" y="130" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="452" y="150" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Chat</text>
-              <text x="452" y="166" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">YouTube</text>
-              <rect x="400" y="188" width="104" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="452" y="208" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">La Cabane</text>
-              <text x="452" y="224" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">raid de fin de live</text>
-            </svg>
-          </div>
-          <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (d'après capture d'écran réelle)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="472" height="192" rx="10" fill="none" stroke="#1a2540"/>
-              <text x="20" y="28" fill="#00f5ff" font-family="Orbitron, sans-serif" font-size="13" font-weight="900" letter-spacing="1">RÉGIE MOBILE</text>
-              <circle cx="330" cy="24" r="4" fill="#00f5ff"/>
-              <text x="338" y="27" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">OBS</text>
-              <circle cx="372" cy="24" r="4" fill="#00f5ff"/>
-              <text x="380" y="27" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Twitch</text>
-              <circle cx="424" cy="24" r="4" fill="#00f5ff"/>
-              <text x="432" y="27" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">YouTube</text>
-              <text x="20" y="52" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">TITRE</text>
-              <rect x="20" y="58" width="440" height="24" rx="4" fill="none" stroke="#1a2540"/>
-              <text x="28" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12">On tente le rang silver ce soir</text>
-              <text x="20" y="100" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">CATÉGORIE</text>
-              <rect x="20" y="106" width="200" height="24" rx="4" fill="none" stroke="#1a2540"/>
-              <text x="28" y="122" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12">VALORANT</text>
-              <text x="20" y="152" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">SCÈNES OBS</text>
-              <rect x="20" y="158" width="105" height="34" rx="5" fill="none" stroke="#1a2540"/>
-              <text x="72" y="179" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="11" font-weight="600">Just Chatting</text>
-              <rect x="133" y="158" width="105" height="34" rx="5" fill="none" stroke="#1a2540"/>
-              <text x="185" y="179" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="11" font-weight="600">Je reviens</text>
-              <rect x="246" y="158" width="120" height="34" rx="5" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="306" y="179" text-anchor="middle" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="11" font-weight="700">Stream en cours</text>
-              <rect x="374" y="158" width="86" height="34" rx="5" fill="none" stroke="#1a2540"/>
-              <text x="417" y="179" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="11" font-weight="600">Fin</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : téléphone, serveur, puis OBS, Twitch, YouTube et La Cabane"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/></svg></span>Téléphone</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="7" rx="1.5"/><rect x="3.5" y="13" width="17" height="7" rx="1.5"/><path d="M7.5 7.5h.01M7.5 16.5h.01"/></svg></span>Serveur</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">OBS<i>·</i>Twitch<i>·</i>YouTube<i>·</i>La Cabane</li></ol>
+          <div class="cp-cadre mx-grille"><div class="tel" role="img" aria-label="Écran de la Régie Mobile : titre du live, catégorie, grille des scènes OBS et carte de raid La Cabane"><div class="tel-ecran"><div class="tel-tete"><b>RÉGIE MOBILE</b><span class="tel-voyants"><span>OBS</span><span>Twitch</span></span></div><div class="tel-champ"><small>Titre</small><div>On tente le rang silver ce soir</div></div><div class="tel-champ"><small>Catégorie</small><div>VALORANT</div></div><div class="tel-scenes"><span>Just Chatting</span><span>Je reviens</span><span class="on">Stream en cours</span><span>Fin</span></div><div class="tel-raid"><span><small>Raid · La Cabane</small><b>Même jeu d'abord</b></span><em>Lancer</em></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p1.etape1.t" data-edit-label="Coulisses · Régie Mobile — étape 1, titre">J'appuie sur le téléphone</h3><p data-edit="coulisses.p1.etape1.d" data-edit-label="Coulisses · Régie Mobile — étape 1, texte">Titre, scène, pause pub ou raid.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p1.etape2.t" data-edit-label="Coulisses · Régie Mobile — étape 2, titre">Le serveur fait le relais</h3><p data-edit="coulisses.p1.etape2.d" data-edit-label="Coulisses · Régie Mobile — étape 2, texte">Il parle à OBS, Twitch et YouTube.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p1.etape3.t" data-edit-label="Coulisses · Régie Mobile — étape 3, titre">Le stream suit</h3><p data-edit="coulisses.p1.etape3.d" data-edit-label="Coulisses · Régie Mobile — étape 3, texte">La scène change, l'annonce part sur les réseaux.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p1.etape4.t" data-edit-label="Coulisses · Régie Mobile — étape 4, titre">Le téléphone prévient</h3><p data-edit="coulisses.p1.etape4.d" data-edit-label="Coulisses · Régie Mobile — étape 4, texte">Il vibre si le stream se dégrade.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p1.chiffre1.n" data-edit-label="Coulisses · Régie Mobile — chiffre 1">≈ 700 Ko</strong><span data-edit="coulisses.p1.chiffre1.l" data-edit-label="Coulisses · Régie Mobile — chiffre 1, légende">l'appli Android</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p1.chiffre2.n" data-edit-label="Coulisses · Régie Mobile — chiffre 2">4</strong><span data-edit="coulisses.p1.chiffre2.l" data-edit-label="Coulisses · Régie Mobile — chiffre 2, légende">sorties : OBS, réseaux, chat YouTube, La Cabane</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p1.chiffre3.n" data-edit-label="Coulisses · Régie Mobile — chiffre 3">Ed25519</strong><span data-edit="coulisses.p1.chiffre3.l" data-edit-label="Coulisses · Régie Mobile — chiffre 3, légende">signature des mises à jour</span></div></div>
         </div>
       </div>
 
@@ -214,48 +153,15 @@
           <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p11.eyebrow" data-edit-label="Coulisses · Agence Aulit — sur-titre">// Agence Aulit</div>
           <h2 data-edit="coulisses.p11.title" data-edit-label="Coulisses · Agence Aulit — titre">Une agence IA dans un <em class="accent">bureau pixel art</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p11.desc1" data-edit-label="Coulisses · Agence Aulit — paragraphe 1">Un bureau en pixel art aux couleurs de la chaîne, où quatorze personnages ont chacun leur métier : Max accueille les demandes et les répartit, Léa et Hugo développent, Nora prépare les streams, Sami et Jade s’occupent des réseaux et des visuels, Lina et Yanis montent les clips. Chacun est un agent IA qui travaille en arrière-plan.</p>
-            <p data-edit="coulisses.p11.desc2" data-edit-label="Coulisses · Agence Aulit — paragraphe 2">Rien ne sort sans contrôle : tout outil ou site livré passe d’abord par Zoé, l’experte en cybersécurité, et toute publication attend une validation avant de partir par la Régie Mobile. Pendant un live, aucun chantier ne démarre, pour ne jamais gêner le stream.</p>
-            <p data-edit="coulisses.p11.desc3" data-edit-label="Coulisses · Agence Aulit — paragraphe 3">Après chaque live, l’agence repère les moments forts (pics du chat, du son), découpe des extraits verticaux et propose les meilleurs, publiés ensuite sous-titrés. Chaque lundi, elle relit ce qui a coincé dans la semaine et propose ses propres améliorations.</p>
+            <p data-edit="coulisses.p11.court" data-edit-label="Coulisses · Agence Aulit — texte">Quatorze agents IA, chacun avec son métier, travaillent en arrière-plan dans un bureau en pixel art : développement, préparation des streams, réseaux, visuels, clips. Rien ne sort sans le contrôle de sécurité de Zoé, et aucun chantier ne démarre pendant un live.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p11.status" data-edit-label="Coulisses · Agence Aulit — note">Chaque mission a son rapport : ce qui a été fait, le contrôle de Zoé, et un bouton pour revenir à la version d’avant</span></div>
           <div class="project-stack" data-edit="coulisses.p11.stack" data-edit-label="Coulisses · Agence Aulit — technologies">Node.js · agents Claude Code · Régie Mobile · pixel art</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#9b5cff"/>
-                </marker>
-              </defs>
-              <line x1="118" y1="130" x2="150" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
-              <line x1="262" y1="112" x2="292" y2="52" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
-              <line x1="262" y1="130" x2="292" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
-              <line x1="262" y1="148" x2="292" y2="208" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
-              <line x1="418" y1="52" x2="440" y2="112" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
-              <line x1="418" y1="130" x2="440" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
-              <line x1="418" y1="208" x2="440" y2="148" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-ag)"/>
-              <rect x="8" y="104" width="110" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="63" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Olivier</text>
-              <text x="63" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">une demande</text>
-              <rect x="152" y="96" width="110" height="68" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
-              <text x="207" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Max</text>
-              <text x="207" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">chef d’agence</text>
-              <rect x="294" y="28" width="124" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="356" y="50" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Dev</text>
-              <text x="356" y="66" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Léa · Hugo</text>
-              <rect x="294" y="106" width="124" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="356" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Stream · réseaux</text>
-              <text x="356" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Nora · Sami · Jade</text>
-              <rect x="294" y="184" width="124" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="356" y="206" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Clips</text>
-              <text x="356" y="222" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Lina · Yanis</text>
-              <rect x="442" y="96" width="72" height="68" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
-              <text x="478" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Zoé</text>
-              <text x="478" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">contrôle</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : Olivier fait une demande, Max la répartit entre les métiers, Zoé contrôle"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c1-4 4-6 7.5-6s6.5 2 7.5 6"/></svg></span>Olivier</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.8 3.1 2.6 3.5 5.2"/></svg></span>Max</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Dev<i>·</i>Stream · réseaux<i>·</i>Clips</li><li class="mx-trait mx-trait--3" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic cp-ic--v"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v5.5c0 4.5-3.2 8-7.5 9.5-4.3-1.5-7.5-5-7.5-9.5V6z"/></svg></span>Zoé</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Rapport de mission de l'agence : ce qui a été fait, contrôle de Zoé validé et bouton pour revenir à la version d'avant"><div class="fen-barre">Rapport de mission</div><div class="fen-corps"><ul class="ec-liste"><li>Ce qui a été fait<span>résumé</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Contrôle de Zoé</span><span>validé</span></li><li>Publication<span>attend ta validation</span></li></ul><div class="tel-raid"><span><small>Version d'avant</small><b>Revenir en arrière</b></span><em>Restaurer</em></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p11.etape1.t" data-edit-label="Coulisses · Agence Aulit — étape 1, titre">Je fais une demande</h3><p data-edit="coulisses.p11.etape1.d" data-edit-label="Coulisses · Agence Aulit — étape 1, texte">Max l'accueille et la répartit.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p11.etape2.t" data-edit-label="Coulisses · Agence Aulit — étape 2, titre">L'agent du métier s'y met</h3><p data-edit="coulisses.p11.etape2.d" data-edit-label="Coulisses · Agence Aulit — étape 2, texte">Dev, stream, réseaux, visuels ou clips.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p11.etape3.t" data-edit-label="Coulisses · Agence Aulit — étape 3, titre">Zoé contrôle</h3><p data-edit="coulisses.p11.etape3.d" data-edit-label="Coulisses · Agence Aulit — étape 3, texte">Rien ne sort sans son contrôle de sécurité.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p11.etape4.t" data-edit-label="Coulisses · Agence Aulit — étape 4, titre">Je valide</h3><p data-edit="coulisses.p11.etape4.d" data-edit-label="Coulisses · Agence Aulit — étape 4, texte">La publication part ensuite par la Régie.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p11.chiffre1.n" data-edit-label="Coulisses · Agence Aulit — chiffre 1">14</strong><span data-edit="coulisses.p11.chiffre1.l" data-edit-label="Coulisses · Agence Aulit — chiffre 1, légende">personnages, un métier chacun</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p11.chiffre2.n" data-edit-label="Coulisses · Agence Aulit — chiffre 2">Lundi</strong><span data-edit="coulisses.p11.chiffre2.l" data-edit-label="Coulisses · Agence Aulit — chiffre 2, légende">l'agence relit sa semaine et propose ses améliorations</span></div></div>
         </div>
       </div>
 
@@ -264,53 +170,15 @@
           <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.p2.eyebrow" data-edit-label="Coulisses · twitch-alerts-bridge — sur-titre">// twitch-alerts-bridge</div>
           <h2 data-edit="coulisses.p2.title" data-edit-label="Coulisses · twitch-alerts-bridge — titre">Toutes les alertes, <em class="accent">sans latence</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p2.desc1" data-edit-label="Coulisses · twitch-alerts-bridge — paragraphe 1">Follows, subs, resubs, dons groupés, bits, raids, dons — un système bâti sur les webhooks EventSub de Twitch, avec ses propres sons synthétisés, un système anti-doublons et une file d'attente pour l'affichage dans l'overlay OBS.</p>
-            <p data-edit="coulisses.p2.desc2" data-edit-label="Coulisses · twitch-alerts-bridge — paragraphe 2">Le plus dur n'a pas été le code mais le débogage : des redirections OAuth qui ne correspondaient pas, le pare-feu Windows qui bloquait des ports locaux, et un filtrage non documenté par Twitch qui ignore les follows de comptes trop récents.</p>
+            <p data-edit="coulisses.p2.court" data-edit-label="Coulisses · twitch-alerts-bridge — texte">Follows, subs, bits, raids et dons arrivent par EventSub de Twitch, sans doublon, avec leurs propres sons et une file d'attente dans l'overlay OBS. Le plus dur a été le débogage, pas le code.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p2.status" data-edit-label="Coulisses · twitch-alerts-bridge — note">Complété par un script Lua qui coupe l'écran de fin de raid automatiquement, avec délais réglables</span></div>
           <div class="project-stack" data-edit="coulisses.p2.stack" data-edit-label="Coulisses · twitch-alerts-bridge — technologies">Node.js · Twitch EventSub · OBS Lua</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#ff2d78"/>
-                </marker>
-              </defs>
-              <line x1="136" y1="130" x2="206" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ab)"/>
-              <line x1="360" y1="108" x2="410" y2="90" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ab)"/>
-              <line x1="360" y1="152" x2="410" y2="170" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ab)"/>
-              <rect x="16" y="100" width="120" height="60" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="76" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">Twitch</text>
-              <text x="76" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="600">EventSub</text>
-              <rect x="210" y="85" width="150" height="90" rx="6" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
-              <text x="285" y="120" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Bridge</text>
-              <text x="285" y="140" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Node.js</text>
-              <text x="285" y="158" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">dédoublonnage + file</text>
-              <rect x="414" y="60" width="100" height="56" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="464" y="84" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Overlay</text>
-              <text x="464" y="100" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">OBS</text>
-              <rect x="414" y="146" width="100" height="56" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="464" y="170" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Son</text>
-              <text x="464" y="186" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">synthétisé</text>
-            </svg>
-          </div>
-          <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (approximatif)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="472" height="182" rx="6" fill="none" stroke="#1a2540" stroke-dasharray="4 3"/>
-              <text x="20" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Vue stream (overlay)</text>
-              <rect x="270" y="20" width="192" height="60" rx="8" fill="#080c18" stroke="#ff2d78" stroke-width="1.5"/>
-              <circle cx="296" cy="50" r="14" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
-              <text x="296" y="55" text-anchor="middle" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">♥</text>
-              <text x="320" y="44" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="11" font-weight="700">NOUVEAU FOLLOW</text>
-              <text x="320" y="62" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Viewer_1</text>
-              <rect x="286" y="86" width="160" height="10" rx="4" fill="none" stroke="#1a2540"/>
-              <rect x="300" y="100" width="146" height="10" rx="4" fill="none" stroke="#1a2540"/>
-              <text x="270" y="140" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">File d'attente : 2 en attente</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : Twitch EventSub, le pont Node.js, puis l'overlay OBS et le son"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9.5L5 20v-4H4z"/></svg></span>Twitch EventSub</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="7" rx="1.5"/><rect x="3.5" y="13" width="17" height="7" rx="1.5"/><path d="M7.5 7.5h.01M7.5 16.5h.01"/></svg></span>Pont Node.js</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Overlay OBS<i>·</i>Son synthétisé</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Overlay du stream : alerte « Nouveau follow » de Viewer_1, deux alertes en file d'attente"><div class="fen-barre">Vue stream · overlay</div><div class="fen-corps"><div class="ec-alerte"><small>♥ NOUVEAU FOLLOW</small><b>Viewer_1</b></div><p class="ec-note" style="margin:10px 0 0;text-align:center">File d'attente : 2 en attente</p></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p2.etape1.t" data-edit-label="Coulisses · twitch-alerts-bridge — étape 1, titre">Twitch prévient le pont</h3><p data-edit="coulisses.p2.etape1.d" data-edit-label="Coulisses · twitch-alerts-bridge — étape 1, texte">Follow, sub, bits, raid ou don, par EventSub.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p2.etape2.t" data-edit-label="Coulisses · twitch-alerts-bridge — étape 2, titre">Le pont fait le tri</h3><p data-edit="coulisses.p2.etape2.d" data-edit-label="Coulisses · twitch-alerts-bridge — étape 2, texte">Il retire les doublons et met en file.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p2.etape3.t" data-edit-label="Coulisses · twitch-alerts-bridge — étape 3, titre">L'alerte s'affiche</h3><p data-edit="coulisses.p2.etape3.d" data-edit-label="Coulisses · twitch-alerts-bridge — étape 3, texte">Dans l'overlay OBS, avec son propre son.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p2.etape4.t" data-edit-label="Coulisses · twitch-alerts-bridge — étape 4, titre">Fin de raid</h3><p data-edit="coulisses.p2.etape4.d" data-edit-label="Coulisses · twitch-alerts-bridge — étape 4, texte">Un script Lua coupe l'écran tout seul.</p></div></li></ol></div></div>
+          
         </div>
       </div>
 
@@ -319,57 +187,15 @@
           <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p3.eyebrow" data-edit-label="Coulisses · labels-bridges — sur-titre">// labels-bridges</div>
           <h2 data-edit="coulisses.p3.title" data-edit-label="Coulisses · labels-bridges — titre">Le remplaçant maison de <em class="accent">Stream Labels</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p3.desc1" data-edit-label="Coulisses · labels-bridges — paragraphe 1">Plutôt que de dépendre de Streamlabs, ces deux ponts (Twitch et YouTube) récupèrent les événements et les écrivent directement dans de simples fichiers <code>.txt</code>, lus par des panneaux HTML dans OBS.</p>
-            <p data-edit="coulisses.p3.desc2" data-edit-label="Coulisses · labels-bridges — paragraphe 2">Pas d'overlay complexe à charger, pas de service externe à surveiller — juste des fichiers texte relus à chaque changement. La solution la plus simple qui marche.</p>
+            <p data-edit="coulisses.p3.court" data-edit-label="Coulisses · labels-bridges — texte">Deux ponts maison, Twitch et YouTube, écrivent les derniers événements dans de simples fichiers texte, relus par des panneaux HTML dans OBS. Pas de Streamlabs, pas de service externe à surveiller.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p3.status" data-edit-label="Coulisses · labels-bridges — note">Intégré dans un overlay entièrement fait main — aucun asset ni template acheté, juste du code</span></div>
           <div class="project-stack" data-edit="coulisses.p3.stack" data-edit-label="Coulisses · labels-bridges — technologies">Node.js · fichiers texte locaux</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-lb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#9b5cff"/>
-                </marker>
-              </defs>
-              <line x1="126" y1="130" x2="146" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-lb)"/>
-              <line x1="266" y1="130" x2="286" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-lb)"/>
-              <line x1="392" y1="130" x2="412" y2="130" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-lb)"/>
-              <rect x="8" y="105" width="118" height="50" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="67" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">API Twitch</text>
-              <text x="67" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">YouTube</text>
-              <rect x="148" y="100" width="118" height="60" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
-              <text x="207" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bridge</text>
-              <text x="207" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Node.js</text>
-              <rect x="288" y="105" width="104" height="50" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="340" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">.txt</text>
-              <text x="340" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">locaux</text>
-              <rect x="414" y="105" width="100" height="50" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="464" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Panneaux</text>
-              <text x="464" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">OBS</text>
-            </svg>
-          </div>
-          <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (d'après capture d'écran réelle)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 130" xmlns="http://www.w3.org/2000/svg">
-              <text x="0" y="18" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Barre d'overlay (bas d'écran, mise à jour en direct)</text>
-              <rect x="0" y="34" width="112" height="72" rx="4" fill="none" stroke="#1a2540"/>
-              <text x="10" y="52" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">// DERNIER FOLLOW</text>
-              <text x="10" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">Viewer_1</text>
-              <rect x="122" y="34" width="112" height="72" rx="4" fill="none" stroke="#1a2540"/>
-              <text x="132" y="52" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">// DERNIER SUB</text>
-              <text x="132" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">Viewer_2</text>
-              <rect x="244" y="34" width="112" height="72" rx="4" fill="none" stroke="#1a2540"/>
-              <text x="254" y="52" fill="#ffb020" font-family="Rajdhani, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">// DERNIER DON</text>
-              <text x="254" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">Viewer_3</text>
-              <text x="254" y="90" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">100 bits</text>
-              <rect x="366" y="34" width="112" height="72" rx="4" fill="none" stroke="#1a2540"/>
-              <text x="376" y="52" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="9" font-weight="700" letter-spacing="0.5">// DERNIER RAID</text>
-              <text x="376" y="74" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">Viewer_4</text>
-              <text x="376" y="90" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">5 viewers</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : API Twitch et YouTube, le pont Node.js, des fichiers texte, puis les panneaux OBS"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9.5L5 20v-4H4z"/></svg></span>Twitch · YouTube</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="7" rx="1.5"/><rect x="3.5" y="13" width="17" height="7" rx="1.5"/><path d="M7.5 7.5h.01M7.5 16.5h.01"/></svg></span>Pont Node.js</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg></span>Fichiers .txt</li><li class="mx-trait mx-trait--3" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M9 20h6M12 16.5V20"/></svg></span>Panneaux OBS</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Barre d'overlay en bas de l'écran : dernier follow, dernier sub, dernier don et dernier raid"><div class="fen-barre">Barre d'overlay · bas d'écran</div><div class="fen-corps"><div class="ec-barre"><div><small>Dernier follow</small>Viewer_1</div><div><small>Dernier sub</small>Viewer_2</div><div><small>Dernier don</small>Viewer_3</div><div><small>Dernier raid</small>Viewer_4</div></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p3.etape1.t" data-edit-label="Coulisses · labels-bridges — étape 1, titre">Les ponts écoutent</h3><p data-edit="coulisses.p3.etape1.d" data-edit-label="Coulisses · labels-bridges — étape 1, texte">Un pour Twitch, un pour YouTube.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p3.etape2.t" data-edit-label="Coulisses · labels-bridges — étape 2, titre">Ils écrivent du texte</h3><p data-edit="coulisses.p3.etape2.d" data-edit-label="Coulisses · labels-bridges — étape 2, texte">De simples fichiers .txt sur le PC.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p3.etape3.t" data-edit-label="Coulisses · labels-bridges — étape 3, titre">OBS relit</h3><p data-edit="coulisses.p3.etape3.d" data-edit-label="Coulisses · labels-bridges — étape 3, texte">Les panneaux HTML se mettent à jour à chaque changement.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p3.chiffre1.n" data-edit-label="Coulisses · labels-bridges — chiffre 1">2</strong><span data-edit="coulisses.p3.chiffre1.l" data-edit-label="Coulisses · labels-bridges — chiffre 1, légende">ponts : Twitch et YouTube</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p3.chiffre2.n" data-edit-label="Coulisses · labels-bridges — chiffre 2">0</strong><span data-edit="coulisses.p3.chiffre2.l" data-edit-label="Coulisses · labels-bridges — chiffre 2, légende">service externe à surveiller</span></div></div>
         </div>
       </div>
 
@@ -378,44 +204,15 @@
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p8.eyebrow" data-edit-label="Coulisses · Overlays &amp; scripts OBS — sur-titre">// Overlays &amp; scripts OBS</div>
           <h2 data-edit="coulisses.p8.title" data-edit-label="Coulisses · Overlays &amp; scripts OBS — titre">Des scènes faites main, qui changent avec les <em class="accent">saisons</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p8.desc1" data-edit-label="Coulisses · Overlays &amp; scripts OBS — paragraphe 1">Toutes les scènes du stream sont des pages web écrites maison et chargées dans OBS : une version de base et des versions festives ou saisonnières, avec les alertes et les labels intégrés directement dans l'overlay pour que tout reste uniforme. Le thème change à la main, par période, plutôt qu'à une date automatique.</p>
-            <p data-edit="coulisses.p8.desc2" data-edit-label="Coulisses · Overlays &amp; scripts OBS — paragraphe 2">Des scripts Lua pilotent OBS : un script de démarrage, un rafraîchissement des sources navigateur avec une case à cocher par source, la coupure automatique de l'écran de fin de raid, et l'affichage du morceau Spotify en cours d'écoute. Un plugin OBS écrit maison retire le fond de la caméra directement sur la carte graphique, sans ralentir le stream. Les mêmes éléments, anonymisés et documentés pas à pas, forment un kit réutilisable par quelqu'un qui débute.</p>
+            <p data-edit="coulisses.p8.court" data-edit-label="Coulisses · Overlays &amp; scripts OBS — texte">Chaque scène du stream est une page web maison chargée dans OBS, avec des versions festives et saisonnières. Des scripts Lua pilotent OBS, et un plugin maison retire le fond de la caméra sur la carte graphique.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p8.status" data-edit-label="Coulisses · Overlays &amp; scripts OBS — note">Le Pack Aulit, accessible à d'autres streamers, est en ligne (bloc suivant) ; un catalogue d'animations est en préparation</span></div>
           <div class="project-stack" data-edit="coulisses.p8.stack" data-edit-label="Coulisses · Overlays &amp; scripts OBS — technologies">HTML · CSS · JavaScript · OBS Lua</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-ov" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
-                </marker>
-              </defs>
-              <line x1="150" y1="60" x2="198" y2="100" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)"/>
-              <line x1="150" y1="130" x2="198" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)"/>
-              <line x1="150" y1="200" x2="198" y2="160" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)"/>
-              <line x1="322" y1="130" x2="372" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)"/>
-              <line x1="260" y1="214" x2="260" y2="174" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-ov)" marker-start="url(#arrow-ov)"/>
-              <rect x="8" y="34" width="142" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="58" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Ponts</text>
-              <text x="79" y="74" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">alertes · labels</text>
-              <rect x="8" y="104" width="142" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Thèmes</text>
-              <text x="79" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">base · festifs</text>
-              <rect x="8" y="174" width="142" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="198" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Panneaux</text>
-              <text x="79" y="214" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">HTML sur mesure</text>
-              <rect x="200" y="92" width="122" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="261" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Overlay</text>
-              <text x="261" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">page HTML</text>
-              <rect x="374" y="92" width="138" height="76" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="443" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">OBS</text>
-              <text x="443" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">sources navigateur</text>
-              <rect x="200" y="218" width="122" height="34" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="261" y="239" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Scripts Lua</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : ponts, thèmes et panneaux, la page d'overlay, puis OBS piloté par des scripts Lua"><li class="ap-sorties">Ponts<i>·</i>Thèmes<i>·</i>Panneaux</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M9 20h6M12 16.5V20"/></svg></span>Overlay HTML</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/></svg></span>OBS</li><li class="mx-trait mx-trait--3" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic cp-ic--v"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg></span>Scripts Lua</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Scripts Lua d'OBS : démarrage, rafraîchissement des sources navigateur, coupure de l'écran de fin de raid, morceau Spotify en cours"><div class="fen-barre">OBS · scripts Lua</div><div class="fen-corps"><ul class="ec-liste"><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Démarrage</span><span>script</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Rafraîchir les sources</span><span>une case par source</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Fin de raid</span><span>coupure auto</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Spotify</span><span>morceau en cours</span></li></ul></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p8.etape1.t" data-edit-label="Coulisses · Overlays &amp; scripts OBS — étape 1, titre">Des pages web faites main</h3><p data-edit="coulisses.p8.etape1.d" data-edit-label="Coulisses · Overlays &amp; scripts OBS — étape 1, texte">Chaque scène du stream est une page chargée dans OBS.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p8.etape2.t" data-edit-label="Coulisses · Overlays &amp; scripts OBS — étape 2, titre">Tout est intégré</h3><p data-edit="coulisses.p8.etape2.d" data-edit-label="Coulisses · Overlays &amp; scripts OBS — étape 2, texte">Alertes et labels vivent dans l'overlay.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p8.etape3.t" data-edit-label="Coulisses · Overlays &amp; scripts OBS — étape 3, titre">Le thème change à la main</h3><p data-edit="coulisses.p8.etape3.d" data-edit-label="Coulisses · Overlays &amp; scripts OBS — étape 3, texte">Base, fêtes ou saisons, par période.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p8.etape4.t" data-edit-label="Coulisses · Overlays &amp; scripts OBS — étape 4, titre">La cam sans fond</h3><p data-edit="coulisses.p8.etape4.d" data-edit-label="Coulisses · Overlays &amp; scripts OBS — étape 4, texte">Un plugin maison le retire sur la carte graphique.</p></div></li></ol></div></div>
+          
         </div>
       </div>
 
@@ -424,15 +221,16 @@
           <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.p16.eyebrow" data-edit-label="Coulisses · Pack Aulit — sur-titre">// Pack Aulit</div>
           <h2 data-edit="coulisses.p16.title" data-edit-label="Coulisses · Pack Aulit — titre">Un pack d'overlays accessible <em class="accent">aux autres streamers</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p16.desc1" data-edit-label="Coulisses · Pack Aulit — paragraphe 1">Le Pack Aulit rassemble des alertes, un chat animé, des transitions, des scènes plein écran, des mini-jeux, des emotes et des personnages dessinés, à installer dans OBS sans rien télécharger d'autre. Un configurateur fabrique les liens à coller dans OBS, avec plus de trente styles au choix.</p>
-            <p data-edit="coulisses.p16.desc2" data-edit-label="Coulisses · Pack Aulit — paragraphe 2">La démonstration ci-contre tourne avec le code même du pack : une démo de chaque famille, l'une après l'autre. Le pack ne garde aucune donnée des viewers au-delà de ce qu'autorise Twitch, et rien n'est envoyé ailleurs que chez Twitch.</p>
+            <p data-edit="coulisses.p16.court" data-edit-label="Coulisses · Pack Aulit — texte">Alertes, chat animé, transitions, scènes, mini-jeux et emotes à installer dans OBS sans rien télécharger, avec plus de trente styles au choix. La démonstration ci-contre tourne avec le code même du pack.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p16.status" data-edit-label="Coulisses · Pack Aulit — note">En ligne sur pack.aulit42369.fr</span></div>
           <div class="project-stack" data-edit="coulisses.p16.stack" data-edit-label="Coulisses · Pack Aulit — technologies">HTML · CSS · JavaScript · API Twitch · OBS</div>
         </div>
         <div class="project-visuals">
-          <iframe class="pack-vitrine" src="https://pack.aulit42369.fr/integre.html" title="Démonstration du Pack Aulit : une animation de chaque famille, en rotation" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : le configurateur fabrique les liens, à coller dans OBS"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 0 0 17c1 0 1.5-.7 1.5-1.5 0-1.2-1-1.4-1-2.5 0-.8.7-1.5 1.5-1.5h2a4.5 4.5 0 0 0 4.5-4.5c0-4-3.8-7-8.5-7z"/><path d="M7.5 11h.01M10 7.5h.01M14.5 7.5h.01"/></svg></span>Configurateur</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span>Liens</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/></svg></span>OBS</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--large"><iframe class="ec-iframe" src="https://pack.aulit42369.fr/integre.html" title="Démonstration du Pack Aulit : une animation de chaque famille, en rotation" loading="lazy" referrerpolicy="no-referrer"></iframe><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p16.etape1.t" data-edit-label="Coulisses · Pack Aulit — étape 1, titre">Je choisis mon style</h3><p data-edit="coulisses.p16.etape1.d" data-edit-label="Coulisses · Pack Aulit — étape 1, texte">Dans le configurateur, parmi plus de trente.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p16.etape2.t" data-edit-label="Coulisses · Pack Aulit — étape 2, titre">Je colle les liens dans OBS</h3><p data-edit="coulisses.p16.etape2.d" data-edit-label="Coulisses · Pack Aulit — étape 2, texte">Rien d'autre à télécharger.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p16.etape3.t" data-edit-label="Coulisses · Pack Aulit — étape 3, titre">Rien ne part ailleurs</h3><p data-edit="coulisses.p16.etape3.d" data-edit-label="Coulisses · Pack Aulit — étape 3, texte">Aucune donnée envoyée ailleurs que chez Twitch.</p></div></li></ol></div></div>
           <p class="pack-vitrine-lien"><a href="https://pack.aulit42369.fr/vitrine.html" rel="noopener">Voir les démos</a> · <a href="https://pack.aulit42369.fr/configurateur.html" rel="noopener">Configurer mon pack</a></p>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p16.chiffre1.n" data-edit-label="Coulisses · Pack Aulit — chiffre 1">30+</strong><span data-edit="coulisses.p16.chiffre1.l" data-edit-label="Coulisses · Pack Aulit — chiffre 1, légende">styles au choix</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p16.chiffre2.n" data-edit-label="Coulisses · Pack Aulit — chiffre 2">0</strong><span data-edit="coulisses.p16.chiffre2.l" data-edit-label="Coulisses · Pack Aulit — chiffre 2, légende">logiciel à télécharger</span></div></div>
         </div>
       </div>
 
@@ -441,74 +239,15 @@
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p4.eyebrow" data-edit-label="Coulisses · Carte à collectionner — sur-titre">// Carte à collectionner</div>
           <h2 data-edit="coulisses.p4.title" data-edit-label="Coulisses · Carte à collectionner — titre">Une extension Twitch <em class="accent">multi-chaînes</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p4.desc1" data-edit-label="Coulisses · Carte à collectionner — paragraphe 1">Les viewers dépensent des points de chaîne pour ouvrir des packs de cartes à collectionner. L'extension gère le français et l'anglais, des effets de cartes holographiques, un mode d'image pleine largeur, l'import de cartes en masse, et un bouton en libre-service pour que chacun supprime ses propres données.</p>
-            <p data-edit="coulisses.p4.desc2" data-edit-label="Coulisses · Carte à collectionner — paragraphe 2">Le morceau le plus coriace a été un problème de cache des sources navigateur OBS qui empêchait les nouvelles formes de pack de s'afficher correctement.</p>
+            <p data-edit="coulisses.p4.court" data-edit-label="Coulisses · Carte à collectionner — texte">Les viewers dépensent leurs points de chaîne pour ouvrir des packs de cartes, avec des effets holographiques, en français et en anglais. Chacun peut supprimer ses propres données d'un bouton.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p4.status" data-edit-label="Coulisses · Carte à collectionner — note">Nouvelle version en examen chez Twitch : elle rejoindra ensuite le serveur dédié</span></div>
           <div class="project-stack" data-edit="coulisses.p4.stack" data-edit-label="Coulisses · Carte à collectionner — technologies">Extension Twitch · Node.js · MongoDB · passage sur le serveur dédié en cours</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-cc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
-                </marker>
-              </defs>
-              <line x1="133" y1="130" x2="213" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-cc)"/>
-              <line x1="375" y1="108" x2="416" y2="86" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-cc)"/>
-              <line x1="375" y1="152" x2="416" y2="174" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-cc)"/>
-              <rect x="8" y="100" width="125" height="60" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="70" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Points de</text>
-              <text x="70" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">chaîne</text>
-              <rect x="215" y="80" width="160" height="100" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="295" y="112" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Extension</text>
-              <text x="295" y="132" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Twitch</text>
-              <text x="295" y="152" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">multi-chaînes</text>
-              <text x="295" y="166" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">MongoDB</text>
-              <rect x="420" y="55" width="95" height="56" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="467" y="79" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Pack de</text>
-              <text x="467" y="95" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">cartes</text>
-              <rect x="420" y="150" width="95" height="56" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="467" y="174" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Overlay</text>
-              <text x="467" y="190" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">OBS</text>
-            </svg>
-          </div>
-          <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (approximatif)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="holo" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#00f5ff"/>
-                  <stop offset="50%" stop-color="#9b5cff"/>
-                  <stop offset="100%" stop-color="#ff2d78"/>
-                </linearGradient>
-              </defs>
-              <rect x="60" y="30" width="90" height="130" rx="8" fill="none" stroke="#1a2540" transform="rotate(-8 105 95)"/>
-              <rect x="195" y="24" width="90" height="130" rx="8" fill="none" stroke="url(#holo)" stroke-width="2"/>
-              <text x="240" y="95" text-anchor="middle" fill="#e8eaf6" font-family="Orbitron, sans-serif" font-size="11" font-weight="900">★</text>
-              <rect x="330" y="30" width="90" height="130" rx="8" fill="none" stroke="#1a2540" transform="rotate(8 375 95)"/>
-              <text x="240" y="184" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Ouverture de pack — carte holographique au centre</text>
-            </svg>
-          </div>
-          <div class="project-preview">
-            <div class="preview-label">Panneau Twitch de la chaîne (d'après capture d'écran réelle)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 150" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="0" width="480" height="140" rx="6" fill="none" stroke="#1a2540"/>
-              <line x1="0" y1="0" x2="480" y2="0" stroke="#00f5ff" stroke-width="2"/>
-              <text x="18" y="28" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Saison 1</text>
-              <text x="440" y="28" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11" text-anchor="end">0/12</text>
-              <rect x="18" y="42" width="72" height="86" rx="5" fill="none" stroke="#1a2540"/>
-              <circle cx="54" cy="85" r="13" fill="none" stroke="#00f5ff"/>
-              <rect x="102" y="42" width="72" height="86" rx="5" fill="none" stroke="#1a2540"/>
-              <circle cx="138" cy="85" r="13" fill="none" stroke="#9b5cff"/>
-              <rect x="186" y="42" width="72" height="86" rx="5" fill="none" stroke="#1a2540"/>
-              <circle cx="222" cy="85" r="13" fill="none" stroke="#ff2d78"/>
-              <text x="290" y="66" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Panneau Twitch de la</text>
-              <text x="290" y="84" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">chaîne — mis à jour</text>
-              <text x="290" y="102" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">en direct chaque saison</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : les points de chaîne, l'extension Twitch multi-chaînes et MongoDB, puis le pack de cartes et l'overlay OBS"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/></svg></span>Points de chaîne</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9.5L5 20v-4H4z"/></svg></span>Extension Twitch</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Pack de cartes<i>·</i>Overlay OBS</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Extension Twitch : ouverture d'un pack, carte holographique au centre, saison 1"><div class="fen-barre">Extension · ouverture de pack</div><div class="fen-corps"><div class="ec-carte-centre"><div class="ec-holo">★</div><b style="font-size:.78rem;color:var(--white)">Carte holographique</b><span class="ec-note">Saison 1</span></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p4.etape1.t" data-edit-label="Coulisses · Carte à collectionner — étape 1, titre">Le viewer dépense ses points</h3><p data-edit="coulisses.p4.etape1.d" data-edit-label="Coulisses · Carte à collectionner — étape 1, texte">Des points de chaîne, pas d'argent.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p4.etape2.t" data-edit-label="Coulisses · Carte à collectionner — étape 2, titre">L'extension ouvre un pack</h3><p data-edit="coulisses.p4.etape2.d" data-edit-label="Coulisses · Carte à collectionner — étape 2, texte">Sur n'importe quelle chaîne qui l'a installée.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p4.etape3.t" data-edit-label="Coulisses · Carte à collectionner — étape 3, titre">La carte apparaît</h3><p data-edit="coulisses.p4.etape3.d" data-edit-label="Coulisses · Carte à collectionner — étape 3, texte">Avec ses effets holographiques, aussi dans OBS.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p4.etape4.t" data-edit-label="Coulisses · Carte à collectionner — étape 4, titre">Ses données lui appartiennent</h3><p data-edit="coulisses.p4.etape4.d" data-edit-label="Coulisses · Carte à collectionner — étape 4, texte">Un bouton pour supprimer les siennes.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p4.chiffre1.n" data-edit-label="Coulisses · Carte à collectionner — chiffre 1">FR · EN</strong><span data-edit="coulisses.p4.chiffre1.l" data-edit-label="Coulisses · Carte à collectionner — chiffre 1, légende">deux langues</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p4.chiffre2.n" data-edit-label="Coulisses · Carte à collectionner — chiffre 2">Multi</strong><span data-edit="coulisses.p4.chiffre2.l" data-edit-label="Coulisses · Carte à collectionner — chiffre 2, légende">chaînes</span></div></div>
         </div>
       </div>
 
@@ -517,66 +256,16 @@
           <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.escape.eyebrow" data-edit-label="Coulisses · Escape Fragments — sur-titre">// Escape Fragments</div>
           <h2 data-edit="coulisses.escape.title" data-edit-label="Coulisses · Escape Fragments — titre">Une escape room que le chat résout <em class="accent">ensemble</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.escape.desc1" data-edit-label="Coulisses · Escape Fragments — paragraphe 1">Chaque viewer reçoit un fragment d'indice différent, et personne ne peut résoudre l'énigme seul : il faut mettre les indices en commun dans le tchat. Les fragments arrivent via une extension Twitch (le viewer partage son identité, sans rien taper), via la page joueur ou avec une commande dans le chat. Le serveur vérifie la signature Twitch de chaque viewer.</p>
-            <p data-edit="coulisses.escape.desc2" data-edit-label="Coulisses · Escape Fragments — paragraphe 2">Autour du jeu : 33 scénarios, dont des thématiques pour les fêtes du calendrier français et 18 jouables en solo, 28 thèmes visuels, une régie à onglets, un éditeur de scénarios avec aperçu en direct de l'overlay (couleurs, polices, image de fond), des profils d'agents avec classement, une télécommande installable sur téléphone et des annonces Discord. Chaque option — indices automatiques, mode traître, indice secret du streamer, mode versus, énigme entre streams — s'active depuis la régie.</p>
+            <p data-edit="coulisses.escape.court" data-edit-label="Coulisses · Escape Fragments — texte">Chaque viewer reçoit un fragment d'indice différent, et personne ne peut résoudre l'énigme seul : il faut les mettre en commun dans le tchat. 33 scénarios, dont 18 jouables en solo, 28 thèmes visuels, et chaque option, du mode traître au mode versus, s'active depuis la régie.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.escape.status" data-edit-label="Coulisses · Escape Fragments — note">Les cartes de résultat de fin de partie ne sont jamais publiées automatiquement : tout reste sous contrôle du streamer</span></div>
           <p style="margin-top:14px;"><a href="escape-fragments.html" class="btn btn-secondary" style="font-size:0.85rem;padding:9px 18px;" data-edit="coulisses.escape.link" data-edit-label="Coulisses · Escape Fragments — bouton classement">Voir le classement des agents</a></p>
           <div class="project-stack" data-edit="coulisses.escape.stack" data-edit-label="Coulisses · Escape Fragments — technologies">Node.js · Extension Twitch · EventSub · MongoDB · passage sur le serveur dédié en cours</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-ef" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#ff2d78"/>
-                </marker>
-              </defs>
-              <line x1="128" y1="130" x2="188" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-start="url(#arrow-ef)" marker-end="url(#arrow-ef)"/>
-              <line x1="332" y1="104" x2="398" y2="46" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ef)"/>
-              <line x1="332" y1="130" x2="398" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ef)"/>
-              <line x1="332" y1="156" x2="398" y2="214" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-ef)"/>
-              <line x1="260" y1="192" x2="260" y2="216" stroke="#ff2d78" stroke-width="1.5" marker-start="url(#arrow-ef)" marker-end="url(#arrow-ef)"/>
-              <rect x="8" y="84" width="120" height="92" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="68" y="122" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Viewers</text>
-              <text x="68" y="140" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">tchat · extension</text>
-              <text x="68" y="154" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">page joueur</text>
-              <rect x="190" y="68" width="142" height="124" rx="6" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
-              <text x="261" y="116" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Serveur</text>
-              <text x="261" y="136" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Escape Fragments</text>
-              <text x="261" y="156" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Node.js · EventSub</text>
-              <text x="261" y="170" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">fragments répartis</text>
-              <rect x="400" y="22" width="112" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="456" y="51" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Overlay OBS</text>
-              <rect x="400" y="106" width="112" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="456" y="127" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Régie +</text>
-              <text x="456" y="143" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">télécommande</text>
-              <rect x="400" y="190" width="112" height="48" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="456" y="219" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Discord</text>
-              <rect x="200" y="218" width="122" height="34" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="261" y="239" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">MongoDB</text>
-            </svg>
-          </div>
-          <div class="project-preview">
-            <div class="preview-label">Aperçu schématique de la page joueur (illustration)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="472" height="182" rx="10" fill="none" stroke="#1a2540"/>
-              <text x="20" y="28" fill="#ff2d78" font-family="Orbitron, sans-serif" font-size="13" font-weight="900" letter-spacing="1">ESCAPE FRAGMENTS</text>
-              <text x="20" y="54" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">TON FRAGMENT</text>
-              <rect x="20" y="60" width="270" height="64" rx="6" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
-              <text x="34" y="84" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12">Indice : « ▒▒▒▒ ▒▒▒ ▒▒▒▒▒▒ »</text>
-              <text x="34" y="106" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Les autres viewers ont les morceaux qui te manquent</text>
-              <text x="310" y="54" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">ÉQUIPE</text>
-              <rect x="310" y="60" width="150" height="64" rx="6" fill="none" stroke="#1a2540"/>
-              <circle cx="334" cy="82" r="8" fill="none" stroke="#00f5ff"/>
-              <circle cx="364" cy="82" r="8" fill="none" stroke="#9b5cff"/>
-              <circle cx="394" cy="82" r="8" fill="none" stroke="#ff2d78"/>
-              <circle cx="424" cy="82" r="8" fill="none" stroke="#1a2540"/>
-              <text x="385" y="112" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">fragments mis en commun</text>
-              <rect x="20" y="140" width="440" height="32" rx="5" fill="none" stroke="#1a2540"/>
-              <text x="34" y="160" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Écris la solution dans le tchat pour valider l'énigme</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : les viewers par le tchat, l'extension ou la page joueur, le serveur Escape Fragments, puis l'overlay, la régie et Discord"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.8 3.1 2.6 3.5 5.2"/></svg></span>Viewers</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="7" rx="1.5"/><rect x="3.5" y="13" width="17" height="7" rx="1.5"/><path d="M7.5 7.5h.01M7.5 16.5h.01"/></svg></span>Serveur</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Overlay OBS<i>·</i>Régie<i>·</i>Discord</li></ol>
+          <div class="cp-cadre mx-grille"><div class="tel" role="img" aria-label="Page joueur d'Escape Fragments : ton fragment d'indice, la mise en commun de l'équipe, la solution à écrire dans le tchat"><div class="tel-ecran"><div class="tel-tete"><b>ESCAPE FRAGMENTS</b></div><div class="tel-champ"><small>Ton fragment</small><div>Indice : « ▒▒▒▒ ▒▒▒ ▒▒▒▒▒▒ »</div></div><p class="ec-note" style="margin:0 0 8px">Les autres viewers ont les morceaux qui te manquent.</p><div class="tel-raid"><span><small>Équipe</small><b>Fragments en commun</b></span><em>Tchat</em></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.escape.etape1.t" data-edit-label="Coulisses · Escape Fragments — étape 1, titre">Chacun reçoit un fragment</h3><p data-edit="coulisses.escape.etape1.d" data-edit-label="Coulisses · Escape Fragments — étape 1, texte">Un indice différent par viewer.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.escape.etape2.t" data-edit-label="Coulisses · Escape Fragments — étape 2, titre">Le serveur vérifie</h3><p data-edit="coulisses.escape.etape2.d" data-edit-label="Coulisses · Escape Fragments — étape 2, texte">La signature Twitch de chaque viewer.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.escape.etape3.t" data-edit-label="Coulisses · Escape Fragments — étape 3, titre">Le tchat met en commun</h3><p data-edit="coulisses.escape.etape3.d" data-edit-label="Coulisses · Escape Fragments — étape 3, texte">Personne ne peut résoudre seul.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.escape.etape4.t" data-edit-label="Coulisses · Escape Fragments — étape 4, titre">La solution se valide</h3><p data-edit="coulisses.escape.etape4.d" data-edit-label="Coulisses · Escape Fragments — étape 4, texte">En l'écrivant dans le tchat.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.escape.chiffre1.n" data-edit-label="Coulisses · Escape Fragments — chiffre 1">33</strong><span data-edit="coulisses.escape.chiffre1.l" data-edit-label="Coulisses · Escape Fragments — chiffre 1, légende">scénarios, dont 18 en solo</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.escape.chiffre2.n" data-edit-label="Coulisses · Escape Fragments — chiffre 2">28</strong><span data-edit="coulisses.escape.chiffre2.l" data-edit-label="Coulisses · Escape Fragments — chiffre 2, légende">thèmes visuels</span></div></div>
         </div>
       </div>
 
@@ -585,41 +274,15 @@
           <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.p13.eyebrow" data-edit-label="Coulisses · Quiz du chat — sur-titre">// Quiz du chat</div>
           <h2 data-edit="coulisses.p13.title" data-edit-label="Coulisses · Quiz du chat — titre">Un quiz <em class="accent">culture gaming</em> dans le chat</h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p13.desc1" data-edit-label="Coulisses · Quiz du chat — paragraphe 1">Un modérateur tape !quiz et le bot pose une question dans le chat : le premier qui trouve la bonne réponse marque des points, deux s’il répond vite. 308 questions sur 24 thèmes, de Mario à Valorant en passant par Minecraft, les jeux indés et le rétro.</p>
-            <p data-edit="coulisses.p13.desc2" data-edit-label="Coulisses · Quiz du chat — paragraphe 2">Les réponses sont tolérantes (accents, majuscules, ponctuation, et une faute admise sur les mots longs), parce qu’on tape vite dans un chat. Les scores se cumulent d’un stream à l’autre sur une saison, avec !score et !classement, et chacun peut effacer le sien.</p>
+            <p data-edit="coulisses.p13.court" data-edit-label="Coulisses · Quiz du chat — texte">Un modérateur tape !quiz, le premier qui trouve marque des points, deux s'il répond vite : 308 questions sur 24 thèmes. Les réponses tolèrent les fautes de frappe et les scores se cumulent sur une saison.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p13.status" data-edit-label="Coulisses · Quiz du chat — note">Le panneau « Quiz » sous le stream se régénère tout seul quand des questions sont ajoutées</span></div>
           <div class="project-stack" data-edit="coulisses.p13.stack" data-edit-label="Coulisses · Quiz du chat — technologies">Node.js sans dépendance · chat Twitch · compte bot dédié</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-qz" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#ff2d78"/>
-                </marker>
-              </defs>
-              <line x1="150" y1="130" x2="198" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-qz)"/>
-              <line x1="322" y1="112" x2="372" y2="56" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-qz)"/>
-              <line x1="322" y1="130" x2="372" y2="130" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-qz)"/>
-              <line x1="322" y1="148" x2="372" y2="204" stroke="#ff2d78" stroke-width="1.5" marker-end="url(#arrow-qz)"/>
-              <rect x="8" y="98" width="142" height="64" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Chat Twitch</text>
-              <text x="79" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">!quiz · réponses</text>
-              <rect x="200" y="92" width="122" height="76" rx="6" fill="none" stroke="#ff2d78" stroke-width="1.5"/>
-              <text x="261" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bot quiz</text>
-              <text x="261" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">30 s par question</text>
-              <rect x="374" y="30" width="138" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="443" y="54" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Question</text>
-              <text x="443" y="70" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">177 · 14 thèmes</text>
-              <rect x="374" y="104" width="138" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="443" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Points</text>
-              <text x="443" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">2 si rapide, sinon 1</text>
-              <rect x="374" y="178" width="138" height="52" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="443" y="202" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Classement</text>
-              <text x="443" y="218" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">par saison</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : le chat Twitch avec la commande !quiz, le bot, puis les points et le classement"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9.5L5 20v-4H4z"/></svg></span>Chat Twitch</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></svg></span>Bot quiz</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Points<i>·</i>Classement</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Chat Twitch : un modérateur lance !quiz, le bot pose une question, le plus rapide gagne deux points"><div class="fen-barre">Chat Twitch</div><div class="fen-corps"><div class="ec-chat"><p><b>Modo :</b> !quiz</p><p class="bot"><b>Bot quiz :</b> question du thème Minecraft…</p><p><b>Viewer_1 :</b> sa réponse</p><p class="bot"><b>Bot quiz :</b> bravo Viewer_1, +2 points (rapide)</p></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p13.etape1.t" data-edit-label="Coulisses · Quiz du chat — étape 1, titre">Un modo tape !quiz</h3><p data-edit="coulisses.p13.etape1.d" data-edit-label="Coulisses · Quiz du chat — étape 1, texte">Le bot pose une question dans le chat.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p13.etape2.t" data-edit-label="Coulisses · Quiz du chat — étape 2, titre">Le premier qui trouve gagne</h3><p data-edit="coulisses.p13.etape2.d" data-edit-label="Coulisses · Quiz du chat — étape 2, texte">1 point, 2 s'il répond vite.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p13.etape3.t" data-edit-label="Coulisses · Quiz du chat — étape 3, titre">Les fautes de frappe passent</h3><p data-edit="coulisses.p13.etape3.d" data-edit-label="Coulisses · Quiz du chat — étape 3, texte">Accents, majuscules, une faute sur les mots longs.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p13.etape4.t" data-edit-label="Coulisses · Quiz du chat — étape 4, titre">La saison continue</h3><p data-edit="coulisses.p13.etape4.d" data-edit-label="Coulisses · Quiz du chat — étape 4, texte">Scores cumulés, !score et !classement.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p13.chiffre1.n" data-edit-label="Coulisses · Quiz du chat — chiffre 1">308</strong><span data-edit="coulisses.p13.chiffre1.l" data-edit-label="Coulisses · Quiz du chat — chiffre 1, légende">questions</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p13.chiffre2.n" data-edit-label="Coulisses · Quiz du chat — chiffre 2">24</strong><span data-edit="coulisses.p13.chiffre2.l" data-edit-label="Coulisses · Quiz du chat — chiffre 2, légende">thèmes</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p13.chiffre3.n" data-edit-label="Coulisses · Quiz du chat — chiffre 3">2</strong><span data-edit="coulisses.p13.chiffre3.l" data-edit-label="Coulisses · Quiz du chat — chiffre 3, légende">points si on répond vite</span></div></div>
         </div>
       </div>
 
@@ -628,81 +291,16 @@
           <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p9.eyebrow" data-edit-label="Coulisses · Jeux mobiles — sur-titre">// Jeux mobiles</div>
           <h2 data-edit="coulisses.p9.title" data-edit-label="Coulisses · Jeux mobiles — titre">Quatre jeux, jouables <em class="accent">partout</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p9.desc1" data-edit-label="Coulisses · Jeux mobiles — paragraphe 1">LUMEN (un puzzle de fusion d'orbes), ÉCHO (un labyrinthe dans le noir), Résonance (un jeu d'ondes) et Fragments (un party game d'évasion sur plusieurs téléphones, tiré d'Escape Fragments). Chacun se joue dans le navigateur et s'installe comme une appli (PWA), avec une version Android native visant le Google Play Store.</p>
-            <p data-edit="coulisses.p9.desc2" data-edit-label="Coulisses · Jeux mobiles — paragraphe 2">Les quatre partagent un Défi du jour : la même partie pour tout le monde, qui change à minuit heure de Paris, avec une série de jours consécutifs. Le résultat se partage en texte ou en image au format story, et chaque jeu présente les trois autres. Chacun garde son dépôt et son domaine : seul le code du défi est commun, copié à l'identique dans les quatre.</p>
-            <p data-edit="coulisses.p9.desc3" data-edit-label="Coulisses · Jeux mobiles — paragraphe 3">ÉCHO parle 7 langues, Résonance 6, LUMEN et Fragments le français et l'anglais. Chaque jeu a sa page de confidentialité et de conditions d'utilisation.</p>
+            <p data-edit="coulisses.p9.court" data-edit-label="Coulisses · Jeux mobiles — texte">LUMEN, ÉCHO, Résonance et Fragments se jouent dans le navigateur, s'installent comme une appli et visent le Google Play Store. Les quatre partagent un Défi du jour, le même pour tout le monde, qui change à minuit.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p9.status" data-edit-label="Coulisses · Jeux mobiles — note">Applis Android prêtes pour Google Play, sortie à venir : en attendant, ils s'installent depuis la page Jeux</span></div>
           <p style="margin-top:14px;"><a href="jeux.html" class="btn btn-secondary" style="font-size:0.85rem;padding:9px 18px;" data-edit="coulisses.p9.link" data-edit-label="Coulisses · Jeux mobiles — bouton">Voir les jeux</a></p>
           <div class="project-stack" data-edit="coulisses.p9.stack" data-edit-label="Coulisses · Jeux mobiles — technologies">PWA · Android Studio · serveur dédié (copie de secours sur GitHub Pages)</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrations des quatre jeux : fusion d'orbes, labyrinthe dans le noir, ondes, évasion multi-téléphones">
-              <defs>
-                <radialGradient id="gO1" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff3c4"/><stop offset="0.5" stop-color="#ffb020"/><stop offset="1" stop-color="#8a4b00"/></radialGradient>
-                <radialGradient id="gO2" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset="0.35" stop-color="#ffd04d"/><stop offset="1" stop-color="#b86a00"/></radialGradient>
-              </defs>
-              <g transform="translate(0,0)">
-                <rect width="250" height="150" rx="8" fill="#0a1020" stroke="#1a2540"/>
-                <line x1="0" y1="0" x2="250" y2="0" stroke="#ffb020" stroke-width="2"/>
-                <text x="14" y="136" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">LUMEN</text>
-                <text x="67" y="136" fill="#ffb020" font-family="Rajdhani, sans-serif" font-size="10">fusion d'orbes</text>
-                <circle cx="62" cy="62" r="14" fill="url(#gO1)"/>
-                <circle cx="100" cy="68" r="14" fill="url(#gO1)"/>
-                <path d="M118 62 L142 62" stroke="#ffb020" stroke-width="1.5" stroke-dasharray="3 3"/>
-                <path d="M138 56 L144 62 L138 68" fill="none" stroke="#ffb020" stroke-width="1.5"/>
-                <circle cx="188" cy="62" r="30" fill="url(#gO2)"/>
-                <circle cx="188" cy="62" r="42" fill="none" stroke="#ffb020" stroke-opacity="0.25"/>
-                <circle cx="80" cy="108" r="7" fill="url(#gO1)" opacity="0.7"/>
-                <circle cx="122" cy="104" r="9" fill="url(#gO1)" opacity="0.7"/>
-              </g>
-              <g transform="translate(270,0)">
-                <rect width="250" height="150" rx="8" fill="#0a1020" stroke="#1a2540"/>
-                <line x1="0" y1="0" x2="250" y2="0" stroke="#00f5ff" stroke-width="2"/>
-                <text x="14" y="136" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">ÉCHO</text>
-                <text x="58" y="136" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="10">labyrinthe dans le noir</text>
-                <g stroke="#1a2c4a" stroke-width="3" fill="none" stroke-linecap="round">
-                  <path d="M30 30 H100 V60 H60 V90 H150"/><path d="M130 30 H220 V70"/><path d="M180 100 H220 V50 H170"/><path d="M30 110 H110"/>
-                </g>
-                <circle cx="60" cy="75" r="5" fill="#00f5ff"/>
-                <circle cx="60" cy="75" r="16" fill="none" stroke="#00f5ff" stroke-opacity="0.7"/>
-                <circle cx="60" cy="75" r="32" fill="none" stroke="#00f5ff" stroke-opacity="0.4"/>
-                <circle cx="60" cy="75" r="50" fill="none" stroke="#00f5ff" stroke-opacity="0.18"/>
-                <path d="M120 90 H150" stroke="#00f5ff" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
-                <rect x="212" y="62" width="10" height="16" rx="2" fill="none" stroke="#ffb020"/>
-              </g>
-              <g transform="translate(0,170)">
-                <rect width="250" height="150" rx="8" fill="#0a1020" stroke="#1a2540"/>
-                <line x1="0" y1="0" x2="250" y2="0" stroke="#9b5cff" stroke-width="2"/>
-                <text x="14" y="136" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Résonance</text>
-                <text x="103" y="136" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="10">jeu d'ondes</text>
-                <g fill="none" stroke="#9b5cff">
-                  <circle cx="90" cy="70" r="14" stroke-opacity="0.9"/><circle cx="90" cy="70" r="28" stroke-opacity="0.6"/><circle cx="90" cy="70" r="42" stroke-opacity="0.35"/><circle cx="90" cy="70" r="56" stroke-opacity="0.15"/>
-                </g>
-                <g fill="none" stroke="#ff2d78">
-                  <circle cx="165" cy="70" r="14" stroke-opacity="0.9"/><circle cx="165" cy="70" r="28" stroke-opacity="0.6"/><circle cx="165" cy="70" r="42" stroke-opacity="0.35"/><circle cx="165" cy="70" r="56" stroke-opacity="0.15"/>
-                </g>
-                <circle cx="127" cy="52" r="4" fill="#e8eaf6"/><circle cx="127" cy="88" r="4" fill="#e8eaf6"/>
-              </g>
-              <g transform="translate(270,170)">
-                <rect width="250" height="150" rx="8" fill="#0a1020" stroke="#1a2540"/>
-                <line x1="0" y1="0" x2="250" y2="0" stroke="#ff2d78" stroke-width="2"/>
-                <text x="14" y="136" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="14" font-weight="700">Fragments</text>
-                <text x="103" y="136" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="10">évasion multi-téléphones</text>
-                <rect x="30" y="22" width="44" height="82" rx="7" fill="#0d1428" stroke="#ff2d78"/>
-                <rect x="36" y="32" width="32" height="56" rx="3" fill="none" stroke="#ff2d78" stroke-opacity="0.4"/>
-                <path d="M0 40 l10 0 l0 14 l-10 0 z" fill="#ff2d78" opacity="0.8" transform="translate(40,0)"/>
-                <rect x="100" y="22" width="44" height="82" rx="7" fill="#0d1428" stroke="#00f5ff"/>
-                <rect x="106" y="32" width="32" height="56" rx="3" fill="none" stroke="#00f5ff" stroke-opacity="0.4"/>
-                <path d="M0 62 l10 0 l0 14 l-10 0 z" fill="#00f5ff" opacity="0.8" transform="translate(110,0)"/>
-                <rect x="170" y="22" width="44" height="82" rx="7" fill="#0d1428" stroke="#9b5cff"/>
-                <rect x="176" y="32" width="32" height="56" rx="3" fill="none" stroke="#9b5cff" stroke-opacity="0.4"/>
-                <path d="M0 40 l10 0 l0 14 l-10 0 z" fill="#9b5cff" opacity="0.8" transform="translate(180,0)"/>
-                <path d="M78 54 H98 M148 66 H168" stroke="#e8eaf6" stroke-opacity="0.5" stroke-dasharray="3 3"/>
-              </g>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : les quatre jeux, le Défi du jour commun, puis le navigateur et Android"><li class="ap-sorties">LUMEN<i>·</i>ÉCHO<i>·</i>Résonance<i>·</i>Fragments</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/></svg></span>Défi du jour</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Navigateur<i>·</i>Android</li></ol>
+          <div class="cp-cadre mx-grille"><div class="tel" role="img" aria-label="Écran d'un jeu : le Défi du jour, la série de jours, le partage du résultat et les trois autres jeux"><div class="tel-ecran"><div class="tel-tete"><b>DÉFI DU JOUR</b></div><div class="tel-champ"><small>Aujourd'hui</small><div>La même partie pour tout le monde</div></div><div class="tel-champ"><small>Série</small><div>Jours consécutifs</div></div><div class="tel-scenes"><span class="on">Partager</span><span>Story</span></div><div class="tel-raid"><span><small>Mes autres jeux</small><b>ÉCHO · Résonance · Fragments</b></span></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p9.etape1.t" data-edit-label="Coulisses · Jeux mobiles — étape 1, titre">On joue tout de suite</h3><p data-edit="coulisses.p9.etape1.d" data-edit-label="Coulisses · Jeux mobiles — étape 1, texte">Dans le navigateur, ou installé comme une appli.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p9.etape2.t" data-edit-label="Coulisses · Jeux mobiles — étape 2, titre">Le même défi pour tous</h3><p data-edit="coulisses.p9.etape2.d" data-edit-label="Coulisses · Jeux mobiles — étape 2, texte">Il change à minuit, heure de Paris.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p9.etape3.t" data-edit-label="Coulisses · Jeux mobiles — étape 3, titre">On partage son résultat</h3><p data-edit="coulisses.p9.etape3.d" data-edit-label="Coulisses · Jeux mobiles — étape 3, texte">En texte ou en image au format story.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p9.chiffre1.n" data-edit-label="Coulisses · Jeux mobiles — chiffre 1">4</strong><span data-edit="coulisses.p9.chiffre1.l" data-edit-label="Coulisses · Jeux mobiles — chiffre 1, légende">jeux</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p9.chiffre2.n" data-edit-label="Coulisses · Jeux mobiles — chiffre 2">7</strong><span data-edit="coulisses.p9.chiffre2.l" data-edit-label="Coulisses · Jeux mobiles — chiffre 2, légende">langues pour ÉCHO</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p9.chiffre3.n" data-edit-label="Coulisses · Jeux mobiles — chiffre 3">Minuit</strong><span data-edit="coulisses.p9.chiffre3.l" data-edit-label="Coulisses · Jeux mobiles — chiffre 3, légende">nouveau Défi du jour</span></div></div>
         </div>
       </div>
 
@@ -711,65 +309,15 @@
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p5.eyebrow" data-edit-label="Coulisses · La Cabane — sur-titre">// La Cabane</div>
           <h2 data-edit="coulisses.p5.title" data-edit-label="Coulisses · La Cabane — titre">Le suivi des chaînes de la <em class="accent">communauté</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p5.desc1" data-edit-label="Coulisses · La Cabane — paragraphe 1">Le suivi existait d'abord dans un fichier Excel : Power Query pour récupérer followers et données de stream via l'API Twitch, une macro VBA pour les snapshots quotidiens, et des métriques SullyGnome ajoutées à la main — pas de scraping automatique, contraire à leurs conditions d'utilisation.</p>
-            <p data-edit="coulisses.p5.desc2" data-edit-label="Coulisses · La Cabane — paragraphe 2">La Cabane en est la version web : un annuaire des streamers suivis (statut, rôle, historique de follows daté) et un pipeline de propositions où chaque chaîne passe par un vote du staff avant d'être acceptée. Les données vivent dans un dépôt privé ; un robot en tire une vitrine publique, sans aucune donnée interne, avec une page par streamer.</p>
-            <p data-edit="coulisses.p5.desc3" data-edit-label="Coulisses · La Cabane — paragraphe 3">Les inscriptions aux événements passent par un relais Cloudflare : l'adresse secrète du salon Discord n'est plus dans la page publique. Un contrôle qualité Lighthouse tourne tout seul à chaque modification du site.</p>
+            <p data-edit="coulisses.p5.court" data-edit-label="Coulisses · La Cabane — texte">Un annuaire des streamers suivis par la communauté, où chaque nouvelle chaîne passe par un vote du staff. Les données restent privées ; un robot en tire une vitrine publique, avec une page par streamer.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p5.status" data-edit-label="Coulisses · La Cabane — note">Volontairement séparée de la page Streamers de ce site — deux outils distincts, pas de pont entre les deux</span></div>
           <div class="project-stack" data-edit="coulisses.p5.stack" data-edit-label="Coulisses · La Cabane — technologies">Power Query · VBA · JSON · GitHub Actions · GitHub Pages · Cloudflare Workers</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-lc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
-                </marker>
-              </defs>
-              <line x1="148" y1="72" x2="206" y2="112" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-lc)"/>
-              <line x1="148" y1="196" x2="206" y2="156" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-lc)"/>
-              <line x1="365" y1="134" x2="413" y2="134" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-lc)"/>
-              <rect x="8" y="36" width="140" height="56" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="78" y="60" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Équipe</text>
-              <text x="78" y="78" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">staff (avis)</text>
-              <rect x="8" y="168" width="140" height="56" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="78" y="192" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">API Twitch</text>
-              <text x="78" y="210" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">(followers)</text>
-              <rect x="210" y="100" width="155" height="68" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="287" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">cabane-data.json</text>
-              <text x="287" y="148" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">dépôt privé</text>
-              <rect x="416" y="100" width="100" height="68" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="466" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">La Cabane</text>
-              <text x="466" y="146" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">(public)</text>
-            </svg>
-          </div>
-          <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (d'après capture d'écran réelle)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 170" xmlns="http://www.w3.org/2000/svg">
-              <text x="20" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Chaîne</text>
-              <text x="220" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Statut</text>
-              <text x="320" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Rôle</text>
-              <text x="410" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="11">Follows</text>
-              <line x1="16" y1="36" x2="464" y2="36" stroke="#1a2540"/>
-              <text x="20" y="62" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Chaîne_A</text>
-              <circle cx="105" cy="58" r="3" fill="#ff2d78"/>
-              <text x="112" y="62" fill="#ff2d78" font-family="Rajdhani, sans-serif" font-size="10" font-weight="700">LIVE</text>
-              <text x="220" y="62" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="12">Présent</text>
-              <text x="320" y="62" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="12">Admin</text>
-              <text x="410" y="62" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">615</text>
-              <line x1="16" y1="76" x2="464" y2="76" stroke="#141c30"/>
-              <text x="20" y="98" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Chaîne_B</text>
-              <text x="220" y="98" fill="#75849e" font-family="Rajdhani, sans-serif" font-size="12">À renseigner</text>
-              <text x="320" y="98" fill="#75849e" font-family="Rajdhani, sans-serif" font-size="12">—</text>
-              <text x="410" y="98" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">252</text>
-              <line x1="16" y1="112" x2="464" y2="112" stroke="#141c30"/>
-              <text x="20" y="134" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="600">Chaîne_C</text>
-              <text x="220" y="134" fill="#00f5ff" font-family="Rajdhani, sans-serif" font-size="12">Présent</text>
-              <text x="320" y="134" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="12">Streamer</text>
-              <text x="410" y="134" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">396</text>
-              <text x="20" y="158" fill="#75849e" font-family="Rajdhani, sans-serif" font-size="10">Suivi via l'API Twitch, relevés datés — exemple</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : l'équipe du staff et l'API Twitch, les données dans un dépôt privé, puis la vitrine publique La Cabane"><li class="ap-sorties">Staff<i>·</i>API Twitch</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></span>Dépôt privé</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.5 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.5-3.5-8.5s1-5.9 3.5-8.5z"/></svg></span>Vitrine publique</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Annuaire de La Cabane, exemple : chaîne, statut, rôle et nombre de follows suivis via l'API Twitch"><div class="fen-barre">Annuaire · exemple</div><div class="fen-corps"><table class="ec-tableau"><thead><tr><th>Chaîne</th><th>Statut</th><th>Rôle</th><th>Follows</th></tr></thead><tbody><tr><td>Chaîne_A</td><td class="ec-live">LIVE</td><td>Admin</td><td>615</td></tr><tr><td>Chaîne_B</td><td>À renseigner</td><td>—</td><td>252</td></tr><tr><td>Chaîne_C</td><td>Présent</td><td>Streamer</td><td>396</td></tr></tbody></table><p class="ec-note" style="margin:8px 0 0">Relevés datés — exemple</p></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p5.etape1.t" data-edit-label="Coulisses · La Cabane — étape 1, titre">Une chaîne est proposée</h3><p data-edit="coulisses.p5.etape1.d" data-edit-label="Coulisses · La Cabane — étape 1, texte">Elle entre dans le pipeline de propositions.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p5.etape2.t" data-edit-label="Coulisses · La Cabane — étape 2, titre">Le staff vote</h3><p data-edit="coulisses.p5.etape2.d" data-edit-label="Coulisses · La Cabane — étape 2, texte">Elle est acceptée ou non.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p5.etape3.t" data-edit-label="Coulisses · La Cabane — étape 3, titre">Un robot publie la vitrine</h3><p data-edit="coulisses.p5.etape3.d" data-edit-label="Coulisses · La Cabane — étape 3, texte">Une page par streamer, sans aucune donnée interne.</p></div></li></ol></div></div>
+          
         </div>
       </div>
 
@@ -778,69 +326,32 @@
           <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p6.eyebrow" data-edit-label="Coulisses · Bot Discord — sur-titre">// Bot Discord</div>
           <h2 data-edit="coulisses.p6.title" data-edit-label="Coulisses · Bot Discord — titre">Le gardien du serveur <em class="accent">d'entraide</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p6.desc1" data-edit-label="Coulisses · Bot Discord — paragraphe 1">Le bot qui fait tourner le serveur d'entraide entre streamers. L'entrée est filtrée : les nouveaux membres acceptent le règlement puis soumettent leur chaîne Twitch ou YouTube pour vérification avant d'obtenir l'accès complet — pas une communauté ouverte à tout le monde.</p>
-            <p data-edit="coulisses.p6.desc2" data-edit-label="Coulisses · Bot Discord — paragraphe 2">Au-delà de l'accueil : modération avec escalade automatique après plusieurs avertissements, anniversaires, sondages, salons vocaux temporaires, zone promo avec délai entre deux posts, annuaire des membres, tickets, concours, et annonces automatiques (chaînes suivies en direct, jeux gratuits, paliers de followers). Un panneau d'administration web permet de tout gérer sans passer par les commandes Discord.</p>
-            <p data-edit="coulisses.p6.desc3" data-edit-label="Coulisses · Bot Discord — paragraphe 3">Le bot tourne désormais sur un serveur dédié, avec une adresse fixe et un certificat propre pour son panneau d'administration — fini le tunnel dont l'adresse changeait et cassait les connexions Discord et Twitch. Le tout est surveillé par le tableau de santé présenté plus bas.</p>
+            <p data-edit="coulisses.p6.court" data-edit-label="Coulisses · Bot Discord — texte">L'entrée du serveur d'entraide est filtrée : chaque nouveau membre fait vérifier sa chaîne avant d'avoir accès à tout. Modération, sondages, tickets et annonces de live se gèrent depuis un panneau web.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p6.status" data-edit-label="Coulisses · Bot Discord — note">Le même bot tourne aussi sur d'autres serveurs, avec des réglages propres à chacun</span></div>
           <div class="project-stack" data-edit="coulisses.p6.stack" data-edit-label="Coulisses · Bot Discord — technologies">Discord · commandes slash · panneau d'admin web · serveur dédié · Caddy</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-db" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#9b5cff"/>
-                </marker>
-              </defs>
-              <line x1="150" y1="112" x2="208" y2="45" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-db)"/>
-              <line x1="150" y1="122" x2="208" y2="100" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-db)"/>
-              <line x1="150" y1="138" x2="208" y2="160" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-db)"/>
-              <line x1="150" y1="148" x2="208" y2="215" stroke="#9b5cff" stroke-width="1.5" marker-end="url(#arrow-db)"/>
-              <rect x="18" y="100" width="132" height="60" rx="6" fill="none" stroke="#9b5cff" stroke-width="1.5"/>
-              <text x="84" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bot</text>
-              <text x="84" y="144" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Discord</text>
-              <rect x="212" y="15" width="160" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="292" y="34" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Accueil &amp;</text>
-              <text x="292" y="50" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">vérification</text>
-              <rect x="212" y="71" width="160" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="292" y="90" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Modération</text>
-              <text x="292" y="106" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">avertissements, escalade</text>
-              <rect x="212" y="127" width="160" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="292" y="146" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Vie du</text>
-              <text x="292" y="162" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">serveur</text>
-              <rect x="212" y="183" width="160" height="46" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="292" y="202" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Suivi Twitch</text>
-              <text x="292" y="218" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">&amp; annonces</text>
-            </svg>
-          </div>
-          <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (approximatif)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 170" xmlns="http://www.w3.org/2000/svg">
-              <text x="20" y="26" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="12">/verification soumettre</text>
-              <rect x="20" y="38" width="440" height="60" rx="6" fill="#080c18"/>
-              <rect x="20" y="38" width="3" height="60" fill="#9b5cff"/>
-              <text x="38" y="60" fill="#9b5cff" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700">VÉRIFICATION</text>
-              <text x="38" y="80" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13">Chaîne soumise — en attente de revue par le staff</text>
-              <text x="20" y="122" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="12">/live ajouter Pseudo_Streamer</text>
-              <rect x="20" y="134" width="440" height="26" rx="6" fill="#080c18"/>
-              <rect x="20" y="134" width="3" height="26" fill="#00f5ff"/>
-              <text x="38" y="151" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12">✓ Chaîne ajoutée aux annonces de live</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : le bot Discord gère l'accueil et la vérification, la modération, la vie du serveur et les annonces Twitch"><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></svg></span>Bot Discord</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Accueil<i>·</i>Modération<i>·</i>Vie du serveur<i>·</i>Annonces</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Discord : un membre soumet sa chaîne pour vérification, puis une chaîne est ajoutée aux annonces de live"><div class="fen-barre">Discord · vérification</div><div class="fen-corps"><div class="ec-chat"><p><b>/verification</b> soumettre</p><div class="tel-raid" style="margin:0"><span><small>Vérification</small><b>En attente de revue par le staff</b></span></div><p><b>/live</b> ajouter Pseudo_Streamer</p><p class="bot"><b>✓</b> Chaîne ajoutée aux annonces de live</p></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p6.etape1.t" data-edit-label="Coulisses · Bot Discord — étape 1, titre">Le nouveau accepte le règlement</h3><p data-edit="coulisses.p6.etape1.d" data-edit-label="Coulisses · Bot Discord — étape 1, texte">Puis il soumet sa chaîne Twitch ou YouTube.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p6.etape2.t" data-edit-label="Coulisses · Bot Discord — étape 2, titre">Le staff vérifie</h3><p data-edit="coulisses.p6.etape2.d" data-edit-label="Coulisses · Bot Discord — étape 2, texte">L'accès complet vient après.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p6.etape3.t" data-edit-label="Coulisses · Bot Discord — étape 3, titre">Le bot fait vivre le serveur</h3><p data-edit="coulisses.p6.etape3.d" data-edit-label="Coulisses · Bot Discord — étape 3, texte">Modération, sondages, tickets, annonces de live.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p6.etape4.t" data-edit-label="Coulisses · Bot Discord — étape 4, titre">Tout se règle sur le web</h3><p data-edit="coulisses.p6.etape4.d" data-edit-label="Coulisses · Bot Discord — étape 4, texte">Un panneau d'administration, sans commandes.</p></div></li></ol></div></div>
+          
         </div>
       </div>
 
-      <div class="project-block project-text-only">
+      <div class="project-block">
         <div>
           <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p15.eyebrow" data-edit-label="Coulisses · Serveur dédié — sur-titre">// Serveur dédié</div>
           <h2 data-edit="coulisses.p15.title" data-edit-label="Coulisses · Serveur dédié — titre">Tout rapatrié sur <em class="accent">un seul serveur</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p15.desc1" data-edit-label="Coulisses · Serveur dédié — paragraphe 1">Depuis novembre 2026, un serveur dédié réunit tout ce qui tournait avant sur des services gratuits ou sur un Raspberry Pi à la maison : les bots de tchat et de Discord, l'espace esport Lugh, la bibliothèque Étagère, les jeux mobiles et ce site lui-même. Un seul endroit, un seul domaine, des certificats HTTPS automatiques.</p>
-            <p data-edit="coulisses.p15.desc2" data-edit-label="Coulisses · Serveur dédié — paragraphe 2">Chaque service est isolé, démarre tout seul au redémarrage et se déploie en une commande qui remet l'ancienne version si la nouvelle ne repart pas. Jamais deux déménagements le même soir, jamais un soir de live. Le Raspberry Pi, lui, a pu être éteint.</p>
+            <p data-edit="coulisses.p15.court" data-edit-label="Coulisses · Serveur dédié — texte">Bots, espace esport Lugh, Étagère, jeux mobiles et ce site tournent désormais au même endroit, sous un seul domaine en HTTPS. Chaque service est isolé, repart tout seul, et une mise à jour ratée remet l'ancienne version.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p15.status" data-edit-label="Coulisses · Serveur dédié — note">Migration faite service par service, chacun vérifié en ligne avant de passer au suivant</span></div>
           <div class="project-stack" data-edit="coulisses.p15.stack" data-edit-label="Coulisses · Serveur dédié — technologies">VPS · Caddy · Let's Encrypt · systemd · déploiement par git</div>
+        </div>
+        <div class="project-visuals">
+          <ol class="cp-cadre ap-chaine mx-chaine" aria-label="Chaîne : avant, services gratuits et Raspberry Pi ; maintenant, un serveur dédié ; un seul domaine en HTTPS"><li>Avant : Raspberry Pi</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="7" rx="1.5"/><rect x="3.5" y="13" width="17" height="7" rx="1.5"/><path d="M7.5 7.5h.01M7.5 16.5h.01"/></svg></span>Serveur dédié</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg></span>HTTPS</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Tableau des services du serveur dédié : bots de tchat et de Discord, espace Lugh, Étagère, jeux mobiles et ce site, tous en marche"><div class="fen-barre">Serveur dédié · services</div><div class="fen-corps"><ul class="ec-liste"><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Bots tchat et Discord</span><span>en marche</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Espace esport Lugh</span><span>en marche</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Étagère</span><span>en marche</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Jeux mobiles</span><span>en marche</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Ce site</span><span>en marche</span></li></ul><div class="tel-raid"><span><small>Mise à jour</small><b>Ancienne version remise si échec</b></span><em>Auto</em></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p15.etape1.t" data-edit-label="Coulisses · Serveur dédié — étape 1, titre">Chaque service à part</h3><p data-edit="coulisses.p15.etape1.d" data-edit-label="Coulisses · Serveur dédié — étape 1, texte">Isolé des autres : une panne reste dans sa case.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p15.etape2.t" data-edit-label="Coulisses · Serveur dédié — étape 2, titre">Il repart tout seul</h3><p data-edit="coulisses.p15.etape2.d" data-edit-label="Coulisses · Serveur dédié — étape 2, texte">Au redémarrage du serveur, sans rien toucher.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p15.etape3.t" data-edit-label="Coulisses · Serveur dédié — étape 3, titre">Mise à jour en une commande</h3><p data-edit="coulisses.p15.etape3.d" data-edit-label="Coulisses · Serveur dédié — étape 3, texte">Si la nouvelle version ne repart pas, l'ancienne revient.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p15.etape4.t" data-edit-label="Coulisses · Serveur dédié — étape 4, titre">Jamais un soir de live</h3><p data-edit="coulisses.p15.etape4.d" data-edit-label="Coulisses · Serveur dédié — étape 4, texte">Un déménagement à la fois, vérifié en ligne.</p></div></li></ol></div></div>
+          <div class="cm-chiffres" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p15.chiffre1.n" data-edit-label="Coulisses · Serveur dédié — chiffre 1">1</strong><span data-edit="coulisses.p15.chiffre1.l" data-edit-label="Coulisses · Serveur dédié — chiffre 1, légende">seul domaine pour tout</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p15.chiffre2.n" data-edit-label="Coulisses · Serveur dédié — chiffre 2">0</strong><span data-edit="coulisses.p15.chiffre2.l" data-edit-label="Coulisses · Serveur dédié — chiffre 2, légende">Raspberry Pi allumé à la maison</span></div></div>
         </div>
       </div>
 
@@ -849,45 +360,15 @@
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p12.eyebrow" data-edit-label="Coulisses · Santé des services — sur-titre">// Santé des services</div>
           <h2 data-edit="coulisses.p12.title" data-edit-label="Coulisses · Santé des services — titre">Savoir en un coup d’œil si <em class="accent">tout tourne</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p12.desc1" data-edit-label="Coulisses · Santé des services — paragraphe 1">Une sonde tourne sur le serveur et vérifie toutes les 5 minutes les bots, les sites, les extensions Twitch, les sauvegardes et le robot de La Cabane. Les sites hébergés gratuitement ne sont interrogés que toutes les 3 heures, pour ne pas épuiser leur quota.</p>
-            <p data-edit="coulisses.p12.desc2" data-edit-label="Coulisses · Santé des services — paragraphe 2">Le résultat s’affiche sur un tableau privé, ouvert depuis le téléphone et protégé par un code envoyé par e-mail. Si un bot s’arrête, qu’un site tombe, qu’une sauvegarde prend du retard ou que le serveur ne donne plus de nouvelles, une alerte part dans un salon Discord privé.</p>
+            <p data-edit="coulisses.p12.court" data-edit-label="Coulisses · Santé des services — texte">Une sonde vérifie toutes les 5 minutes les bots, les sites, les extensions Twitch et les sauvegardes. Si quelque chose tombe, une alerte part dans un salon Discord privé.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p12.status" data-edit-label="Coulisses · Santé des services — note">Les tests simulent tous les services : aucun vrai bot ni site n’est touché pendant les essais</span></div>
           <div class="project-stack" data-edit="coulisses.p12.stack" data-edit-label="Coulisses · Santé des services — technologies">Node.js sans dépendance · cron · serveur dédié · Discord</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
-                </marker>
-              </defs>
-              <line x1="150" y1="130" x2="198" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
-              <line x1="322" y1="112" x2="372" y2="62" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
-              <line x1="322" y1="148" x2="372" y2="198" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
-              <rect x="8" y="34" width="142" height="44" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="54" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Bots (serveur)</text>
-              <text x="79" y="70" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">BOT Aulit · Lugh</text>
-              <rect x="8" y="108" width="142" height="44" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Sites</text>
-              <text x="79" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">QG Lugh · extensions</text>
-              <rect x="8" y="182" width="142" height="44" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="202" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Sauvegardes</text>
-              <text x="79" y="218" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">robot La Cabane</text>
-              <line x1="150" y1="56" x2="198" y2="112" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
-              <line x1="150" y1="204" x2="198" y2="148" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-sa)"/>
-              <rect x="200" y="92" width="122" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="261" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Sonde</text>
-              <text x="261" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">serveur · toutes les 5 min</text>
-              <rect x="374" y="34" width="138" height="56" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="443" y="60" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Tableau privé</text>
-              <text x="443" y="76" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">sur le téléphone</text>
-              <rect x="374" y="170" width="138" height="56" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="443" y="196" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Salon #santé</text>
-              <text x="443" y="212" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">alerte Discord</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : bots, sites et sauvegardes, la sonde du serveur toutes les 5 minutes, puis le tableau privé et le salon Discord"><li class="ap-sorties">Bots<i>·</i>Sites<i>·</i>Sauvegardes</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>Sonde</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Tableau privé<i>·</i>Alerte Discord</li></ol>
+          <div class="cp-cadre mx-grille"><div class="tel" role="img" aria-label="Tableau de santé sur le téléphone : bots, sites, sauvegardes et robot de La Cabane, tous en marche"><div class="tel-ecran"><div class="tel-tete"><b>SANTÉ</b><span class="tel-voyants"><span>5 min</span></span></div><ul class="ec-liste"><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">BOT Aulit</span><span>OK</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Lugh</span><span>OK</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Sites</span><span>OK</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Sauvegardes</span><span>OK</span></li><li><span class="ec-ok" style="color:var(--white);font-size:.72rem">Robot La Cabane</span><span>OK</span></li></ul></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p12.etape1.t" data-edit-label="Coulisses · Santé des services — étape 1, titre">La sonde vérifie tout</h3><p data-edit="coulisses.p12.etape1.d" data-edit-label="Coulisses · Santé des services — étape 1, texte">Bots, sites, extensions, sauvegardes.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p12.etape2.t" data-edit-label="Coulisses · Santé des services — étape 2, titre">Je regarde sur le téléphone</h3><p data-edit="coulisses.p12.etape2.d" data-edit-label="Coulisses · Santé des services — étape 2, texte">Un tableau privé, protégé par un code par e-mail.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p12.etape3.t" data-edit-label="Coulisses · Santé des services — étape 3, titre">Une panne prévient</h3><p data-edit="coulisses.p12.etape3.d" data-edit-label="Coulisses · Santé des services — étape 3, texte">Une alerte part dans un salon Discord privé.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p12.chiffre1.n" data-edit-label="Coulisses · Santé des services — chiffre 1">5 min</strong><span data-edit="coulisses.p12.chiffre1.l" data-edit-label="Coulisses · Santé des services — chiffre 1, légende">entre deux vérifications</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p12.chiffre2.n" data-edit-label="Coulisses · Santé des services — chiffre 2">3 h</strong><span data-edit="coulisses.p12.chiffre2.l" data-edit-label="Coulisses · Santé des services — chiffre 2, légende">pour les sites hébergés gratuitement</span></div></div>
         </div>
       </div>
 
@@ -896,36 +377,14 @@
           <div class="project-eyebrow" style="color:var(--magenta);" data-edit="coulisses.p7.eyebrow" data-edit-label="Coulisses · Panneaux Twitch — sur-titre">// Panneaux Twitch</div>
           <h2 data-edit="coulisses.p7.title" data-edit-label="Coulisses · Panneaux Twitch — titre">Ce qui vit sous le <em class="accent">direct</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p7.desc1" data-edit-label="Coulisses · Panneaux Twitch — paragraphe 1">Les panneaux sous le stream : présentation de la chaîne, setup PC, réseaux, soutien, règles du chat, et un panneau planning qui renvoie directement vers le planning intégré à ce site plutôt que de dupliquer l'info à deux endroits.</p>
-            <p data-edit="coulisses.p7.desc2" data-edit-label="Coulisses · Panneaux Twitch — paragraphe 2">Faits en HTML plutôt qu'avec l'éditeur de panneaux par défaut de Twitch, pour garder la même identité graphique que le reste de la chaîne.</p>
+            <p data-edit="coulisses.p7.court" data-edit-label="Coulisses · Panneaux Twitch — texte">Les panneaux sous le stream (présentation, setup, réseaux, soutien, règles, planning) sont faits en HTML pour garder la même identité que la chaîne. Le panneau planning renvoie vers ce site plutôt que de recopier l'info.</p>
           </div>
           <div class="project-stack" data-edit="coulisses.p7.stack" data-edit-label="Coulisses · Panneaux Twitch — technologies">Panneaux Twitch · HTML sur mesure</div>
         </div>
         <div class="project-visuals">
-          <div class="project-preview">
-            <div class="preview-label">Aperçu de l'interface (d'après capture d'écran réelle)</div>
-            <svg class="project-preview-svg" viewBox="0 0 480 195" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="0" width="148" height="185" rx="6" fill="none" stroke="#1a2540"/>
-              <line x1="0" y1="0" x2="148" y2="0" stroke="#ff2d78" stroke-width="2"/>
-              <rect x="14" y="14" width="22" height="22" rx="5" fill="none" stroke="#ff2d78"/>
-              <text x="44" y="30" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">À propos</text>
-              <text x="14" y="58" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Présentation, ton</text>
-              <text x="14" y="72" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">de la chaîne, humour</text>
-              <rect x="166" y="0" width="148" height="185" rx="6" fill="none" stroke="#1a2540"/>
-              <line x1="166" y1="0" x2="314" y2="0" stroke="#ffb020" stroke-width="2"/>
-              <rect x="180" y="14" width="22" height="22" rx="5" fill="none" stroke="#ffb020"/>
-              <text x="210" y="30" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Règles</text>
-              <text x="180" y="56" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Respect, pas de pub,</text>
-              <text x="180" y="70" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">vie privée protégée,</text>
-              <text x="180" y="84" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">FR uniquement</text>
-              <rect x="332" y="0" width="148" height="185" rx="6" fill="none" stroke="#1a2540"/>
-              <line x1="332" y1="0" x2="480" y2="0" stroke="#9b5cff" stroke-width="2"/>
-              <rect x="346" y="14" width="22" height="22" rx="5" fill="none" stroke="#9b5cff"/>
-              <text x="376" y="30" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Planning</text>
-              <text x="346" y="58" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Horaires de la semaine</text>
-              <text x="346" y="72" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">→ lien vers /planning</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : des panneaux en HTML sous le stream Twitch, le panneau planning renvoie vers ce site"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg></span>Panneaux HTML</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9.5L5 20v-4H4z"/></svg></span>Sous le stream</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.5 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.5-3.5-8.5s1-5.9 3.5-8.5z"/></svg></span>Planning du site</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Panneaux sous le stream Twitch : À propos, Règles et Planning avec un lien vers le planning du site"><div class="fen-barre">Twitch · sous le direct</div><div class="fen-corps"><div class="ec-panneaux"><div><b>À propos</b>Présentation, ton de la chaîne</div><div><b>Règles</b>Respect, pas de pub, vie privée</div><div><b>Planning</b>→ lien vers le planning</div></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p7.etape1.t" data-edit-label="Coulisses · Panneaux Twitch — étape 1, titre">Faits en HTML</h3><p data-edit="coulisses.p7.etape1.d" data-edit-label="Coulisses · Panneaux Twitch — étape 1, texte">Plutôt qu'avec l'éditeur de Twitch.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p7.etape2.t" data-edit-label="Coulisses · Panneaux Twitch — étape 2, titre">La même identité</h3><p data-edit="coulisses.p7.etape2.d" data-edit-label="Coulisses · Panneaux Twitch — étape 2, texte">Que le reste de la chaîne.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p7.etape3.t" data-edit-label="Coulisses · Panneaux Twitch — étape 3, titre">Pas de doublon</h3><p data-edit="coulisses.p7.etape3.d" data-edit-label="Coulisses · Panneaux Twitch — étape 3, texte">Le panneau planning renvoie vers ce site.</p></div></li></ol></div></div>
+          
         </div>
       </div>
 
@@ -934,38 +393,15 @@
           <div class="project-eyebrow" style="color:var(--cyan);" data-edit="coulisses.p10.eyebrow" data-edit-label="Coulisses · Ce site — sur-titre">// Ce site</div>
           <h2 data-edit="coulisses.p10.title" data-edit-label="Coulisses · Ce site — titre">Un site qui se modifie <em class="accent">sans code</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p10.desc1" data-edit-label="Coulisses · Ce site — paragraphe 1">Ce site est écrit en HTML, CSS et JavaScript simples, sans outil de build, et hébergé sur le serveur dédié (une copie reste sur GitHub Pages en secours). Une page d'administration privée permet de tout changer depuis le navigateur : streamers, clips, planning (semaine type et changements ponctuels), À propos et FAQ, textes de chaque page, liens et bandeau d'annonce, nouvelles pages, liste des jeux. Chaque enregistrement devient une version sauvegardée, restaurable en un clic.</p>
-            <p data-edit="coulisses.p10.desc2" data-edit-label="Coulisses · Ce site — paragraphe 2">Le serveur fait le reste : à chaque envoi, il reconstruit et publie le site tout seul (minification avec mise à jour du cache, plan du site), et toutes les 10 minutes il met à jour le statut Twitch (direct, abonnés, avatars). Avant chaque mise en ligne, des tests vérifient les liens, les données et chaque page dans un vrai navigateur.</p>
-            <p data-edit="coulisses.p10.desc3" data-edit-label="Coulisses · Ce site — paragraphe 3">Côté visiteurs : pages Confidentialité et CGU, lecteurs Twitch chargés seulement après accord (ce sont eux qui déposent des cookies), données structurées pour Google, où les clips sont décrits comme des vidéos, et suivi dans la Search Console. Le site héberge aussi les mises à jour signées de la Régie Mobile.</p>
+            <p data-edit="coulisses.p10.court" data-edit-label="Coulisses · Ce site — texte">Un site en HTML, CSS et JavaScript simples, modifiable de A à Z depuis une page d'administration privée, chaque version restaurable en un clic. Le serveur le republie tout seul et des tests vérifient chaque page avant la mise en ligne.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p10.status" data-edit-label="Coulisses · Ce site — note">Une règle maison : toute nouvelle page doit aussi être gérable depuis l'admin, et c'est vérifié automatiquement</span></div>
           <div class="project-stack" data-edit="coulisses.p10.stack" data-edit-label="Coulisses · Ce site — technologies">HTML · CSS · JavaScript · serveur dédié · Caddy · déploiement par git</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-st" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
-                </marker>
-              </defs>
-              <line x1="150" y1="130" x2="198" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-st)"/>
-              <line x1="332" y1="130" x2="386" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-st)"/>
-              <line x1="260" y1="174" x2="260" y2="214" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-st)" marker-start="url(#arrow-st)"/>
-              <rect x="8" y="92" width="142" height="76" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Admin</text>
-              <text x="79" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">navigateur · sans code</text>
-              <rect x="200" y="92" width="132" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="266" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Serveur</text>
-              <text x="266" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">git · données</text>
-              <rect x="388" y="92" width="124" height="76" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="450" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Site</text>
-              <text x="450" y="144" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">aulit42369.fr</text>
-              <rect x="200" y="216" width="132" height="36" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="266" y="232" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Construction</text>
-              <text x="266" y="248" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Twitch · 10 min</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : l'administration dans le navigateur, le serveur, puis le site publié"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-4 11-11 3 3-11 11z"/><path d="M14 7l3 3"/></svg></span>Admin</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="7" rx="1.5"/><rect x="3.5" y="13" width="17" height="7" rx="1.5"/><path d="M7.5 7.5h.01M7.5 16.5h.01"/></svg></span>Serveur</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.5 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.5-3.5-8.5s1-5.9 3.5-8.5z"/></svg></span>Site</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Page d'administration du site : onglets Streamers, Clips, Planning et Textes, chaque enregistrement devient une version restaurable"><div class="fen-barre">Administration du site</div><div class="fen-corps"><div class="ec-onglets"><span>Streamers</span><span>Clips</span><span class="on">Planning</span><span>Textes</span></div><div class="tel-champ"><small>Samedi</small><div>21:00 · jeu du soir</div></div><div class="tel-raid"><span><small>Enregistrer</small><b>Version sauvegardée</b></span><em>Restaurer</em></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p10.etape1.t" data-edit-label="Coulisses · Ce site — étape 1, titre">Je modifie dans l'admin</h3><p data-edit="coulisses.p10.etape1.d" data-edit-label="Coulisses · Ce site — étape 1, texte">Depuis le navigateur, sans code.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p10.etape2.t" data-edit-label="Coulisses · Ce site — étape 2, titre">Chaque enregistrement est gardé</h3><p data-edit="coulisses.p10.etape2.d" data-edit-label="Coulisses · Ce site — étape 2, texte">Une version restaurable en un clic.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p10.etape3.t" data-edit-label="Coulisses · Ce site — étape 3, titre">Le serveur publie seul</h3><p data-edit="coulisses.p10.etape3.d" data-edit-label="Coulisses · Ce site — étape 3, texte">Il reconstruit le site à chaque envoi.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p10.etape4.t" data-edit-label="Coulisses · Ce site — étape 4, titre">Des tests passent avant</h3><p data-edit="coulisses.p10.etape4.d" data-edit-label="Coulisses · Ce site — étape 4, texte">Liens, données, chaque page dans un vrai navigateur.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p10.chiffre1.n" data-edit-label="Coulisses · Ce site — chiffre 1">10 min</strong><span data-edit="coulisses.p10.chiffre1.l" data-edit-label="Coulisses · Ce site — chiffre 1, légende">mise à jour du statut Twitch</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p10.chiffre2.n" data-edit-label="Coulisses · Ce site — chiffre 2">0</strong><span data-edit="coulisses.p10.chiffre2.l" data-edit-label="Coulisses · Ce site — chiffre 2, légende">outil de build</span></div></div>
         </div>
       </div>
 
@@ -974,42 +410,16 @@
           <div class="project-eyebrow" style="color:var(--violet);" data-edit="coulisses.p14.eyebrow" data-edit-label="Coulisses · AulitBot — sur-titre">// AulitBot</div>
           <h2 data-edit="coulisses.p14.title" data-edit-label="Coulisses · AulitBot — titre">Un bot de tchat Twitch <em class="accent">codé maison</em></h2>
           <div class="project-desc">
-            <p data-edit="coulisses.p14.desc1" data-edit-label="Coulisses · AulitBot — paragraphe 1">Pour remplacer un bot payant : commandes personnalisées, messages de bienvenue, annonces, alertes (follow, abonnement, cadeau, bits, raid, début et fin de live), niveaux et expérience, monnaie virtuelle, et une protection du tchat (anti-bots de vues, filtres, gestion des liens) — chaque fonction activable séparément. Le bot écrit <em>au nom de la chaîne</em>, donc les emotes s'affichent.</p>
-            <p data-edit="coulisses.p14.desc2" data-edit-label="Coulisses · AulitBot — paragraphe 2">Multi-chaînes : chaque streamer connecte sa chaîne par Twitch (sans mot de passe à retaper), avec ses propres réglages, ses overlays OBS (train de la hype, streamathon), sa page de classement et sa liste de commandes. Les anciennes statistiques peuvent être importées depuis l'ancien bot. Aucun des outils n'est « scrapable » : pages publiques derrière un jeton et limites de débit.</p>
-            <p data-edit="coulisses.p14.desc3" data-edit-label="Coulisses · AulitBot — paragraphe 3">Tourne sur le serveur OVH (Node.js sans dépendance), pas sur un service tiers. Une page d'aide explique tous les codes à écrire dans les commandes et alertes.</p>
+            <p data-edit="coulisses.p14.court" data-edit-label="Coulisses · AulitBot — texte">Le bot de tchat qui remplace un bot payant : commandes, alertes, niveaux, monnaie virtuelle et protection du tchat, chaque fonction activable à part. Chaque streamer y connecte sa chaîne avec ses propres réglages et overlays.</p>
           </div>
           <p style="margin:14px 0 0"><a href="https://aulitbot.aulit42369.fr/aide" target="_blank" rel="noopener" style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.03em">📖 Aide &amp; variables du bot</a><span style="color:var(--muted)"> · </span><a href="https://aulitbot.aulit42369.fr" target="_blank" rel="noopener" style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.03em">Connecter sa chaîne</a></p>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p14.status" data-edit-label="Coulisses · AulitBot — note">En service sur la chaîne, ouvert à d'autres streamers</span></div>
           <div class="project-stack" data-edit="coulisses.p14.stack" data-edit-label="Coulisses · AulitBot — technologies">Node.js · zéro dépendance · Twitch EventSub · multi-chaînes · serveur OVH</div>
         </div>
         <div class="project-visuals">
-          <div class="project-diagram">
-            <svg class="project-diagram-svg" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrow-bot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#00f5ff"/>
-                </marker>
-              </defs>
-              <line x1="150" y1="130" x2="198" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-bot)"/>
-              <line x1="336" y1="110" x2="396" y2="52" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-bot)"/>
-              <line x1="336" y1="130" x2="396" y2="130" stroke="#00f5ff" stroke-width="1.5" marker-start="url(#arrow-bot)" marker-end="url(#arrow-bot)"/>
-              <line x1="336" y1="150" x2="396" y2="208" stroke="#00f5ff" stroke-width="1.5" marker-end="url(#arrow-bot)"/>
-              <rect x="8" y="98" width="142" height="64" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="79" y="126" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">Streamers</text>
-              <text x="79" y="143" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">connexion Twitch</text>
-              <rect x="200" y="96" width="136" height="76" rx="6" fill="none" stroke="#00f5ff" stroke-width="1.5"/>
-              <text x="268" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="13" font-weight="700">AulitBot</text>
-              <text x="268" y="146" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">Node · serveur OVH</text>
-              <rect x="398" y="30" width="114" height="44" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="455" y="57" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Tchat Twitch</text>
-              <rect x="398" y="108" width="114" height="44" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="455" y="128" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">EventSub</text>
-              <text x="455" y="143" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">follow · sub · raid</text>
-              <rect x="398" y="186" width="114" height="44" rx="6" fill="none" stroke="#1a2540"/>
-              <text x="455" y="206" text-anchor="middle" fill="#e8eaf6" font-family="Rajdhani, sans-serif" font-size="12" font-weight="600">Overlays OBS</text>
-              <text x="455" y="221" text-anchor="middle" fill="#8892a8" font-family="Rajdhani, sans-serif" font-size="10">hype · streamathon</text>
-            </svg>
-          </div>
+          <ol class="cp-cadre ap-chaine" aria-label="Chaîne : les streamers se connectent par Twitch, AulitBot sur le serveur, puis le tchat Twitch et les overlays OBS"><li><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.8 3.1 2.6 3.5 5.2"/></svg></span>Streamers</li><li class="mx-trait" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-cle"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></svg></span>AulitBot</li><li class="mx-trait mx-trait--2" aria-hidden="true"><span class="fx-l"></span></li><li class="ap-sorties">Tchat Twitch<i>·</i>Overlays OBS</li></ol>
+          <div class="cp-cadre mx-grille mx-grille--fen"><div class="fen" role="img" aria-label="Tchat Twitch : AulitBot souhaite la bienvenue, répond à une commande et annonce un raid"><div class="fen-barre">Tchat Twitch</div><div class="fen-corps"><div class="ec-chat"><p class="bot"><b>AulitBot :</b> bienvenue Viewer_1 !</p><p><b>Viewer_2 :</b> !discord</p><p class="bot"><b>AulitBot :</b> le lien du serveur Discord</p><p class="bot"><b>AulitBot :</b> merci pour le raid, Streamer_A !</p></div></div></div><div><p class="cp-legende">Comment ça marche</p><ol class="cm-etapes"><li><span class="cm-num" aria-hidden="true">1</span><div><h3 data-edit="coulisses.p14.etape1.t" data-edit-label="Coulisses · AulitBot — étape 1, titre">Le streamer connecte sa chaîne</h3><p data-edit="coulisses.p14.etape1.d" data-edit-label="Coulisses · AulitBot — étape 1, texte">Par Twitch, sans mot de passe à retaper.</p></div></li><li><span class="cm-num" aria-hidden="true">2</span><div><h3 data-edit="coulisses.p14.etape2.t" data-edit-label="Coulisses · AulitBot — étape 2, titre">Il choisit ses fonctions</h3><p data-edit="coulisses.p14.etape2.d" data-edit-label="Coulisses · AulitBot — étape 2, texte">Chacune s'active séparément.</p></div></li><li><span class="cm-num" aria-hidden="true">3</span><div><h3 data-edit="coulisses.p14.etape3.t" data-edit-label="Coulisses · AulitBot — étape 3, titre">Le bot parle au nom de la chaîne</h3><p data-edit="coulisses.p14.etape3.d" data-edit-label="Coulisses · AulitBot — étape 3, texte">Donc les emotes s'affichent.</p></div></li><li><span class="cm-num" aria-hidden="true">4</span><div><h3 data-edit="coulisses.p14.etape4.t" data-edit-label="Coulisses · AulitBot — étape 4, titre">Overlays et classement</h3><p data-edit="coulisses.p14.etape4.d" data-edit-label="Coulisses · AulitBot — étape 4, texte">Train de la hype, streamathon, page de classement.</p></div></li></ol></div></div>
+          <div class="cm-chiffres"><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p14.chiffre1.n" data-edit-label="Coulisses · AulitBot — chiffre 1">0</strong><span data-edit="coulisses.p14.chiffre1.l" data-edit-label="Coulisses · AulitBot — chiffre 1, légende">dépendance</span></div><div class="cp-cadre cm-chiffre"><strong data-edit="coulisses.p14.chiffre2.n" data-edit-label="Coulisses · AulitBot — chiffre 2">Multi</strong><span data-edit="coulisses.p14.chiffre2.l" data-edit-label="Coulisses · AulitBot — chiffre 2, légende">chaînes</span></div></div>
         </div>
       </div>
 
@@ -1031,10 +441,10 @@
 
 <script src="main.min.js?v=d2743c84"></script>
 
-<script src="js/coulisses.js?v=ac6b2fc9"></script>
-
+<script src="js/coulisses.js?v=f8f305a1"></script>
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>
+
 </body>
 </html>

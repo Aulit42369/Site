@@ -23,7 +23,7 @@
 <link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css?v=2026111301">
-<link rel="stylesheet" href="style.min.css?v=85298072">
+<link rel="stylesheet" href="style.min.css?v=c51fd889">
 <style>
 /* ===== Accueil « Synthwave Broadcast » — mise en page de la maquette, posée par-dessus la charte.
    Scopé .sw-home : n'affecte que l'accueil. Polices : fonts.css (Saira Condensed / IBM Plex Sans / IBM Plex Mono). ===== */
@@ -262,6 +262,23 @@
       <div class="sw-panel cell"><div class="k">Prochain live</div><div class="v" id="nextLive">—</div></div>
     </div>
 
+    <!-- Accueil vivant (idée 27, 16/11/2026) : rempli par js/accueil-vivant.js -->
+    <section class="vv" id="vivant" aria-label="En ce moment sur la chaîne"></section>
+    <!-- Textes de l'accueil vivant, modifiables dans l'admin ; lus par js/accueil-vivant.js -->
+    <div id="vivantTextes" hidden>
+      <span data-edit="index.vivant.dernier" data-edit-label="Accueil vivant — titre « Dernier live »">Dernier live</span>
+      <span data-edit="index.vivant.revoir" data-edit-label="Accueil vivant — lien vers les rediffusions">Revoir sur Twitch →</span>
+      <span data-edit="index.vivant.clip" data-edit-label="Accueil vivant — devant le clip de la soirée">Clip de la soirée :</span>
+      <span data-edit="index.vivant.aucun" data-edit-label="Accueil vivant — aucun live enregistré">Pas encore de live enregistré.</span>
+      <span data-edit="index.vivant.prochain" data-edit-label="Accueil vivant — titre « Prochain live »">Prochain live</span>
+      <span data-edit="index.vivant.planning" data-edit-label="Accueil vivant — lien vers le planning">Tout le planning →</span>
+      <span data-edit="index.vivant.annonce" data-edit-label="Accueil vivant — aucun live prévu">Le prochain live sera annoncé sur le Discord.</span>
+      <span data-edit="index.vivant.direct" data-edit-label="Accueil vivant — pastille en live">En direct</span>
+      <span data-edit="index.vivant.cesoir" data-edit-label="Accueil vivant — au-dessus du jeu, en live">Ce soir</span>
+      <span data-edit="index.vivant.objectif" data-edit-label="Accueil vivant — devant le titre du live">Objectif de la soirée</span>
+      <span data-edit="index.vivant.rejoindre" data-edit-label="Accueil vivant — bouton en live">Rejoindre le live</span>
+    </div>
+
     <div class="sw-rule"></div>
 
     <!-- LA CHAÎNE -->
@@ -313,6 +330,7 @@
 </footer>
 
 <script src="main.min.js?v=d2743c84"></script>
+<script src="js/accueil-vivant.js?v=4f268cd2"></script>
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>
