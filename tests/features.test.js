@@ -64,6 +64,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     write('pages.json',{texts:{
       'index.lead':'Nouveau texte avec [Discord](https://discord.com/invite/Amgaz5YNVg) et *accent* et `code`\nligne 2 <img src=x onerror="window.__x=1">',
       'index.joinBtn':'Viens !',
+      'index.ticker':'Message un | Message deux',
       'legal.ed1':'Hébergement modifié',
       'coulisses.p1.title':'Titre *neuf*',
       'clips.lead':'   ',
@@ -78,6 +79,7 @@ const iso=(off)=>{const d=new Date();d.setDate(d.getDate()+off);return d.getFull
     check('override escaped (no xss)', !(await p.evaluate(()=>window.__x)) && lead.includes('&lt;img'));
     check('override link: discord rewritten by site.json', lead.includes('href="https://discord.gg/ZZZ"'));
     check('button label override', (await p.textContent('[data-edit="index.joinBtn"]'))==='Viens !');
+    check('bandeau défilant : texte de l’admin', (await p.textContent('#tickerTrack')).startsWith('Message unMessage deux'));
     check('untouched key keeps default', (await p.textContent('[data-edit="index.eyebrow"]')).includes('Multigaming'));
     await p.close();
     p = await newPage(); await p.goto(BASE+'/clips.html'); await p.waitForTimeout(300);

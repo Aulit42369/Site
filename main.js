@@ -229,7 +229,9 @@ if (latestClipEl) {
    Pour modifier les messages : admin, le champ « Accueil — bandeau défilant ». */
 const tickerTrack = document.getElementById('tickerTrack');
 const tickerSource = document.getElementById('tickerSource');
-if (tickerTrack && tickerSource) {
+// Construit tout de suite (texte d'origine), puis de nouveau quand data/pages.json a remplacé #tickerSource (plus bas)
+function buildTicker() {
+  if (!tickerTrack || !tickerSource) return;
   const msgs = tickerSource.textContent.split('|').map(s => s.trim()).filter(Boolean);
   if (msgs.length) {
     tickerTrack.textContent = '';
@@ -242,6 +244,7 @@ if (tickerTrack && tickerSource) {
     }
   }
 }
+buildTicker();
 
 /* ================================================================
    Réglages du site gérés depuis l'admin (onglet « Liens & annonce »)
@@ -330,6 +333,7 @@ window.pagesDataPromise.then((d) => {
     const v = d.texts[el.dataset.edit];
     if (typeof v === 'string' && v.trim()) el.innerHTML = renderRichText(v);
   });
+  buildTicker(); // le bandeau de l'accueil reprend le texte de l'admin (il était construit avant, 16/11)
 });
 
 /* Pages créées depuis l'admin (data/custom-pages.json) : celles qui
