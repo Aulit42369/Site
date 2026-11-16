@@ -242,6 +242,12 @@ input[type=checkbox] { accent-color: var(--cyan); }
 @keyframes s12-tourne { to { transform: rotate(360deg); } }
 .admin-note.warn { color: #ffc35c; }
 #brokenLinksWarning { padding: 10px 14px; border-radius: 12px; background: rgba(60,40,0,.6); border: 1px solid rgba(255,176,32,.45); }
+#adminPanel { color-scheme: dark; } /* icône calendrier des dates (Liens & annonce) : sombre sur champ sombre sinon */
+.add-form .form-actions { flex-wrap: wrap; } /* à 390 px, « Annuler » du formulaire Clips sortait de l'écran */
+/* « Supprimer ce jeu / cette page » : rouge comme les autres « Supprimer » (était cyan comme une action normale) */
+.btn.btn-secondary.danger { background: rgba(48,10,28,.6); color: var(--err); border-color: rgba(255,45,120,.55); box-shadow: none; }
+.btn.btn-secondary.danger:hover { background: rgba(255,45,120,.14); border-color: var(--magenta); color: #fff; }
+@media (max-width: 480px) { .ap-inline { grid-template-columns: 1fr; } } /* Pages : titre tronqué et champs décalés à 2 colonnes */
 
 /* ---------- téléphone : flou allégé, plus de flou sous les petites plaques ---------- */
 @media (max-width: 820px) {
@@ -458,17 +464,17 @@ input[type=checkbox] { accent-color: var(--cyan); }
 </div>
 
 <!-- Ordre important : commun d'abord, admin.js (démarrage) en dernier -->
-<script src="admin/commun.js?v=7a1685f7"></script>
-<script src="admin/streamers.js?v=eaf18555"></script>
-<script src="admin/clips.js?v=b9b7f2a3"></script>
-<script src="admin/planning.js?v=691d02df"></script>
-<script src="admin/apropos.js?v=43a992ce"></script>
-<script src="admin/site.js?v=5b8469d1"></script>
-<script src="admin/textes.js?v=b1550a51"></script>
-<script src="admin/sante.js?v=95504bb1"></script>
-<script src="admin/historique.js?v=bc9cbba4"></script>
-<script src="admin/pages.js?v=e34848d0"></script>
-<script src="admin/jeux.js?v=fb1d1eca"></script>
-<script src="admin.js?v=b4494b37"></script>
+<script src="admin/commun.js?v=89eb1ae4"></script>
+<script src="admin/streamers.js?v=4f790524"></script>
+<script src="admin/clips.js?v=439563cc"></script>
+<script src="admin/planning.js?v=79379e44"></script>
+<script src="admin/apropos.js?v=7561e339"></script>
+<script src="admin/site.js?v=1a7b7ec5"></script>
+<script src="admin/textes.js?v=40faf2e5"></script>
+<script src="admin/sante.js?v=cef51d8e"></script>
+<script src="admin/historique.js?v=b6c40adf"></script>
+<script src="admin/pages.js?v=6aa49366"></script>
+<script src="admin/jeux.js?v=cfdde52b"></script>
+<script src="admin.js?v=61fed53c"></script>
 </body>
 </html>
