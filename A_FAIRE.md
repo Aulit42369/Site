@@ -27,7 +27,7 @@
 - (rien)
 
 ## À faire
-- Refonte style 12 de `admin.html` : maquettes en cours (`F:\Stream\Maquettesdmins-style12\`), rien sur le vrai admin avant l'accord d'Olivier.
+- Refonte style 12 de `admin.html` : maquettes en cours (`F:\Stream\Maquettes\admins-style12\`), rien sur le vrai admin avant l'accord d'Olivier.
 - Fluidité du flou sur le téléphone d'Olivier (démo du Pack vérifiée en ligne le 16/11 : chargée, aucune erreur).
 - Kit média (27/10) : une fois le premier bilan mensuel produit, saisir les 4 chiffres dans l'admin (« Textes des pages » > Partenaires). Relire les formats proposés (textes de départ rédigés par Léa, sans tarif). Source des idées du kit : Creator Handbook / certification sponsoring Creator Camp, source secondaire à confirmer chez Twitch ; rien de cette source n'est cité sur la page.
 - Pages légales (26/10) : dans l'admin (« Textes des pages »), supprimer les anciens textes enregistrés devenus inutiles (`legal.2`, `legal.4`, `legal.13`, `legal.17`, `privacy.2`, `privacy.4`, `privacy.7`, `privacy.9`, `privacy.14`, `privacy.15`, `privacy.17`, `privacy.19`, `privacy.24`, `privacy.26`) s'il y en a. Supprimer les messages du formulaire (Gmail + tableau Formspree) 12 mois après la réponse, comme promis dans Confidentialité.
