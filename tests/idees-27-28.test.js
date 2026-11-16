@@ -69,6 +69,9 @@ test('accueil en live : titre, depuis quand, textes de l\'admin', async () => {
     assert.match(txt, /En direct depuis 1 h 1[23] min/);
     assert.match(txt, /On tente le <b>silver<\/b>/); // titre Twitch échappé, jamais interprété
     assert.match(txt, /Rejoindre le live/i);
+    // Cam 1 en live : lecteur Twitch, plus de vidéo de présentation
+    assert.strictEqual(await p.locator('#camVideo').count(), 0);
+    assert.strictEqual(await p.locator('#camTwitch').isHidden(), false);
   } finally {
     await browser.close();
     if (avant) fs.writeFileSync(f, avant); else fs.unlinkSync(f);
@@ -82,6 +85,10 @@ test('accueil hors ligne et Coulisses en textes courts', async () => {
     await p.goto(BASE + '/index.html');
     await p.waitForSelector('.vv-grille');
     assert.match(await p.locator('#vivant').innerText(), /Prochain live/i);
+    // Cam 1 hors ligne : la vidéo de présentation du site à la place de l'écran de Twitch
+    assert.match(await p.getAttribute('#camVideo', 'src'), /video\/presentation-chaine\.mp4$/);
+    assert.strictEqual(await p.locator('#camTwitch').count(), 0);
+    assert.strictEqual(await p.textContent('#camPill'), 'Présentation');
     await p.goto(BASE + '/coulisses.html');
     assert.strictEqual(await p.locator('.project-desc p[data-edit$=".court"]').count(), 17);
     assert.strictEqual(await p.locator('.texte-court, .piste-choix').count(), 0);

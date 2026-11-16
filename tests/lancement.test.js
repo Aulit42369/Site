@@ -23,6 +23,10 @@ const PAGES = fs.readdirSync(ROOT).filter((f) => f.endsWith('.html') && f !== 'a
 
   try {
     // ---- 1. Consentement : rien de Twitch avant accord ----
+    // Le lecteur Twitch de l'accueil n'existe qu'en live (hors ligne : vidéo de présentation, 16/11) : statut « en live »
+    const statutF = path.join(ROOT, 'data/twitch-status.json');
+    const statutAvant = fs.existsSync(statutF) ? fs.readFileSync(statutF) : null;
+    fs.writeFileSync(statutF, JSON.stringify({ _updated_at: new Date().toISOString(), aulit42369: { live: true, game: 'Test' } }));
     let p = await ctx.newPage();
     const errs = [];
     p.on('pageerror', (e) => errs.push(e.message));
@@ -43,6 +47,7 @@ const PAGES = fs.readdirSync(ROOT).filter((f) => f.endsWith('.html') && f !== 'a
     const src = await p.getAttribute('.broadcast-frame iframe', 'src');
     check('accord : lecteur chargé, remplaçant retiré', !!src && src.includes('player.twitch.tv') && (await p.locator('.consent-ph').count()) === 0);
     check('aucune erreur JS (index)', errs.length === 0);
+    if (statutAvant) fs.writeFileSync(statutF, statutAvant); else fs.unlinkSync(statutF);
     // choix daté : redemandé après 6 mois, et un choix sans date (ancien) aussi
     check('accord daté', !!(await p.evaluate(() => localStorage.getItem('aulit_consent_date'))));
     await p.evaluate(() => localStorage.setItem('aulit_consent_date', String(Date.now() - 200 * 24 * 3600 * 1000)));

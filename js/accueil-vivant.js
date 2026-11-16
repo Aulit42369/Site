@@ -54,6 +54,21 @@
   const T = (k) => { const el = document.querySelector('[data-edit="index.vivant.' + k + '"]'); return el ? el.innerHTML : ''; };
   const ABBR = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
 
+  /* Lecteur « CAM 1 » : en live, le lecteur Twitch (soumis au consentement, main.js) ; hors ligne, la vidéo de
+     présentation hébergée par le site, au lieu de l'écran « hors ligne » de Twitch. La vidéo n'est téléchargée
+     que hors ligne ; mouvement réduit : elle ne démarre pas toute seule (contrôles affichés). */
+  function camera(enDirect) {
+    const video = document.getElementById('camVideo'), twitch = document.getElementById('camTwitch'), pill = document.getElementById('camPill');
+    if (!video || !twitch) return;
+    if (enDirect) { video.remove(); twitch.hidden = false; return; }
+    twitch.remove(); // hors ligne : aucun lecteur Twitch, donc aucun cookie Twitch même après accord
+    if (pill) pill.textContent = 'Présentation';
+    video.src = 'video/presentation-chaine.mp4';
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { video.controls = true; return; }
+    video.autoplay = true;
+    video.play().catch(() => { video.controls = true; }); // lecture auto refusée par le navigateur : on laisse le bouton
+  }
+
   Promise.all([json('data/twitch-status.json'), json('data/planning.json'), json('data/planning-exceptions.json'),
     json('data/recent-games.json'), json('data/clips.json'), global.pagesDataPromise]).then(([statut, planning, exceptions, recents, clips]) => {
     const chaine = statut && statut.aulit42369;
@@ -67,7 +82,10 @@
         ? ' ' + prochain.debut.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : '');
     }
 
-    if (chaine && chaine.live && frais) {
+    const enDirect = !!(chaine && chaine.live && frais);
+    camera(enDirect);
+
+    if (enDirect) {
       const depuis = chaine.startedAt ? duree(Date.now() - new Date(chaine.startedAt), true) : '';
       zone.innerHTML = `
         <div class="vv-live">

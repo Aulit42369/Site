@@ -244,12 +244,16 @@
       </div>
 
       <div class="sw-panel lit sw-live sw-bracket">
-        <div class="head"><span class="cam">▸ CAM 1 · Chaîne</span><span class="sw-pill">Lecteur Twitch</span></div>
+        <div class="head"><span class="cam">▸ CAM 1 · Chaîne</span><span class="sw-pill" id="camPill">Lecteur Twitch</span></div>
         <div class="frame broadcast-frame">
+          <!-- Hors ligne : vidéo de présentation (fichier du site, aucun cookie) ; en live : lecteur Twitch. Choix fait par js/accueil-vivant.js -->
+          <video id="camVideo" class="cam-video" muted loop playsinline preload="none" aria-label="Vidéo de présentation de la chaîne Aulit42369" style="display:block;width:100%;height:100%;object-fit:cover"></video>
+          <div id="camTwitch" hidden style="height:100%">
           <iframe
             data-consent-src="https://player.twitch.tv/?channel=aulit42369&parent=aulit42369.github.io&parent=aulit42369.fr&muted=true"
             title="Lecteur Twitch — chaîne AULIT42369"
             height="330" width="100%" allowfullscreen style="display:block;aspect-ratio:16/9;height:auto;border:none;"></iframe>
+          </div>
         </div>
       </div>
     </section>
@@ -330,7 +334,7 @@
 </footer>
 
 <script src="main.min.js?v=b97806ba"></script>
-<script src="js/accueil-vivant.js?v=4f268cd2"></script>
+<script src="js/accueil-vivant.js?v=71ec2d13"></script>
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>
