@@ -1,6 +1,8 @@
 {
   "schemaVersion": 1,
   "texts": {
+    "index.ticker": "Multigaming · jeu coop · entre potes | !discord pour rejoindre la commu |  On teste, on rage, on rigole, on troll les copains | Planning à jour sur la page Planning",
+    "index.vivant.prochain": "Prochain live programmé",
     "escape.play": "Jouer"
   },
   "extraProjects": []
