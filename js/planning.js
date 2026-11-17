@@ -72,8 +72,11 @@ Promise.all([
     return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
   }
 
+  /* La grille commence aujourd'hui et suit les 7 jours dans l'ordre (avant : lundi → dimanche,
+     donc « Lundi 23 » pouvait s'afficher avant « Mardi 17 »). */
+  const ecart = (day) => (JOURS.indexOf(day) - maintenant.getDay() + 7) % 7;
   const cartes = [];
-  planning.map(jeuDeLaSemaine).forEach(base => {
+  planning.slice().sort((a, b) => ecart(a.day) - ecart(b.day)).map(jeuDeLaSemaine).forEach(base => {
     const ex = parJour[base.day];
     const item = !ex ? base : ex.on
       ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '', note: '' })
@@ -88,10 +91,10 @@ Promise.all([
       card.innerHTML = `
         <div class="planning-card-head">
           <div><div class="planning-day">${escapeHtml(item.day)}</div>${date}</div>
-          ${isToday ? '<span class="planning-today-badge">Aujourd\'hui</span>' : ''}
+          ${isToday ? '<span class="planning-today-badge">Aujourd’hui</span>' : ''}
         </div>
-        <div class="planning-game">${escapeHtml(item.game)}</div>
-        ${item.time ? `<div class="planning-time">${item.end ? escapeHtml(item.time) + ' – ' + escapeHtml(item.end) : 'À partir de ' + escapeHtml(item.time.replace(':', 'h'))} · Heure FR</div>` : ''}
+        <div class="planning-game">${escapeHtml(nomDeJeu(item.game))}</div>
+        ${item.time ? `<div class="planning-time">${item.end ? escapeHtml(heureFr(item.time)) + ' – ' + escapeHtml(heureFr(item.end)) : 'À partir de ' + escapeHtml(heureFr(item.time))} · Heure FR</div>` : ''}
         ${item.note ? `<div class="planning-alt-note">${escapeHtml(item.note)}</div>` : ''}
       `;
     } else {

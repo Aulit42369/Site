@@ -39,4 +39,38 @@ function buildToc(wrap) {
   toc.setAttribute('aria-label', 'Projets de la page');
   toc.innerHTML = links.join('');
   wrap.insertBefore(toc, wrap.firstChild);
+
+  /* Sur téléphone (CSS ≤ 700 px), une fois le sommaire sorti de l'écran : bouton « Sommaire » collant qui l'ouvre en panneau. */
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'toc-bouton';
+  btn.textContent = 'Sommaire';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'tocPanneau');
+  const panneau = document.createElement('nav');
+  panneau.id = 'tocPanneau';
+  panneau.className = 'toc-panneau';
+  panneau.hidden = true;
+  panneau.setAttribute('aria-label', 'Sommaire des projets');
+  panneau.innerHTML = links.join('');
+  const fermer = (rendreFocus) => {
+    if (panneau.hidden) return;
+    panneau.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+    if (rendreFocus) btn.focus();
+  };
+  btn.addEventListener('click', () => {
+    if (!panneau.hidden) return fermer(false);
+    panneau.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    panneau.querySelector('a').focus();
+  });
+  panneau.addEventListener('click', (e) => { if (e.target.closest('a')) fermer(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fermer(true); });
+  new IntersectionObserver(([e]) => {
+    const visible = !e.isIntersecting && e.boundingClientRect.top < 0;
+    btn.classList.toggle('visible', visible);
+    if (!visible) fermer(false);
+  }).observe(toc);
+  document.body.append(btn, panneau);
 }

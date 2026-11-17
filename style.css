@@ -28,7 +28,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--white);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Rajdhani', 'Plex Sans secours', sans-serif; /* secours aux mêmes dimensions (fonts.css) : pas de saut au chargement des polices */
   font-weight: 500;
   font-size: 17px;
   line-height: 1.6;
@@ -74,7 +74,7 @@ img { max-width: 100%; display: block; }
 }
 .nav { display: flex; align-items: center; gap: 6px; }
 .nav a {
-  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem;
+  font-family: 'Rajdhani', 'Plex Sans secours', sans-serif; font-weight: 700; font-size: 0.95rem;
   letter-spacing: 0.03em; text-transform: uppercase;
   padding: 9px 12px; border-radius: 3px; color: var(--muted);
   border: 1px solid transparent; white-space: nowrap;
@@ -133,7 +133,7 @@ img { max-width: 100%; display: block; }
 
 /* ---------- typo générique ---------- */
 .eyebrow { font-size: 0.82rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cyan); text-shadow: var(--glow-c); margin-bottom: 14px; }
-h1, h2, h3 { font-family: 'Orbitron', sans-serif; font-weight: 900; line-height: 1.12; margin: 0; }
+h1, h2, h3 { font-family: 'Orbitron', 'Saira secours', sans-serif; font-weight: 900; line-height: 1.12; margin: 0; }
 h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
 h1.h1-page { font-size: clamp(2rem, 4.5vw, 3rem); }
 h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 700; letter-spacing: 0.02em; }
@@ -538,6 +538,16 @@ em.accent, .eyebrow, .nav a.active { text-shadow: none; }
   .nav a { padding: 14px; }
   .nav a.active::after { left: 44%; right: 44%; }
 }
+/* Lien Discord du menu (main.js NAV_DISCORD) : pastille-icône discrète à droite sur ordinateur, ligne entière en bas du menu mobile */
+.nav a.nav-discord { display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-left: 6px; padding: 8px 10px; color: #b9b2ff; }
+.nav a.nav-discord:hover, .nav a.nav-discord:focus-visible { color: var(--white); background: rgba(88,101,242,.35); }
+.nav-discord svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+@media (min-width: 1001px) {
+  .nav-discord span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+@media (max-width: 1000px) {
+  .nav a.nav-discord { margin: 6px 0 0; padding: 14px; border-top: 1px solid var(--bord); border-radius: 0 0 10px 10px; --i: 8; }
+}
 
 /* Jeux : boutons en verre teinté de la couleur du jeu (au lieu d'aplats pleins), défi du jour en plaque arrondie */
 body .jx-card .btn-primary { background: color-mix(in srgb, var(--accent) 22%, rgba(255,255,255,.06)); color: var(--white);
@@ -795,3 +805,27 @@ body .sw-home { --smut: #c4bce6; }
 .clip-card.cr-choisi { outline: 2px solid var(--cyan); outline-offset: 4px; }
 @media (max-width: 600px) { .cr-barre { grid-template-columns: minmax(0, 1fr); } .cr-hasard { grid-row: auto; grid-column: auto; justify-self: start; } }
 @media (prefers-reduced-motion: reduce) { .vv-point { animation: none; } }
+
+/* ===== Place réservée pendant le chargement des données (CLS, 17/11) =====
+   Les grilles sont remplies par js/<page>.js après lecture de data/*.json : vides, elles gardent assez de hauteur pour
+   que la suite de la page (pied de page compris) reste sous la ligne de flottaison, donc rien ne saute à l'arrivée. */
+.planning-grid:empty { min-height: 320px; }
+.streamers-grid:empty, .clips-grid:empty { min-height: 640px; }
+.jx-chargement { grid-column: 1 / -1; min-height: 640px; padding: 40px 0; text-align: center; color: var(--muted); }
+.cr-jeux:empty { min-height: 36px; }
+.cr-compte:empty { min-height: 1.6em; }
+#efBox:has(> .spin) { min-height: 480px; }
+#aboutParagraphs p + p { margin-top: 14px; }
+
+/* ===== Fluidité au téléphone (17/11) =====
+   Le flou d'arrière-plan se recalcule à chaque image pendant le défilement : trop lourd pour un téléphone.
+   Sur petit écran ou écran tactile : plus aucun flou, plaques opaques de la teinte moyenne mesurée sous le verre
+   (même reflet blanc par-dessus). L'ordinateur (souris, > 760 px) garde le verre dépoli. */
+@media (max-width: 760px), (pointer: coarse) {
+  *, *::before, *::after { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  :root { --verre: linear-gradient(135deg, rgba(255,255,255,.13), rgba(255,255,255,.04) 45%, rgba(255,255,255,.07)), #130f24; }
+  body .legal-content, body .coulisses-toc, .announce, .sw-ticker { background-color: #15102a; }
+  .consent-bar { background: #0e0a1e; }
+}
+/* animations en boucle hors de l'écran : en pause (classe posée par main.js) */
+.anim-pause, .anim-pause::before, .anim-pause::after { animation-play-state: paused !important; }

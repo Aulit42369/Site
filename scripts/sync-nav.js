@@ -14,9 +14,12 @@ const check = process.argv.includes('--check');
 const pages = loadCorePages();
 const menu = pages.filter((p) => p.menu && !p.last).concat(pages.filter((p) => p.menu && p.last));
 
+// Lien Discord en fin de menu : même balise que NAV_DISCORD de main.js
+const navDiscord = fs.readFileSync(path.join(ROOT, 'main.js'), 'utf8').match(/const NAV_DISCORD = '([^']+)';/)[1];
+
 function navFor(file) {
   const links = menu.map((p) => `      <a href="${p.file}"${p.file === file ? ' class="active"' : ''}>${p.label}</a>`).join('\n');
-  return `<nav class="nav" id="nav">\n${links}\n    </nav>`;
+  return `<nav class="nav" id="nav">\n${links}\n      ${navDiscord}\n    </nav>`;
 }
 
 let diffs = 0;

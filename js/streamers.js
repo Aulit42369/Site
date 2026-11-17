@@ -15,16 +15,25 @@ function twitchUsername(url) {
   }
 }
 
-function applyAvatarPhoto(avatarEl, photoUrl) {
+/* Avatar affiché en 64 px : Twitch publie aussi chaque photo en 70x70 et 150x150 (vérifié le 17/11) ;
+   on prend la plus petite suffisante (~3-34 Ko au lieu de ~100 Ko). URL d'une autre forme : gardée telle quelle. */
+function smallTwitchAvatar(url) {
+  return url.replace(/-profile_image-300x300\.(png|jpe?g)$/i, '-profile_image-' + (window.devicePixelRatio > 1.1 ? '150x150' : '70x70') + '.$1');
+}
+
+function applyAvatarPhoto(avatarEl, photoUrl, isRetry) {
   if (typeof photoUrl !== 'string' || !/^https?:\/\//i.test(photoUrl)) return;
+  const small = isRetry ? photoUrl : smallTwitchAvatar(photoUrl);
   const img = new Image();
+  if (small !== photoUrl) img.onerror = () => applyAvatarPhoto(avatarEl, photoUrl, true); // petite taille absente : photo d'origine
   img.onload = () => {
+    photoUrl = small;
     avatarEl.style.backgroundImage = `url("${encodeURI(photoUrl).replace(/["')]/g, encodeURIComponent)}")`;
     avatarEl.style.backgroundSize = 'cover';
     avatarEl.style.backgroundPosition = 'center';
     avatarEl.textContent = '';
   };
-  img.src = photoUrl;
+  img.src = small;
 }
 
 function applyLiveState(badgeEl, isLive) {

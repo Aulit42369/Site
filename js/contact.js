@@ -38,7 +38,7 @@
     }
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi...';
+    submitBtn.textContent = 'Envoi…';
     try {
       const res = await fetch(form.action, {
         method: 'POST',
@@ -52,8 +52,8 @@
       }
     } catch (err) {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Envoyer';
-      formError.textContent = "L'envoi a échoué — réessaie, ou passe par le Discord en attendant.";
+      submitBtn.textContent = 'Envoyer le message';
+      formError.textContent = "L’envoi a échoué — réessaie, ou passe par le Discord en attendant.";
       formError.hidden = false;
     }
   });
