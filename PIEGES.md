@@ -5,3 +5,12 @@
 
 - **Sauts de page (CLS, 17/11)** : tout bloc rempli par JS après lecture de `data/*.json` doit avoir sa place réservée (hauteur mini tant qu'il est vide, ou texte de secours de la même longueur) ; ne jamais masquer en `display:none` un bouton qui apparaîtra ensuite (Escape : boutons visibles avec l'adresse par défaut). Nouvelle police de titre : lui donner aussi la police de secours `Saira secours` / `Plex Sans secours` (fonts.css), sinon la page saute au chargement. Mesure : `tests/perf-41-47.test.js` (données retardées de 700 ms).
 - **Flou au téléphone (17/11)** : aucun `backdrop-filter` sous 760 px ni sur écran tactile (bloc de fin de `style.css`, `!important`). Un nouveau panneau en verre y devient opaque s'il utilise `var(--verre)` ; sinon lui donner un fond opaque dans ce bloc.
+
+- **18/11/2026 : course avec la construction automatique du serveur.** Le serveur recalcule `style.min.css`, `main.min.js` et les
+  `?v=` à chaque construction (toutes les quelques minutes, avec le statut Twitch), et ses hachages diffèrent de ceux calculés
+  sur le PC (fins de ligne). Conséquences vues : conflits sur les `?v=` à chaque `git pull`, et un `git pull --rebase` (mode
+  fork-point, après un `git stash`) qui a ÉCARTÉ le commit local (récupéré par `git cherry-pick` depuis le reflog). Le push part
+  vers 2 adresses (serveur puis GitHub) : l'une peut accepter et l'autre refuser.
+  À faire : ne pas lancer `update-asset-versions.js` avant un push (le serveur le fait) ; récupérer avec
+  `git fetch origin && git rebase --no-fork-point origin/main` ; sur un conflit de `?v=`, prendre la version du serveur ;
+  si GitHub refuse, `git fetch https://github.com/Aulit42369/Site.git main` puis fusion (jamais de force).
