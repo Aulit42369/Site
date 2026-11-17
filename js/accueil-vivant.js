@@ -53,6 +53,7 @@
   // Textes modifiables dans l'admin : <div id="vivantTextes"> d'index.html (déjà en HTML sûr, rendu par main.js)
   const T = (k) => { const el = document.querySelector('[data-edit="index.vivant.' + k + '"]'); return el ? el.innerHTML : ''; };
   const ABBR = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+  const heure = (d) => heureFr(d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0')); // « 21 h » (main.js)
 
   /* Lecteur « CAM 1 » : en live, le lecteur Twitch (soumis au consentement, main.js) ; hors ligne, la vidéo de
      présentation hébergée par le site, au lieu de l'écran « hors ligne » de Twitch. La vidéo n'est téléchargée
@@ -78,8 +79,7 @@
     // Case « Prochain live » du tableau de score : main.js ignore la semaine sur 2 et les exceptions, on la corrige ici
     const caseProchain = document.getElementById('nextLive');
     if (caseProchain && prochain) {
-      caseProchain.textContent = ABBR[prochain.debut.getDay()] + (prochain.heureConnue
-        ? ' ' + prochain.debut.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : '');
+      caseProchain.textContent = ABBR[prochain.debut.getDay()] + (prochain.heureConnue ? ' ' + heure(prochain.debut) : '');
     }
 
     const enDirect = !!(chaine && chaine.live && frais);
@@ -109,7 +109,7 @@
           <p class="vv-k">${T('dernier')}</p>
           ${dernier ? `<div class="vv-dernier">
             ${dernier.art ? `<img src="${esc(dernier.art)}" alt="" width="72" height="96" loading="lazy">` : ''}
-            <div><h2 class="vv-jeu">${esc(dernier.game)}</h2><p class="vv-quand">${esc(quand)}</p>
+            <div><h2 class="vv-jeu">${esc(nomDeJeu(dernier.game))}</h2><p class="vv-quand">${esc(quand)}</p>
               ${clipSoiree ? `<p class="vv-clip">${T('clip')} <a href="clips.html">${esc(clipSoiree.title)}</a></p>` : ''}
               <a class="vv-lien" href="https://www.twitch.tv/aulit42369/videos" target="_blank" rel="noopener">${T('revoir')}</a></div>
           </div>` : `<p class="vv-quand">${T('aucun')}</p>`}
@@ -117,7 +117,7 @@
         <article class="vv-carte vv-carte--prochain">
           <p class="vv-k">${T('prochain')}</p>
           ${prochain ? `<p class="vv-compte" id="vvCompte" aria-live="off">${esc(duree(prochain.debut - Date.now()))}</p>
-            <p class="vv-quand">${esc(prochain.debut.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }))}${prochain.heureConnue ? ' · ' + esc(prochain.debut.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })) : ''} · <b>${esc(prochain.game)}</b></p>
+            <p class="vv-quand">${esc(prochain.debut.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }))}${prochain.heureConnue ? ' · ' + esc(heure(prochain.debut)) : ''} · <b>${esc(nomDeJeu(prochain.game))}</b></p>
             <a class="vv-lien" href="planning.html">${T('planning')}</a>`
             : `<p class="vv-quand">${T('annonce')}</p><a class="vv-lien" href="planning.html">${T('planning')}</a>`}
         </article>

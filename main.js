@@ -29,6 +29,25 @@ function loadJson(path, fallback) {
     .catch(() => fallback);
 }
 
+/* Heure de l'admin « 21:00 » → « 21 h », « 16:30 » → « 16 h 30 » (typographie française).
+   Utilisée par le planning et l'accueil. */
+function heureFr(t) {
+  const m = /^(\d{1,2}):(\d{2})$/.exec(String(t || '').trim());
+  if (!m) return String(t || '');
+  return Number(m[1]) + ' h' + (m[2] === '00' ? '' : ' ' + m[2]);
+}
+
+/* Noms de jeu abrégés dans l'admin → nom complet à l'affichage (planning, accueil). */
+const NOMS_DE_JEU = { '7d2d': '7 Days to Die' };
+function nomDeJeu(g) {
+  const s = String(g || '');
+  return NOMS_DE_JEU[s.trim().toLowerCase()] || s;
+}
+
+/* Lien Discord du menu : discret à droite sur ordinateur, en bas du menu sur téléphone (style.css .nav-discord).
+   Même balise dans le menu statique des pages : scripts/sync-nav.js la lit ici. */
+const NAV_DISCORD = '<a href="https://discord.com/invite/Amgaz5YNVg" class="nav-discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.028C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.042-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.946 2.418-2.157 2.418z"/></svg><span>Discord</span></a>';
+
 /* ================================================================
    Registre des pages : LA liste du site (menu, vérifications, plan du
    site). Le HTML statique de chaque page garde son menu en secours
@@ -110,6 +129,14 @@ navToggle.addEventListener('click', () => {
   document.body.classList.toggle('nav-open', open);
   navToggle.setAttribute('aria-expanded', open);
 });
+/* Échap ferme le menu mobile et rend le focus à son bouton */
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape' || !nav.classList.contains('open')) return;
+  nav.classList.remove('open');
+  document.body.classList.remove('nav-open');
+  navToggle.setAttribute('aria-expanded', 'false');
+  navToggle.focus();
+});
 
 /* Bandeau "EN DIRECT" du header (sur toutes les pages) + nombre
    d'abonnés Twitch (affiché seulement là où l'élément #followerCount
@@ -183,12 +210,15 @@ if (liveBanner || followerCount) {
       const sJeu = document.getElementById('sJeu');
       if (sStatut) sStatut.textContent = enDirect ? '● En direct' : '○ Hors ligne';
       if (sJeu) sJeu.textContent = (enDirect && chaine.game) ? chaine.game : '—';
+      // Pastille du bandeau défilant : « À l’antenne » seulement en live (sinon libellé neutre du HTML)
+      const onair = document.getElementById('tickerOnair');
+      if (onair && enDirect) { onair.classList.remove('off'); onair.lastChild.textContent = 'À l’antenne'; }
     })
     .catch(() => {});
 }
 
 /* Scoreboard de l'accueil — « Prochain live » : le prochain jour marqué « on »
-   dans le planning (data/planning.json), formaté « Mer 21:00 ». */
+   dans le planning (data/planning.json), formaté « Mer 21 h ». */
 const nextLiveEl = document.getElementById('nextLive');
 if (nextLiveEl) {
   loadJson('data/planning.json', null)
@@ -205,7 +235,7 @@ if (nextLiveEl) {
           const p = e.time.split(':');
           if (now.getHours() * 60 + now.getMinutes() > (+p[0]) * 60 + (+p[1]) + 90) continue;
         }
-        nextLiveEl.textContent = (ABBR[JOURS[idx]] || JOURS[idx]) + (e.time ? ' ' + e.time : '');
+        nextLiveEl.textContent = (ABBR[JOURS[idx]] || JOURS[idx]) + (e.time ? ' ' + heureFr(e.time) : '');
         return;
       }
       nextLiveEl.textContent = 'À venir';
@@ -301,7 +331,7 @@ function applyAnnouncement(a) {
   const close = document.createElement('button');
   close.type = 'button';
   close.className = 'announce-close';
-  close.setAttribute('aria-label', "Fermer l'annonce");
+  close.setAttribute('aria-label', "Fermer l’annonce");
   close.textContent = '×';
   close.addEventListener('click', () => {
     bar.remove();
@@ -351,7 +381,8 @@ function renderNav(customMenu) {
   const items = CORE_PAGES.filter((p) => p.menu && !p.last).map((p) => ({ href: p.file, label: p.label, active: p.file === here }));
   customMenu.forEach((p) => items.push({ href: 'page.html?p=' + encodeURIComponent(p.slug), label: p.title, active: here === 'page.html' && slug === p.slug }));
   CORE_PAGES.filter((p) => p.menu && p.last).forEach((p) => items.push({ href: p.file, label: p.label, active: p.file === here }));
-  nav.innerHTML = items.map((i) => '<a href="' + escapeHtml(i.href) + '"' + (i.active ? ' class="active"' : '') + '>' + escapeHtml(i.label) + '</a>').join('\n');
+  nav.innerHTML = items.map((i) => '<a href="' + escapeHtml(i.href) + '"' + (i.active ? ' class="active"' : '') + '>' + escapeHtml(i.label) + '</a>').join('\n') + '\n' + NAV_DISCORD;
+  if (window.__siteDiscord) nav.querySelector('.nav-discord').href = window.__siteDiscord; // Discord changé dans l'admin
 }
 const CUSTOM_NAV_KEY = 'custom-nav';
 let cachedCustomNav = [];
@@ -543,3 +574,13 @@ function gcRefresh() {
   });
 }
 gcRefresh();
+
+/* Fluidité (17/11) : les animations en boucle (décor, traits lumineux des Coulisses…) se mettent en pause quand
+   leur élément sort de l'écran, et repartent quand il revient. Invisible pour le visiteur, moins de calcul au téléphone. */
+if ('IntersectionObserver' in window && document.getAnimations) {
+  const enBoucle = new Set(document.getAnimations()
+    .filter((a) => a.effect && a.effect.target && a.effect.getTiming().iterations === Infinity)
+    .map((a) => a.effect.target));
+  const ioAnim = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('anim-pause', !e.isIntersecting)));
+  enBoucle.forEach((el) => ioAnim.observe(el));
+}

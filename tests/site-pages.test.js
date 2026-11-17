@@ -171,7 +171,7 @@ function writeClipsXSS() {
     check('coulisses.html: no more #4a5568 left', !svgHtml.includes('4a5568'));
     // Piste D + textes courts (16/11) : les anciens schémas SVG et paragraphes longs sont remplacés
     check('coulisses.html: texte court de la Régie présent', svgHtml.includes('raid de fin de live'));
-    check('coulisses.html: texte court de « Ce site » présent', svgHtml.includes("page d'administration privée"));
+    check('coulisses.html: texte court de « Ce site » présent', svgHtml.includes('page d’administration privée'));
     await page.close();
 
   } finally {

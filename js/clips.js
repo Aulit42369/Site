@@ -26,7 +26,7 @@ function addClipsJsonLd(clips) {
       '@type': 'VideoObject',
       name: clip.title,
       description: 'Clip Twitch de la chaîne AULIT42369 : ' + clip.title,
-      thumbnailUrl: 'https://aulit42369.fr/Site/og/clips-og.png?v=12',
+      thumbnailUrl: 'https://aulit42369.fr/Site/og/clips-og.jpg?v=13',
       embedUrl: `https://clips.twitch.tv/embed?clip=${slug}&parent=aulit42369.github.io&parent=aulit42369.fr`,
       url: `https://clips.twitch.tv/${slug}`,
       inLanguage: 'fr'
@@ -64,13 +64,12 @@ loadJson('data/clips.json', [])
           <div class="clip-title">${escapeHtml(clip.title)}${badge}</div>
           <button type="button" class="share-btn" aria-label="Partager ce clip">Partager</button>
         </div>
-        ${yt ? '' : `<div class="clip-slug" tabindex="0" role="button" aria-label="Copier le slug du clip">${escapeHtml(clip.slug)}</div>`}
       `;
       grid.appendChild(card);
       applyConsent(card); // lecteur Twitch chargé seulement après accord (main.js)
 
-      /* Bouton "Partager" : ne transmet que le titre et le lien du
-         clip, jamais le slug — voir juste en dessous pour ça. */
+      /* Bouton "Partager" : ne transmet que le titre et le lien du clip.
+         (17/11 : l'identifiant technique du clip n'est plus affiché sous la vidéo ; il reste dans l'admin.) */
       const shareBtn = card.querySelector('.share-btn');
       shareBtn.addEventListener('click', () => {
         if (navigator.share) {
@@ -82,24 +81,6 @@ loadJson('data/clips.json', [])
             setTimeout(() => { shareBtn.textContent = original; }, 1800);
           }).catch(() => {});
         }
-      });
-
-      /* Slug affiché sous la vidéo pour mon propre usage (le
-         retrouver sans repasser par l'admin) — clic pour copier,
-         complètement à part du bouton "Partager" ci-dessus. */
-      const slugEl = card.querySelector('.clip-slug');
-      if (!slugEl) return;
-      const copySlug = () => {
-        if (!navigator.clipboard) return;
-        navigator.clipboard.writeText(clip.slug).then(() => {
-          const original = slugEl.textContent;
-          slugEl.textContent = 'Copié !';
-          setTimeout(() => { slugEl.textContent = original; }, 1200);
-        }).catch(() => {});
-      };
-      slugEl.addEventListener('click', copySlug);
-      slugEl.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copySlug(); }
       });
     });
   });

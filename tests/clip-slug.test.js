@@ -74,27 +74,8 @@ function check(label, cond) {
     await page.goto(`${BASE}/clips.html`);
     await page.waitForTimeout(300);
 
-    const slugText = await page.evaluate(() => document.querySelector('.clip-slug').textContent);
-    check('clips.html: slug visible under the video', slugText === 'AwkwardSalamanderSwiftRage');
-
-    // click slug -> copies slug only, not url
-    await page.click('.clip-slug');
-    await page.waitForTimeout(100);
-    const clipboardAfterSlugClick = await page.evaluate(() => window.__clipboardWrites.slice());
-    check('clips.html: clicking slug copies the raw slug', clipboardAfterSlugClick.includes('AwkwardSalamanderSwiftRage'));
-    const slugFeedback = await page.evaluate(() => document.querySelector('.clip-slug').textContent);
-    check('clips.html: slug shows "Copié !" feedback', slugFeedback === 'Copié !');
-    await page.waitForTimeout(1300);
-    const slugRestored = await page.evaluate(() => document.querySelector('.clip-slug').textContent);
-    check('clips.html: slug text restored after feedback', slugRestored === 'AwkwardSalamanderSwiftRage');
-
-    // keyboard activation
-    await page.evaluate(() => { window.__clipboardWrites.length = 0; });
-    await page.focus('.clip-slug');
-    await page.keyboard.press('Enter');
-    await page.waitForTimeout(100);
-    const clipboardAfterEnter = await page.evaluate(() => window.__clipboardWrites.slice());
-    check('clips.html: Enter key on slug also copies it', clipboardAfterEnter.includes('AwkwardSalamanderSwiftRage'));
+    // 17/11 (audit, point 48) : l'identifiant technique n'est plus affiché sous le clip
+    check('clips.html: slug NOT shown under the video', await page.locator('.clip-slug').count() === 0 && !(await page.textContent('#clipsGrid, main')).includes('AwkwardSalamanderSwiftRage'));
 
     // share button payload must stay title+url, no slug anywhere in it
     await page.evaluate(() => { window.__shareCalls.length = 0; window.__clipboardWrites.length = 0; });

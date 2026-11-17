@@ -42,7 +42,7 @@ window.customPagesPromise.then((d) => {
     robots.content = 'noindex';
     document.head.appendChild(robots);
     title.textContent = 'Page introuvable';
-    document.getElementById('cpBlocks').innerHTML = '<p>Cette page n\'existe pas ou n\'est plus publiée. <a href="index.html">Retour à l\'accueil</a>.</p>';
+    document.getElementById('cpBlocks').innerHTML = '<p>Cette page n’existe pas ou n’est plus publiée. <a href="index.html">Retour à l’accueil</a>.</p>';
     return;
   }
   title.textContent = page.title;

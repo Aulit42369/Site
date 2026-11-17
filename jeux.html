@@ -13,14 +13,19 @@
 <meta property="og:description" content="Jeux mobiles gratuits créés par Aulit42369 : LUMEN, ÉCHO, Résonance et Fragments. Joue directement dans le navigateur ou installe-les sur Android et iPhone.">
 <meta property="og:url" content="https://aulit42369.fr/Site/jeux.html">
 <link rel="canonical" href="https://aulit42369.fr/Site/jeux.html">
-<meta property="og:image" content="https://aulit42369.fr/Site/og-image.png?v=12">
+<meta property="og:image" content="https://aulit42369.fr/Site/og-image.jpg?v=13">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Aulit42369, streamer Twitch francophone multigaming : jeux coop entre potes, planning des lives, clips et Discord">
+<meta property="og:site_name" content="Aulit42369">
+<meta property="og:locale" content="fr_FR">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Jeux mobiles gratuits créés par Aulit42369 : LUMEN, ÉCHO, Résonance et Fragments. Joue directement dans le navigateur ou installe-les sur Android et iPhone.">
 
 <link rel="stylesheet" href="fonts.css?v=2026111301">
-<link rel="stylesheet" href="style.min.css?v=c51fd889">
+<link rel="stylesheet" href="style.min.css?v=06764a66">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,7 +66,7 @@
   .jx-desc { color: var(--muted); font-size: 1.08rem; line-height: 1.55; margin: 0; }
   .jx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .jx-chip { font-family: 'Orbitron', sans-serif; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 11px; border: 1px solid var(--line); border-radius: 3px; color: var(--muted); background: var(--surface2); }
-  .jx-chip.pwa { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+  .jx-chip.pwa { color: color-mix(in srgb, var(--accent) 80%, #fff); /* violet éclairci : 5,6:1 sur le fond de la carte (4,2:1 avant) */ border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
   .jx-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: auto; padding-top: 4px; }
   .jx-card .btn-primary { background: var(--accent); }
   .jx-card .btn-secondary { color: var(--accent); border-color: var(--accent); }
@@ -93,6 +98,7 @@
       <a href="coulisses.html">Coulisses</a>
       <a href="apropos.html">À propos</a>
       <a href="escape-fragments.html">Escape Fragments</a>
+      <a href="https://discord.com/invite/Amgaz5YNVg" class="nav-discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.028C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.042-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.946 2.418-2.157 2.418z"/></svg><span>Discord</span></a>
     </nav>
   </div>
 </header>
@@ -100,14 +106,14 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow" data-edit="jeux.eyebrow" data-edit-label="Jeux — sur-titre">// Mes jeux</div>
-      <h1 class="h1-page" data-edit="jeux.title" data-edit-label="Jeux — titre">Les jeux mobiles gratuits <em class="accent">d'Aulit</em></h1>
+      <h1 class="h1-page" data-edit="jeux.title" data-edit-label="Jeux — titre">Les jeux mobiles gratuits <em class="accent">d’Aulit</em></h1>
       <p class="lead" data-edit="jeux.lead" data-edit-label="Jeux — introduction">Quatre jeux mobiles gratuits à essayer directement dans ton navigateur, sans rien télécharger. Tu peux aussi les installer sur ton téléphone comme une vraie appli, en attendant leur arrivée sur Google Play.</p>
     </div>
   </section>
 
   <section class="tight">
     <div class="container">
-      <div class="jx-grid" id="jxGrid"><div class="ef-status" style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0;">Chargement des jeux…</div></div>
+      <div class="jx-grid" id="jxGrid"><div class="jx-chargement">Chargement des jeux…</div></div>
       <noscript><p class="jx-note">Active JavaScript pour voir la liste des jeux.</p></noscript>
     </div>
   </section>
@@ -116,16 +122,16 @@
     <div class="container">
       <div class="eyebrow" data-edit="jeux.pwa.eyebrow" data-edit-label="Jeux — installation : sur-titre">// Installer sur ton téléphone</div>
       <h2 data-edit="jeux.pwa.title" data-edit-label="Jeux — installation : titre">Installer un jeu en <em class="accent">4 étapes</em></h2>
-      <p class="lead" style="margin-top:10px;" data-edit="jeux.pwa.lead" data-edit-label="Jeux — installation : introduction">Pas besoin de boutique d'applications : chaque jeu s'installe directement depuis son lien. Une fois installé, il a son icône sur ton écran d'accueil et s'ouvre en plein écran.</p>
+      <p class="lead" style="margin-top:10px;" data-edit="jeux.pwa.lead" data-edit-label="Jeux — installation : introduction">Pas besoin de boutique d’applications : chaque jeu s’installe directement depuis son lien. Une fois installé, il a son icône sur ton écran d’accueil et s’ouvre en plein écran.</p>
       <ol class="jx-steps">
         <li data-edit="jeux.pwa.s1" data-edit-label="Jeux — installation : étape 1">Ouvre le lien du jeu avec <em class="accent">Chrome</em> sur ton téléphone Android (bouton « Jouer maintenant »).</li>
         <li data-edit="jeux.pwa.s2" data-edit-label="Jeux — installation : étape 2">Appuie sur le menu <em class="accent">⋮</em> (les trois points, en haut à droite).</li>
-        <li data-edit="jeux.pwa.s3" data-edit-label="Jeux — installation : étape 3">Choisis <em class="accent">« Installer l'application »</em> (ou « Ajouter à l'écran d'accueil »).</li>
-        <li data-edit="jeux.pwa.s4" data-edit-label="Jeux — installation : étape 4">Confirme : l'icône du jeu apparaît sur ton écran d'accueil. Lance-le comme n'importe quelle appli.</li>
+        <li data-edit="jeux.pwa.s3" data-edit-label="Jeux — installation : étape 3">Choisis <em class="accent">« Installer l’application »</em> (ou « Ajouter à l’écran d’accueil »).</li>
+        <li data-edit="jeux.pwa.s4" data-edit-label="Jeux — installation : étape 4">Confirme : l’icône du jeu apparaît sur ton écran d’accueil. Lance-le comme n’importe quelle appli.</li>
       </ol>
       <div class="jx-note">
-        <p data-edit="jeux.pwa.ios" data-edit-label="Jeux — installation : note iPhone">Sur iPhone : ouvre le lien dans <em class="accent">Safari</em>, touche le bouton Partager, puis « Sur l'écran d'accueil ».</p>
-        <p data-edit="jeux.pwa.play" data-edit-label="Jeux — installation : note Google Play">Chaque jeu s'installe séparément. Les versions Google Play arriveront plus tard : d'ici là, cette installation te permet déjà de jouer comme avec une vraie appli.</p>
+        <p data-edit="jeux.pwa.ios" data-edit-label="Jeux — installation : note iPhone">Sur iPhone : ouvre le lien dans <em class="accent">Safari</em>, touche le bouton Partager, puis « Sur l’écran d’accueil ».</p>
+        <p data-edit="jeux.pwa.play" data-edit-label="Jeux — installation : note Google Play">Chaque jeu s’installe séparément. Les versions Google Play arriveront plus tard : d’ici là, cette installation te permet déjà de jouer comme avec une vraie appli.</p>
       </div>
     </div>
   </section>
@@ -143,7 +149,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=b97806ba"></script>
+<script src="main.min.js?v=57ec6678"></script>
 
 <script src="js/jeux.js?v=8b8744d1"></script>
 
