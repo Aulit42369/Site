@@ -829,3 +829,93 @@ body .sw-home { --smut: #c4bce6; }
 }
 /* animations en boucle hors de l'écran : en pause (classe posée par main.js) */
 .anim-pause, .anim-pause::before, .anim-pause::after { animation-play-state: paused !important; }
+
+/* ===== Système commun 18/11 (audit 46) : jetons + composants uniques =====
+   Mesuré avant : 8 styles de boutons, rayons 3/4/10/14/16/18/22/999, 25 tailles de texte (jusqu'à 8 px), 5 largeurs.
+   Après : 3 boutons (plein, contour, lien), 3 rayons (petit, carte, pilule), 6 tailles (12 px minimum), 1 largeur.
+   Seule exception assumée : le titre-logo « AULIT42369 » de l'accueil (affiche). Voir composants.html. */
+:root {
+  /* rayons */
+  --r-petit: 8px; --r-carte: 18px; --r-pilule: 999px;
+  /* tailles de texte : 12 · 14 · 17 · 22 · 28→36 · 40→64 */
+  --t-xs: .75rem; --t-s: .875rem; --t-m: 1.0625rem; --t-l: 1.375rem;
+  --t-xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem); --t-xxl: clamp(2.5rem, 1.7rem + 3vw, 4rem);
+  /* largeur : une seule colonne de contenu, mêmes bords pour l'en-tête, le bandeau et les pages */
+  --contenu: 1072px; --gouttiere: 24px;
+  --f-titre: 'Saira Condensed', 'Saira secours', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'Plex Mono secours', ui-monospace, monospace;
+}
+@media (max-width: 600px) { :root { --gouttiere: 16px; } }
+
+/* --- largeur unique --- */
+.container, .sw-home .wrap { max-width: calc(var(--contenu) + 2 * var(--gouttiere)); padding-inline: var(--gouttiere); }
+.site-header { padding-inline: var(--gouttiere); }
+.site-header .container { max-width: var(--contenu); }
+.sw-ticker { max-width: var(--contenu); width: calc(100% - 2 * var(--gouttiere)); }
+
+/* --- typographie : 6 tailles --- */
+body { font-size: var(--t-m); }
+h1, h1.h1-page { font-size: var(--t-xxl); }
+h2 { font-size: var(--t-xl); }
+h3, h2.as-h3 { font-size: var(--t-l); }
+.eyebrow { font-size: var(--t-s); }
+p.lead { font-size: var(--t-m); }
+.logo { font-size: var(--t-l); }
+.nav a { font-size: var(--t-s); }
+@media (max-width: 1000px) { .nav a { font-size: var(--t-m); } }
+@media (min-width: 1001px) and (max-width: 1240px) { .nav a { font-size: var(--t-s); } }
+.site-footer .brand, .site-footer .legal-links a, .site-footer .legal-links button { font-size: var(--t-xs); }
+.site-footer .footer-nav a, .site-footer .socials a { font-size: var(--t-s); }
+.announce, .consent-bar p, .consent-ph p, .vv-quand, .vv-clip, .vv-lien, .cr-jeux button, .cr-compte, .cm-etapes p, .cm-chiffre span, .ap-chaine li, .ap-chaine:has(li:nth-child(7)) li, .jx-defi-note, .pack-vitrine-lien { font-size: var(--t-s); }
+.consent-bar strong, .consent-ph-tag, .vv-k, .vv-objectif span, .cp-legende, .skip-link { font-size: var(--t-xs); }
+.vv-objectif, .cr-champ input, .cm-etapes h3 { font-size: var(--t-m); }
+.vv-jeu { font-size: var(--t-l); }
+.vv-compte, .cm-chiffre strong { font-size: var(--t-xl); }
+
+/* titres : la couleur seulement sur le mot porteur (classe .porteur), sinon rien */
+h1 em.accent, h2 em.accent { color: inherit; font-style: inherit; }
+h1 em.accent.porteur, h2 em.accent.porteur { color: var(--cyan); }
+
+/* --- rayons : petit · carte · pilule --- */
+.card, .sw-panel, .link-card, .clip-card, .planning-card, .streamer-card, .ef-pod, .kit-stat, .project-diagram, .project-preview, .ef-table,
+.sw-score .cell, .broadcast-frame, .consent-bar, .sw-live, .sw-feat, .sw-cardsite, .sw-join, .vv-carte, .vv-live, .cr-barre, .cp-cadre,
+.site-header .container, .pack-vitrine, body .legal-content, body .coulisses-toc, .ec-iframe { border-radius: var(--r-carte); }
+.sw-live .frame, .consent-ph, .field input, .field textarea, .legal-content code, .vv-dernier img, body .jx-defi, body .status-note,
+.announce-close, .skip-link, .project-preview .btn, .project-preview button { border-radius: var(--r-petit); }
+.nav, .nav a, .sw-ticker, .sw-livebug, .cr-champ, .cr-hasard, .cr-jeux button { border-radius: var(--r-pilule); }
+@media (max-width: 1000px) { .nav { border-radius: var(--r-carte); } .nav a { border-radius: var(--r-petit); } .nav a.nav-discord { border-radius: 0 0 var(--r-petit) var(--r-petit); } }
+
+/* --- boutons : plein · contour · lien (même hauteur, même police, même forme partout) --- */
+body :is(.btn, .sw-btn, .cr-hasard) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px;
+  border-radius: var(--r-pilule); clip-path: none; border: 1px solid transparent; background: none; color: var(--white);
+  font-family: var(--f-titre); font-style: normal; font-weight: 700; font-size: var(--t-m); letter-spacing: .05em; text-transform: uppercase; line-height: 1;
+  cursor: pointer; text-decoration: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+  transition: transform .25s var(--spring), background-color .15s, border-color .15s, color .15s; }
+body :is(.btn-primary, .sw-btn.primary) { background: var(--cyan); border-color: var(--cyan); color: #06121a; box-shadow: 0 8px 22px -14px var(--cyan); }
+body :is(.btn-primary, .sw-btn.primary):hover { background: #8ff6f2; border-color: #8ff6f2; }
+body :is(.btn-secondary, .sw-btn.ghost, .cr-hasard) { background: transparent; border-color: rgba(255,255,255,.42); color: var(--white); }
+body :is(.btn-secondary, .sw-btn.ghost, .cr-hasard):hover { border-color: var(--cyan); color: var(--cyan); }
+.consent-bar-actions .btn { padding: 0 20px; }
+/* lien d'action : texte cyan gras + flèche écrite dans le libellé ; souligné au survol (aussi quand toute la carte est le lien) */
+.lien-action { display: inline-flex; align-items: center; min-height: 24px; padding: 0; border: 0; background: none; cursor: pointer;
+  font: 700 var(--t-s)/1.3 'IBM Plex Sans', 'Plex Sans secours', sans-serif; letter-spacing: 0; text-transform: none; color: var(--cyan); text-decoration: none; }
+.lien-action:hover, a:hover > .lien-action, a:focus-visible > .lien-action { text-decoration: underline; text-underline-offset: 3px; }
+.vv .vv-lien { font-size: var(--t-s); }
+
+/* --- étiquettes : une seule forme (pilule, mono 12 px), variante accent --- */
+.etiquette, .planning-alt-note, .badge-new, .planning-today-badge, .status-pill, .sw-live .etiquette {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: var(--r-pilule); clip-path: none;
+  font-family: var(--f-mono); font-size: var(--t-xs); font-weight: 500; font-style: normal; letter-spacing: .08em; text-transform: uppercase; line-height: 1.4;
+  border: 1px solid rgba(255,255,255,.24); background: rgba(255,255,255,.06); color: var(--white); white-space: nowrap; }
+.etiquette--accent, .badge-new, .planning-today-badge { border-color: rgba(46,230,224,.55); background: rgba(46,230,224,.12); color: var(--cyan); }
+
+/* --- cartes : une marge intérieure --- */
+.card { padding: 24px; }
+.vv { min-height: 0; }
+.sw-home .lien-action { color: var(--cyan); }
+@media (max-width: 600px) { body :is(.btn, .sw-btn, .cr-hasard) { padding: 0 18px; } }
+.cr-hasard::before { content: none; }
+/* pages légales et 404 (audit 46, toutes les pages) */
+.legal-content h2 { font-size: var(--t-l); }
+.legal-content h3.legal-sub { font-size: var(--t-m); }
+.legal-content code { font-size: var(--t-s); }

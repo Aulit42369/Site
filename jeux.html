@@ -24,8 +24,10 @@
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Jeux mobiles gratuits créés par Aulit42369 : LUMEN, ÉCHO, Résonance et Fragments. Joue directement dans le navigateur ou installe-les sur Android et iPhone.">
 
-<link rel="stylesheet" href="fonts.css?v=2026111301">
-<link rel="stylesheet" href="style.min.css?v=06764a66">
+<link rel="preload" href="fonts/saira-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=2026111801">
+<link rel="stylesheet" href="style.min.css?v=d132a861">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,21 +63,21 @@
   .jx-orb.echo { background: repeating-radial-gradient(circle, var(--accent) 0 2px, transparent 2px 11px), #070a10; box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 45%, transparent); border: 1px solid var(--accent); }
   .jx-orb.resonance { background: repeating-radial-gradient(circle at 50% 50%, transparent 0 7px, color-mix(in srgb, var(--accent) 85%, transparent) 7px 9px), radial-gradient(circle, var(--accent) 0 5px, transparent 6px), #070a10; border: 1px solid var(--accent); box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 45%, transparent); }
   .jx-orb.fragments { border-radius: 14px; background: conic-gradient(from 20deg, var(--accent) 0 25%, transparent 0 28%, color-mix(in srgb, var(--accent) 60%, #070a10) 28% 55%, transparent 0 58%, color-mix(in srgb, var(--accent) 35%, #070a10) 58% 82%, transparent 0 85%, var(--accent) 85%); box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 45%, transparent); transform: rotate(8deg); }
-  .jx-name { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.55rem; letter-spacing: 0.04em; margin: 0; overflow-wrap: anywhere; }
-  .jx-tag { color: var(--accent); font-size: 1.05rem; margin: 2px 0 0; }
-  .jx-desc { color: var(--muted); font-size: 1.08rem; line-height: 1.55; margin: 0; }
+  .jx-name { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: var(--t-l); letter-spacing: 0.04em; margin: 0; overflow-wrap: anywhere; }
+  .jx-tag { color: var(--accent); font-size: var(--t-m); margin: 2px 0 0; }
+  .jx-desc { color: var(--muted); font-size: var(--t-m); line-height: 1.55; margin: 0; }
   .jx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .jx-chip { font-family: 'Orbitron', sans-serif; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 11px; border: 1px solid var(--line); border-radius: 3px; color: var(--muted); background: var(--surface2); }
+  .jx-chip { font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 11px; border: 1px solid var(--line); border-radius: var(--r-pilule); color: var(--muted); background: var(--surface2); }
   .jx-chip.pwa { color: color-mix(in srgb, var(--accent) 80%, #fff); /* violet éclairci : 5,6:1 sur le fond de la carte (4,2:1 avant) */ border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
   .jx-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: auto; padding-top: 4px; }
   .jx-card .btn-primary { background: var(--accent); }
   .jx-card .btn-secondary { color: var(--accent); border-color: var(--accent); }
-  .jx-soon { font-family: 'Orbitron', sans-serif; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border: 1px dashed var(--line); padding: 12px 18px; border-radius: 4px; }
+  .jx-soon { font-family: 'Orbitron', sans-serif; font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border: 1px dashed var(--line); padding: 12px 18px; border-radius: var(--r-petit); }
   .jx-steps { list-style: none; counter-reset: jx; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-  .jx-steps li { counter-increment: jx; position: relative; background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 4px; padding: 58px 20px 20px; color: var(--white); font-size: 1.08rem; line-height: 1.45; }
-  .jx-steps li::before { content: counter(jx); position: absolute; top: 16px; left: 20px; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 0.9rem; color: var(--bg); background: var(--cyan); box-shadow: var(--glow-c); }
+  .jx-steps li { counter-increment: jx; position: relative; background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: var(--r-carte); padding: 58px 20px 20px; color: var(--white); font-size: var(--t-m); line-height: 1.45; }
+  .jx-steps li::before { content: counter(jx); position: absolute; top: 16px; left: 20px; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: var(--t-s); color: var(--bg); background: var(--cyan); box-shadow: var(--glow-c); }
   .jx-steps li .accent, .jx-steps li em { color: var(--cyan); font-style: normal; font-weight: 700; }
-  .jx-note { margin-top: 20px; color: var(--muted); font-size: 1.02rem; max-width: 760px; }
+  .jx-note { margin-top: 20px; color: var(--muted); font-size: var(--t-m); max-width: 760px; }
   .jx-note p { margin: 0 0 8px; }
 </style>
 </head>
@@ -106,7 +108,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow" data-edit="jeux.eyebrow" data-edit-label="Jeux — sur-titre">// Mes jeux</div>
-      <h1 class="h1-page" data-edit="jeux.title" data-edit-label="Jeux — titre">Les jeux mobiles gratuits <em class="accent">d’Aulit</em></h1>
+      <h1 class="h1-page" data-edit="jeux.title" data-edit-label="Jeux — titre">Les jeux mobiles gratuits <em class="accent porteur">d’Aulit</em></h1>
       <p class="lead" data-edit="jeux.lead" data-edit-label="Jeux — introduction">Quatre jeux mobiles gratuits à essayer directement dans ton navigateur, sans rien télécharger. Tu peux aussi les installer sur ton téléphone comme une vraie appli, en attendant leur arrivée sur Google Play.</p>
     </div>
   </section>
@@ -149,7 +151,7 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=57ec6678"></script>
+<script src="main.min.js?v=9edccaad"></script>
 
 <script src="js/jeux.js?v=8b8744d1"></script>
 

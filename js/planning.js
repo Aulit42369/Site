@@ -1,118 +1,94 @@
 /* ================================================================
-   Le planning vient de data/planning.json — géré via la page
-   d'administration (admin.html), plus besoin d'un site séparé ni
-   d'éditer de code pour le mettre à jour.
+   Le planning vient de data/planning.json + data/planning-exceptions.json
+   (gérés dans l'admin). 18/11 (audit 44) : en tête, le bloc « Prochain live »
+   (jour, date, heure, jeu, compte à rebours, bouton Twitch), puis la semaine
+   en bande compacte : jours de repos petits, jour de live mis en avant.
+   Le calcul du prochain live est celui de l'accueil (window.prochainLive,
+   js/accueil-vivant.js, chargé avant ce fichier).
    ================================================================ */
 const JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-const aujourdhui = JOURS[new Date().getDay()];
+const ABR = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
 
 const grid = document.getElementById('planningGrid');
+const bloc = document.getElementById('planProchain');
 const empty = document.getElementById('emptyState');
 
-/* Changements ponctuels (stream en plus, jour de repos exceptionnel…) :
-   data/planning-exceptions.json, géré depuis l'admin (onglet Planning) ou posé
-   par l'Agence Aulit. Un changement des 7 prochains jours remplace la case de son
-   jour dans la grille (case active + jeu annoncé, SANS heure : pas d'ambiguïté). */
 function dateLocale(d) {
   return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
 }
 const maintenant = new Date();
 const todayStr = dateLocale(maintenant);
-const dans6j = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + 6);
-const limiteStr = dateLocale(dans6j);
-
-/* S8 : squelette en vagues (7 cases grises) pendant le chargement ; remplacé par les vraies cartes */
-const mouvementReduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-for (let i = 0; i < 7; i++) {
-  const sk = document.createElement('div');
-  sk.className = 'card planning-card sk';
-  sk.setAttribute('aria-hidden', 'true');
-  sk.innerHTML = '<div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div>';
-  sk.querySelectorAll('.sk-bar').forEach(b => b.style.setProperty('--d', (i * 0.12) + 's'));
-  grid.appendChild(sk);
-}
+const limiteStr = dateLocale(new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + 6));
 
 Promise.all([
   loadJson('data/planning.json', []),
   loadJson('data/planning-exceptions.json', []).catch(() => [])
 ]).then(([planning, list]) => {
-  grid.textContent = '';
-  const upcoming = (Array.isArray(list) ? list : [])
-    .filter(e => e && typeof e.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.date >= todayStr)
-    .sort((a, b) => a.date.localeCompare(b.date));
+  const exceptions = Array.isArray(list) ? list : [];
+  if (!Array.isArray(planning) || planning.length === 0) { empty.style.display = 'block'; bloc.remove(); return; }
 
-  /* première exception de chaque jour de la semaine, dans les 7 prochains jours */
+  /* changements ponctuels des 7 prochains jours : le premier de chaque jour remplace la case (sans heure) */
   const parJour = {};
-  upcoming.filter(e => e.date <= limiteStr).forEach(e => {
-    const jour = JOURS[new Date(e.date + 'T12:00:00').getDay()];
-    if (!parJour[jour]) parJour[jour] = e;
-  });
+  exceptions.filter(e => e && typeof e.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.date >= todayStr && e.date <= limiteStr)
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .forEach(e => { const j = JOURS[new Date(e.date + 'T12:00:00').getDay()]; if (!parJour[j]) parJour[j] = e; });
 
-  if (planning.length === 0) {
-    empty.style.display = 'block';
-  }
-  /* « Une semaine sur 2 » : la carte ne montre QUE le jeu de la prochaine occurrence du jour
-     (semaines paires depuis la date de départ = jeu de l'encadré « une semaine sur 2 » ; les autres = jeu du dessus,
-     ou repos s'il est vide). Un jeu n'apparaît donc jamais la semaine de l'autre. */
-  function jeuDeLaSemaine(base) {
+  /* « Une semaine sur 2 » : jeu de la prochaine occurrence du jour (même règle que l'admin et l'accueil) */
+  function jeuDeLaSemaine(base, jour) {
     if (!base.biweekly || !/^\d{4}-\d{2}-\d{2}$/.test(base.anchor || '')) return base;
-    const idx = JOURS.indexOf(base.day);
-    const prochain = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + ((idx - maintenant.getDay() + 7) % 7), 12);
-    const jours = Math.round((prochain - new Date(base.anchor + 'T12:00:00')) / 86400000);
-    // même règle que l'aperçu de l'admin (admin/planning.js, apercuAlternance) : la date de départ est une semaine du jeu
-    // « une semaine sur 2 » (altGame, demande d'Olivier du 28/10) ; les autres semaines = jeu du dessus ; vide = repos
-    const jeu = Math.floor(jours / 7) % 2 === 0 ? base.altGame : base.game;
+    const n = Math.round((jour - new Date(base.anchor + 'T12:00:00')) / 86400000);
+    const jeu = Math.floor(n / 7) % 2 === 0 ? base.altGame : base.game;
     return jeu ? Object.assign({}, base, { game: jeu, note: 'Une semaine sur 2' }) : Object.assign({}, base, { on: false });
   }
+  const horaire = (it) => it.time ? (it.end ? heureFr(it.time) + ' – ' + heureFr(it.end) : 'À partir de ' + heureFr(it.time)) : '';
 
-  /* 30/10 (Olivier : « je n'ai pas de semaine type, n'affiche rien ») : plus de badge « Changement » ;
-     la date du jour (sa prochaine occurrence, dans les 7 jours) sous son nom, dans la couleur de la case s'il est actif. */
-  function dateDuJour(day) {
-    const d = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + ((JOURS.indexOf(day) - maintenant.getDay() + 7) % 7));
-    return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
-  }
-
-  /* La grille commence aujourd'hui et suit les 7 jours dans l'ordre (avant : lundi → dimanche,
-     donc « Lundi 23 » pouvait s'afficher avant « Mardi 17 »). */
-  const ecart = (day) => (JOURS.indexOf(day) - maintenant.getDay() + 7) % 7;
-  const cartes = [];
-  planning.slice().sort((a, b) => ecart(a.day) - ecart(b.day)).map(jeuDeLaSemaine).forEach(base => {
-    const ex = parJour[base.day];
-    const item = !ex ? base : ex.on
-      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '', note: '' })
+  /* les 7 jours à partir d'aujourd'hui */
+  const semaine = [];
+  for (let i = 0; i < 7; i++) {
+    const jour = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() + i, 12);
+    const nom = JOURS[jour.getDay()];
+    const base = planning.find(p => p.day === nom) || { day: nom, on: false };
+    const ex = parJour[nom];
+    const item = !ex ? jeuDeLaSemaine(base, jour) : ex.on
+      ? Object.assign({}, base, { on: true, game: ex.game || 'Stream', time: '', end: '', note: '' })
       : Object.assign({}, base, { on: false });
-    const isToday = item.day === aujourdhui;
-    const card = document.createElement('div');
-    card.className = 'card planning-card' + (item.on ? '' : ' off');
-    card.style.setProperty('--accent', item.color);
-    const date = `<div class="planning-date">${escapeHtml(dateDuJour(item.day))}</div>`;
-
-    if (item.on) {
-      card.innerHTML = `
-        <div class="planning-card-head">
-          <div><div class="planning-day">${escapeHtml(item.day)}</div>${date}</div>
-          ${isToday ? '<span class="planning-today-badge">Aujourd’hui</span>' : ''}
-        </div>
-        <div class="planning-game">${escapeHtml(nomDeJeu(item.game))}</div>
-        ${item.time ? `<div class="planning-time">${item.end ? escapeHtml(heureFr(item.time)) + ' – ' + escapeHtml(heureFr(item.end)) : 'À partir de ' + escapeHtml(heureFr(item.time))} · Heure FR</div>` : ''}
-        ${item.note ? `<div class="planning-alt-note">${escapeHtml(item.note)}</div>` : ''}
-      `;
-    } else {
-      card.innerHTML = `
-        <div class="planning-card-head">
-          <div><div class="planning-day">${escapeHtml(item.day)}</div>${date}</div>
-        </div>
-        <div class="planning-off-label">— Repos —</div>
-      `;
-    }
-    grid.appendChild(card);
-    cartes.push(card);
-  });
-
-  /* S7 : mosaïque diagonale, retard de 30 ms × (colonne + ligne) mesurés sur la grille réelle */
-  if (!mouvementReduit) {
-    const xs = [], ys = [];
-    cartes.forEach(c => { if (!xs.includes(c.offsetLeft)) xs.push(c.offsetLeft); if (!ys.includes(c.offsetTop)) ys.push(c.offsetTop); });
-    cartes.forEach(c => { c.style.setProperty('--d', (0.03 * (xs.indexOf(c.offsetLeft) + ys.indexOf(c.offsetTop))) + 's'); c.classList.add('enter'); });
+    semaine.push({ jour, item, i });
   }
+
+  /* --- bloc « Prochain live » --- */
+  const prochain = typeof window.prochainLive === 'function' ? window.prochainLive(planning, exceptions, maintenant) : null;
+  if (!prochain) {
+    bloc.innerHTML = '<p class="pl-k">Prochain live</p><p class="pl-vide">Pas de live prévu cette semaine : il sera annoncé sur le <a class="lien-action" href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord →</a></p>';
+  } else {
+    const memeJour = semaine.find(s => dateLocale(s.jour) === dateLocale(prochain.debut));
+    const it = memeJour && memeJour.item.on ? memeJour.item : { time: '' };
+    const h = horaire(it) || (prochain.heureConnue ? 'À partir de ' + heureFr(prochain.debut.getHours() + ':' + String(prochain.debut.getMinutes()).padStart(2, '0')) : 'Horaire sur le Discord');
+    const d = prochain.debut;
+    bloc.innerHTML = `
+      <div class="pl-date" aria-hidden="true"><span>${ABR[d.getDay()]}</span><b>${d.getDate()}</b><span>${escapeHtml(d.toLocaleDateString('fr-FR', { month: 'short' }))}</span></div>
+      <div class="pl-corps">
+        <p class="pl-k">Prochain live<span class="sr-only"> : ${escapeHtml(d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }))}</span></p>
+        <h2 class="pl-jeu">${escapeHtml(nomDeJeu(prochain.game))}</h2>
+        <p class="pl-heure">${escapeHtml(h)} · heure de Paris${it.note ? ` <span class="etiquette">${escapeHtml(it.note)}</span>` : ''}</p>
+      </div>
+      <div class="pl-action">
+        <p class="pl-compte"><span>Dans</span> <b id="plCompte">${escapeHtml(window.dureeLive(d - Date.now()))}</b></p>
+        <a class="btn btn-primary" href="https://www.twitch.tv/aulit42369" target="_blank" rel="noopener">Suivre sur Twitch</a>
+      </div>`;
+    const compte = document.getElementById('plCompte');
+    setInterval(() => { compte.textContent = window.dureeLive(d - Date.now()); }, 30000);
+  }
+
+  /* --- la semaine en bande compacte --- */
+  grid.textContent = '';
+  semaine.forEach(({ jour, item, i }) => {
+    const li = document.createElement('li');
+    li.className = 'pl-jour' + (item.on ? ' on' : '') + (i === 0 ? ' auj' : '');
+    const date = `<span class="pl-j-nom">${ABR[jour.getDay()]}<span class="sr-only">${JOURS[jour.getDay()].slice(3)}</span></span><span class="pl-j-num">${jour.getDate()}</span>`;
+    li.innerHTML = item.on
+      ? `${date}<span class="pl-j-info"><b>${escapeHtml(nomDeJeu(item.game))}</b>${horaire(item) ? `<span>${escapeHtml(horaire(item))}</span>` : ''}</span>`
+      : `${date}<span class="pl-j-info pl-repos">Repos</span>`;
+    if (i === 0) li.insertAdjacentHTML('beforeend', '<span class="pl-auj">Aujourd’hui</span>');
+    grid.appendChild(li);
+  });
 });

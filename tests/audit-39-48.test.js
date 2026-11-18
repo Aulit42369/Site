@@ -31,10 +31,10 @@ const ecrire = (f, v) => fs.writeFileSync(path.join(ROOT, 'data', f), JSON.strin
       { day, on: true, game: day === 'Samedi' ? '7D2D' : 'Jeu ' + day, time: '21:00', end: day === 'Mardi' ? '23:30' : '', color: '#2ee6e0' })));
     ecrire('planning-exceptions.json', []);
     let p = await ouvrir('/planning.html');
-    const jours = await p.$$eval('.planning-day', (els) => els.map((e) => e.textContent.trim()));
+    const jours = await p.$$eval('.pl-j-nom', (els) => els.map((e) => e.textContent.trim()));
     const auj = new Date().getDay();
     check('planning : commence aujourd’hui et suit les 7 jours', JSON.stringify(jours) === JSON.stringify([0, 1, 2, 3, 4, 5, 6].map((i) => JOURS[(auj + i) % 7])));
-    check('planning : badge « Aujourd’hui » sur la 1re carte', await p.locator('.planning-card').first().locator('.planning-today-badge').count() === 1);
+    check('planning : badge « Aujourd’hui » sur la 1re carte', await p.locator('.pl-jour').first().locator('.pl-auj').count() === 1 && await p.locator('.pl-auj').count() === 1);
     const grille = await p.textContent('#planningGrid');
     check('planning : heures en « 21 h » et « 23 h 30 »', grille.includes('À partir de 21 h') && grille.includes('21 h – 23 h 30') && !grille.includes('21:00'));
     check('planning : 7D2D affiché « 7 Days to Die »', grille.includes('7 Days to Die') && !grille.includes('7D2D'));
@@ -44,7 +44,7 @@ const ecrire = (f, v) => fs.writeFileSync(path.join(ROOT, 'data', f), JSON.strin
     ecrire('twitch-status.json', { _updated_at: new Date().toISOString(), aulit42369: { live: false, followers: 10 } });
     p = await ouvrir('/');
     check('accueil hors ligne : pas de « À l’antenne »', (await p.textContent('#tickerOnair')).trim() === 'En bref');
-    check('accueil : prochain live en « 21 h »', /\b21 h\b/.test(await p.textContent('#nextLive')));
+    check('accueil : prochain live en « 21 h »', /\b21 h\b/.test(await p.textContent('#sProchainQuand')));
     await p.close();
     ecrire('twitch-status.json', { _updated_at: new Date().toISOString(), aulit42369: { live: true, game: 'Jeu test', followers: 10 } });
     p = await ouvrir('/');

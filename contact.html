@@ -24,8 +24,10 @@
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Contact Aulit42369 : une question, une idée de collab ou de partenariat avec le streamer Twitch ? Écris via le formulaire, réponse sous quelques jours.">
 
-<link rel="stylesheet" href="fonts.css?v=2026111301">
-<link rel="stylesheet" href="style.min.css?v=06764a66">
+<link rel="preload" href="fonts/saira-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=2026111801">
+<link rel="stylesheet" href="style.min.css?v=d132a861">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -52,14 +54,14 @@
 </script>
 <style>
   .contact-form { display: flex; flex-direction: column; gap: 18px; max-width: 560px; }
-  .field label { display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px; }
+  .field label { display: block; font-size: var(--t-s); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px; }
   .field input, .field textarea {
-    width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: 4px;
-    padding: 13px 16px; color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 1rem;
+    width: 100%; background: var(--surface2); border: 1px solid var(--line); border-radius: var(--r-petit);
+    padding: 13px 16px; color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: var(--t-m);
   }
   .field input:focus, .field textarea:focus { outline: 2px solid var(--cyan); outline-offset: 2px; border-color: var(--cyan); }
   .field textarea { resize: vertical; min-height: 140px; }
-  .form-note { font-size: 0.85rem; color: var(--muted); }
+  .form-note { font-size: var(--t-s); color: var(--muted); }
   .success-box { display: none; }
   .success-box.show { display: block; }
   .hp-field { position: absolute; left: -9999px; top: -9999px; }
@@ -98,7 +100,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow" data-edit="contact.eyebrow" data-edit-label="Contact — sur-titre">// Une question, une proposition</div>
-      <h1 class="h1-page">Me <em class="accent">contacter</em></h1>
+      <h1 class="h1-page">Me <em class="accent porteur">contacter</em></h1>
       <p class="lead" data-edit="contact.lead" data-edit-label="Contact — introduction">Une question, une idée de collab ou de partenariat ? Le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a> reste plus rapide — mais si tu préfères écrire ici, c’est possible aussi.</p>
     </div>
   </section>
@@ -148,9 +150,9 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=57ec6678"></script>
+<script src="main.min.js?v=9edccaad"></script>
 
-<script src="js/contact.js?v=5c74ee7d"></script>
+<script src="js/contact.js?v=342f0e62"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"

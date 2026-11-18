@@ -10,6 +10,8 @@
    Les anciens noms 'Orbitron' et 'Rajdhani', utilisés un peu partout dans
    les pages, sont ré-aliasés vers les nouvelles polices : toutes les pages
    basculent d'un coup, sans toucher à leur HTML.
+   18/11 : texte (IBM Plex Sans / alias Rajdhani) en font-display: optional + préchargé dans
+   chaque page : plus de retour à la ligne différent au remplacement de la police (CLS).
    ================================================================ */
 
 /* ---------- Saira Condensed (display) ---------- */
@@ -19,10 +21,10 @@
 @font-face { font-family: 'Saira Condensed'; font-style: normal; font-weight: 800; font-display: swap; src: url('fonts/saira-condensed-latin-800-normal.woff2') format('woff2'); }
 
 /* ---------- IBM Plex Sans (texte) ---------- */
-@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2'); }
-@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2'); }
-@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2'); }
-@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; font-display: optional; src: url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 500; font-display: optional; src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; font-display: optional; src: url('fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 700; font-display: optional; src: url('fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2'); }
 
 /* ---------- IBM Plex Mono (HUD / étiquettes) ---------- */
 @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2'); }
@@ -33,10 +35,10 @@
 @font-face { font-family: 'Orbitron'; font-style: normal; font-weight: 900; font-display: swap; src: url('fonts/saira-condensed-latin-800-normal.woff2') format('woff2'); }
 
 /* ---------- Alias : 'Rajdhani' -> IBM Plex Sans (texte, nav, boutons existants) ---------- */
-@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 400; font-display: optional; src: url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 500; font-display: optional; src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 600; font-display: optional; src: url('fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 700; font-display: optional; src: url('fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2'); }
 
 /* ---------- Polices de secours aux mêmes dimensions (13/11) ----------
    Le temps que les polices arrivent, le navigateur affiche une police du système : sans réglage, Arial est 54 % plus

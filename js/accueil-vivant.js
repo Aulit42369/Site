@@ -44,6 +44,7 @@
   }
 
   if (typeof module !== 'undefined') module.exports = { prochainLive, duree };
+  global.prochainLive = prochainLive; global.dureeLive = duree; // 18/11 : aussi utilisés par js/planning.js (une seule règle de calcul)
   if (typeof document === 'undefined') return;
 
   const zone = document.getElementById('vivant');
@@ -76,17 +77,19 @@
     const frais = statut && statut._updated_at && Date.now() - new Date(statut._updated_at) < 30 * 60000;
     const prochain = prochainLive(planning, exceptions, new Date());
 
-    // Case « Prochain live » du tableau de score : main.js ignore la semaine sur 2 et les exceptions, on la corrige ici
-    const caseProchain = document.getElementById('nextLive');
-    if (caseProchain && prochain) {
-      caseProchain.textContent = ABBR[prochain.debut.getDay()] + (prochain.heureConnue ? ' ' + heure(prochain.debut) : '');
-    }
-
+    /* 18/11 (audit 43) : une info = une place. Le tableau de score porte Dernier live et Prochain live (compte à rebours) ;
+       la case Statut n'apparaît qu'en live. Le « clip de la soirée » n'est plus répété ici : il est dans la carte « Dernier clip ». */
+    const $ = (id) => document.getElementById(id);
+    const score = $('score');
     const enDirect = !!(chaine && chaine.live && frais);
     camera(enDirect);
 
     if (enDirect) {
       const depuis = chaine.startedAt ? duree(Date.now() - new Date(chaine.startedAt), true) : '';
+      if (score) score.classList.add('en-direct');
+      if ($('cStatut')) $('cStatut').hidden = false;
+      if ($('cDernier')) $('cDernier').hidden = true;
+      if ($('cProchain')) $('cProchain').hidden = true;
       zone.innerHTML = `
         <div class="vv-live">
           <span class="vv-pastille"><span class="vv-point" aria-hidden="true"></span>${T('direct')}${depuis ? ' depuis ' + esc(depuis) : ''}</span>
@@ -99,30 +102,27 @@
         </div>`;
       return;
     }
+    zone.hidden = true;
 
     const dernier = Array.isArray(recents) && recents[0];
-    const clipSoiree = dernier && Array.isArray(clips) && clips.find((c) => c.dateAdded === dernier.date);
-    const quand = dernier ? new Date(dernier.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) : '';
-    zone.innerHTML = `
-      <div class="vv-grille">
-        <article class="vv-carte">
-          <p class="vv-k">${T('dernier')}</p>
-          ${dernier ? `<div class="vv-dernier">
-            ${dernier.art ? `<img src="${esc(dernier.art)}" alt="" width="72" height="96" loading="lazy">` : ''}
-            <div><h2 class="vv-jeu">${esc(nomDeJeu(dernier.game))}</h2><p class="vv-quand">${esc(quand)}</p>
-              ${clipSoiree ? `<p class="vv-clip">${T('clip')} <a href="clips.html">${esc(clipSoiree.title)}</a></p>` : ''}
-              <a class="vv-lien" href="https://www.twitch.tv/aulit42369/videos" target="_blank" rel="noopener">${T('revoir')}</a></div>
-          </div>` : `<p class="vv-quand">${T('aucun')}</p>`}
-        </article>
-        <article class="vv-carte vv-carte--prochain">
-          <p class="vv-k">${T('prochain')}</p>
-          ${prochain ? `<p class="vv-compte" id="vvCompte" aria-live="off">${esc(duree(prochain.debut - Date.now()))}</p>
-            <p class="vv-quand">${esc(prochain.debut.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }))}${prochain.heureConnue ? ' · ' + esc(heure(prochain.debut)) : ''} · <b>${esc(nomDeJeu(prochain.game))}</b></p>
-            <a class="vv-lien" href="planning.html">${T('planning')}</a>`
-            : `<p class="vv-quand">${T('annonce')}</p><a class="vv-lien" href="planning.html">${T('planning')}</a>`}
-        </article>
-      </div>`;
-    const compte = document.getElementById('vvCompte');
-    if (compte && prochain) setInterval(() => { compte.textContent = duree(prochain.debut - Date.now()); }, 30000);
+    if ($('sDernier')) {
+      $('sDernier').textContent = dernier ? nomDeJeu(dernier.game) : '—';
+      $('sDernierQuand').textContent = dernier ? new Date(dernier.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) : '';
+      if (!dernier) $('sDernierQuand').innerHTML = T('aucun');
+      if ($('sRevoir') && T('revoir')) $('sRevoir').innerHTML = T('revoir');
+    }
+    if ($('sCompte')) {
+      if (T('prochain')) $('sProchainK').innerHTML = T('prochain');
+      if (T('planning')) $('sPlanning').innerHTML = T('planning');
+      if (prochain) {
+        $('sCompte').textContent = duree(prochain.debut - Date.now());
+        $('sProchainQuand').innerHTML = esc(prochain.debut.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }))
+          + (prochain.heureConnue ? ' · ' + esc(heure(prochain.debut)) : '') + ' · <b>' + esc(nomDeJeu(prochain.game)) + '</b>';
+        setInterval(() => { $('sCompte').textContent = duree(prochain.debut - Date.now()); }, 30000);
+      } else {
+        $('sCompte').textContent = 'À venir';
+        $('sProchainQuand').innerHTML = T('annonce');
+      }
+    }
   });
 })(typeof window !== 'undefined' ? window : globalThis);

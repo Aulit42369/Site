@@ -23,7 +23,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Outils de stream sur mesure d'Aulit42369 : régie mobile pour piloter OBS et Twitch depuis le téléphone, overlays, alertes et scripts OBS codés maison.">
-<link rel="stylesheet" href="fonts.css?v=2026111301">
+<link rel="preload" href="fonts/saira-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=2026111801">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,19 +50,19 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=06764a66">
+<link rel="stylesheet" href="style.min.css?v=d132a861">
 <style>
   /* chiffres sous l'introduction : une ligne sobre, pas des cartes */
   .coulisses-stats { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; }
   .coulisses-stats li { display: flex; flex-direction: column; gap: 2px; padding: 0 28px; border-left: 1px solid var(--line); }
   .coulisses-stats li:first-child { padding-left: 0; border-left: none; }
-  .coulisses-stats strong { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--cyan); font-variant-numeric: tabular-nums; }
-  .coulisses-stats span { font-size: 0.9rem; color: var(--muted); }
+  .coulisses-stats strong { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: var(--t-l); color: var(--cyan); font-variant-numeric: tabular-nums; }
+  .coulisses-stats span { font-size: var(--t-s); color: var(--muted); }
   @media (max-width: 700px) {
     .coulisses-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 0; }
     .coulisses-stats li { padding: 0 0 0 14px; }
     .coulisses-stats li:nth-child(odd) { padding-left: 0; border-left: none; }
-    .coulisses-stats strong { font-size: 1.25rem; }
+    .coulisses-stats strong { font-size: var(--t-l); }
   }
   /* sommaire des projets (construit par js/coulisses.js), reste visible sous le menu */
   .coulisses-toc { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 0; margin-bottom: 40px; background: var(--bg); border-bottom: 1px solid var(--line); }
@@ -69,12 +71,12 @@
     .coulisses-toc { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-bottom: 24px; }
     .coulisses-toc::-webkit-scrollbar { display: none; }
   }
-  .coulisses-toc a { flex-shrink: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; white-space: nowrap; }
+  .coulisses-toc a { flex-shrink: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: var(--t-s); letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; white-space: nowrap; }
   .coulisses-toc a:hover, .coulisses-toc a:focus-visible { color: var(--cyan); border-color: var(--cyan); }
   /* bouton « Sommaire » collant sur téléphone (js/coulisses.js) */
   .toc-bouton, .toc-panneau { display: none; }
   @media (max-width: 700px) {
-    .toc-bouton.visible { display: inline-flex; align-items: center; position: fixed; left: 16px; bottom: 24px; z-index: 60; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--cyan); background: #0e0a1e; color: var(--white); font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; }
+    .toc-bouton.visible { display: inline-flex; align-items: center; position: fixed; left: 16px; bottom: 24px; z-index: 60; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--cyan); background: #0e0a1e; color: var(--white); font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: var(--t-m); letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; }
     .toc-panneau:not([hidden]) { display: flex; flex-direction: column; position: fixed; left: 16px; right: 16px; bottom: 80px; z-index: 60; max-height: 60vh; overflow-y: auto; padding: 8px; background: #0e0a1e; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 18px 40px -18px #000; }
     .toc-panneau a { padding: 12px 14px; border-radius: 10px; color: var(--white); font-weight: 600; }
     .toc-panneau a:hover, .toc-panneau a:focus-visible { background: rgba(46,230,224,.1); color: var(--cyan); }
@@ -87,18 +89,18 @@
     .project-block { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
   }
   .project-text-only { grid-template-columns: minmax(0, 760px); }
-  .project-eyebrow { font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
+  .project-eyebrow { font-size: var(--t-xs); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
   .project-desc { margin-top: 14px; }
   .project-desc p { margin-top: 12px; }
   .project-desc p:first-child { margin-top: 0; }
-  .project-stack { font-size: 0.8rem; color: var(--muted); margin-top: 16px; letter-spacing: 0.02em; }
+  .project-stack { font-size: var(--t-xs); color: var(--muted); margin-top: 16px; letter-spacing: 0.02em; }
   .project-visuals { display: flex; flex-direction: column; gap: 16px; }
   .project-diagram { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 4px; padding: 22px; display: flex; align-items: center; }
   .project-diagram-svg { width: 100%; height: auto; display: block; }
   .project-preview { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 4px; padding: 18px 20px; }
   .project-preview-svg { width: 100%; height: auto; display: block; }
-  .preview-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-  .status-note { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-top: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; }
+  .preview-label { font-size: var(--t-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .status-note { display: inline-flex; align-items: center; gap: 8px; font-size: var(--t-xs); color: var(--muted); margin-top: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; }
   .status-note .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); flex-shrink: 0; }
 </style>
 </head>
@@ -131,7 +133,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow" data-edit="coulisses.eyebrow" data-edit-label="Coulisses — sur-titre">// Coulisses techniques</div>
-      <h1 class="h1-page">Outils de stream <em class="accent">sur mesure</em></h1>
+      <h1 class="h1-page">Outils de stream <em class="accent porteur">sur mesure</em></h1>
       <p class="lead" data-edit="coulisses.lead" data-edit-label="Coulisses — introduction">Les outils qui tournent derrière le stream, construits sur-mesure plutôt qu’avec des solutions toutes faites — développés ici avec Claude. Comment ils sont pensés, et ce qu’il a fallu résoudre pour que ça marche.</p>
       <ul class="coulisses-stats" aria-label="En chiffres">
         <li><strong data-edit="coulisses.stat1.n" data-edit-label="Coulisses · chiffre 1">17</strong><span data-edit="coulisses.stat1.l" data-edit-label="Coulisses · chiffre 1, légende">outils sur mesure</span></li>
@@ -273,7 +275,7 @@
             <p data-edit="coulisses.escape.court" data-edit-label="Coulisses · Escape Fragments — texte">Chaque viewer reçoit un fragment d’indice différent, et personne ne peut résoudre l’énigme seul : il faut les mettre en commun dans le tchat. 33 scénarios, dont 18 jouables en solo, 28 thèmes visuels, et chaque option, du mode traître au mode versus, s’active depuis la régie.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.escape.status" data-edit-label="Coulisses · Escape Fragments — note">Les cartes de résultat de fin de partie ne sont jamais publiées automatiquement : tout reste sous contrôle du streamer</span></div>
-          <p style="margin-top:14px;"><a href="escape-fragments.html" class="btn btn-secondary" style="font-size:0.85rem;padding:9px 18px;" data-edit="coulisses.escape.link" data-edit-label="Coulisses · Escape Fragments — bouton classement">Voir le classement des agents</a></p>
+          <p style="margin-top:14px;"><a href="escape-fragments.html" class="btn btn-secondary" data-edit="coulisses.escape.link" data-edit-label="Coulisses · Escape Fragments — bouton classement">Voir le classement des agents</a></p>
           <div class="project-stack" data-edit="coulisses.escape.stack" data-edit-label="Coulisses · Escape Fragments — technologies">Node.js · Extension Twitch · EventSub · MongoDB · passage sur le serveur dédié en cours</div>
         </div>
         <div class="project-visuals">
@@ -308,7 +310,7 @@
             <p data-edit="coulisses.p9.court" data-edit-label="Coulisses · Jeux mobiles — texte">LUMEN, ÉCHO, Résonance et Fragments se jouent dans le navigateur, s’installent comme une appli et visent le Google Play Store. Les quatre partagent un Défi du jour, le même pour tout le monde, qui change à minuit.</p>
           </div>
           <div class="status-note"><span class="dot"></span><span data-edit="coulisses.p9.status" data-edit-label="Coulisses · Jeux mobiles — note">Applis Android prêtes pour Google Play, sortie à venir : en attendant, ils s’installent depuis la page Jeux</span></div>
-          <p style="margin-top:14px;"><a href="jeux.html" class="btn btn-secondary" style="font-size:0.85rem;padding:9px 18px;" data-edit="coulisses.p9.link" data-edit-label="Coulisses · Jeux mobiles — bouton">Voir les jeux</a></p>
+          <p style="margin-top:14px;"><a href="jeux.html" class="btn btn-secondary" data-edit="coulisses.p9.link" data-edit-label="Coulisses · Jeux mobiles — bouton">Voir les jeux</a></p>
           <div class="project-stack" data-edit="coulisses.p9.stack" data-edit-label="Coulisses · Jeux mobiles — technologies">PWA · Android Studio · serveur dédié (copie de secours sur GitHub Pages)</div>
         </div>
         <div class="project-visuals">
@@ -453,9 +455,9 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=57ec6678"></script>
+<script src="main.min.js?v=9edccaad"></script>
 
-<script src="js/coulisses.js?v=f333acd3"></script>
+<script src="js/coulisses.js?v=30bc2302"></script>
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"
         integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"></script>

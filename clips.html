@@ -23,7 +23,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Clips Twitch d'Aulit42369 : les meilleurs moments des lives multigaming, fous rires, rages et parties coop entre potes, sélectionnés après chaque stream.">
-<link rel="stylesheet" href="fonts.css?v=2026111301">
+<link rel="preload" href="fonts/saira-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=2026111801">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,20 +50,55 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=06764a66">
+<link rel="stylesheet" href="style.min.css?v=d132a861">
 <style>
-  .clips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  @media (max-width: 700px) { .clips-grid { grid-template-columns: 1fr; } }
-  .clip-card iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
-  .clip-card.vertical iframe { aspect-ratio: 9/16; max-height: 78vh; width: auto; max-width: 100%; margin: 0 auto; }
-  .clip-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; }
-  .clip-title { font-weight: 700; font-size: 1rem; }
-  .share-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.85rem; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
-  .share-btn:hover { border-color: var(--cyan); color: var(--cyan); }
-  .badge-new { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 10px; font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bg); background: var(--cyan); vertical-align: middle; }
-  /* Petit repère technique pour moi seul (pas un élément de partage,
-     voir le script plus bas) : cliquer copie le slug du clip. */
+  /* 18/11 (audit 45) : cartes titre + vignette 16:9 + lecture au clic ; explication des cookies une seule fois */
+  .clips-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  @media (max-width: 1000px) { .clips-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .clips-grid { grid-template-columns: minmax(0, 1fr); } }
+  .clip-card { display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+  .clip-card::before { display: none; }
+  .clip-title { font-family: 'IBM Plex Sans', 'Plex Sans secours', sans-serif; font-style: normal; text-transform: none; letter-spacing: 0;
+    font-size: var(--t-m); font-weight: 700; line-height: 1.3; margin: 0; min-height: 2.6em;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .clip-media { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-petit); overflow: hidden; background: #0b0918; }
+  .clip-media.vertical { aspect-ratio: 9 / 16; max-height: 78vh; margin-inline: auto; width: auto; max-width: 100%; }
+  .clip-media iframe { display: block; width: 100%; height: 100%; border: 0; }
+  /* vignette dessinée (maquette ; en vrai : la miniature copiée sur le site) */
+  .clip-play { position: absolute; inset: 0; width: 100%; display: grid; place-items: center; padding: 16px; border: 0; cursor: pointer; color: #fff;
+    background: radial-gradient(120% 90% at 85% 10%, var(--va), transparent 60%), radial-gradient(90% 90% at 0% 100%, var(--vb), transparent 65%),
+      repeating-linear-gradient(0deg, transparent 0 23px, rgba(255,255,255,.05) 23px 24px), #110d22; }
+  .clip-play.vt-a { --va: rgba(46,230,224,.55); --vb: rgba(162,75,255,.5); }
+  .clip-play.vt-b { --va: rgba(162,75,255,.6); --vb: rgba(255,61,154,.4); }
+  .clip-play.vt-c { --va: rgba(255,178,78,.45); --vb: rgba(255,61,154,.45); }
+  .clip-play.vt-d { --va: rgba(46,150,255,.5); --vb: rgba(46,230,224,.4); }
+  .vt-jeu { position: absolute; left: 16px; bottom: 12px; right: 16px; text-align: left; font-family: var(--f-titre); font-style: italic; font-weight: 800;
+    text-transform: uppercase; font-size: var(--t-xl); line-height: .95; text-shadow: 0 2px 12px rgba(0,0,0,.5);
+    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  /* vraie miniature copiée sur le site (scripts/miniatures-clips.js) : par-dessus la vignette dessinée */
+  .clip-mini { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .clip-play.a-mini::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,9,18,.55), transparent 35%, transparent 70%, rgba(10,9,18,.35)); }
+  .clip-play.a-mini .vt-jeu { display: none; }
+  .clip-play.a-mini .vt-marque, .clip-play.a-mini .vt-play { z-index: 1; }
+  .vt-marque { position: absolute; left: 16px; top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: var(--t-xs); letter-spacing: .14em; color: rgba(255,255,255,.75); }
+  .vt-play { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: rgba(10,9,18,.55);
+    border: 1px solid rgba(255,255,255,.5); transition: transform .2s var(--out), background-color .2s; }
+  .vt-play svg { width: 26px; height: 26px; fill: #fff; margin-left: 3px; }
+  .clip-play:hover .vt-play, .clip-play:focus-visible .vt-play { transform: scale(1.08); background: var(--cyan); }
+  .clip-play:hover .vt-play svg, .clip-play:focus-visible .vt-play svg { fill: #06121a; }
+  .clip-accord { position: absolute; inset: 0; display: grid; place-content: center; gap: 12px; padding: 16px; text-align: center; background: rgba(10,9,18,.9); }
+  .clip-accord p { margin: 0; font-size: var(--t-s); color: var(--white); }
+  .clip-accord div { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: center; }
+  .clip-pied { display: flex; align-items: center; gap: 8px; }
+  .clip-pied .share-btn { margin-left: auto; }
+  .clips-cookies { display: flex; align-items: center; gap: 16px 24px; margin-bottom: 20px; padding: 16px 20px; border-radius: var(--r-carte);
+    border: 1px solid rgba(255,255,255,.2); background: rgba(14,10,30,.6); }
+  .clips-cookies p { margin: 0; font-size: var(--t-s); }
+  .clips-cookies strong { color: var(--white); }
+  .clips-cookies .btn { flex: none; }
+  @media (max-width: 640px) { .clips-cookies { flex-direction: column; align-items: stretch; } }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .vt-play { transition: none; } .clip-play:hover .vt-play { transform: none; } }
 </style>
 </head>
 <body>
@@ -93,7 +130,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow" data-edit="clips.eyebrow" data-edit-label="Clips — sur-titre">// Meilleurs moments</div>
-      <h1 class="h1-page">Derniers <em class="accent">clips</em> Twitch</h1>
+      <h1 class="h1-page">Derniers <em class="accent porteur">clips</em> Twitch</h1>
       <p class="lead" data-edit="clips.lead" data-edit-label="Clips — introduction">Les meilleurs moments des lives, sélectionnés à la main après chaque stream.</p>
     </div>
   </section>
@@ -120,10 +157,10 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=57ec6678"></script>
+<script src="main.min.js?v=9edccaad"></script>
 
-<script src="js/clips.js?v=7d92a0be"></script>
-<script src="js/clips-recherche.js?v=b418ff73"></script>
+<script src="js/clips.js?v=d12342b3"></script>
+<script src="js/clips-recherche.js?v=8d6434d1"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"

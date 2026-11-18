@@ -23,8 +23,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="À propos de la chaîne Twitch multigaming d'Aulit42369 : jeux coop entre amis, commandes du chat, règles et FAQ pour rejoindre la communauté sur Discord.">
-<link rel="stylesheet" href="fonts.css?v=2026111301">
-<link rel="stylesheet" href="style.min.css?v=06764a66">
+<link rel="preload" href="fonts/saira-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=2026111801">
+<link rel="stylesheet" href="style.min.css?v=d132a861">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,7 +60,7 @@
   .rule-list li:last-child { border-bottom: none; }
   .ap-ailleurs { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); }
   .ap-ailleurs a { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
-  .game-tag { display: inline-flex; align-items: center; padding: 6px 14px; border: 1px solid var(--line); border-radius: 20px; font-size: 0.85rem; color: var(--white); background: var(--surface2); }
+  .game-tag { display: inline-flex; align-items: center; padding: 6px 14px; border: 1px solid var(--line); border-radius: var(--r-pilule); font-size: var(--t-s); color: var(--white); background: var(--surface2); }
   .game-tag-art { width: 20px; height: 27px; object-fit: cover; border-radius: 2px; margin-right: 8px; flex-shrink: 0; }
   .faq-item { border-bottom: 1px solid var(--line); }
   .faq-item:last-child { border-bottom: none; }
@@ -69,7 +71,7 @@
   .faq-item summary::-webkit-details-marker, .faq-item summary::marker { display: none; content: ''; }
   .faq-item summary::before {
     content: '+'; position: absolute; top: 16px; right: 4px; color: var(--cyan);
-    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; line-height: 1;
+    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: var(--t-l); line-height: 1;
   }
   .faq-item[open] summary::before { content: '–'; }
   .faq-item p { margin: 0 0 18px; color: var(--muted); padding-right: 34px; line-height: 1.5; }
@@ -106,7 +108,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow" data-edit="apropos.eyebrow" data-edit-label="À propos — sur-titre">// La chaîne</div>
-      <h1 class="h1-page">À propos de la chaîne <em class="accent">multigaming</em></h1>
+      <h1 class="h1-page">À propos de la chaîne <em class="accent porteur">multigaming</em></h1>
     </div>
   </section>
 
@@ -123,7 +125,7 @@
           <p>Installe-toi, dis bonjour dans le tchat ou sur le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a> : la place est chaude.</p>
           </div>
           <div id="recentGames" style="display:none;margin-top:18px;">
-            <div style="font-family:'Orbitron',sans-serif;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Récemment sur la chaîne</div>
+            <div style="font-family:'Orbitron',sans-serif;font-size:var(--t-xs);letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Récemment sur la chaîne</div>
             <div id="recentGamesList" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
           </div>
         </div>
@@ -191,11 +193,11 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=57ec6678"></script>
+<script src="main.min.js?v=9edccaad"></script>
 
-<script src="js/apropos.js?v=755485a5"></script>
+<script src="js/apropos.js?v=b1c6facc"></script>
 
-<script src="js/apropos-recents.js?v=2126ec24"></script>
+<script src="js/apropos-recents.js?v=ae0af7da"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"

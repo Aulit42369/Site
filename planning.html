@@ -23,7 +23,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Planning stream d'Aulit42369 : jours et horaires des lives Twitch de la semaine, avec les changements de la semaine. Repère le prochain direct multigaming !">
-<link rel="stylesheet" href="fonts.css?v=2026111301">
+<link rel="preload" href="fonts/saira-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=2026111801">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,40 +50,58 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="style.min.css?v=06764a66">
+<link rel="stylesheet" href="style.min.css?v=d132a861">
 <style>
-  .planning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-  .planning-card { display: flex; flex-direction: column; min-height: 150px; }
-  /* jour off : estompé par la couleur et le cadre, pas par l'opacité (qui faisait tomber le contraste du texte sous 4,5:1) */
-  .planning-card.off { border-style: dashed; }
-  .planning-card.off::before { opacity: 0.25; }
-  .planning-card.off .planning-day { color: var(--muted); }
-  .planning-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; }
-  .planning-day { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.05rem; letter-spacing: 0.04em; text-transform: uppercase; }
-  .planning-date { margin-top: 3px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.03em; color: var(--accent, var(--cyan)); }
-  .planning-card.off .planning-date { color: var(--muted); font-weight: 400; }
-  .planning-today-badge { font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px; background: var(--accent, var(--cyan)); color: var(--bg); font-weight: 700; border-radius: 2px; flex-shrink: 0; }
-  .planning-game { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
-  .planning-time { color: var(--muted); font-size: 0.88rem; }
-  .planning-off-label { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin: auto 0; text-align: center; }
-  .planning-alt-note { align-self: flex-start; margin-top: 10px; padding: 3px 8px; border: 1px solid var(--accent, var(--cyan)); border-radius: 2px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  /* 18/11 (audit 44) : bloc « Prochain live » en tête, puis la semaine en bande compacte */
+  .pl-prochain { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 28px; align-items: center; padding: 28px 32px;
+    border-color: rgba(46,230,224,.45); min-height: 168px; }
+  .pl-prochain:empty { min-height: 184px; } /* places réservées = hauteurs remplies mesurées (CLS) */
+  .pl-date { display: grid; justify-items: center; width: 96px; padding: 12px 0; border-radius: var(--r-carte); background: rgba(46,230,224,.1);
+    border: 1px solid rgba(46,230,224,.4); font-family: var(--f-titre); text-transform: uppercase; line-height: 1; }
+  .pl-date span { font-size: var(--t-s); letter-spacing: .12em; color: var(--muted); }
+  .pl-date b { font-size: var(--t-xxl); font-style: italic; font-weight: 800; color: var(--white); margin: 4px 0; }
+  .pl-k { margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: var(--t-xs); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); }
+  .pl-jeu { font-size: var(--t-xl); margin: 0; }
+  .pl-heure { margin: 8px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; color: var(--muted); font-size: var(--t-m); }
+  .pl-action { display: grid; justify-items: end; gap: 12px; }
+  .pl-compte { margin: 0; text-align: right; font-size: var(--t-s); color: var(--muted); }
+  .pl-compte b { display: block; font-family: var(--f-titre); font-style: italic; font-weight: 800; font-size: var(--t-xl); line-height: 1.1; color: var(--white); font-variant-numeric: tabular-nums; }
+  .pl-vide { margin: 0; color: var(--white); grid-column: 1 / -1; }
+  .pl-prochain .pl-k:only-child { grid-column: 1 / -1; }
+
+  .pl-semaine-titre { font-size: var(--t-l); margin: 40px 0 14px; }
+  .planning-grid { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; }
+  .planning-grid:empty { min-height: 134px; }
+  .pl-jour { flex: 1 1 0; min-width: 0; position: relative; display: grid; align-content: start; gap: 2px; padding: 14px 12px;
+    border-radius: var(--r-petit); border: 1px dashed rgba(255,255,255,.16); color: var(--muted); }
+  .pl-jour.on { flex: 2.4 1 0; border: 1px solid rgba(46,230,224,.55); background: rgba(46,230,224,.08); color: var(--white); }
+  .pl-j-nom { font-family: var(--f-titre); font-size: var(--t-s); letter-spacing: .12em; text-transform: uppercase; }
+  .pl-j-num { font-family: var(--f-titre); font-style: italic; font-weight: 800; font-size: var(--t-l); line-height: 1.1; color: var(--white); }
+  .pl-jour:not(.on) .pl-j-num { color: var(--muted); }
+  .pl-j-info { margin-top: 6px; font-size: var(--t-s); display: grid; gap: 2px; }
+  .pl-j-info b { font-size: var(--t-m); line-height: 1.2; }
+  .pl-auj { position: absolute; top: 8px; right: 8px; font-family: 'IBM Plex Mono', monospace; font-size: var(--t-xs); text-transform: uppercase; letter-spacing: .08em; color: var(--cyan); }
+  .pl-jour.auj { border-style: solid; border-color: rgba(255,255,255,.3); }
+  .pl-jour.auj .pl-auj { position: static; margin-top: 4px; }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
-  /* S6 : lévitation au survol · S7 : mosaïque diagonale · S8 : squelette · S9 : anneau de « Aujourd'hui » (js/planning.js) */
-  .planning-card { transition: transform .2s var(--out); }
-  .planning-card:hover { transform: translateY(-3px); }
-  .planning-card.enter { animation: planCard .2s var(--out) backwards; animation-delay: var(--d, 0s); }
-  @keyframes planCard { from { opacity: 0; transform: scale(.85); } }
-  .planning-card.sk { gap: 12px; }
-  .sk-bar { height: 14px; background: rgba(154,144,196,.14); border-radius: 2px; position: relative; overflow: hidden; }
-  .sk-bar.w1 { width: 46%; height: 18px; } .sk-bar.w2 { width: 78%; } .sk-bar.w3 { width: 54%; }
-  .sk-bar::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 80px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent); transform: translateX(-120px) skewX(-20deg);
-    animation: skWave 1.6s linear infinite; animation-delay: var(--d, 0s); }
-  @keyframes skWave { to { transform: translateX(300px) skewX(-20deg); } }
-  .planning-today-badge { position: relative; }
-  .planning-today-badge::after { content: ''; position: absolute; inset: -3px; border: 1px solid var(--accent, var(--cyan)); opacity: 0; animation: badgeBreath 2.4s ease-in-out infinite; }
-  @keyframes badgeBreath { 0%, 100% { opacity: 0; transform: scale(1); } 50% { opacity: .85; transform: scale(1.12); } }
-  @media (prefers-reduced-motion: reduce) { .planning-card:hover { transform: none; } .planning-card.enter { animation: none; } .sk-bar::after, .planning-today-badge::after { display: none; } }
+
+  @media (max-width: 760px) {
+    .pl-prochain { grid-template-columns: auto minmax(0, 1fr); gap: 16px 18px; padding: 20px; }
+    .pl-prochain:empty { min-height: 223px; }
+    .planning-grid:empty { min-height: 399px; }
+    .pl-date { width: 72px; padding: 10px 0; }
+    .pl-action { grid-column: 1 / -1; justify-items: stretch; grid-template-columns: auto 1fr; align-items: center; }
+    .pl-compte { text-align: left; }
+    .pl-action .btn { justify-self: end; }
+    /* la semaine devient une liste de lignes courtes : 7 jours lisibles sans défiler */
+    .planning-grid { flex-direction: column; gap: 6px; }
+    .pl-jour, .pl-jour.on { flex: none; }
+    .pl-jour { grid-template-columns: 44px 36px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 10px 14px; min-height: 48px; }
+    .pl-jour.on { padding-block: 14px; }
+    .pl-j-info { margin: 0; }
+    .pl-jour.auj .pl-auj { margin: 0; }
+  }
+  @media (max-width: 400px) { .pl-action { grid-template-columns: 1fr; } .pl-action .btn { justify-self: stretch; } .pl-prochain:empty { min-height: 294px; } }
 </style>
 </head>
 <body>
@@ -111,14 +131,16 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow" data-edit="planning.eyebrow" data-edit-label="Planning — sur-titre">// Programme de la semaine</div>
-      <h1 class="h1-page">Planning <em class="accent">stream</em></h1>
+      <h1 class="h1-page">Planning stream</h1>
       <p class="lead">Les jours et horaires des lives Twitch de la semaine.</p>
     </div>
   </section>
 
   <section class="tight">
     <div class="container">
-      <div class="planning-grid" id="planningGrid"></div>
+      <article class="card pl-prochain" id="planProchain" aria-live="off"></article>
+      <h2 class="pl-semaine-titre">Les 7 prochains jours</h2>
+      <ol class="planning-grid" id="planningGrid"></ol>
       <div class="empty-state" id="emptyState" style="display:none;" data-edit="planning.empty" data-edit-label="Planning — message si vide">
         Le planning arrive bientôt.
       </div>
@@ -128,7 +150,7 @@
   <section class="tight">
     <div class="container">
       <div class="card" style="text-align:center;">
-        <p style="margin:0;" data-edit="planning.note" data-edit-label="Planning — note du bas">
+        <p style="margin:0;font-size:var(--t-s)" data-edit="planning.note" data-edit-label="Planning — note du bas">
           Le planning peut évoluer d’une semaine à l’autre — le plus fiable
           reste toujours le <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener" style="color:var(--cyan);">Discord de la chaîne</a>.
         </p>
@@ -147,9 +169,10 @@
     </div>
   </div>
 </footer>
-<script src="main.min.js?v=57ec6678"></script>
+<script src="main.min.js?v=9edccaad"></script>
 
-<script src="js/planning.js?v=2a8412cd"></script>
+<script src="js/accueil-vivant.js?v=30ec75fc"></script>
+<script src="js/planning.js?v=6b908839"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"

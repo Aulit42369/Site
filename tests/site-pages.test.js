@@ -101,9 +101,9 @@ function writeClipsXSS() {
     check('clips.html: <script> in title did not execute', !clipXss);
     const titleHtml = await page.evaluate(() => document.querySelector('.clip-title').innerHTML);
     check('clips.html: title rendered escaped, text preserved', titleHtml.includes('&lt;script&gt;') && titleHtml.includes('Titre'));
-    // lecteur Twitch soumis au consentement : l'adresse attend dans data-consent-src
-    const iframeSrc = await page.getAttribute('.clip-card iframe', 'data-consent-src');
-    check('clips.html: iframe src still points to the real slug', iframeSrc.includes('clip=abc123'));
+    // 18/11 (audit 45) : lecteur chargé au clic seulement ; l'adresse attend dans data-lecteur
+    const iframeSrc = await page.getAttribute('.clip-card', 'data-lecteur');
+    check('clips.html: iframe src still points to the real slug', iframeSrc.includes('clip=abc123') && await page.locator('.clip-card iframe').count() === 0);
     await page.close();
 
     // ---- 4. planning.html: normal + XSS-ish game name ----
@@ -115,9 +115,9 @@ function writeClipsXSS() {
     page = await browser.newPage();
     await page.goto(`${BASE}/planning.html`);
     await page.waitForTimeout(300);
-    const gameHtml = await page.evaluate(() => document.querySelector('.planning-game').innerHTML);
+    const gameHtml = await page.evaluate(() => document.querySelector('.pl-jour.on .pl-j-info b').innerHTML);
     check('planning.html: game name escaped (no live <i> tag)', gameHtml.includes('&lt;i&gt;'));
-    const offLabel = await page.evaluate(() => !!document.querySelector('.planning-off-label'));
+    const offLabel = await page.evaluate(() => !!document.querySelector('.pl-jour:not(.on) .pl-repos'));
     check('planning.html: off-day still renders normally', offLabel);
     await page.close();
 

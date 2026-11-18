@@ -24,8 +24,10 @@
 <meta name="theme-color" content="#00f5ff">
 <meta name="description" content="Escape room Twitch jouée par le chat : dans Escape Fragments, chaque viewer détient un indice. Découvre le classement des meilleurs agents de la chaîne.">
 
-<link rel="stylesheet" href="fonts.css?v=2026111301">
-<link rel="stylesheet" href="style.min.css?v=06764a66">
+<link rel="preload" href="fonts/saira-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=2026111801">
+<link rel="stylesheet" href="style.min.css?v=d132a861">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,17 +55,17 @@
 <style>
   .ef-podium { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 14px; align-items: end; margin-bottom: 28px; }
   .ef-pod { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 8px; text-align: center; padding: 20px 10px; }
-  .ef-pod .rank { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 2rem; }
-  .ef-pod .icon { font-size: 1.8rem; line-height: 1.2; }
-  .ef-pod b { display: block; font-size: 1.15rem; margin-top: 4px; overflow-wrap: anywhere; }
-  .ef-pod span { color: var(--muted); font-size: 0.9rem; }
+  .ef-pod .rank { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: var(--t-xl); }
+  .ef-pod .icon { font-size: var(--t-xl); line-height: 1.2; }
+  .ef-pod b { display: block; font-size: var(--t-l); margin-top: 4px; overflow-wrap: anywhere; }
+  .ef-pod span { color: var(--muted); font-size: var(--t-s); }
   .ef-pod.p1 { border-color: #f5c542; box-shadow: 0 0 28px rgba(245, 197, 66, 0.22); padding-top: 30px; padding-bottom: 30px; }
   .ef-pod.p1 .rank { color: #f5c542; }
   .ef-pod.p2 .rank { color: #d3d8e2; }
   .ef-pod.p3 .rank { color: #d59a6a; }
   .ef-table { width: 100%; border-collapse: collapse; background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
   .ef-table th, .ef-table td { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--line); }
-  .ef-table th { font-family: 'Orbitron', sans-serif; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .ef-table th { font-family: 'Orbitron', sans-serif; font-size: var(--t-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
   .ef-table td.num, .ef-table th.num { text-align: right; }
   .ef-table tr:last-child td { border-bottom: none; }
   .ef-status { text-align: center; padding: 50px 20px; color: var(--muted); }
@@ -102,7 +104,7 @@
   <section class="grid-bg">
     <div class="container">
       <div class="eyebrow" data-edit="escape.eyebrow" data-edit-label="Escape Fragments (page) — sur-titre">// Le jeu du tchat</div>
-      <h1 class="h1-page" data-edit="escape.title" data-edit-label="Escape Fragments (page) — titre">Escape room Twitch : classement des <em class="accent">agents</em></h1>
+      <h1 class="h1-page" data-edit="escape.title" data-edit-label="Escape Fragments (page) — titre">Escape room Twitch : classement des <em class="accent porteur">agents</em></h1>
       <p class="lead" data-edit="escape.lead" data-edit-label="Escape Fragments (page) — introduction">Escape Fragments, l’escape room interactive du tchat Twitch : chaque viewer détient un fragment d’indice, et il faut tout mettre en commun pour s’évader. Voici les meilleurs agents de la chaîne.</p>
       <p style="margin-top:20px;" id="efPlay"><a class="btn btn-primary" id="efPlayLink" href="https://escape-fragments.onrender.com/jouer" target="_blank" rel="noopener" data-edit="escape.play" data-edit-label="Escape Fragments (page) — bouton « tes indices »">Jouer · Tes indices</a></p>
     </div>
@@ -129,9 +131,9 @@
   </div>
 </footer>
 
-<script src="main.min.js?v=57ec6678"></script>
+<script src="main.min.js?v=9edccaad"></script>
 
-<script src="js/escape-fragments.js?v=05892b37"></script>
+<script src="js/escape-fragments.js?v=ab43301f"></script>
 
 <script data-goatcounter="https://aulit42369.goatcounter.com/count"
         async src="https://gc.zgo.at/count.v4.js" crossorigin="anonymous"

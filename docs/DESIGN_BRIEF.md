@@ -95,6 +95,21 @@ respecté (ticker/animations coupés), alt sur les images, structure de titres,
   même identité (Orbitron/Rajdhani, cyan/violet/magenta, soleil), mais plaques de **verre dépoli** (`--verre`, `--flou`)
   sur un fond de taches synthwave floutées, coins arrondis, néon réduit à un filet. Flou allégé sur téléphone.
   Coulisses en « piste D » (pastilles + écran dessiné + « Comment ça marche » + chiffres). Bloc en fin de `style.css`.
+- **Site, 18/11/2026 : système commun** (audit 46, maquette validée `F:\Stream\Maquettes\site-audit\composants.html`),
+  bloc « Système commun 18/11 » en fin de `style.css`, appliqué à toutes les pages publiques :
+
+  | Jeton / composant | Valeur |
+  |---|---|
+  | Tailles `--t-xs` · `--t-s` · `--t-m` · `--t-l` | 12 · 14 · 17 · 22 px (12 px minimum) |
+  | `--t-xl` · `--t-xxl` | 28→36 px (h2) · 40→64 px (h1) ; hors échelle : le titre-logo AULIT42369 de l'accueil et le « 404 » décoratif |
+  | Rayons `--r-petit` · `--r-carte` · `--r-pilule` | 8 px · 18 px · 999 px |
+  | Largeur `--contenu` + `--gouttiere` | 1072 px + 24 px de marge (16 px sous 600 px), en-tête, bandeau et pages |
+  | Boutons | `.btn-primary` / `.sw-btn.primary` (plein cyan), `.btn-secondary` / `.sw-btn.ghost` (contour), `.lien-action` (texte cyan gras + « → ») ; 48 px de haut, pilule, Saira 17 px majuscules |
+  | Étiquettes | `.etiquette` (+ `.etiquette--accent`) : pilule, IBM Plex Mono 12 px majuscules |
+  | Titres | neutres ; couleur seulement sur le mot porteur `em.accent.porteur` (un par h1 de page de contenu) |
+  | Polices `--f-titre` · `--f-mono` | Saira Condensed · IBM Plex Mono (avec leurs polices de secours) |
+
+  Mini-écrans dessinés de Coulisses (`role="img"`) : petit texte décoratif conservé.
 - À faire : La Cabane, Étagère, pages AulitBot, Lugh, CRA (version sobre),
   puis caler le soleil des vitrines et, en option, unifier via vrais jetons
   `--f-display/--f-body/--f-mono` + nav/boutons condensés partout.

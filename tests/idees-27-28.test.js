@@ -83,8 +83,11 @@ test('accueil hors ligne et Coulisses en textes courts', async () => {
   try {
     const p = await browser.newPage();
     await p.goto(BASE + '/index.html');
-    await p.waitForSelector('.vv-grille');
-    assert.match(await p.locator('#vivant').innerText(), /Prochain live/i);
+    // 18/11 (audit 43) : hors live, le tableau de score porte Dernier live et Prochain live ; plus de case Statut
+    await p.waitForFunction(() => document.getElementById('sCompte').textContent.trim() !== '—');
+    assert.match(await p.locator('#cProchain').innerText(), /Prochain live/i);
+    assert.ok(await p.locator('#cDernier').isVisible());
+    assert.ok(await p.locator('#cStatut').isHidden());
     // Cam 1 hors ligne : la vidéo de présentation du site à la place de l'écran de Twitch
     assert.match(await p.getAttribute('#camVideo', 'src'), /video\/presentation-chaine\.mp4$/);
     assert.strictEqual(await p.locator('#camTwitch').count(), 0);
