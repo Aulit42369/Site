@@ -43,6 +43,7 @@
 - Vérifier dans l'admin (onglet « Textes des pages », page Coulisses) qu'aucun texte enregistré n'écrase les nouveaux textes par défaut : `coulisses.p1.desc1`, `p1.desc2`, `p1.status`, `p1.stack`, `p9.desc2`, `p9.status`, `p5.desc2`, `p5.stack`, `p6.desc2`, `p6.desc3`, `p6.stack`, `p8.desc2`, `p10.desc2`. Un texte enregistré y masque la mise à jour : le vider (ou le remplacer) pour retrouver le nouveau texte.
 
 ## Décisions prises
+- 18/11/2026 : la vidéo de présentation de l'accueil (≈ 7 Mo) reste chargée à l'ouverture, malgré le budget de 1 Mo : choix d'Olivier, « c'est la vitrine de ma chaîne ». Exception assumée, à ne plus signaler dans les audits.
 - Pages légales en `noindex` et hors sitemap, comme les mentions légales existantes.
 - Pas de bandeau sur les pages sans lecteur Twitch : seul le lecteur dépose des cookies ; le choix reste modifiable partout via « Cookies » dans le pied de page.
 - Analytics : GoatCounter déjà en place (sans cookie) → aucun nouvel outil.
