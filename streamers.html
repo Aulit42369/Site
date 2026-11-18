@@ -77,7 +77,8 @@
   }
   .streamer-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--cyan); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: var(--t-l); flex-shrink: 0; }
   .streamer-name { font-weight: 700; font-size: var(--t-m); }
-  .streamer-desc { color: #c3cadb; font-size: var(--t-s); line-height: 1.45; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+  /* flex-shrink: 0 : dans la carte carrée, la description se faisait écraser et coupait au milieu d'une ligne (18/11) ; la carte grandit à la place */
+  .streamer-desc { flex-shrink: 0; color: #c3cadb; font-size: var(--t-s); line-height: 1.45; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
   .streamer-card .btn { margin-top: auto; align-self: center; }
   .streamer-live-badge { display: none; position: absolute; top: 12px; right: 12px; align-items: center; gap: 5px; font-family: var(--f-mono); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 7px; border-radius: var(--r-pilule); background: var(--surface2); border: 1px solid var(--line); color: var(--dim); }
   .streamer-live-badge.is-live, .streamer-live-badge.is-offline { display: inline-flex; }
