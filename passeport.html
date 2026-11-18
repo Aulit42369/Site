@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://static-cdn.jtvnw.net; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<title>Passeport du viewer : tes lives, cartes et badges | Aulit42369</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="Passeport du viewer : tes lives, cartes et badges | Aulit42369">
+<meta property="og:description" content="Connecte-toi avec Twitch et retrouve ce que tu as vécu sur la chaîne d'Aulit42369 : lives suivis, séries, cartes, badges. Rien n'est gardé sans ton accord.">
+<meta property="og:url" content="https://aulit42369.fr/Site/passeport.html">
+<link rel="canonical" href="https://aulit42369.fr/Site/passeport.html">
+<meta property="og:image" content="https://aulit42369.fr/Site/og-image.jpg?v=13">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Aulit42369 · Passeport du viewer">
+<meta property="og:site_name" content="Aulit42369">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#00f5ff">
+<meta name="description" content="Connecte-toi avec Twitch et retrouve ce que tu as vécu sur la chaîne d'Aulit42369 : lives suivis, séries, cartes, badges. Rien n'est gardé sans ton accord.">
+
+<link rel="preload" href="fonts/saira-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=2026111801">
+<link rel="stylesheet" href="style.min.css?v=d132a861">
+<style>
+  /* Passeport du viewer (18/11/2026) : d'après la maquette validée, style Actuel + Verre. Seul élément néon : l'anneau de l'avatar. */
+  .pp-plaque { background: var(--verre); border: 1px solid var(--bord); border-radius: 18px; box-shadow: var(--ombre); padding: 24px; backdrop-filter: var(--flou); -webkit-backdrop-filter: var(--flou); }
+  .pp-h2 { font-family: 'Saira Condensed', 'Saira secours', sans-serif; font-weight: 800; font-size: 1.6rem; line-height: 1.1; margin: 0 0 14px; }
+  .pp-h3 { font-family: 'Saira Condensed', 'Saira secours', sans-serif; font-weight: 800; font-size: 1.35rem; line-height: 1.1; margin: 0; }
+  .pp-h4 { margin: 0 0 8px; font: 600 .78rem 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+  .pp-note, .pp-petit { font-size: .9rem; color: var(--muted); margin: 10px 0 0; }
+  .pp-note a, .pp-liste a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+  .pp-accueil .pp-plaque { max-width: 720px; }
+  .pp-etapes { margin: 0 0 22px; padding-left: 1.3em; display: grid; gap: 10px; color: var(--muted); }
+  .pp-etapes b, .pp-liste b { color: var(--white); }
+  .pp-twitch { gap: 10px; }
+  .pp-twitch svg { width: 20px; height: 20px; fill: currentColor; }
+  .pp-accord { max-width: 720px; }
+  .pp-qui { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .pp-qui img { width: 56px; height: 56px; border-radius: 14px; background: var(--surface2); }
+  .pp-qui .pp-petit { margin: 0; }
+  .pp-liste { margin: 0 0 18px; padding-left: 1.1em; display: grid; gap: 8px; color: var(--muted); }
+  .pp-case { display: flex; gap: 10px; align-items: center; min-height: 44px; font-weight: 600; cursor: pointer; }
+  .pp-case input { width: 20px; height: 20px; accent-color: var(--cyan); }
+  .pp-boutons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+
+  .pp-passeport { display: grid; grid-template-columns: 300px 1fr; grid-template-areas: "id contenu" "vie contenu"; grid-template-rows: auto 1fr; gap: 24px; align-items: start; }
+  .pp-identite { grid-area: id; } .pp-contenu { grid-area: contenu; } .pp-vie { grid-area: vie; }
+  .pp-avatar { width: 88px; height: 88px; border-radius: 22px; background: linear-gradient(140deg, #3a2a78, #1b1540); border: 2px solid var(--cyan); box-shadow: 0 0 22px rgba(46,230,224,.35); object-fit: cover; }
+  .pp-pseudo { font: 800 1.7rem 'Saira Condensed', 'Saira secours', sans-serif; margin: 14px 0 0; line-height: 1.1; overflow-wrap: anywhere; }
+  .pp-qui .pp-pseudo { margin: 0; font-size: 1.4rem; }
+  .pp-depuis { color: var(--muted); font-size: .92rem; margin: 4px 0 0; }
+  .pp-rang { display: inline-block; margin-top: 12px; font: 600 .75rem 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; background: rgba(255,201,74,.12); color: #ffd36b; border: 1px solid rgba(255,201,74,.35); }
+  .pp-reglage { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; font-size: .95rem; cursor: pointer; }
+  .pp-reglage input { appearance: none; -webkit-appearance: none; flex: none; width: 44px; height: 24px; border-radius: 12px; background: rgba(255,255,255,.08); border: 1px solid var(--bord); position: relative; cursor: pointer; transition: background .2s var(--out); margin: 0; }
+  .pp-reglage input::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--dim); transition: left .2s var(--out), background .2s; }
+  .pp-reglage input:checked { background: rgba(46,230,224,.3); }
+  .pp-reglage input:checked::after { left: 23px; background: var(--cyan); }
+  .pp-reglage input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .pp-lien { font-size: .82rem; margin: 0 0 6px; overflow-wrap: anywhere; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  #ppZone [hidden] { display: none !important; } /* les blocs en grille/flex gardent sinon leur affichage */
+  .pp-lien a { color: var(--cyan); }
+  .pp-copier, .pp-deco { background: none; border: 1px solid var(--bord); color: var(--white); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: .85rem; cursor: pointer; min-height: 32px; }
+  .pp-effacer { margin-top: 14px; width: 100%; min-height: 44px; border-radius: 10px; border: 1px solid rgba(255,107,107,.5); background: transparent; color: #ffb0b0; font: 600 .95rem inherit; cursor: pointer; }
+  .pp-effacer:hover { background: rgba(255,107,107,.1); }
+  .pp-deco { margin-top: 10px; width: 100%; min-height: 40px; color: var(--muted); }
+
+  .pp-chiffres { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .pp-chiffre { background: rgba(255,255,255,.06); border: 1px solid var(--bord); border-radius: 14px; padding: 16px; }
+  .pp-chiffre b { display: block; font: 800 2.1rem 'Saira Condensed', 'Saira secours', sans-serif; line-height: 1; }
+  .pp-chiffre b small { font-size: 1rem; color: var(--dim); font-weight: 600; }
+  .pp-chiffre span { color: var(--muted); font-size: .9rem; }
+  .pp-chiffre em { display: block; font-style: normal; color: var(--dim); font-size: .8rem; margin-top: 4px; }
+  .pp-jauge { height: 6px; border-radius: 3px; background: rgba(255,255,255,.1); margin-top: 8px; overflow: hidden; }
+  .pp-jauge i { display: block; height: 100%; background: var(--violet); border-radius: 3px; }
+  .pp-titre { display: flex; flex-wrap: wrap; gap: 4px 12px; justify-content: space-between; align-items: baseline; margin: 28px 0 12px; }
+  .pp-titre small { color: var(--dim); font-size: .88rem; }
+  .pp-badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 12px; }
+  .pp-badge { text-align: center; padding: 12px 8px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid var(--bord); }
+  .pp-badge svg { width: 54px; height: 60px; display: block; margin: 0 auto 8px; }
+  .pp-badge b { display: block; font-size: .9rem; line-height: 1.25; }
+  .pp-badge span { display: block; font-size: .78rem; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+  .pp-badge.ferme { border-style: dashed; background: transparent; }
+  .pp-badge.ferme svg { filter: grayscale(1); opacity: .55; }
+  .pp-souvenirs { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--bord); }
+  .pp-souvenirs li { position: relative; padding: 0 0 16px 24px; }
+  .pp-souvenirs li::before { content: ''; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #120f20; border: 2px solid var(--violet); }
+  .pp-souvenirs time { font: 500 .8rem 'IBM Plex Mono', monospace; color: var(--dim); display: block; }
+  .pp-vide { color: var(--muted); }
+  .pp-souvenirs .pp-vide::before { display: none; }
+
+  .pp-classement { list-style: none; margin: 0; padding: 0; background: var(--verre); border: 1px solid var(--bord); border-radius: 18px; overflow: hidden; max-width: 720px; }
+  .pp-classement li { display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: center; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .pp-classement li:last-child { border-bottom: 0; }
+  .pp-classement .pos { font: 800 1.4rem 'Saira Condensed', 'Saira secours', sans-serif; color: var(--dim); }
+  .pp-classement li:first-child .pos { color: #ffd36b; }
+  .pp-classement .pts { font: 600 .85rem 'IBM Plex Mono', monospace; color: var(--muted); text-align: right; }
+  .pp-classement .pp-vide, .pp-classement .masque { grid-column: 1 / -1; color: var(--muted); font-style: italic; }
+  .pp-erreur { color: #ffb0b0; font-weight: 600; margin-top: 16px; }
+
+  @media (max-width: 900px) {
+    /* au téléphone : identité en haut, puis chiffres, badges, souvenirs, et la vie privée en bas de page */
+    .pp-passeport { grid-template-columns: 1fr; grid-template-areas: "id" "contenu" "vie"; grid-template-rows: auto; }
+    .pp-identite { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; }
+    .pp-identite .pp-avatar { width: 56px; height: 56px; border-radius: 14px; grid-row: span 3; }
+    .pp-identite .pp-pseudo { margin: 0; font-size: 1.35rem; }
+    .pp-identite .pp-rang { margin-top: 6px; justify-self: start; }
+    .pp-chiffres { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 420px) { .pp-classement li { grid-template-columns: 28px 1fr auto; padding: 12px; } .pp-classement .pts { font-size: .78rem; } .pp-plaque { padding: 18px; } .pp-chiffre { padding: 12px; } .pp-chiffre b { font-size: 1.7rem; } .pp-badges { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 760px), (hover: none) { .pp-plaque { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: #130f24; } }
+  @media (prefers-reduced-motion: reduce) { .pp-reglage input, .pp-reglage input::after { transition: none; } }
+</style>
+</head>
+<body data-no-edit>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-left">
+      <a href="index.html" class="logo"><span class="dot"></span>AULIT42369</a>
+      <a href="index.html" class="live-banner" id="liveBanner"><span class="dot"></span><span class="label">En direct</span></a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Accueil</a>
+      <a href="planning.html">Planning</a>
+      <a href="clips.html">Clips</a>
+      <a href="streamers.html">Streamers</a>
+      <a href="jeux.html">Jeux</a>
+      <a href="coulisses.html">Coulisses</a>
+      <a href="apropos.html">À propos</a>
+      <a href="escape-fragments.html">Escape Fragments</a>
+      <a href="https://discord.com/invite/Amgaz5YNVg" class="nav-discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.028C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.042-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.946 2.418-2.157 2.418z"/></svg><span>Discord</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="grid-bg">
+    <div class="container">
+      <div class="eyebrow">// Pour les viewers de la chaîne</div>
+      <h1 class="h1-page">Ton <em class="accent porteur">passeport</em></h1>
+      <p class="lead" id="ppIntro">Connecte-toi avec Twitch et retrouve d’un coup ce que tu as vécu ici : tes lives, tes séries, tes cartes, tes badges. Personne d’autre ne voit ta page.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container" id="ppZone" aria-live="polite">
+      <!-- Accueil (pas connecté) -->
+      <div class="pp-accueil" id="ppAccueil">
+        <div class="pp-plaque">
+          <h2 class="pp-h2">Comment ça marche</h2>
+          <ol class="pp-etapes">
+            <li><b>Tu te connectes avec Twitch.</b> Twitch te demande ton accord ; on ne reçoit que ton pseudo et ton image de profil, aucun mot de passe ni e-mail.</li>
+            <li><b>Tu acceptes (ou pas).</b> Tant que tu n’as pas cliqué « J’accepte », rien n’est gardé à ton nom.</li>
+            <li><b>Ton passeport se remplit.</b> Pendant les lives, AulitBot note toutes les 10 minutes si tu es connecté au tchat. Tu peux l’arrêter ou tout effacer quand tu veux.</li>
+          </ol>
+          <button class="btn btn-primary pp-twitch" id="ppConnexion" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.3 3 3 6.4v13.5h4.6V22h2.6l2.4-2.1h3.7l4.9-4.9V3H4.3zm15 11.1-2.8 2.8h-4.6l-2.4 2.1v-2.1H6.6V4.8h12.7v9.3zM16.5 8.2v4.9h-1.8V8.2h1.8zm-4.9 0v4.9H9.8V8.2h1.8z"/></svg>
+            Se connecter avec Twitch</button>
+          <p class="pp-note">En te connectant, tu acceptes les <a href="cgu.html">conditions d’utilisation</a>. Ce qui est gardé et pendant combien de temps : <a href="confidentialite.html#passeport">confidentialité</a>.</p>
+        </div>
+      </div>
+
+      <!-- Consentement (première connexion) -->
+      <div class="pp-plaque pp-accord" id="ppAccord" hidden>
+        <div class="pp-qui"><img id="ppAccordAvatar" alt="" width="56" height="56"><div><p class="pp-petit">Connecté avec Twitch</p><p class="pp-pseudo" id="ppAccordNom"></p></div></div>
+        <h2 class="pp-h2">Avant d’ouvrir ton passeport</h2>
+        <ul class="pp-liste">
+          <li><b>Gardé :</b> ton identifiant Twitch, ton pseudo, l’adresse de ton image de profil, et les lives où tu étais connecté au tchat (date, jeu).</li>
+          <li><b>Jamais gardé :</b> e-mail, messages du tchat, abonnements, Bits, jeton de connexion Twitch.</li>
+          <li><b>Le classement public</b> est fermé : c’est toi qui choisis d’y apparaître, plus tard.</li>
+          <li><b>Tout est effacé</b> si tu cliques « Tout effacer », ou tout seul 12 mois après ta dernière visite.</li>
+        </ul>
+        <label class="pp-case"><input type="checkbox" id="ppAccordCompter" checked> Compter mes lives suivis (décochable à tout moment)</label>
+        <div class="pp-boutons">
+          <button class="btn btn-primary" id="ppAccepter" type="button">J’accepte, ouvrir mon passeport</button>
+          <button class="btn btn-secondary" id="ppRefuser" type="button">Non merci</button>
+        </div>
+      </div>
+
+      <!-- Passeport -->
+      <div class="pp-passeport" id="ppPasseport" hidden>
+        <aside class="pp-plaque pp-identite">
+          <img class="pp-avatar" id="ppAvatar" alt="" width="88" height="88">
+          <p class="pp-pseudo" id="ppNom"></p>
+          <p class="pp-depuis" id="ppDepuis"></p>
+          <span class="pp-rang" id="ppRang"></span>
+        </aside>
+        <div class="pp-contenu">
+          <div class="pp-chiffres" id="ppChiffres"></div>
+          <div class="pp-titre"><h2 class="pp-h3">Mes badges</h2><small id="ppBadgesNote"></small></div>
+          <div class="pp-badges" id="ppBadges"></div>
+          <div class="pp-titre"><h2 class="pp-h3">Mes souvenirs</h2><small>les moments où tu étais là</small></div>
+          <ol class="pp-souvenirs" id="ppSouvenirs"></ol>
+        </div>
+        <section class="pp-plaque pp-vie" id="ppVie" aria-labelledby="ppVieTitre">
+          <h2 class="pp-h4" id="ppVieTitre">Ma vie privée</h2>
+          <label class="pp-reglage"><span>Apparaître dans le classement</span><input type="checkbox" role="switch" data-reglage="classement"></label>
+          <label class="pp-reglage"><span>Montrer mon passeport à qui a le lien</span><input type="checkbox" role="switch" data-reglage="lien"></label>
+          <p class="pp-lien" id="ppLien" hidden><a id="ppLienA" href="#"></a> <button type="button" class="pp-copier" id="ppCopier">Copier</button></p>
+          <label class="pp-reglage"><span>Compter mes lives suivis</span><input type="checkbox" role="switch" data-reglage="compter"></label>
+          <p class="pp-note" id="ppRetire" hidden>Aulit42369 t’a retiré du classement public (modération).</p>
+          <p class="pp-note" id="ppGarde"></p>
+          <button class="pp-effacer" id="ppEffacer" type="button">Tout effacer et me déconnecter</button>
+          <button class="pp-deco" id="ppDeconnexion" type="button">Me déconnecter</button>
+        </section>
+      </div>
+
+      <p class="pp-erreur" id="ppErreur" role="alert" hidden></p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="pp-titre"><h2 class="pp-h3" id="ppClassTitre">Classement de la saison</h2><small>fidélité seulement : lives suivis, puis badges · jamais d’abonnements ni de Bits</small></div>
+      <ol class="pp-classement" id="ppClassement" aria-labelledby="ppClassTitre"><li class="pp-vide">Chargement…</li></ol>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="brand">AULIT42369 · TWITCH.TV &nbsp;·&nbsp; <span class="legal-links"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a href="cgu.html">CGU</a><button type="button" data-consent-open>Cookies</button></span></div>
+    <nav class="footer-nav" aria-label="Autres pages"><a href="passeport.html">Mon passeport</a><a href="partenaires.html">Partenaires</a><a href="contact.html">Contact</a></nav>
+    <div class="socials">
+      <a href="https://discord.com/invite/Amgaz5YNVg" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/@Aulit42369" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/aulit42369/?hl=fr" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.min.js?v=9edccaad"></script>
+<script src="js/passeport.js?v=1"></script>
+</body>
+</html>

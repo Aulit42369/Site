@@ -58,7 +58,7 @@ function downloadBackup() {
 document.getElementById('backupBtn').addEventListener('click', downloadBackup);
 
 /* ── Onglets ── */
-const TAB_NAMES = ['streamers', 'clips', 'planning', 'apropos', 'textes', 'pages', 'jeux', 'site', 'sante', 'historique', 'aide'];
+const TAB_NAMES = ['streamers', 'clips', 'planning', 'apropos', 'textes', 'pages', 'jeux', 'site', 'passeports', 'sante', 'historique', 'aide'];
 document.querySelectorAll('.admin-tabs [data-tab]').forEach((btn) => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.admin-tabs [data-tab]').forEach((b) => b.classList.remove('active'));
@@ -69,6 +69,7 @@ document.querySelectorAll('.admin-tabs [data-tab]').forEach((btn) => {
     hideStatus();
     if (btn.dataset.tab === 'textes') loadTextes();
     if (btn.dataset.tab === 'sante') loadSante();
+    if (btn.dataset.tab === 'passeports') loadPasseports();
     if (btn.dataset.tab === 'historique') loadHistory();
   });
 });

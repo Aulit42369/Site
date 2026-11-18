@@ -267,6 +267,21 @@ input[type=checkbox] { accent-color: var(--cyan); }
   .admin-tabs, .entry-card, .planning-day-card, .ap-section, .tx-group, .add-form, #statusMsg { background: #1a1434; backdrop-filter: none; }
 }
 @media (prefers-reduced-motion: reduce) { #statusMsg.pending::before { animation: none; } }
+/* ---------- onglet Passeports (18/11) ---------- */
+.pp-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 14px; }
+.pp-grille select { width: 100%; padding: 12px 14px; font: inherit; background: var(--champ); border: 1px solid var(--champ-bord); border-radius: 10px; color: var(--white); }
+.pp-chiffres { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.pp-chiffres div { padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); }
+.pp-chiffres b { display: block; font-size: 1.6rem; line-height: 1.1; }
+.pp-chiffres span { color: var(--muted); font-size: .85rem; }
+.pp-badge { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+.pp-badge .pp-nom { flex: 1 1 200px; } .pp-badge .pp-nom small { display: block; color: var(--muted); }
+.pp-badge.off { opacity: .6; }
+.pp-badge button, .pp-viewer button, .pp-viewer select { min-height: 36px; background: none; border: 1px solid var(--line); color: var(--white); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: .88rem; cursor: pointer; }
+.pp-badge button:hover, .pp-viewer button:hover { border-color: var(--cyan); }
+.pp-viewer button.danger:hover { border-color: var(--magenta); color: var(--magenta); }
+.pp-viewer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+.pp-viewer .pp-nom { flex: 1 1 180px; } .pp-viewer .pp-nom small { display: block; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -297,6 +312,7 @@ input[type=checkbox] { accent-color: var(--cyan); }
       <button data-tab="pages">Pages</button>
       <button data-tab="jeux">Jeux</button>
       <button data-tab="site">Liens &amp; annonce</button>
+      <button data-tab="passeports">Passeports</button>
       <button data-tab="sante">Santé du site</button>
       <button data-tab="historique">Historique</button>
       <button data-tab="aide">✨ Aide</button>
@@ -402,6 +418,32 @@ input[type=checkbox] { accent-color: var(--cyan); }
       <button class="btn btn-primary" id="saveSiteBtn" style="margin-top:8px;">Enregistrer</button>
     </div>
 
+    <div id="passeportsPanel" class="admin-panel" style="display:none;">
+      <p class="admin-note">Passeports des viewers (page <a href="passeport.html" target="_blank" rel="noopener">passeport.html</a>) : badges, chiffres d'ensemble, modération. Tu ne vois rien de plus que ce que chaque viewer voit lui-même. Les changements s'appliquent tout de suite (pas de bouton Enregistrer).</p>
+      <div id="ppResume"><div class="ap-empty">Chargement…</div></div>
+      <div class="ap-section">
+        <h2>Les badges</h2>
+        <div id="ppBadges"></div>
+        <form class="add-form" id="ppBadgeForm">
+          <p class="admin-note" style="margin-top:0;">Créer un badge (ou en modifier un en reprenant son identifiant).</p>
+          <div class="pp-grille">
+            <div class="field"><label for="ppId">Identifiant (minuscules, chiffres, tirets)</label><input id="ppId" required pattern="[a-z0-9\-]{2,40}" maxlength="40" placeholder="present-31-12"></div>
+            <div class="field"><label for="ppNom">Nom affiché</label><input id="ppNom" required maxlength="40" placeholder="Réveillon 2026"></div>
+            <div class="field"><label for="ppRegle">Règle</label><select id="ppRegle"></select></div>
+            <div class="field"><label for="ppSeuil">Seuil (nombre)</label><input id="ppSeuil" type="number" min="0" max="100000" value="1"></div>
+            <div class="field"><label for="ppCouleur">Couleur</label><select id="ppCouleur"></select></div>
+            <div class="field"><label for="ppMotif">Dessin</label><select id="ppMotif"></select></div>
+          </div>
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Enregistrer le badge</button></div>
+        </form>
+      </div>
+      <div class="ap-section">
+        <h2>Modération</h2>
+        <div class="field"><label for="ppCherche">Chercher un viewer (pseudo Twitch)</label><input id="ppCherche" maxlength="40" placeholder="pseudo" autocomplete="off"></div>
+        <div id="ppViewers"></div>
+      </div>
+    </div>
+
     <div id="santePanel" class="admin-panel" style="display:none;">
       <p class="admin-note">État des automatisations et des données du site, lu en direct.</p>
       <div id="santeBox"></div>
@@ -430,6 +472,7 @@ input[type=checkbox] { accent-color: var(--cyan); }
         <li><strong>Pages</strong> — les pages personnalisées.</li>
         <li><strong>Jeux</strong> — les jeux mobiles (page Jeux).</li>
         <li><strong>Liens &amp; annonce</strong> — réseaux sociaux, lien Discord (valable partout), bandeau d'annonce.</li>
+        <li><strong>Passeports</strong> — les passeports des viewers : créer, retirer ou offrir un badge, retirer quelqu'un du classement, effacer un compte sur demande.</li>
         <li><strong>Santé du site</strong> — état des automatisations (Twitch, données).</li>
         <li><strong>Historique</strong> — restaurer une version précédente de n'importe quel contenu.</li>
       </ul>
@@ -474,6 +517,7 @@ input[type=checkbox] { accent-color: var(--cyan); }
 <script src="admin/site.js?v=5b8469d1"></script>
 <script src="admin/textes.js?v=b1550a51"></script>
 <script src="admin/sante.js?v=95504bb1"></script>
+<script src="admin/passeports.js?v=1"></script>
 <script src="admin/historique.js?v=bc9cbba4"></script>
 <script src="admin/pages.js?v=e34848d0"></script>
 <script src="admin/jeux.js?v=fb1d1eca"></script>

@@ -67,6 +67,7 @@ const CORE_PAGES = [
   // 29/10 : hors du menu (il débordait à 10 entrées), liens dans le pied de page de chaque page
   { file: 'partenaires.html', label: 'Partenaires', menu: false },
   { file: 'contact.html', label: 'Contact', menu: false },
+  { file: 'passeport.html', label: 'Mon passeport', menu: false }, // 18/11 : passeport du viewer (service /Site/passeport-api/)
   { file: 'mentions-legales.html', label: 'Mentions légales', menu: false, sitemap: false },
   { file: 'confidentialite.html', label: 'Confidentialité et cookies', menu: false, sitemap: false },
   { file: 'cgu.html', label: 'Conditions d’utilisation', menu: false, sitemap: false },
