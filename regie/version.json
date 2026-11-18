@@ -1,9 +1,9 @@
 {
-  "version": "1.0.8",
-  "date": "2026-11-06T11:08:06.806Z",
-  "notes": "optimisation du code",
-  "sha256": "998ae5514025962d8e44ad6b9b9631a153155b5d40ce6e002e429d40247838c3",
-  "taille": 607587,
-  "url": "https://aulit42369.fr/Site/regie/regie-maj-1.0.8.zip",
-  "signature": "XSDcv+bC2m1Gvsu3fhzGVSaKgij8TMm4HyPjZ1RXcSbo2BtCxJ4i//3pAC2Lk0iBoCGrC1/C1rog03MaMHKwDg=="
+  "version": "1.0.9",
+  "date": "2026-11-18T17:49:38.662Z",
+  "notes": "nouvelle Boussole (quel jeu streamer ce soir, onglet Stats + Accueil).",
+  "sha256": "b0f968fa19200cf7dd8dcff1caea49b40f01da1f8884a5c667c3af9555b2e3ec",
+  "taille": 622219,
+  "url": "https://aulit42369.fr/Site/regie/regie-maj-1.0.9.zip",
+  "signature": "AlaTGf9P3J3yXZvEQQxNdTa7kVCCRrkmk/WoQm88a0H/kgqazOfCAI8AtbmH03fz3NzddhDn5azulPWI0FilDA=="
 }
