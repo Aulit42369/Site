@@ -4,7 +4,7 @@
     "paragraphs": [
       "Salut, moi c’est Olivier, alias Aulit. Ici c’est une chaîne francophone multigaming : du Valorant, du coop entre potes, des pépites indé… et le programme se décide à l’ambiance du soir.",
       "On rage, on rigole, on se troll un peu, mais personne ne reste dans son coin : ici on joue ensemble plutôt que de juste regarder.",
-      "À côté du jeu, je bricole tout moi-même : les overlays et les alertes, la régie qui pilote le live depuis le téléphone, ce site, le bot du tchat, des extensions Twitch (cartes à collectionner, escape game pour le tchat) et même quatre [jeux mobiles](jeux.html). J’ai aussi monté un pack d’overlays accessible aux autres streamers, le [Pack Aulit](https://pack.aulit42369.fr). Tout est raconté dans les [coulisses](coulisses.html).",
+      "À côté du jeu, je bricole tout moi-même : les overlays et les alertes, la régie qui pilote le live depuis le téléphone, ce site, le bot du tchat, des extensions Twitch (cartes à collectionner, escape game pour le chat) et même quatre [jeux mobiles](jeux.html). J’ai aussi monté un pack d’overlays accessible aux autres streamers, le [Pack Aulit](https://pack.aulit42369.fr). Tout est raconté dans les [coulisses](coulisses.html).",
       "Installe-toi, dis bonjour dans le tchat ou sur le [Discord](https://discord.com/invite/Amgaz5YNVg) : la place est chaude."
     ]
   },
@@ -30,7 +30,7 @@
       },
       {
         "cmd": "!regles",
-        "desc": "le règlement du tchat"
+        "desc": "le règlement du chat"
       }
     ]
   },
@@ -40,7 +40,7 @@
       "a": "Le plus simple est de rejoindre le [Discord](https://discord.com/invite/Amgaz5YNVg) : c'est là que ça se passe en dehors des lives. Le [planning](planning.html) donne les prochaines dates prévues."
     },
     {
-      "q": "Y a-t-il des règles à respecter dans le tchat ?",
+      "q": "Y a-t-il des règles à respecter dans le chat ?",
       "a": "Oui — tape `!regles` dans le tchat Twitch pendant un live pour afficher le règlement complet du salon."
     },
     {
