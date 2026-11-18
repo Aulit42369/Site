@@ -64,12 +64,13 @@ Promise.all([
     const it = memeJour && memeJour.item.on ? memeJour.item : { time: '' };
     const h = horaire(it) || (prochain.heureConnue ? 'À partir de ' + heureFr(prochain.debut.getHours() + ':' + String(prochain.debut.getMinutes()).padStart(2, '0')) : 'Horaire sur le Discord');
     const d = prochain.debut;
+    const ferie = typeof window.ferieDe === 'function' ? window.ferieDe(d) : ''; // js/jours-feries.js (calculé, aucun service tiers)
     bloc.innerHTML = `
       <div class="pl-date" aria-hidden="true"><span>${ABR[d.getDay()]}</span><b>${d.getDate()}</b><span>${escapeHtml(d.toLocaleDateString('fr-FR', { month: 'short' }))}</span></div>
       <div class="pl-corps">
         <p class="pl-k">Prochain live<span class="sr-only"> : ${escapeHtml(d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }))}</span></p>
         <h2 class="pl-jeu">${escapeHtml(nomDeJeu(prochain.game))}</h2>
-        <p class="pl-heure">${escapeHtml(h)} · heure de Paris${it.note ? ` <span class="etiquette">${escapeHtml(it.note)}</span>` : ''}</p>
+        <p class="pl-heure">${escapeHtml(h)} · heure de Paris${it.note ? ` <span class="etiquette">${escapeHtml(it.note)}</span>` : ''}${ferie ? ` <span class="etiquette etiquette--accent">Jour férié · ${escapeHtml(ferie)}</span>` : ''}</p>
       </div>
       <div class="pl-action">
         <p class="pl-compte"><span>Dans</span> <b id="plCompte">${escapeHtml(window.dureeLive(d - Date.now()))}</b></p>
@@ -88,6 +89,8 @@ Promise.all([
     li.innerHTML = item.on
       ? `${date}<span class="pl-j-info"><b>${escapeHtml(nomDeJeu(item.game))}</b>${horaire(item) ? `<span>${escapeHtml(horaire(item))}</span>` : ''}</span>`
       : `${date}<span class="pl-j-info pl-repos">Repos</span>`;
+    const ferie = typeof window.ferieDe === 'function' ? window.ferieDe(jour) : '';
+    if (ferie) li.querySelector('.pl-j-info').insertAdjacentHTML('beforeend', `<span class="etiquette etiquette--accent" style="justify-self:start" title="${escapeHtml(ferie)}">Férié<span class="sr-only"> : ${escapeHtml(ferie)}</span></span>`);
     if (i === 0) li.insertAdjacentHTML('beforeend', '<span class="pl-auj">Aujourd’hui</span>');
     grid.appendChild(li);
   });

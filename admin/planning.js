@@ -116,7 +116,25 @@ function normalizeEx(d) {
     date: strOr(e.date), on: e.on !== false, game: strOr(e.game), time: strOr(e.time), end: strOr(e.end), note: strOr(e.note),
   }));
 }
+/* Rappel : jours fériés dans les 14 prochains jours sans changement déjà prévu (js/jours-feries.js, calculés, aucun service tiers). */
+function renderFeries() {
+  const zone = document.getElementById('feriesAlerte');
+  const prevus = new Set(exState.data.map((e) => e.date));
+  const liste = typeof feriesDu === 'function' ? feriesDu(new Date(), 14).filter((f) => !prevus.has(f.date)) : [];
+  zone.innerHTML = liste.map((f) => `<div class="planning-apercu ferie-rappel" style="display:block;margin:0 0 12px;">
+    <b>${escapeHtml(f.nom)}, ${f.dans === 0 ? 'aujourd’hui' : f.dans === 1 ? 'demain' : 'dans ' + f.dans + ' jours'} (${new Date(f.date + 'T12:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })})</b> :
+    live spécial, horaire décalé ou pas de live ? <button type="button" class="ap-add" data-ferie="${escapeHtml(f.date)}" style="margin:6px 0 0 6px;">Prévoir un changement ce jour-là</button></div>`).join('');
+}
+document.getElementById('feriesAlerte').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-ferie]');
+  if (!b) return;
+  exState.data.push({ date: b.dataset.ferie, on: true, game: '', time: '21:00', end: '00:00', note: '' });
+  renderExceptions();
+  const dates = document.getElementById('exceptionsEditor').querySelectorAll('[data-f="date"]');
+  if (dates.length) dates[dates.length - 1].focus();
+});
 function renderExceptions() {
+  renderFeries();
   const box = document.getElementById('exceptionsEditor');
   if (exState.data.length === 0) {
     box.innerHTML = '<div class="ap-empty">Aucun changement prévu.</div>';
