@@ -42,7 +42,7 @@ Deux intensités :
 
 **Couleur dominante par outil** (chacun garde son identité dans la famille) :
 Site = cyan · La Cabane = violet · Étagère = cyan · AulitBot = magenta ·
-Lugh = cyan · CRA = violet.
+Lugh = or + violet (choix d'Olivier du 06/11/2026) · CRA = violet.
 
 Semantic (bon/attention/critique) séparé des accents : `--ok #53e39b`, etc.
 
