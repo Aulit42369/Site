@@ -851,6 +851,9 @@ body .sw-home { --smut: #c4bce6; }
 .container, .sw-home .wrap { max-width: calc(var(--contenu) + 2 * var(--gouttiere)); padding-inline: var(--gouttiere); }
 .site-header { padding-inline: var(--gouttiere); }
 .site-header .container { max-width: var(--contenu); }
+/* 19/11 : la plaque s'élargit si le menu ne tient pas (police de secours, texte agrandi), sinon le menu débordait à droite */
+@media (min-width: 1001px) { .site-header .container { width: max-content; min-width: min(var(--contenu), 100%); max-width: 100%; } }
+@media (min-width: 1001px) and (max-width: 1100px) { .site-header .container { gap: 8px; padding-inline: 12px 6px; } .nav a { padding: 8px 7px; letter-spacing: 0; } .nav a.nav-discord { margin-left: 2px; } }
 .sw-ticker { max-width: var(--contenu); width: calc(100% - 2 * var(--gouttiere)); }
 
 /* --- typographie : 6 tailles --- */
