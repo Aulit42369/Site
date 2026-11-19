@@ -1,4 +1,8 @@
 {
+  "eiwen_": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
+    "live": false
+  },
   "aly0806": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
     "live": true,
@@ -26,9 +30,5 @@
     "live": true,
     "game": "StarRupture"
   },
-  "eiwen_": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
-    "live": false
-  },
-  "_updated_at": "2026-11-19T22:54:05.925Z"
+  "_updated_at": "2026-11-19T23:04:06.342Z"
 }
