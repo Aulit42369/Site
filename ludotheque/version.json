@@ -1,9 +1,9 @@
 {
-  "version": "1.2.1",
-  "date": "2026-11-23T09:18:52.470Z",
-  "notes": "Correctif : la page restait vide",
-  "sha256": "96c73575f827192c3e39d199f25d33dc97a5cac0b7827327965711311df8c32c",
-  "taille": 40383936,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.2.1.zip",
-  "signature": "9SEMpQbdAuFfVM9KhaWoRSWDIiEHrqsnVRGQE/G6CwvlsT6XU+JbCSg7WSS4ErLElfSYUr42D1gQ+ksLiIpUDw=="
+  "version": "1.2.2",
+  "date": "2026-11-23T09:38:35.966Z",
+  "notes": "Xbox : seuls tes vrais jeux Xbox (plus l'historique des jeux d'autres boutiques)",
+  "sha256": "e392d3cb5cfed792fe70611288615cf9e1276c9df1a4eff2b5998db0ce75a134",
+  "taille": 40384180,
+  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.2.2.zip",
+  "signature": "yZwJYJ+np4xARaLANlX2a+2nWYa3y3aF5KL5L7A6xxbt1KRdSg+rCeHsZt4JqtnWFh3oR6Y3KI0hqvTajAb1Cw=="
 }
