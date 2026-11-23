@@ -1,9 +1,9 @@
 {
-  "version": "1.2.0",
-  "date": "2026-11-23T09:17:25.824Z",
-  "notes": "Import de listes (GOG, Ubisoft, EA, Battle.net, Amazon), compte Xbox, tri « Installés d'abord », mises à jour automatiques",
-  "sha256": "c62d41e6deaa250500cc2e142cbbf9ef7a7d31502aa37ee880922589dfe88c3f",
-  "taille": 40383934,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.2.0.zip",
-  "signature": "zvhjWQ3HAv/YwsatAQMWiHW9AbmSNs+CrCvnM1KXnbNnbvjAoZxaRPPYhnrwUtvXV2rBrGPo3J3rTmGO/KYhDA=="
+  "version": "1.2.1",
+  "date": "2026-11-23T09:18:52.470Z",
+  "notes": "Correctif : la page restait vide",
+  "sha256": "96c73575f827192c3e39d199f25d33dc97a5cac0b7827327965711311df8c32c",
+  "taille": 40383936,
+  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.2.1.zip",
+  "signature": "9SEMpQbdAuFfVM9KhaWoRSWDIiEHrqsnVRGQE/G6CwvlsT6XU+JbCSg7WSS4ErLElfSYUr42D1gQ+ksLiIpUDw=="
 }
