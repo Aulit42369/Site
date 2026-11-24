@@ -1,4 +1,13 @@
 {
+  "eiwen_": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
+    "live": true,
+    "game": "Once Human"
+  },
+  "aly0806": {
+    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
+    "live": false
+  },
   "galyssiane": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/5f1c037e-16a5-4a48-a01d-8d8a016dadc2-profile_image-300x300.jpeg",
     "live": false
@@ -14,25 +23,12 @@
   },
   "aulit42369": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/f33ce494-5527-426f-bc67-7a59bbf51609-profile_image-300x300.png",
-    "live": true,
-    "game": "Once Human",
-    "title": "On bâtit notre petit havre de paix en solo sur Once Human, ambiance chill et loot au poil",
-    "startedAt": "2026-11-24T14:03:46Z",
-    "gameArt": "https://static-cdn.jtvnw.net/ttv-boxart/1441208453_IGDB-144x192.jpg",
+    "live": false,
     "followers": 200
   },
   "hagosan": {
     "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/ec8488c3-09e4-4a21-b527-53a04251bda5-profile_image-300x300.png",
     "live": false
   },
-  "eiwen_": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/3ad980bb-1646-457c-897a-1d8694b05023-profile_image-300x300.png",
-    "live": true,
-    "game": "Once Human"
-  },
-  "aly0806": {
-    "avatar": "https://static-cdn.jtvnw.net/jtv_user_pictures/a82dd431-b906-4991-802b-e16ded62c062-profile_image-300x300.png",
-    "live": false
-  },
-  "_updated_at": "2026-11-24T19:24:07.775Z"
+  "_updated_at": "2026-11-24T19:34:27.438Z"
 }
