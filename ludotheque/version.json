@@ -1,9 +1,9 @@
 {
-  "version": "1.7.0",
-  "date": "2026-11-25T14:03:09.678Z",
-  "notes": "Cacher un jeu en stream (automatique avec OBS), synopsis en francais traduits sur ton PC, langues comme sur Steam, plus de jaquettes",
-  "sha256": "e4ccee8af7ba53c0586fd9c8b37cbd5a9e0d153617c69ca092cea6c5bf8463e5",
-  "taille": 42363388,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.7.0.zip",
-  "signature": "LKwj9T3x1ENaRWVY+MGx+5+vHER3TwD7eyUXLYIUEgI5F+yoR6ar2oET0AUo7befuQXWWPhbgJetUOu1fvmMCw=="
+  "version": "1.7.1",
+  "date": "2026-11-25T14:10:36.446Z",
+  "notes": "Jaquettes claires pendant le defilement",
+  "sha256": "f89ea24990203998f4c3a7cc5ecac715bac5af0781c8dbc7139c8f2a80313c55",
+  "taille": 42363329,
+  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.7.1.zip",
+  "signature": "fQmV6og5jTSsKmb+CfmTBVc/49QVAdY3ocmNxe8RdFDYFE8T8ybjuVJkSuWIWllTFhX0tWfSc2RhZilOtW6pBw=="
 }
