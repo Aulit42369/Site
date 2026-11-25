@@ -1,9 +1,9 @@
 {
-  "version": "1.7.1",
-  "date": "2026-11-25T14:10:36.446Z",
-  "notes": "Jaquettes claires pendant le defilement",
-  "sha256": "f89ea24990203998f4c3a7cc5ecac715bac5af0781c8dbc7139c8f2a80313c55",
-  "taille": 42363329,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.7.1.zip",
-  "signature": "fQmV6og5jTSsKmb+CfmTBVc/49QVAdY3ocmNxe8RdFDYFE8T8ybjuVJkSuWIWllTFhX0tWfSc2RhZilOtW6pBw=="
+  "version": "1.8.0",
+  "date": "2026-11-25T14:46:51.893Z",
+  "notes": "Acces protege, cle Steam chiffree, vraie desinstallation, jeux administrateur",
+  "sha256": "7e6d7cac573a27bfacf82a867069e826e2ab0baa3efce2a1a1b0db7756d2bdf4",
+  "taille": 42433092,
+  "url": "https://aulit42369.fr/telechargements/ludotheque/ludotheque-maj-1.8.0.zip",
+  "signature": "s9yS5fdjZkOrT5Ewe5RYjWSUqQzrlO0AGFJUZodk2YCrkjuhYKXdzLrO1bYyPpyYLXocnFZvLc9C9SNZ6qzGBA=="
 }
