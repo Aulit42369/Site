@@ -1,9 +1,9 @@
 {
-  "version": "1.6.0",
-  "date": "2026-11-25T13:09:40.885Z",
-  "notes": "Famille Steam (jeux partagés, filtre), extensions Epic retirées, titres Epic réparés",
-  "sha256": "309fed7107c779913f4ba3b528413365d77a457442617514835281e03e550625",
-  "taille": 40411350,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.6.0.zip",
-  "signature": "c4/LFc4KVve8k2Bu1Ooq2ziv3w+Gi063GZSqqmzclJLKZbTIZxl7gTpAtX1XqLmF64+sJZyDa23xJJbu2JsfCA=="
+  "version": "1.7.0",
+  "date": "2026-11-25T14:03:09.678Z",
+  "notes": "Cacher un jeu en stream (automatique avec OBS), synopsis en francais traduits sur ton PC, langues comme sur Steam, plus de jaquettes",
+  "sha256": "e4ccee8af7ba53c0586fd9c8b37cbd5a9e0d153617c69ca092cea6c5bf8463e5",
+  "taille": 42363388,
+  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.7.0.zip",
+  "signature": "LKwj9T3x1ENaRWVY+MGx+5+vHER3TwD7eyUXLYIUEgI5F+yoR6ar2oET0AUo7befuQXWWPhbgJetUOu1fvmMCw=="
 }
