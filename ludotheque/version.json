@@ -1,9 +1,9 @@
 {
-  "version": "1.5.0",
-  "date": "2026-11-25T12:34:24.411Z",
-  "notes": "AulitBot relié (vote du tchat !jeu, jeux déjà streamés, durées et nombre de joueurs), jeux en commun avec tes amis Steam, bouton Installer dans Réglages",
-  "sha256": "3d9c6e1be534f09b3dca50fec110cb44f896d5b1f021678b1d326791bf0f892a",
-  "taille": 40408846,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.5.0.zip",
-  "signature": "DCqZxE19iX9UgxY1zKM7/uGQu40n+FBqJnT8fMMEXS24POFfZ9JCYejiqCHbY4E+dxD7mAv8DCzBKdqUF8npBw=="
+  "version": "1.6.0",
+  "date": "2026-11-25T13:09:40.885Z",
+  "notes": "Famille Steam (jeux partagés, filtre), extensions Epic retirées, titres Epic réparés",
+  "sha256": "309fed7107c779913f4ba3b528413365d77a457442617514835281e03e550625",
+  "taille": 40411350,
+  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.6.0.zip",
+  "signature": "c4/LFc4KVve8k2Bu1Ooq2ziv3w+Gi063GZSqqmzclJLKZbTIZxl7gTpAtX1XqLmF64+sJZyDa23xJJbu2JsfCA=="
 }
