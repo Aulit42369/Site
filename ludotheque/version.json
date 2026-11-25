@@ -1,9 +1,9 @@
 {
-  "version": "1.3.0",
-  "date": "2026-11-25T12:11:41.174Z",
-  "notes": "Mes chiffres (temps, argent en euros sur toutes les boutiques, à découvrir, souhaits), carnet des heures jour après jour, jeux qui tournent en fond à part, alertes de souhaits, filtres seul ou à plusieurs",
-  "sha256": "c9fdbca03293223f956c14c0a0009ca4ff6b67d758daa5cacea415c97e089837",
-  "taille": 40401111,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.3.0.zip",
-  "signature": "fAH5Lktr/rWHcysbLsnqGYRlpfjKILn8S7a9IBBZhsl3wZg+mdQq2/cBOQna4BnH67bP5TWcVVV9t17zWuhaDw=="
+  "version": "1.4.0",
+  "date": "2026-11-25T12:14:41.993Z",
+  "notes": "Durée Pour finir et nombre de joueurs maximum remplis tout seuls (Sources, Durées et joueurs IGDB)",
+  "sha256": "761699178f10492d8358a5aca49095bf08c1c8adfe0c6ed6cef12daf0dc254d5",
+  "taille": 40404880,
+  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.4.0.zip",
+  "signature": "GN5Cb7dBx2pyIDPcoOwW2FDh29G0fNncGuGeE+wovgQj1XzHCNmIKIKqmUqQjXd3AbBnPvB2heJPOt9hqxnLCw=="
 }
