@@ -1,9 +1,9 @@
 {
-  "version": "1.2.2",
-  "date": "2026-11-23T09:38:35.966Z",
-  "notes": "Xbox : seuls tes vrais jeux Xbox (plus l'historique des jeux d'autres boutiques)",
-  "sha256": "e392d3cb5cfed792fe70611288615cf9e1276c9df1a4eff2b5998db0ce75a134",
-  "taille": 40384180,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.2.2.zip",
-  "signature": "yZwJYJ+np4xARaLANlX2a+2nWYa3y3aF5KL5L7A6xxbt1KRdSg+rCeHsZt4JqtnWFh3oR6Y3KI0hqvTajAb1Cw=="
+  "version": "1.2.3",
+  "date": "2026-11-25T11:15:01.070Z",
+  "notes": "Ouverture : plus de page d'erreur 127.0.0.1 quand le PC met du temps à démarrer l'appli",
+  "sha256": "6ede3e32f27724669a1c7a157afe948c203ac49c0908788f293dbe0bf832367b",
+  "taille": 40385024,
+  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.2.3.zip",
+  "signature": "PD1KjgorNNJV9RHaOoLRnK9dyp8YHoaXdpnucqCCZ6bVHaGcZnd5Xa7jpqCOnETTtWu8IwdOnmFmSiQqpN1DCw=="
 }
