@@ -1,9 +1,9 @@
 {
-  "version": "1.4.0",
-  "date": "2026-11-25T12:14:41.993Z",
-  "notes": "Durée Pour finir et nombre de joueurs maximum remplis tout seuls (Sources, Durées et joueurs IGDB)",
-  "sha256": "761699178f10492d8358a5aca49095bf08c1c8adfe0c6ed6cef12daf0dc254d5",
-  "taille": 40404880,
-  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.4.0.zip",
-  "signature": "GN5Cb7dBx2pyIDPcoOwW2FDh29G0fNncGuGeE+wovgQj1XzHCNmIKIKqmUqQjXd3AbBnPvB2heJPOt9hqxnLCw=="
+  "version": "1.5.0",
+  "date": "2026-11-25T12:34:24.411Z",
+  "notes": "AulitBot relié (vote du tchat !jeu, jeux déjà streamés, durées et nombre de joueurs), jeux en commun avec tes amis Steam, bouton Installer dans Réglages",
+  "sha256": "3d9c6e1be534f09b3dca50fec110cb44f896d5b1f021678b1d326791bf0f892a",
+  "taille": 40408846,
+  "url": "https://aulit42369.fr/Site/ludotheque/ludotheque-maj-1.5.0.zip",
+  "signature": "DCqZxE19iX9UgxY1zKM7/uGQu40n+FBqJnT8fMMEXS24POFfZ9JCYejiqCHbY4E+dxD7mAv8DCzBKdqUF8npBw=="
 }
