@@ -1,0 +1,4 @@
+Moteur de traduction Bergamot (@browsermt/bergamot-translator 0.4.9), non modifié.
+Code source : https://github.com/browsermt/bergamot-translator
+Modèle anglais-français : https://github.com/mozilla/firefox-translations-models (Mozilla, Firefox Translations)
+Licence : Mozilla Public License 2.0 (MPL-2.0), https://www.mozilla.org/MPL/2.0/
