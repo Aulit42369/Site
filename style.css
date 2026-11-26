@@ -625,7 +625,7 @@ body .sw-home { --smut: #c4bce6; }
 .ap-chaine .ap-cle { border-color: rgba(46,230,224,.55); background: rgba(46,230,224,.12); }
 .ap-chaine .ap-sorties { padding-left: 13px; gap: 6px; flex-wrap: wrap; justify-content: center; }
 .ap-chaine .ap-sorties i { font-style: normal; color: var(--cyan); opacity: .7; }
-.ap-chaine .mx-trait { flex: 1 1 28px; min-width: 18px; padding: 0 6px; background: none; border: 0; }
+.ap-chaine .mx-trait { flex: 1 1 32px; min-width: 32px; padding: 0 6px; background: none; border: 0; }
 .fx-l { position: relative; display: block; width: 100%; height: 2px; border-radius: 2px; overflow: hidden; background: var(--cp-trait); }
 .fx-l::after { content: ''; position: absolute; inset: 0; width: 40%; transform: translateX(-120%);
   background: linear-gradient(90deg, transparent, var(--cyan), transparent); animation: fx-h 2.8s linear infinite; }
@@ -732,7 +732,14 @@ body .sw-home { --smut: #c4bce6; }
 /* lignes à 4 éléments : pastilles plus serrées, libellés sur une ligne */
 .ap-chaine li { white-space: nowrap; }
 .ap-chaine:has(li:nth-child(7)) li { font-size: .8rem; padding: 6px 10px 6px 7px; gap: 6px; }
-.ap-chaine:has(li:nth-child(7)) .mx-trait { min-width: 10px; padding: 0 4px; }
+.ap-chaine:has(li:nth-child(7)) .mx-trait { min-width: 32px; padding: 0 6px; }
+/* 26/11 : une chaîne trop large pour sa colonne (texte à 14 px minimum) écrasait ses pastilles ; js/coulisses.js la plie alors
+   sur deux lignes, sans traits, comme sur téléphone. */
+.ap-chaine li:not(.mx-trait) { flex-shrink: 0; }
+.ap-chaine.est-plie { display: grid; grid-template-columns: repeat(2, auto); justify-content: center; gap: 8px; }
+.ap-chaine.est-plie .mx-trait { display: none; }
+.ap-chaine.est-plie li:not(.mx-trait) { justify-content: center; }
+.ap-chaine.est-plie li:last-child:nth-child(4n+1) { grid-column: 1 / -1; justify-self: center; } /* nombre impair de pastilles */
 @media (max-width: 700px) { .ap-chaine li { white-space: normal; } }
 @media (min-width: 701px) { .ap-chaine .ap-sorties { flex-wrap: nowrap; } }
 

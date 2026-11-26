@@ -74,3 +74,14 @@ function buildToc(wrap) {
   }).observe(toc);
   document.body.append(btn, panneau);
 }
+
+/* Chaînes de pastilles (schémas) : pliées sur deux lignes quand elles ne tiennent pas dans leur colonne (voir style.css, .est-plie). */
+document.querySelectorAll('.ap-chaine').forEach((ol) => {
+  const ajuster = () => {
+    ol.classList.remove('est-plie');
+    if (ol.scrollWidth > ol.clientWidth + 1) ol.classList.add('est-plie');
+  };
+  ajuster();
+  if ('ResizeObserver' in window) new ResizeObserver(ajuster).observe(ol.parentElement);
+  if (document.fonts) document.fonts.ready.then(ajuster);
+});
