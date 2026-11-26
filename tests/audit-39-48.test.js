@@ -97,7 +97,7 @@ const ecrire = (f, v) => fs.writeFileSync(path.join(ROOT, 'data', f), JSON.strin
     await p.waitForTimeout(300);
     check('coulisses : bouton « Sommaire » visible après défilement', await p.isVisible('.toc-bouton'));
     await p.click('.toc-bouton');
-    check('coulisses : le panneau liste les 17 projets', await p.locator('#tocPanneau a').count() === 17 && await p.isVisible('#tocPanneau'));
+    check('coulisses : le panneau liste les 23 projets', await p.locator('#tocPanneau a').count() === 23 && await p.isVisible('#tocPanneau'));
     await p.keyboard.press('Escape');
     check('coulisses : Échap ferme le panneau', !(await p.isVisible('#tocPanneau')));
     await p.close();

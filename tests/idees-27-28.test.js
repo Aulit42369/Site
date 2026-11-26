@@ -93,7 +93,7 @@ test('accueil hors ligne et Coulisses en textes courts', async () => {
     assert.strictEqual(await p.locator('#camTwitch').count(), 0);
     assert.strictEqual(await p.textContent('#camPill'), 'Présentation');
     await p.goto(BASE + '/coulisses.html');
-    assert.strictEqual(await p.locator('.project-desc p[data-edit$=".court"]').count(), 17);
+    assert.strictEqual(await p.locator('.project-desc p[data-edit$=".court"]').count(), 23);
     assert.strictEqual(await p.locator('.texte-court, .piste-choix').count(), 0);
     assert.ok(await p.locator('[data-edit*=".etape1.t"]').count() >= 15);
     await p.goto(BASE + '/clips.html');
